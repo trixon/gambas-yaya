@@ -1,0 +1,21 @@
+# Gambas Action File 3.0
+
+{ Actions
+  { Action about
+    Text = "&About"
+    Shortcut = ""
+  }
+  { Action full_screen
+    Text = "&Full Screen"
+    Shortcut = "Ctrl+Shift+F"
+  }
+  { Action menu_bar
+    Text = "&Hide menu bar"
+    Shortcut = "Ctrl+Alt+M"
+  }
+  { Action quit
+    Text = "&Quit"
+    Shortcut = "Ctrl+Q"
+  }
+}
+

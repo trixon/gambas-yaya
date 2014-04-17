@@ -1,17 +1,55 @@
 ' Gambas class file
 
+Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
+Public Const KEY_MENU_BAR As String = "Window/MenuBar"
+
 Public Sub _new()
+
+End
+
+Public Sub Action_Activate(key As String) As Boolean
+
+  Select Case key
+    Case "full_screen"
+      Me.FullScreen = mnuFullScreen.Checked
+
+    Case "menu_bar"
+      Me.Menus.Visible = mnuMenuBar.Checked
+
+    Case "quit"
+      Me.Close
+
+    Default
+      Print "Unknown action: " & key
+
+  End Select
 
 End
 
 Public Sub Form_Open()
 
   Settings.Read(Me)
+  Me.FullScreen = Settings[KEY_FULL_SCREEN]
+  mnuFullScreen.Checked = Me.FullScreen
+  Me.Menus.Visible = Settings[KEY_MENU_BAR]
+  mnuMenuBar.Checked = Me.Menus.Visible
+
+  InitMenuShortcuts
 
 End
 
 Public Sub Form_Close()
 
   Settings.Write(Me)
+  Settings[KEY_FULL_SCREEN] = Me.FullScreen
+  Settings[KEY_MENU_BAR] = Me.Menus.Visible
+
+End
+
+Private Sub InitMenuShortcuts()
+
+  If Application.Env["GB_GUI"] Begins "gb.gtk" Then
+    mnuFullScreen.Shortcut = "F11"
+  Endif
 
 End

@@ -1,6 +1,57 @@
 # Gambas Form File 3.0
 
-{ FMain Form
-  MoveScaled(0,0,50,50)
+{ Form Form
+  MoveScaled(0,0,102,62)
+  { mnuGame Menu
+    Text = ("&Game")
+    { mnuQuit Menu
+      Action = "quit"
+      Text = ("&Quit")
+      Shortcut = "Ctrl+Q"
+    }
+  }
+  { mnuView Menu
+    Text = ("&View")
+    { mnuFullScreen Menu
+      Action = "full_screen"
+      Text = ("&Full Screen")
+      Toggle = True
+      Shortcut = "Ctrl+Shift+F"
+    }
+    { mnuMenuBar Menu
+      Action = "menu_bar"
+      Text = ("&Hide menu bar")
+      Toggle = True
+      Shortcut = "Ctrl+Alt+M"
+    }
+  }
+  { mnuHelp Menu
+    Text = ("&Help")
+    { mnuAbout Menu
+      Action = "about"
+      Text = ("&About")
+      Enabled = False
+    }
+  }
 }
 
+# Gambas Action File 3.0
+
+{ Actions
+  { Action about
+    Text = "&About"
+    Shortcut = ""
+  }
+  { Action full_screen
+    Text = "&Full Screen"
+    Shortcut = "Ctrl+Shift+F"
+  }
+  { Action menu_bar
+    Text = "&Hide menu bar"
+    Shortcut = "Ctrl+Alt+M"
+  }
+  { Action quit
+    Text = "&Quit"
+    Shortcut = "Ctrl+Q"
+  }
+}
