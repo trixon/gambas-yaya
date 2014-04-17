@@ -1,0 +1,8 @@
+# Gambas Project File 3.0
+Title=YaYa
+Startup=FMain
+Component=gb.settings
+Component=gb.image
+Component=gb.gui
+Component=gb.form
+

@@ -1,0 +1,17 @@
+' Gambas class file
+
+Public Sub _new()
+
+End
+
+Public Sub Form_Open()
+
+  Settings.Read(Me)
+
+End
+
+Public Sub Form_Close()
+
+  Settings.Write(Me)
+
+End
