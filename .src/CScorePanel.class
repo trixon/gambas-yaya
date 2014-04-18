@@ -1,0 +1,23 @@
+' Gambas class file
+
+Property Read Panel As Panel
+
+Private $hPanel As Panel
+
+Public Sub _new(hContainer As Container)
+
+  $hPanel = New Panel(hContainer) As "Panel"
+
+  With $hPanel
+    .Arrangement = Arrange.Horizontal
+    .Background = &HFFFFDF
+    .Expand = True
+  End With
+
+End
+
+Private Function Panel_Read() As Panel
+
+  Return $hPanel
+
+End

@@ -9,9 +9,13 @@
     Text = "&Full Screen"
     Shortcut = "Ctrl+Shift+F"
   }
-  { Action menu_bar
+  { Action menu_bar_hide
     Text = "&Hide menu bar"
     Shortcut = "Ctrl+Alt+M"
+  }
+  { Action menu_bar_show
+    Text = "Show menu bar"
+    Shortcut = ""
   }
   { Action quit
     Text = "&Quit"

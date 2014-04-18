@@ -2,8 +2,13 @@
 
 Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
 Public Const KEY_MENU_BAR As String = "Window/MenuBar"
+Private $hDicePanel As DicePanel
+Private $hScorePanel As CScorePanel
 
 Public Sub _new()
+
+  $hScorePanel = New CScorePanel(pnlGame)
+  $hDicePanel = New DicePanel(pnlGame)
 
 End
 
@@ -13,8 +18,11 @@ Public Sub Action_Activate(key As String) As Boolean
     Case "full_screen"
       Me.FullScreen = mnuFullScreen.Checked
 
-    Case "menu_bar"
-      Me.Menus.Visible = mnuMenuBar.Checked
+    Case "menu_bar_hide"
+      MenuVisibility(mnuHideMenuBar.Checked)
+
+    Case "menu_bar_show"
+      MenuVisibility(True)
 
     Case "quit"
       Me.Close
@@ -31,10 +39,9 @@ Public Sub Form_Open()
   Settings.Read(Me)
   Me.FullScreen = Settings[KEY_FULL_SCREEN]
   mnuFullScreen.Checked = Me.FullScreen
-  Me.Menus.Visible = Settings[KEY_MENU_BAR]
-  mnuMenuBar.Checked = Me.Menus.Visible
+  MenuVisibility(Settings[KEY_MENU_BAR])
 
-  InitMenuShortcuts
+  InitMenuShortcuts()
 
 End
 
@@ -46,10 +53,40 @@ Public Sub Form_Close()
 
 End
 
+Public Sub Form_Resize()
+
+  MGuiUtils.CenterInParent(pnlGame)
+
+End
+
+Public Sub Form_Menu()
+
+  If Not Me.Menus.Visible Then
+    mnuPopupMain.Popup
+  Endif
+
+End
+
 Private Sub InitMenuShortcuts()
 
   If Application.Env["GB_GUI"] Begins "gb.gtk" Then
     mnuFullScreen.Shortcut = "F11"
   Endif
+
+End
+
+Private Sub MenuVisibility(bVisible As Boolean)
+
+  Debug bVisible
+  Me.Menus.Visible = bVisible
+  mnuHideMenuBar.Checked = bVisible
+
+  Form_Resize()
+
+End
+
+Public Sub Form_KeyPress()
+
+  If Key.Code = Key.Esc Then Me.Close()
 
 End
