@@ -44,7 +44,7 @@ Public Sub Form_Open()
   Settings.Read(Me)
   Me.FullScreen = Settings[KEY_FULL_SCREEN]
   mnuFullScreen.Checked = Me.FullScreen
-  MenuVisibility(Settings[KEY_MENU_BAR])
+  MenuVisibility(Settings[KEY_MENU_BAR, True])
 
   InitMenuShortcuts()
 
