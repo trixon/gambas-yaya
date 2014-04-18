@@ -13,6 +13,13 @@ End
 Public Sub Action_Activate(key As String) As Boolean
 
   Select Case key
+    Case "dice4"
+      $hGamePanel.DicePanel.DiceCount = 4
+    Case "dice5"
+      $hGamePanel.DicePanel.DiceCount = 5
+    Case "dice6"
+      $hGamePanel.DicePanel.DiceCount = 6
+
     Case "full_screen"
       Me.FullScreen = mnuFullScreen.Checked
 

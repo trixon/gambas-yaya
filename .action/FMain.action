@@ -5,6 +5,18 @@
     Text = "&About"
     Shortcut = ""
   }
+  { Action dice4
+    Text = "4 dice"
+    Shortcut = ""
+  }
+  { Action dice5
+    Text = "5 dice"
+    Shortcut = ""
+  }
+  { Action dice6
+    Text = "6 dice"
+    Shortcut = ""
+  }
   { Action full_screen
     Text = "&Full Screen"
     Shortcut = "Ctrl+Shift+F"

@@ -44,6 +44,24 @@
       Text = ("Show menu bar")
     }
   }
+  { mnuDev Menu
+    Text = ("Dev")
+    { mnu4Dice Menu
+      Action = "dice4"
+      Text = ("4 dice")
+      Tag = "4"
+    }
+    { mnu5Dice Menu
+      Action = "dice5"
+      Text = ("5 dice")
+      Tag = "5"
+    }
+    { mnu6Dice Menu
+      Action = "dice6"
+      Text = ("6 dice")
+      Tag = "6"
+    }
+  }
   { pnlMain Panel
     MoveScaled(11,3,96,75)
     Background = &H0D1F07&
@@ -55,6 +73,18 @@
 { Actions
   { Action about
     Text = "&About"
+    Shortcut = ""
+  }
+  { Action dice4
+    Text = "4 dice"
+    Shortcut = ""
+  }
+  { Action dice5
+    Text = "5 dice"
+    Shortcut = ""
+  }
+  { Action dice6
+    Text = "6 dice"
     Shortcut = ""
   }
   { Action full_screen

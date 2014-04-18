@@ -3,7 +3,7 @@
 { Form Form
   MoveScaled(0,0,64,64)
   { PictureBox1 PictureBox
-    MoveScaled(5,8,55,21)
+    MoveScaled(3,32,55,21)
     Expand = True
     Picture = Picture["dice-images/board/default.jpg"]
     Stretch = True
@@ -12,5 +12,9 @@
   { Button1 Button
     MoveScaled(32,14,16,4)
     Text = ("Button1")
+  }
+  { ToggleButton1 ToggleButton
+    MoveScaled(14,9,16,4)
+    Text = ("ToggleButton1")
   }
 }

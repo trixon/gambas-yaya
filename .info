@@ -9,6 +9,10 @@ C
 :
 
 
+DiceCount
+p
+i
+
 Panel
 r
 Panel
@@ -26,6 +30,14 @@ m
 
 
 Roll
+m
+
+
+Reset
+m
+
+
+InitDice
 m
 
 

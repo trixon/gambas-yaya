@@ -1,5 +1,7 @@
 ' Gambas class file
 
+Property Read DicePanel As DicePanel
+
 Property Read Panel As Panel
 
 Private $hPanel As Panel
@@ -44,5 +46,11 @@ End
 Private Function Panel_Read() As Panel
 
   Return $hPanel
+
+End
+
+Private Function DicePanel_Read() As DicePanel
+
+  Return $hDicePanel
 
 End
