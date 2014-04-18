@@ -2,13 +2,11 @@
 
 Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
 Public Const KEY_MENU_BAR As String = "Window/MenuBar"
-Private $hDicePanel As DicePanel
-Private $hScorePanel As CScorePanel
+Private $hGamePanel As CGamePanel
 
 Public Sub _new()
 
-  $hScorePanel = New CScorePanel(pnlGame)
-  $hDicePanel = New DicePanel(pnlGame)
+  $hGamePanel = New CGamePanel(pnlMain)
 
 End
 
@@ -55,7 +53,7 @@ End
 
 Public Sub Form_Resize()
 
-  MGuiUtils.CenterInParent(pnlGame)
+  MGuiUtils.CenterInParent($hGamePanel.Panel)
 
 End
 

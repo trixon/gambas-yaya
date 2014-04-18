@@ -1,14 +1,34 @@
 #DicePanel
 
 C
+:RollFinished
+:
+
+
+:RollRequest
+:
+
+
 Panel
 r
 Panel
+
+Picture
+p
+Picture
 
 _new
 m
 
 (hContainer)Container;
+DiceHand_RollRequest
+m
+
+
+Roll
+m
+
+
 #MGuiUtils
 
 C

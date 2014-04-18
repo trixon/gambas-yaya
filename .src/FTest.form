@@ -1,0 +1,16 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  { PictureBox1 PictureBox
+    MoveScaled(5,8,55,21)
+    Expand = True
+    Picture = Picture["dice-images/board/default.jpg"]
+    Stretch = True
+    AutoResize = True
+  }
+  { Button1 Button
+    MoveScaled(32,14,16,4)
+    Text = ("Button1")
+  }
+}

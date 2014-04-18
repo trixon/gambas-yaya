@@ -1,0 +1,48 @@
+' Gambas class file
+
+Property Read Panel As Panel
+
+Private $hPanel As Panel
+Private $hDicePanel As DicePanel
+Private $hScorePanel As CScorePanel
+
+Public Sub _new(hContainer As Container)
+
+  $hPanel = New Panel(hContainer) As "Panel"
+
+  With $hPanel
+    .Arrangement = Arrange.Vertical
+    .Background = &H1B3F0F&
+    .Border = Border.Sunken
+    .Height = 512
+    .Padding = 8
+    .Width = 756
+  End With
+
+  $hScorePanel = New CScorePanel($hPanel)
+  $hDicePanel = New DicePanel($hPanel) As "DicePanel"
+
+End
+
+Public Sub DicePanel_RollFinished()
+
+  Debug "roll finished - eval"
+
+End
+
+Public Sub DicePanel_RollRequest()
+
+  Debug "roll request"
+  If Even(Timer) Then
+    $hDicePanel.Roll()
+  Else
+    Debug "roll abort"
+  Endif
+
+End
+
+Private Function Panel_Read() As Panel
+
+  Return $hPanel
+
+End

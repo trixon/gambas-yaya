@@ -45,15 +45,8 @@
     }
   }
   { pnlMain Panel
-    MoveScaled(15,2,100,79)
+    MoveScaled(11,3,96,75)
     Background = &H0D1F07&
-    { pnlGame Panel
-      MoveScaled(9,9,93,73)
-      Background = &H1B3F0F&
-      Arrangement = Arrange.Vertical
-      Padding = 16
-      Border = Border.Sunken
-    }
   }
 }
 
