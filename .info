@@ -25,6 +25,10 @@ _new
 m
 
 (hContainer)Container;
+DiceHand_RollAbort
+m
+
+
 DiceHand_RollRequest
 m
 
@@ -38,6 +42,10 @@ m
 
 
 Reset
+m
+
+
+Die_Toggled
 m
 
 
