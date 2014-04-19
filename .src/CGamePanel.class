@@ -18,11 +18,12 @@ Public Sub _new(hContainer As Container)
     .Border = Border.Sunken
     .Height = 512
     .Padding = 8
-    .Width = 756
+    .Width = 1024
   End With
 
   $hScorePanel = New CScorePanel($hPanel)
   $hDicePanel = New DicePanel($hPanel) As "DicePanel"
+  $hDicePanel.DiceCount = 5
 
 End
 
@@ -34,12 +35,7 @@ End
 
 Public Sub DicePanel_RollRequest()
 
-  Debug "roll request"
-  If Even(Timer) Then
-    $hDicePanel.Roll()
-  Else
-    Debug "roll abort"
-  Endif
+  $hDicePanel.Roll()
 
 End
 

@@ -29,6 +29,10 @@ DiceHand_RollRequest
 m
 
 
+DiceHand_ShakeStart
+m
+
+
 Roll
 m
 
@@ -37,7 +41,15 @@ Reset
 m
 
 
-InitDice
+Die_Up
+m
+
+
+Die_Down
+m
+
+
+Die_InvertSelection
 m
 
 

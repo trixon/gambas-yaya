@@ -10,11 +10,26 @@
     AutoResize = True
   }
   { Button1 Button
-    MoveScaled(32,14,16,4)
+    MoveScaled(22,26,16,4)
     Text = ("Button1")
   }
   { ToggleButton1 ToggleButton
-    MoveScaled(14,9,16,4)
+    MoveScaled(4,25,16,4)
     Text = ("ToggleButton1")
+  }
+  { Panel1 Panel
+    MoveScaled(1,1,60,24)
+    Background = &H007FFF&
+    Arrangement = Arrange.Horizontal
+    { ToggleButton2 ToggleButton
+      MoveScaled(6,5,16,4)
+      Expand = True
+      Text = ("ToggleButton2")
+    }
+    { ToggleButton3 ToggleButton
+      MoveScaled(42,13,16,4)
+      Expand = True
+      Text = ("ToggleButton3")
+    }
   }
 }

@@ -5,3 +5,17 @@ Public Sub PictureBox1_Leave()
   Debug
 
 End
+
+Public Sub Panel1_MouseDown()
+
+End
+
+Public Sub ToggleButton2_Click()
+
+  Button1.Visible = ToggleButton2.Value
+
+End
+
+Public Sub Panel1_MouseWheel()
+
+End
