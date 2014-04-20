@@ -1,0 +1,9 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,55,35)
+  Text = ("cxv")
+  Resizable = False
+  Border = False
+  SkipTaskbar = True
+}

@@ -1,7 +1,6 @@
 ' Gambas class file
 
 Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
-Public Const KEY_MENU_BAR As String = "Window/MenuBar"
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
@@ -13,6 +12,9 @@ End
 Public Sub Action_Activate(key As String) As Boolean
 
   Select Case key
+    Case "new"
+      NewGame()
+
     Case "dice4"
       $hGamePanel.DicePanel.DiceCount = 4
 
@@ -23,13 +25,8 @@ Public Sub Action_Activate(key As String) As Boolean
       $hGamePanel.DicePanel.DiceCount = 6
 
     Case "full_screen"
-      Me.FullScreen = mnuFullScreen.Checked
-
-    Case "menu_bar_hide"
-      MenuVisibility(mnuHideMenuBar.Checked)
-
-    Case "menu_bar_show"
-      MenuVisibility(True)
+      Me.FullScreen = Not Me.FullScreen
+      UpdateToolBarBackground()
 
     Case "quit"
       Me.Close
@@ -41,15 +38,24 @@ Public Sub Action_Activate(key As String) As Boolean
 
 End
 
+Private Sub UpdateToolBarBackground()
+
+  If Me.FullScreen Then
+    tlbMain.Background = pnlMain.Background
+  Else
+    tlbMain.Background = Color.Default
+  Endif
+
+End
+
 Public Sub Form_Open()
 
   Settings.Read(Me)
   Me.FullScreen = Settings[KEY_FULL_SCREEN]
-  mnuFullScreen.Checked = Me.FullScreen
-  MenuVisibility(Settings[KEY_MENU_BAR, True])
+  UpdateToolBarBackground()
 
-  InitMenuShortcuts()
   $hGamePanel.Open()
+  Form_Resize()
 
 End
 
@@ -58,7 +64,6 @@ Public Sub Form_Close()
   $hGamePanel.Close()
   Settings.Write(Me)
   Settings[KEY_FULL_SCREEN] = Me.FullScreen
-  Settings[KEY_MENU_BAR] = Me.Menus.Visible
 
 End
 
@@ -68,33 +73,20 @@ Public Sub Form_Resize()
 
 End
 
-Public Sub Form_Menu()
-
-  If Not Me.Menus.Visible Then
-    mnuPopupMain.Popup
-  Endif
-
-End
-
-Private Sub InitMenuShortcuts()
-
-  If Application.Env["GB_GUI"] Begins "gb.gtk" Then
-    mnuFullScreen.Shortcut = "F11"
-  Endif
-
-End
-
-Private Sub MenuVisibility(bVisible As Boolean)
-
-  Me.Menus.Visible = bVisible
-  mnuHideMenuBar.Checked = bVisible
-
-  Form_Resize()
-
-End
-
 Public Sub Form_KeyPress()
 
-  If Key.Code = Key.Esc Then Me.Close()
+  If Key.Code = Key.Esc Then
+    Me.Close()
+  Else If Key.Code = Key["Q"] And If Key.Control
+    Me.Close()
+  Endif
+
+End
+
+Private Sub NewGame()
+
+  Dim hNewGame As New FNewGame
+
+  hNewGame.ShowModal
 
 End

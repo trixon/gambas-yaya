@@ -8,5 +8,6 @@ gb.image
 gb.gui
 gb.form
 gb.settings
+gb.form.mdi
 gb.sdl.sound
 
