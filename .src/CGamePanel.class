@@ -39,6 +39,20 @@ Public Sub DicePanel_RollRequest()
 
 End
 
+Public Sub Close()
+
+  Debug
+  $hDicePanel.Close()
+
+End
+
+Public Sub Open()
+
+  Debug
+  $hDicePanel.Open()
+
+End
+
 Private Function Panel_Read() As Panel
 
   Return $hPanel

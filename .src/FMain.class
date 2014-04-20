@@ -49,11 +49,13 @@ Public Sub Form_Open()
   MenuVisibility(Settings[KEY_MENU_BAR, True])
 
   InitMenuShortcuts()
+  $hGamePanel.Open()
 
 End
 
 Public Sub Form_Close()
 
+  $hGamePanel.Close()
   Settings.Write(Me)
   Settings[KEY_FULL_SCREEN] = Me.FullScreen
   Settings[KEY_MENU_BAR] = Me.Menus.Visible

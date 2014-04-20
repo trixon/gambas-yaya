@@ -21,23 +21,27 @@ Picture
 p
 Picture
 
+_free
+m
+
+
 _new
 m
 
 (hContainer)Container;
-DiceHand_RollAbort
-m
-
-
-DiceHand_RollRequest
-m
-
-
-DiceHand_ShakeStart
+Roller_RequestRoll
 m
 
 
 Roll
+m
+
+
+Close
+m
+
+
+Open
 m
 
 
