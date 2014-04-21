@@ -1,9 +1,73 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,55,35)
-  Text = ("cxv")
+  MoveScaled(0,0,59,42)
+  Text = ("New Game")
   Resizable = False
-  Border = False
   SkipTaskbar = True
+  Arrangement = Arrange.Vertical
+  Margin = True
+  { Panel2 Panel
+    MoveScaled(2,2,55,27)
+    Expand = True
+    Arrangement = Arrange.Vertical
+    { Label1 Label
+      MoveScaled(0,0,24,4)
+      Text = ("Type")
+    }
+    { ComboBox1 ComboBox
+      MoveScaled(0,4,37,4)
+      Font = Font["+3"]
+      ReadOnly = True
+      List = [("Yahtzee")]
+      Text = ("ComboBox1")
+      Sorted = True
+    }
+    { Label2 Label
+      MoveScaled(1,9,24,4)
+      Text = ("Variant")
+    }
+    { ComboBox2 ComboBox
+      MoveScaled(1,13,24,4)
+      Font = Font["+3"]
+      ReadOnly = True
+      List = [("Standard")]
+      Text = ("ComboBox2")
+    }
+    { Label3 Label
+      MoveScaled(1,18,24,4)
+      Text = ("Number of Players")
+    }
+    { ComboBox3 ComboBox
+      MoveScaled(1,22,24,4)
+      Font = Font["+3"]
+      ReadOnly = True
+      List = [("1"), ("2"), ("3"), ("4"), ("5"), ("6"), ("7"), ("8")]
+      Text = ("ComboBox3")
+    }
+  }
+  { Separator1 Separator
+    MoveScaled(16,29,28,4)
+  }
+  { HBox1 HBox
+    MoveScaled(3,32,50,4)
+    AutoResize = True
+    Spacing = True
+    { Panel1 Panel
+      MoveScaled(4,0,4,4)
+      Expand = True
+    }
+    { btnOK Button
+      MoveScaled(15,0,6,6)
+      AutoResize = True
+      Picture = Picture["images/dialog-ok-apply.png"]
+      Default = True
+    }
+    { btnCancel Button
+      MoveScaled(32,0,16,4)
+      AutoResize = True
+      Picture = Picture["images/dialog-cancel.png"]
+      Cancel = True
+    }
+  }
 }

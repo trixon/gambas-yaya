@@ -86,6 +86,8 @@ Public Sub Form_KeyPress()
     Me.Close()
   Else If Key.Code = Key["Q"] And If Key.Control
     Me.Close()
+  Else If Key.Code = Key["N"] And If Key.Control
+    NewGame()
   Endif
 
 End
@@ -109,7 +111,7 @@ Private Sub NewGame()
 
   Dim hForm As New FNewGame
 
-  hForm.ShowModal()
+  Debug hForm.Run()
 
 End
 

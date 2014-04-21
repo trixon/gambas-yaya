@@ -2,9 +2,25 @@
 
 Public Sub Form_Open()
 
+  ComboBox1.Index = 0
+  ComboBox2.Index = 0
+  ComboBox3.Index = 1
+
 End
 
-Public Sub Form_MouseDown()
+Public Sub Run() As Boolean
+
+  Return Me.ShowModal()
+
+End
+
+Public Sub btnOK_Click()
+
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
 
   Me.Close()
 
