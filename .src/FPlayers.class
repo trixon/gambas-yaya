@@ -84,7 +84,7 @@ Public Sub tlbEdit_Click()
 
   If Not lbxPlayers.Text Then Return
   sName = hForm.Run(lbxPlayers.Text)
-  If Not sName Then Return
+  If Not sName Or lbxPlayers.Text == sName Then Return
 
   If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
     lbxPlayers.Remove(lbxPlayers.Index)
