@@ -15,7 +15,7 @@
       MoveScaled(0,0,24,4)
       Text = ("Game")
     }
-    { ComboBox1 ComboBox
+    { cmbGame ComboBox
       MoveScaled(0,4,37,4)
       Font = Font["+3"]
       ReadOnly = True
@@ -27,7 +27,7 @@
       MoveScaled(1,9,24,4)
       Text = ("Variant")
     }
-    { ComboBox2 ComboBox
+    { cmbVariant ComboBox
       MoveScaled(1,13,24,4)
       Font = Font["+3"]
       ReadOnly = True
@@ -38,7 +38,7 @@
       MoveScaled(1,18,24,4)
       Text = ("Players")
     }
-    { ComboBox3 ComboBox
+    { cmbPlayers ComboBox
       MoveScaled(1,22,24,4)
       Font = Font["+3"]
       ReadOnly = True

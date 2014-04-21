@@ -1,15 +1,33 @@
 ' Gambas module file
 
-Public GameDefs As New CGameDef[]
+Public GameDefs As New Collection
+Private $hIdByText As New Collection
 
 Public Sub LoadAll()
 
-  GameDefs.Add(LoadDef("gamedefs/standard.json"))
-  GameDefs.Add(LoadDef("gamedefs/yacht.json"))
-  GameDefs.Add(LoadDef("gamedefs/maxi_yahtzee.json"))
-  GameDefs.Add(LoadDef("gamedefs/yahtzee_scandinavian.json"))
-  GameDefs.Add(LoadDef("gamedefs/straight.json"))
-  GameDefs.Add(LoadDef("gamedefs/quickie.json"))
+  Dim sFile As String
+  Dim sDir As String = "../gamedefs"
+  Dim hGameDef As CGameDef
+
+  For Each sFile In Dir(sDir, "*.json")
+    hGameDef = LoadDef(sDir &/ sFile)
+    GameDefs.Add(hGameDef, hGameDef.Id)
+    $hIdByText.Add(hGameDef.Id, hGameDef.Text)
+  Next
+
+End
+
+Public Function IdByText(sText As String) As String
+
+  Return $hIdByText[sText]
+
+End
+
+Public Function VariantsByText(sText As String) As String[]
+
+  Dim hGameDef As CGameDef = GameDefs[$hIdByText[sText]]
+
+  Return hGameDef.Variants
 
 End
 

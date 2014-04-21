@@ -2,10 +2,10 @@
 
 Public Sub Form_Open()
 
-  ComboBox1.Index = 0
-  ComboBox1.List = MGameLoader.Titles()
-  ComboBox2.Index = 0
-  ComboBox3.Index = 1
+  cmbGame.Index = 0
+  cmbGame.List = MGameLoader.Titles()
+  cmbVariant.Index = 0
+  cmbPlayers.Index = Settings[FMain.KEY_GAME_PLAYERS, 1]
 
 End
 
@@ -17,6 +17,7 @@ End
 
 Public Sub btnOK_Click()
 
+  Settings[FMain.KEY_GAME_PLAYERS] = cmbPlayers.Index
   Me.Close(True)
 
 End
@@ -24,5 +25,12 @@ End
 Public Sub btnCancel_Click()
 
   Me.Close()
+
+End
+
+Public Sub cmbGame_Click()
+
+  Debug MGameLoader.IdByText(cmbGame.Text)
+  cmbVariant.List = MGameLoader.VariantsByText(cmbGame.Text)
 
 End
