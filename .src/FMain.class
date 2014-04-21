@@ -5,6 +5,8 @@ Private $hGamePanel As CGamePanel
 
 Public Sub _new()
 
+  Settings["gb.form.mdi/Toolbars/main/Size"] = "Large"
+
   $hGamePanel = New CGamePanel(pnlMain)
 
 End
@@ -12,6 +14,9 @@ End
 Public Sub Action_Activate(key As String) As Boolean
 
   Select Case key
+    Case "about"
+      About()
+
     Case "new"
       NewGame()
 
@@ -41,9 +46,9 @@ End
 Private Sub UpdateToolBarBackground()
 
   If Me.FullScreen Then
-    tlbMain.Background = pnlMain.Background
+    Panel1.Background = pnlMain.Background
   Else
-    tlbMain.Background = Color.Default
+    Panel1.Background = Color.Default
   Endif
 
 End
@@ -83,10 +88,31 @@ Public Sub Form_KeyPress()
 
 End
 
+Private Sub About()
+
+  Dim hAbout As New FAbout
+
+  With hAbout
+    .AppAuthor = "Patrik Karlsson"
+    .AppCopyright = ("Copyright © 2014 Patrik Karlsson")
+    .AppDescription = ("Yet Another Yahtzee")
+    .AppLogo = Picture.Load("logo.png")
+  End With
+
+  hAbout.Run
+
+End
+
 Private Sub NewGame()
 
   Dim hNewGame As New FNewGame
 
   hNewGame.ShowModal
+
+End
+
+Public Sub ToolButton4_Click()
+
+  mnuMain.Popup()
 
 End

@@ -23,7 +23,11 @@
   }
   { Action new
     Text = "New Game"
-    Picture = "icon:/22/new"
+    Picture = "images/document-new.png"
+  }
+  { Action players
+    Text = "Players"
+    Picture = "images/system-users.png"
   }
   { Action settings
     Text = "Settings"
@@ -31,7 +35,7 @@
   }
   { Action undo
     Text = "Undo"
-    Picture = "icon:/22/undo"
+    Picture = "images/edit-undo.png"
   }
 }
 

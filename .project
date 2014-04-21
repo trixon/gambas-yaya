@@ -2,14 +2,17 @@
 # Compiled with Gambas 3.5.3
 Title=YaYa
 Startup=FMain
+Icon=logo.png
 Version=0.0.1
 Component=gb.image
 Component=gb.gui
 Component=gb.form
+Component=gb.desktop
 Component=gb.settings
 Component=gb.form.mdi
 Component=gb.sdl.sound
-Description="Dice Game"
+Description="Yet Another Yahtzee"
 Authors="Patrik Karlsson"
+Environment="GB_GUI=gb.gtk"
 TabSize=2
 Packager=1
