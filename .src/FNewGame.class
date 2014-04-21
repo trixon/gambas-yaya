@@ -3,6 +3,7 @@
 Public Sub Form_Open()
 
   ComboBox1.Index = 0
+  ComboBox1.List = MGameLoader.Titles()
   ComboBox2.Index = 0
   ComboBox3.Index = 1
 

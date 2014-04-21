@@ -1,0 +1,176 @@
+' Gambas class file
+
+Property Id As String
+Property Text As String
+Property IsSum As Boolean
+Property IsCounter As Boolean
+Property Symbol As String
+Property IsPlayable As Boolean
+Property Lim As Integer
+Property Max As Integer
+Property Formula As String
+Property Sum As String
+Property IsBonus As Boolean
+
+Private $bBonus As Boolean
+Private $bCounter As Boolean
+Private $bPlayable As Boolean
+Private $bSum As Boolean
+
+Private $iLim As Integer
+Private $iMax As Integer
+
+Private $sId As String
+Private $sFormula As String
+Private $sSum As String
+Private $sSymbol As String
+Private $sText As String
+
+Public Sub Debug()
+
+  Debug " Row: "
+  Debug " - Id: "; Me.Id
+  Debug " - Text: "; Me.Text
+  Debug " - Symbol: "; Me.Symbol
+  Debug " - IsCounter: "; Me.IsCounter
+  Debug " - IsBonus: "; Me.IsBonus
+  Debug " - IsSum: "; Me.IsSum
+  Debug " - IsPlayable: "; Me.IsPlayable
+  Debug " - Lim: "; Me.Lim
+  Debug " - Max: "; Me.Max
+  Debug " - Formula: "; Me.Formula
+  Debug " - Sum: "; Me.Sum
+
+End
+
+Private Function Id_Read() As String
+
+  Return $sId
+
+End
+
+Private Sub Id_Write(Value As String)
+
+  $sId = Value
+
+End
+
+Private Function Text_Read() As String
+
+  Return $sText
+
+End
+
+Private Sub Text_Write(Value As String)
+
+  $sText = Value
+
+End
+
+Private Function IsSum_Read() As Boolean
+
+  Return $bSum
+
+End
+
+Private Sub IsSum_Write(Value As Boolean)
+
+  $bSum = Value
+
+End
+
+Private Function IsCounter_Read() As Boolean
+
+  Return $bCounter
+
+End
+
+Private Sub IsCounter_Write(Value As Boolean)
+
+  $bCounter = Value
+
+End
+
+Private Function Symbol_Read() As String
+
+  Return $sSymbol
+
+End
+
+Private Sub Symbol_Write(Value As String)
+
+  $sSymbol = Value
+
+End
+
+Private Function IsPlayable_Read() As Boolean
+
+  Return $bPlayable
+
+End
+
+Private Sub IsPlayable_Write(Value As Boolean)
+
+  $bPlayable = Value
+
+End
+
+Private Function Lim_Read() As Integer
+
+  Return $iLim
+
+End
+
+Private Sub Lim_Write(Value As Integer)
+
+  $iLim = Value
+
+End
+
+Private Function Max_Read() As Integer
+
+  Return $iMax
+
+End
+
+Private Sub Max_Write(Value As Integer)
+
+  $iMax = Value
+
+End
+
+Private Function Formula_Read() As String
+
+  Return $sFormula
+
+End
+
+Private Sub Formula_Write(Value As String)
+
+  $sFormula = Value
+
+End
+
+Private Function IsBonus_Read() As Boolean
+
+  Return $bBonus
+
+End
+
+Private Sub IsBonus_Write(Value As Boolean)
+
+  $bBonus = Value
+
+End
+
+Private Function Sum_Read() As String
+
+  Return $bSum
+
+End
+
+Private Sub Sum_Write(Value As String)
+
+  $bSum = Value
+
+End

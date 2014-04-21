@@ -64,6 +64,8 @@ Public Sub Form_Open()
   $hGamePanel.Open()
   Form_Resize()
 
+  MGameLoader.LoadAll()
+
 End
 
 Public Sub Form_Close()

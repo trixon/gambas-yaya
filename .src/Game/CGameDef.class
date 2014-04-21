@@ -1,0 +1,170 @@
+' Gambas class file
+
+Property Id As String
+Property Dice As Integer
+Property Rolls As Integer
+Property ResultRow As Integer
+Property VariantIndex As Integer
+Property Variants As String[]
+Property Author As String
+Property Version As String
+Property Rows As CGameRow[]
+Property Text As String
+
+Private $aVariants As String[]
+Private $aRows As CGameRow[]
+
+Private $iDice As Integer
+Private $iRolls As Integer
+Private $iResultRow As Integer
+Private $iVariantIndex As Integer
+
+Private $sAuthor As String
+Private $sId As String
+Private $sText As String
+Private $sVersion As String
+
+Public Sub Debug()
+
+  Dim sVariant As String
+  Dim hRow As CGameRow
+
+  Debug "Id: "; Me.Id
+  Debug "Text: "; Me.Text
+  Debug "Dice: "; Me.Dice
+  Debug "Rolls: "; Me.Rolls
+  Debug "ResultRow: "; Me.ResultRow
+  Debug "VariantIndex: "; Me.VariantIndex
+  Debug "Variants: "
+  For Each sVariant In Me.Variants
+    Debug " - "; sVariant
+  Next
+  Debug "Version: "; Me.Version
+  Debug "Author: "; Me.Author
+
+  Debug "Rows: "
+  For Each hRow In Me.Rows
+    hRow.Debug
+  Next
+
+End
+
+Private Function Id_Read() As String
+
+  Return $sId
+
+End
+
+Private Sub Id_Write(Value As String)
+
+  $sId = Value
+
+End
+
+Private Function Dice_Read() As Integer
+
+  Return $iDice
+
+End
+
+Private Sub Dice_Write(Value As Integer)
+
+  $iDice = Value
+
+End
+
+Private Function Rolls_Read() As Integer
+
+  Return $iRolls
+
+End
+
+Private Sub Rolls_Write(Value As Integer)
+
+  $iRolls = Value
+
+End
+
+Private Function ResultRow_Read() As Integer
+
+  Return $iResultRow
+
+End
+
+Private Sub ResultRow_Write(Value As Integer)
+
+  $iResultRow = Value
+
+End
+
+Private Function Variants_Read() As String[]
+
+  Return $aVariants
+
+End
+
+Private Sub Variants_Write(Value As String[])
+
+  $aVariants = Value
+
+End
+
+Private Function Author_Read() As String
+
+  Return $sAuthor
+
+End
+
+Private Sub Author_Write(Value As String)
+
+  $sAuthor = Value
+
+End
+
+Private Function Version_Read() As String
+
+  Return $sVersion
+
+End
+
+Private Sub Version_Write(Value As String)
+
+  $sVersion = Value
+
+End
+
+Private Function Rows_Read() As CGameRow[]
+
+  Return $aRows
+
+End
+
+Private Sub Rows_Write(Value As CGameRow[])
+
+  $aRows = Value
+
+End
+
+Private Function VariantIndex_Read() As Integer
+
+  Return $iVariantIndex
+
+End
+
+Private Sub VariantIndex_Write(Value As Integer)
+
+  $iVariantIndex = Value
+
+End
+
+Private Function Text_Read() As String
+
+  Return $sText
+
+End
+
+Private Sub Text_Write(Value As String)
+
+  $sText = Value
+
+End

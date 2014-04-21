@@ -2,7 +2,7 @@ FMain
 YaYa
 0
 0
-0.0.1
+0.0.2
 
 gb.image
 gb.gui
@@ -11,4 +11,5 @@ gb.desktop
 gb.settings
 gb.form.mdi
 gb.sdl.sound
+gb.web
 

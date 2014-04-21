@@ -3,7 +3,7 @@
 Title=YaYa
 Startup=FMain
 Icon=logo.png
-Version=0.0.1
+Version=0.0.2
 Component=gb.image
 Component=gb.gui
 Component=gb.form
@@ -11,6 +11,7 @@ Component=gb.desktop
 Component=gb.settings
 Component=gb.form.mdi
 Component=gb.sdl.sound
+Component=gb.web
 Description="Yet Another Yahtzee"
 Authors="Patrik Karlsson"
 Environment="GB_GUI=gb.gtk"

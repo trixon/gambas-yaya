@@ -13,7 +13,7 @@
     Arrangement = Arrange.Vertical
     { Label1 Label
       MoveScaled(0,0,24,4)
-      Text = ("Type")
+      Text = ("Game")
     }
     { ComboBox1 ComboBox
       MoveScaled(0,4,37,4)
@@ -36,7 +36,7 @@
     }
     { Label3 Label
       MoveScaled(1,18,24,4)
-      Text = ("Number of Players")
+      Text = ("Players")
     }
     { ComboBox3 ComboBox
       MoveScaled(1,22,24,4)

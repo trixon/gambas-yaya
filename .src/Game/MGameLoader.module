@@ -1,0 +1,95 @@
+' Gambas module file
+
+Public GameDefs As New CGameDef[]
+
+Public Sub LoadAll()
+
+  GameDefs.Add(LoadDef("gamedefs/standard.json"))
+  GameDefs.Add(LoadDef("gamedefs/yacht.json"))
+  GameDefs.Add(LoadDef("gamedefs/maxi_yahtzee.json"))
+  GameDefs.Add(LoadDef("gamedefs/yahtzee_scandinavian.json"))
+  GameDefs.Add(LoadDef("gamedefs/straight.json"))
+  GameDefs.Add(LoadDef("gamedefs/quickie.json"))
+
+End
+
+Public Function Titles() As String[]
+
+  Dim aTitles As New String[]
+  Dim hGameDef As CGameDef
+
+  For Each hGameDef In GameDefs
+    aTitles.Add(hGameDef.Text)
+  Next
+
+  Return aTitles.Sort()
+
+End
+
+Public Function LoadDef(sGameDef As String) As CGameDef
+
+  Dim sJson As String
+  Dim hGameDefCollection As Collection
+  Dim hRowsCollection As Collection
+  Dim hGameDef As New CGameDef
+  Dim hRows As New CGameRow[]
+  Dim hRow As CGameRow
+  Dim aVariant As Variant
+
+  sJson = File.Load(sGameDef)
+  hGameDefCollection = JSON.Decode(sJson)
+  hGameDef.Id = hGameDefCollection["id"]
+  hGameDef.Text = LocalizedValue("title", hGameDefCollection)
+  hGameDef.Dice = hGameDefCollection["numOfDice"]
+  hGameDef.Rolls = hGameDefCollection["numOfRolls"]
+  hGameDef.ResultRow = hGameDefCollection["resultRow"]
+  hGameDef.VariantIndex = hGameDefCollection["defaultVariant"]
+  hGameDef.Variants = Split(hGameDefCollection["variants"], " ")
+  hGameDef.Version = hGameDefCollection["version"]
+  hGameDef.Author = hGameDefCollection["author"]
+
+  For Each hRowsCollection In hGameDefCollection["rows"]
+    hRow = New CGameRow
+    hRow.Id = hRowsCollection["id"]
+    hRow.Text = LocalizedValue("title", hRowsCollection)
+    hRow.Symbol = hRowsCollection["titleSym"]
+    hRow.IsCounter = hRowsCollection["isRollCounter"]
+    hRow.IsSum = hRowsCollection["isSum"]
+    hRow.IsPlayable = hRowsCollection["isPlayable"]
+    hRow.IsBonus = hRowsCollection["isBonus"]
+
+    aVariant = hRowsCollection["lim"]
+    If Not IsNull(aVariant) Then hRow.Lim = aVariant
+    aVariant = hRowsCollection["max"]
+    If Not IsNull(aVariant) Then hRow.Max = aVariant
+    hRow.Formula = hRowsCollection["formula"]
+    hRow.Sum = hRowsCollection["sum"]
+
+    hRows.Add(hRow)
+  Next
+
+  hGameDef.Rows = hRows
+  'hGameDef.Debug()
+
+  Return hGameDef
+
+End
+
+Private Function LocalizedValue(sKey As String, hCollection As Collection) As Variant
+
+  Dim sLang As String = System.Language
+  Dim sLocalizedKey As String
+
+  If Len(sLang) > 1 Then
+    sLang = Left(sLang, 2)
+  Endif
+
+  sLocalizedKey = sKey & "-" & sLang
+
+  If hCollection.Exist(sLocalizedKey) Then
+    Return hCollection[sLocalizedKey]
+  Else
+    Return hCollection[sKey]
+  Endif
+
+End
