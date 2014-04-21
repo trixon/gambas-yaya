@@ -1,11 +1,10 @@
 ' Gambas class file
 
 Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
+Public Const KEY_PLAYER_NAMES As String = "Players"
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
-
-  Settings["gb.form.mdi/Toolbars/main/Size"] = "Large"
 
   $hGamePanel = New CGamePanel(pnlMain)
 
@@ -19,6 +18,9 @@ Public Sub Action_Activate(key As String) As Boolean
 
     Case "new"
       NewGame()
+
+    Case "players"
+      Players()
 
     Case "dice4"
       $hGamePanel.DicePanel.DiceCount = 4
@@ -90,24 +92,32 @@ End
 
 Private Sub About()
 
-  Dim hAbout As New FAbout
+  Dim hForm As New FAbout
 
-  With hAbout
+  With hForm
     .AppAuthor = "Patrik Karlsson"
     .AppCopyright = ("Copyright © 2014 Patrik Karlsson")
     .AppDescription = ("Yet Another Yahtzee")
     .AppLogo = Picture.Load("logo.png")
   End With
 
-  hAbout.Run
+  hForm.Run()
 
 End
 
 Private Sub NewGame()
 
-  Dim hNewGame As New FNewGame
+  Dim hForm As New FNewGame
 
-  hNewGame.ShowModal
+  hForm.ShowModal()
+
+End
+
+Private Sub Players()
+
+  Dim hForm As New FPlayers
+
+  hForm.Run()
 
 End
 

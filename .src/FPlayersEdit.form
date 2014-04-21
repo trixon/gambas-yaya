@@ -1,0 +1,36 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,46,13)
+  Text = ("Player")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Margin = True
+  Padding = 8
+  { txtName TextBox
+    MoveScaled(1,1,24,4)
+    Text = ("TextBox1")
+  }
+  { HBox1 HBox
+    MoveScaled(1,6,43,4)
+    AutoResize = True
+    Spacing = True
+    Margin = True
+    { Panel1 Panel
+      MoveScaled(4,0,4,4)
+      Expand = True
+    }
+    { btnOK Button
+      MoveScaled(9,0,6,6)
+      AutoResize = True
+      Picture = Picture["images/dialog-ok-apply.png"]
+      Default = True
+    }
+    { btnCancel Button
+      MoveScaled(26,0,16,4)
+      AutoResize = True
+      Picture = Picture["images/dialog-cancel.png"]
+      Cancel = True
+    }
+  }
+}

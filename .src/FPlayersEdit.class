@@ -1,0 +1,28 @@
+' Gambas class file
+
+Private $sName As String
+
+Public Sub Run(Optional sName As String = "") As String
+
+  txtName.Text = sName
+
+  If Me.ShowModal() Then
+    Return $sName
+  Else
+    Return ""
+  Endif
+
+End
+
+Public Sub btnOK_Click()
+
+  $sName = txtName.Text
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
+
+  Me.Close
+
+End

@@ -1,0 +1,102 @@
+' Gambas class file
+
+Public Sub Run() As Boolean
+
+  Return Not Me.ShowModal()
+
+End
+
+Public Sub btnOK_Click()
+
+  Dim sName As String
+  Dim sNames As String
+
+  For Each sName In lbxPlayers.List
+    sNames = sNames & "|" & sName
+  Next
+
+  Settings[FMain.KEY_PLAYER_NAMES] = String.Right(sNames, -1)
+  Settings.Save()
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  Dim sNames As String = Settings[FMain.KEY_PLAYER_NAMES]
+
+  Debug sNames
+  If sNames Then
+    lbxPlayers.List = Split(sNames, "|", "", True, False)
+  Endif
+
+End
+
+Public Sub tlbRemove_Click()
+
+  Dim sMessage As String
+
+  If Not lbxPlayers.Text Then Return
+
+  sMessage = Subst(("Remove '&1'?"), lbxPlayers.Text)
+  If Message.Error(sMessage, ("Remove"), ("Cancel")) = 1 Then
+    lbxPlayers.Remove(lbxPlayers.Index)
+  Endif
+
+End
+
+Public Sub tlbRemoveAll_Click()
+
+  If lbxPlayers.Count = 0 Then Return
+
+  If Message.Error(("Remove all players?"), ("Remove All"), ("Cancel")) = 1 Then
+    lbxPlayers.Clear
+  Endif
+
+End
+
+Public Sub tlbAdd_Click()
+
+  Dim hForm As New FPlayersEdit
+  Dim sName As String
+
+  sName = hForm.Run()
+  If Not sName Then Return
+
+  If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
+    lbxPlayers.Add(sName)
+  Else
+    Balloon.Warning(("Player already exists."), Last)
+  Endif
+
+End
+
+Public Sub tlbEdit_Click()
+
+  Dim hForm As New FPlayersEdit
+  Dim sName As String
+
+  If Not lbxPlayers.Text Then Return
+  sName = hForm.Run(lbxPlayers.Text)
+  If Not sName Then Return
+
+  If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
+    lbxPlayers.Remove(lbxPlayers.Index)
+    lbxPlayers.Add(sName)
+  Else
+    Balloon.Warning(("Player already exists."), Last)
+  Endif
+
+End
+
+Public Sub lbxPlayers_DblClick()
+
+  tlbEdit_Click()
+
+End
