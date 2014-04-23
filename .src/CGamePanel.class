@@ -25,6 +25,8 @@ Public Sub _new(hContainer As Container)
   $hDicePanel = New DicePanel($hPanel) As "DicePanel"
   $hDicePanel.DiceCount = 5
 
+  DicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
+
 End
 
 Public Sub DicePanel_RollFinished()

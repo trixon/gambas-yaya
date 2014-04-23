@@ -1,7 +1,10 @@
 ' Gambas module file
 
 Property Players As Integer
-Public Const KEY_GAME_PLAYERS As String = "Game/Players"
+Property ReverseMouseScroll As Boolean
+
+Private Const KEY_GAME_PLAYERS As String = "Game/Players"
+Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
 
 Private Function Players_Read() As Integer
 
@@ -12,6 +15,20 @@ End
 Private Sub Players_Write(Value As Integer)
 
   Settings[KEY_GAME_PLAYERS] = Value
+  Settings.Save
+
+End
+
+Private Function ReverseMouseScroll_Read() As Boolean
+
+  Return Settings[KEY_REVERSE_MOUSE_SCROLL, False]
+
+End
+
+Private Sub ReverseMouseScroll_Write(Value As Boolean)
+
+  DicePanel.ReverseMouseScroll = Value
+  Settings[KEY_REVERSE_MOUSE_SCROLL] = Value
   Settings.Save
 
 End

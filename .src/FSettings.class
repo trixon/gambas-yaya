@@ -8,6 +8,7 @@ End
 
 Public Sub btnOK_Click()
 
+  MSettings.ReverseMouseScroll = cbxMouseScroll.Value
   Me.Close(True)
 
 End
@@ -19,5 +20,11 @@ Public Sub btnCancel_Click()
 End
 
 Public Sub HBox1_MouseDown()
+
+End
+
+Public Sub Form_Open()
+
+  cbxMouseScroll.Value = MSettings.ReverseMouseScroll
 
 End

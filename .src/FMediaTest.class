@@ -1,0 +1,10 @@
+' Gambas class file
+
+Private $hPlayer As MediaPlayer
+Private $hOutput As MediaControl
+
+Public Sub Form_Open()
+
+  $hPlayer = New MediaPlayer As "MediaPlayer"
+
+End

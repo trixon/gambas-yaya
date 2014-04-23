@@ -11,9 +11,9 @@
     MoveScaled(4,1,53,15)
     Expand = True
     Border = Border.Raised
-    { CheckBox1 CheckBox
+    { cbxMouseScroll CheckBox
       MoveScaled(3,2,24,4)
-      Text = ("CheckBox1")
+      Text = ("Reverse mouse scroll")
     }
   }
   { HBox1 HBox

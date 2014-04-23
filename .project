@@ -10,6 +10,7 @@ Component=gb.form
 Component=gb.desktop
 Component=gb.settings
 Component=gb.form.mdi
+Component=gb.media
 Component=gb.sdl.sound
 Component=gb.web
 Description="Yet Another Yahtzee"
