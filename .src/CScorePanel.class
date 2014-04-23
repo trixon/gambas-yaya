@@ -3,6 +3,9 @@
 Property Read Panel As Panel
 
 Private $hPanel As Panel
+Private $hGridView As GridView
+Private $hButton As Button
+Private $hGameDef As CGameDef
 
 Public Sub _new(hContainer As Container)
 
@@ -14,10 +17,39 @@ Public Sub _new(hContainer As Container)
     .Expand = True
   End With
 
+  $hGameDef = MGameLoader.GameDefs["default"]
+  $hGameDef.Debug
+  $hGridView = New GridView($hPanel) As "GridView"
+  $hGridView.Columns.Count = MSettings.Players + 1
+  $hGridView.Rows.Count = $hGameDef.Rows.Count
+  $hGridView.Columns.Width = 52
+  $hGridView.W = 200
+  $hGridView.H = 200
+
 End
 
 Private Function Panel_Read() As Panel
 
   Return $hPanel
+
+End
+
+Public Sub GridView_Data(Row As Integer, Column As Integer)
+
+  Dim hGameRow As CGameRow
+  Dim hData As _GridView_Data
+
+  hGameRow = $hGameDef.Rows[Row]
+  hData = $hGridView.Data
+
+  If Column = 0 Then
+    hData.Text = hGameRow.Text
+  Endif
+
+  If hGameRow.IsSum Or hGameRow.IsCounter Then
+    hData.Background = Color.Yellow
+    hData.Padding = 2
+    hData.Font = Font["Bold"]
+  Endif
 
 End

@@ -1,0 +1,17 @@
+' Gambas module file
+
+Property Players As Integer
+Public Const KEY_GAME_PLAYERS As String = "Game/Players"
+
+Private Function Players_Read() As Integer
+
+  Return Settings[KEY_GAME_PLAYERS, 2]
+
+End
+
+Private Sub Players_Write(Value As Integer)
+
+  Settings[KEY_GAME_PLAYERS] = Value
+  Settings.Save
+
+End

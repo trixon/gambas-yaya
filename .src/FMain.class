@@ -4,11 +4,11 @@ Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
 Public Const KEY_PLAYER_NAMES As String = "Players"
 Public Const KEY_GAME_ID As String = "Game/Id"
 Public Const KEY_GAME_VARIANT As String = "Game/Variant"
-Public Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
 
+  MGameLoader.LoadAll()
   $hGamePanel = New CGamePanel(pnlMain)
 
 End
@@ -24,6 +24,9 @@ Public Sub Action_Activate(key As String) As Boolean
 
     Case "players"
       Players()
+
+    Case "settings"
+      SettingsDialog()
 
     Case "dice4"
       $hGamePanel.DicePanel.DiceCount = 4
@@ -66,8 +69,6 @@ Public Sub Form_Open()
 
   $hGamePanel.Open()
   Form_Resize()
-
-  MGameLoader.LoadAll()
 
 End
 
@@ -125,6 +126,21 @@ Private Sub Players()
   Dim hForm As New FPlayers
 
   hForm.Run()
+
+End
+
+Private Sub SettingsDialog()
+
+  Dim hForm As New FSettings
+
+  If Me.FullScreen Then
+    Me.FullScreen = False
+    hForm.Run()
+    Me.FullScreen = True
+  Else
+    hForm.Run()
+
+  Endif
 
 End
 

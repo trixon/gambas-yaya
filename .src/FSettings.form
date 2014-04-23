@@ -1,0 +1,40 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,65,29)
+  Resizable = False
+  Stacking = Window.Above
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  { Panel2 Panel
+    MoveScaled(4,1,53,15)
+    Expand = True
+    Border = Border.Raised
+    { CheckBox1 CheckBox
+      MoveScaled(3,2,24,4)
+      Text = ("CheckBox1")
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(8,19,50,4)
+    AutoResize = True
+    Spacing = True
+    { Panel1 Panel
+      MoveScaled(4,0,4,4)
+      Expand = True
+    }
+    { btnOK Button
+      MoveScaled(15,0,6,6)
+      AutoResize = True
+      Picture = Picture["images/dialog-ok-apply.png"]
+      Default = True
+    }
+    { btnCancel Button
+      MoveScaled(32,0,16,4)
+      AutoResize = True
+      Picture = Picture["images/dialog-cancel.png"]
+      Cancel = True
+    }
+  }
+}

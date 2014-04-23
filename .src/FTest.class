@@ -19,3 +19,7 @@ End
 Public Sub Panel1_MouseWheel()
 
 End
+
+Public Sub GridView1_Click()
+
+End

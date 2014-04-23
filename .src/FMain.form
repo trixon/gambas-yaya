@@ -34,7 +34,6 @@
     { mnuSettings Menu
       Action = "settings"
       Text = ("Settings")
-      Enabled = False
     }
     { Menu2 Menu
     }
