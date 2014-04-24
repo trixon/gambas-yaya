@@ -16,7 +16,7 @@ Public Sub _new(hContainer As Container)
     .Arrangement = Arrange.Vertical
     .Background = &H1B3F0F&
     .Border = Border.Sunken
-    .Height = 512
+    .Height = 700
     .Padding = 8
     .Width = 1024
   End With

@@ -4,6 +4,7 @@
   MoveScaled(0,0,59,42)
   Text = ("New Game")
   Resizable = False
+  Stacking = Window.Below
   SkipTaskbar = True
   Arrangement = Arrange.Vertical
   Margin = True

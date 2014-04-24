@@ -20,11 +20,15 @@ Public Sub _new(hContainer As Container)
   $hGameDef = MGameLoader.GameDefs["default"]
   $hGameDef.Debug
   $hGridView = New GridView($hPanel) As "GridView"
-  $hGridView.Columns.Count = MSettings.Players + 1
-  $hGridView.Rows.Count = $hGameDef.Rows.Count
-  $hGridView.Columns.Width = 52
-  $hGridView.W = 200
-  $hGridView.H = 200
+  With $hGridView
+    .Columns.Count = MSettings.Players + 1
+    .Rows.Count = $hGameDef.Rows.Count
+    .Columns.Width = 52
+    .W = 400
+    .H = 200
+    .Border = Border.None
+    .Background = &HFFFFDF
+  End With
 
 End
 
@@ -44,6 +48,7 @@ Public Sub GridView_Data(Row As Integer, Column As Integer)
 
   If Column = 0 Then
     hData.Text = hGameRow.Text
+    hData.Background = Color.Orange
   Endif
 
   If hGameRow.IsSum Or hGameRow.IsCounter Then
