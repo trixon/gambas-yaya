@@ -26,3 +26,11 @@ Public Sub btnCancel_Click()
   Me.Close
 
 End
+
+Public Sub txtName_Change()
+
+  If String.InStr(Last.Text, "|") > 0 Then
+    Last.Text = Replace(Last.Text, "|", "")
+  Endif
+
+End
