@@ -34,3 +34,7 @@ Public Sub cmbGame_Click()
   cmbVariant.List = MGameLoader.VariantsByText(cmbGame.Text)
 
 End
+
+Public Sub Panel2_MouseDown()
+
+End

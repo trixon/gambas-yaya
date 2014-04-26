@@ -118,6 +118,7 @@ Private Sub NewGame()
   Dim hForm As New FNewGame
 
   Debug hForm.Run()
+  'Message.Info("mess", "OKI")
 
 End
 
