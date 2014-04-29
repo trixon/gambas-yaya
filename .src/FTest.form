@@ -38,4 +38,9 @@
     Header = GridView.Both
     ScrollBar = Scroll.Vertical
   }
+  { MaskBox1 MaskBox
+    MoveScaled(72,43,24,4)
+    Text = ("MaskBox1")
+    Mask = "[...]"
+  }
 }

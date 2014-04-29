@@ -2,8 +2,8 @@
 
 Public Sub Form_Open()
 
-  cmbGame.Index = 0
   cmbGame.List = MGameLoader.Titles()
+  cmbGame.Text = MGameLoader.TextById(MSettings.GameId)
   cmbVariant.Index = 0
   cmbPlayers.Text = MSettings.Players
 
@@ -17,6 +17,7 @@ End
 
 Public Sub btnOK_Click()
 
+  MSettings.GameId = MGameLoader.IdByText(cmbGame.Text)
   MSettings.Players = cmbPlayers.Text
   Me.Close(True)
 
@@ -32,9 +33,5 @@ Public Sub cmbGame_Click()
 
   Debug MGameLoader.IdByText(cmbGame.Text)
   cmbVariant.List = MGameLoader.VariantsByText(cmbGame.Text)
-
-End
-
-Public Sub Panel2_MouseDown()
 
 End

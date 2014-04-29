@@ -23,6 +23,12 @@ Public Function IdByText(sText As String) As String
 
 End
 
+Public Function TextById(sId As String) As String
+
+  Return GameDefs[sId].Text
+
+End
+
 Public Function VariantsByText(sText As String) As String[]
 
   Dim hGameDef As CGameDef = GameDefs[$hIdByText[sText]]

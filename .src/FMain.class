@@ -2,8 +2,6 @@
 
 Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
 Public Const KEY_PLAYER_NAMES As String = "Players"
-Public Const KEY_GAME_ID As String = "Game/Id"
-Public Const KEY_GAME_VARIANT As String = "Game/Variant"
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
@@ -117,8 +115,9 @@ Private Sub NewGame()
 
   Dim hForm As New FNewGame
 
-  Debug hForm.Run()
-  'Message.Info("mess", "OKI")
+  If hForm.Run() Then
+    $hGamePanel.NewGame()
+  Endif
 
 End
 

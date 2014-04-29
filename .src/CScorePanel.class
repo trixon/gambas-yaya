@@ -17,18 +17,18 @@ Public Sub _new(hContainer As Container)
     .Expand = True
   End With
 
-  $hGameDef = MGameLoader.GameDefs["default"]
-  $hGameDef.Debug
-  $hGridView = New GridView($hPanel) As "GridView"
-  With $hGridView
-    .Columns.Count = MSettings.Players + 1
-    .Rows.Count = $hGameDef.Rows.Count
-    .Columns.Width = 52
-    .W = 400
-    .H = 200
-    .Border = Border.None
-    .Background = &HFFFFDF
-  End With
+  ' $hGameDef = MGameLoader.GameDefs["default"]
+  ' $hGameDef.Debug
+  ' $hGridView = New GridView($hPanel) As "GridView"
+  ' With $hGridView
+  '   .Columns.Count = MSettings.Players + 1
+  '   .Rows.Count = $hGameDef.Rows.Count
+  '   .Columns.Width = 52
+  '   .W = 400
+  '   .H = 200
+  '   .Border = Border.None
+  '   .Background = &HFFFFDF
+  ' End With
 
 End
 
@@ -43,9 +43,10 @@ Public Sub GridView_Data(Row As Integer, Column As Integer)
   Dim hGameRow As CGameRow
   Dim hData As _GridView_Data
 
+  '$hGridView = Null
   hGameRow = $hGameDef.Rows[Row]
   hData = $hGridView.Data
-
+  Debug Row; "x"; Column
   If Column = 0 Then
     hData.Text = hGameRow.Text
     hData.Background = Color.Orange
@@ -56,5 +57,23 @@ Public Sub GridView_Data(Row As Integer, Column As Integer)
     hData.Padding = 2
     hData.Font = Font["Bold"]
   Endif
+
+End
+
+Public Sub NewGame()
+
+  Debug
+  $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
+  $hGameDef.Debug
+  $hGridView = New GridView($hPanel) As "GridView"
+  With $hGridView
+    .Columns.Count = MSettings.Players + 1
+    .Rows.Count = $hGameDef.Rows.Count
+    .Columns.Width = 52
+    .W = 400
+    .H = 200
+    .Border = Border.None
+    .Background = &HFFFFDF
+  End With
 
 End

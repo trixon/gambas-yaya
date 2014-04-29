@@ -2,9 +2,12 @@
 
 Property Players As Integer
 Property ReverseMouseScroll As Boolean
+Property GameId As String
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
+Private Const KEY_GAME_ID As String = "Game/Id"
+Private Const KEY_GAME_VARIANT As String = "Game/Variant"
 
 Private Function Players_Read() As Integer
 
@@ -29,6 +32,19 @@ Private Sub ReverseMouseScroll_Write(Value As Boolean)
 
   DicePanel.ReverseMouseScroll = Value
   Settings[KEY_REVERSE_MOUSE_SCROLL] = Value
+  Settings.Save
+
+End
+
+Private Function GameId_Read() As String
+
+  Return Settings[KEY_GAME_ID, "default"]
+
+End
+
+Private Sub GameId_Write(Value As String)
+
+  Settings[KEY_GAME_ID] = Value
   Settings.Save
 
 End
