@@ -133,14 +133,7 @@ Private Sub SettingsDialog()
 
   Dim hForm As New FSettings
 
-  If Me.FullScreen Then
-    Me.FullScreen = False
-    hForm.Run()
-    Me.FullScreen = True
-  Else
-    hForm.Run()
-
-  Endif
+  hForm.Run()
 
 End
 

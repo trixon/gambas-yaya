@@ -2,6 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,65,29)
+  Text = ("Settings")
   Resizable = False
   Stacking = Window.Above
   Arrangement = Arrange.Vertical
