@@ -18,10 +18,11 @@
     }
     { cmbGame ComboBox
       MoveScaled(0,4,37,4)
+      #Translate = False
       Font = Font["+3"]
       ReadOnly = True
-      List = [("Yahtzee")]
-      Text = ("ComboBox1")
+      List = ["Yahtzee"]
+      Text = "ComboBox1"
       Sorted = True
     }
     { Label2 Label
@@ -30,10 +31,11 @@
     }
     { cmbVariant ComboBox
       MoveScaled(1,13,24,4)
+      #Translate = False
       Font = Font["+3"]
       ReadOnly = True
-      List = [("Standard")]
-      Text = ("ComboBox2")
+      List = ["Standard"]
+      Text = "ComboBox2"
     }
     { Label3 Label
       MoveScaled(1,18,24,4)
@@ -41,10 +43,11 @@
     }
     { cmbPlayers ComboBox
       MoveScaled(1,22,24,4)
+      #Translate = False
       Font = Font["+3"]
       ReadOnly = True
-      List = [("1"), ("2"), ("3"), ("4"), ("5"), ("6"), ("7"), ("8")]
-      Text = ("ComboBox3")
+      List = ["1", "2", "3", "4", "5", "6", "7", "8"]
+      Text = "ComboBox3"
     }
   }
   { Separator1 Separator

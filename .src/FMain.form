@@ -8,20 +8,24 @@
     Text = ("Menu")
     Visible = False
     { mnuDev Menu
-      Text = ("Dev")
+      #Translate = False
+      Text = "Dev"
       { mnu4Dice Menu
+        #Translate = False
         Action = "dice4"
-        Text = ("4 dice")
+        Text = "4 dice"
         Tag = "4"
       }
       { mnu5Dice Menu
+        #Translate = False
         Action = "dice5"
-        Text = ("5 dice")
+        Text = "5 dice"
         Tag = "5"
       }
       { mnu6Dice Menu
+        #Translate = False
         Action = "dice6"
-        Text = ("6 dice")
+        Text = "6 dice"
         Tag = "6"
       }
     }

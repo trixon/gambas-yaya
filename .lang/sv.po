@@ -1,0 +1,173 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-11-01 04:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .project:1
+msgid "YaYa"
+msgstr "-"
+
+#: .project:2 FMain.class:106
+msgid "Yet Another Yahtzee"
+msgstr "Ännu en yatzy"
+
+#: FAbout.form:22 FMain.form:72
+msgid "About"
+msgstr "Om"
+
+#: FAbout.form:56
+msgid "Label1"
+msgstr ""
+
+#: FAbout.form:70
+msgid "UrlLabel1"
+msgstr ""
+
+#: FAbout.form:86
+msgid "GNU GENERAL PUBLIC LICENSE"
+msgstr "-"
+
+#: FAbout.form:99
+msgid "Thanks"
+msgstr "Tack"
+
+#: FAbout.form:105
+msgid "License"
+msgstr "Licens"
+
+#: FAbout.form:115
+msgid "Close"
+msgstr "Stäng"
+
+#: FMain.class:105
+msgid "Copyright © 2014 Patrik Karlsson"
+msgstr "Copyright © 2014 Patrik Karlsson"
+
+#: FMain.form:29
+msgid "Menu"
+msgstr "Meny"
+
+#: FMain.form:56
+msgid "Full Screen"
+msgstr "Fullskärm"
+
+#: FMain.form:64 FSettings.form:13
+msgid "Settings"
+msgstr "Inställningar"
+
+#: FMain.form:83 FNewGame.form:19
+msgid "New Game"
+msgstr "Nytt spel"
+
+#: FMain.form:96
+msgid "Undo"
+msgstr "Ångra"
+
+#: FMain.form:105 FNewGame.form:60 FPlayers.form:18
+msgid "Players"
+msgstr "Spelare"
+
+#: FNewGame.form:33
+msgid "Game"
+msgstr "Spel"
+
+#: FNewGame.form:40
+msgid "Yahtzee"
+msgstr ""
+
+#: FNewGame.form:41
+msgid "ComboBox1"
+msgstr ""
+
+#: FNewGame.form:47
+msgid "Variant"
+msgstr "Variant"
+
+#: FNewGame.form:54 MGameLoader.module:15
+msgid "Standard"
+msgstr "Standard"
+
+#: FNewGame.form:55
+msgid "ComboBox2"
+msgstr ""
+
+#: FPlayers.class:45
+msgid "Remove '&1'?"
+msgstr "Ta bort '&1'?"
+
+#: FPlayers.class:46
+msgid "Confirm"
+msgstr "Bekräfta"
+
+#: FPlayers.class:48
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: FPlayers.class:48
+msgid "Remove"
+msgstr "Ta bort"
+
+#: FPlayers.class:59
+msgid "Remove All"
+msgstr "Ta bort alla"
+
+#: FPlayers.class:59
+msgid "Remove all players?"
+msgstr "Ta bort alla spelare?"
+
+#: FPlayers.class:76
+msgid "Player already exists."
+msgstr "Spelaren finns redan."
+
+#: FPlayersEdit.class:10
+msgid "Edit"
+msgstr "Redigera"
+
+#: FPlayersEdit.class:12
+msgid "Add"
+msgstr "Lägg till"
+
+#: FPlayersEdit.form:12
+msgid "Player"
+msgstr "Spelare"
+
+#: FPlayersEdit.form:20
+msgid "TextBox1"
+msgstr ""
+
+#: FSettings.form:27
+msgid "Reverse mouse scroll"
+msgstr "Omvänd rullningsriktning"
+
+#: MGameLoader.module:16
+msgid "Downwards"
+msgstr "Nedåt"
+
+#: MGameLoader.module:17
+msgid "Upwards"
+msgstr "Uppåt"
+
+#: MGameLoader.module:18
+msgid "Upper Lower"
+msgstr "Övre Nedre"
+
+#: MGameLoader.module:19
+msgid "Lower Upper"
+msgstr "Nedre Övre"
+
+#: MGameLoader.module:20
+msgid "Random"
+msgstr "Slump"
+
+#: MGameLoader.module:21
+msgid "Consume"
+msgstr "Förbruka"
+

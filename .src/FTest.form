@@ -1,46 +1,5 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,110,64)
-  { PictureBox1 PictureBox
-    MoveScaled(3,32,55,21)
-    Expand = True
-    Picture = Picture["dice-images/board/default.jpg"]
-    Stretch = True
-    AutoResize = True
-  }
-  { Button1 Button
-    MoveScaled(22,26,16,4)
-    Text = ("Button1")
-  }
-  { ToggleButton1 ToggleButton
-    MoveScaled(4,25,16,4)
-    Text = ("ToggleButton1")
-  }
-  { Panel1 Panel
-    MoveScaled(1,1,60,24)
-    Background = &H007FFF&
-    Arrangement = Arrange.Horizontal
-    { ToggleButton2 ToggleButton
-      MoveScaled(6,5,16,4)
-      Expand = True
-      Text = ("ToggleButton2")
-    }
-    { ToggleButton3 ToggleButton
-      MoveScaled(42,13,16,4)
-      Expand = True
-      Text = ("ToggleButton3")
-    }
-  }
-  { GridView1 GridView
-    MoveScaled(68,4,39,34)
-    Border = False
-    Header = GridView.Both
-    ScrollBar = Scroll.Vertical
-  }
-  { MaskBox1 MaskBox
-    MoveScaled(72,43,24,4)
-    Text = ("MaskBox1")
-    Mask = "[...]"
-  }
+  MoveScaled(0,0,67,33)
 }

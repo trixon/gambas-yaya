@@ -31,7 +31,6 @@ Public Sub Form_Open()
 
   Dim sNames As String = Settings[FMain.KEY_PLAYER_NAMES]
 
-  Debug sNames
   If sNames Then
     lbxPlayers.List = Split(sNames, "|", "", True, False)
   Endif
@@ -43,8 +42,9 @@ Public Sub tlbRemove_Click()
   Dim sMessage As String
 
   If Not lbxPlayers.Text Then Return
-
   sMessage = Subst(("Remove '&1'?"), lbxPlayers.Text)
+  Message.Title = ("Confirm")
+
   If Message.Error(sMessage, ("Remove"), ("Cancel")) = 1 Then
     lbxPlayers.Remove(lbxPlayers.Index)
   Endif
@@ -54,6 +54,7 @@ End
 Public Sub tlbRemoveAll_Click()
 
   If lbxPlayers.Count = 0 Then Return
+  Message.Title = ("Confirm")
 
   If Message.Error(("Remove all players?"), ("Remove All"), ("Cancel")) = 1 Then
     lbxPlayers.Clear

@@ -6,6 +6,12 @@ Public Sub Run(Optional sName As String = "") As String
 
   txtName.Text = sName
 
+  If sName Then
+    Me.Title = ("Edit")
+  Else
+    Me.Title = ("Add")
+  Endif
+
   If Me.ShowModal() Then
     Return $sName
   Else
@@ -32,5 +38,9 @@ Public Sub txtName_Change()
   If String.InStr(Last.Text, "|") > 0 Then
     Last.Text = Replace(Last.Text, "|", "")
   Endif
+
+End
+
+Public Sub Form_Open()
 
 End

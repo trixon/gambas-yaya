@@ -1,7 +1,26 @@
 ' Gambas module file
 
 Public GameDefs As New Collection
+Public Variants As New Collection
 Private $hIdByText As New Collection
+
+Public Sub _init()
+
+  InitVariants
+
+End
+
+Private Sub InitVariants()
+
+  Variants.Add(("Standard"), "standard")
+  Variants.Add(("Downwards"), "downwards")
+  Variants.Add(("Upwards"), "upwards")
+  Variants.Add(("Upper Lower"), "upper_lower")
+  Variants.Add(("Lower Upper"), "lower_upper")
+  Variants.Add(("Random"), "random")
+  Variants.Add(("Consume"), "consume")
+
+End
 
 Public Sub LoadAll()
 
@@ -26,6 +45,21 @@ End
 Public Function TextById(sId As String) As String
 
   Return GameDefs[sId].Text
+
+End
+
+Public Function LocalizedVariants(aVariants As String[]) As String[]
+
+  Dim aL10NVariants As New String[]
+  Dim sKey As String
+
+  For Each sKey In aVariants
+    Debug sKey
+    Debug Variants[sKey]
+    aL10NVariants.Add(Variants[sKey])
+  Next
+
+  Return aL10NVariants
 
 End
 

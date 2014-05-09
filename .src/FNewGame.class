@@ -33,5 +33,6 @@ Public Sub cmbGame_Click()
 
   Debug MGameLoader.IdByText(cmbGame.Text)
   cmbVariant.List = MGameLoader.VariantsByText(cmbGame.Text)
+  cmbVariant.List = MGameLoader.LocalizedVariants(MGameLoader.VariantsByText(cmbGame.Text))
 
 End
