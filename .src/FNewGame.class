@@ -114,14 +114,14 @@ Public Sub bntShuffle_Click()
 
   Dim i As Integer
   Dim iPlayers As Integer = spbPlayers.Value
-  Dim iSwapIndex As Integer
+  Dim iSwapWithIndex As Integer
   Dim iStoredIndex As Integer
 
   For i = 0 To iPlayers - 1
-    iSwapIndex = Int(Rnd(1, iPlayers - 1))
     iStoredIndex = $hCmbPlayers[i].Index
-    $hCmbPlayers[i].Index = $hCmbPlayers[iSwapIndex].Index
-    $hCmbPlayers[iSwapIndex].Index = iStoredIndex
+    iSwapWithIndex = Int(Rnd(0, iPlayers))
+    $hCmbPlayers[i].Index = $hCmbPlayers[iSwapWithIndex].Index
+    $hCmbPlayers[iSwapWithIndex].Index = iStoredIndex
   Next
 
 End
