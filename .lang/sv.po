@@ -15,9 +15,17 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:106
+#: .project:2 FMain.class:105
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
+
+#: CScorePanel.class:57
+msgid "Max"
+msgstr ""
+
+#: CScorePanel.class:67
+msgid "Top"
+msgstr ""
 
 #: FAbout.form:22 FMain.form:72
 msgid "About"
@@ -47,7 +55,7 @@ msgstr "Licens"
 msgid "Close"
 msgstr "Stäng"
 
-#: FMain.class:105
+#: FMain.class:104
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
@@ -59,11 +67,11 @@ msgstr "Meny"
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:64 FSettings.form:13
+#: FMain.form:64 FSettings.form:18
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:83 FNewGame.form:19
+#: FMain.form:83 FNewGame.form:28
 msgid "New Game"
 msgstr "Nytt spel"
 
@@ -71,59 +79,51 @@ msgstr "Nytt spel"
 msgid "Undo"
 msgstr "Ångra"
 
-#: FMain.form:105 FNewGame.form:60 FPlayers.form:18
+#: FMain.form:105 FNewGame.form:79 FPlayers.form:18
 msgid "Players"
 msgstr "Spelare"
 
-#: FNewGame.form:33
+#: FNewGame.form:43
 msgid "Game"
 msgstr "Spel"
 
-#: FNewGame.form:40
-msgid "Yahtzee"
-msgstr ""
-
-#: FNewGame.form:41
-msgid "ComboBox1"
-msgstr ""
-
-#: FNewGame.form:47
+#: FNewGame.form:59
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:54 MGameLoader.module:15
-msgid "Standard"
-msgstr "Standard"
+#: FNewGame.form:89
+msgid "Number of players:"
+msgstr "Antal spelare:"
 
-#: FNewGame.form:55
-msgid "ComboBox2"
-msgstr ""
+#: FNewGame.form:107
+msgid "Shuffle"
+msgstr "Blanda"
 
-#: FPlayers.class:45
+#: FPlayers.class:33
 msgid "Remove '&1'?"
 msgstr "Ta bort '&1'?"
 
-#: FPlayers.class:46
+#: FPlayers.class:34
 msgid "Confirm"
 msgstr "Bekräfta"
 
-#: FPlayers.class:48
+#: FPlayers.class:36
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: FPlayers.class:48
+#: FPlayers.class:36
 msgid "Remove"
 msgstr "Ta bort"
 
-#: FPlayers.class:59
+#: FPlayers.class:47
 msgid "Remove All"
 msgstr "Ta bort alla"
 
-#: FPlayers.class:59
+#: FPlayers.class:47
 msgid "Remove all players?"
 msgstr "Ta bort alla spelare?"
 
-#: FPlayers.class:76
+#: FPlayers.class:64
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
@@ -143,9 +143,41 @@ msgstr "Spelare"
 msgid "TextBox1"
 msgstr ""
 
-#: FSettings.form:27
+#: FSettings.form:33
+msgid "Miscellaneous"
+msgstr ""
+
+#: FSettings.form:38
+msgid "Scorecard"
+msgstr "Protokoll"
+
+#: FSettings.form:42
+msgid "Show suggestions"
+msgstr "Visa förslag"
+
+#: FSettings.form:47
+msgid "Show Max column"
+msgstr "Visa Maxkolumn"
+
+#: FSettings.form:52
+msgid "Show Top column"
+msgstr "Visa Toppkolumn"
+
+#: FSettings.form:58
+msgid "Dice"
+msgstr "Tärningar"
+
+#: FSettings.form:62
 msgid "Reverse mouse scroll"
 msgstr "Omvänd rullningsriktning"
+
+#: FSettings.form:66
+msgid "Themes"
+msgstr ""
+
+#: MGameLoader.module:15
+msgid "Standard"
+msgstr "Standard"
 
 #: MGameLoader.module:16
 msgid "Downwards"

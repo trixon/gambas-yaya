@@ -2,4 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,67,33)
+  { SpinBox1 SpinBox
+    MoveScaled(13,6,9,4)
+  }
 }

@@ -1,11 +1,19 @@
 ' Gambas class file
 
+Private Const MAX_PLAYERS As Integer = 8
+Private $hCmbPlayers As New ComboBox[MAX_PLAYERS]
+
 Public Sub Form_Open()
 
   cmbGame.List = MGameLoader.Titles()
   cmbGame.Text = MGameLoader.TextById(MSettings.GameId)
-  cmbVariant.Index = 0
-  cmbPlayers.Text = MSettings.Players
+  cmbVariant.Index = MSettings.Variant
+
+  spbPlayers.Value = MSettings.Players
+
+  initPlayers()
+  spbPlayers_Change()
+  LoadPlayerSelection()
 
 End
 
@@ -18,7 +26,9 @@ End
 Public Sub btnOK_Click()
 
   MSettings.GameId = MGameLoader.IdByText(cmbGame.Text)
-  MSettings.Players = cmbPlayers.Text
+  MSettings.Variant = cmbVariant.Index
+  MSettings.Players = spbPlayers.Value
+  SavePlayerSelection()
   Me.Close(True)
 
 End
@@ -31,8 +41,87 @@ End
 
 Public Sub cmbGame_Click()
 
-  Debug MGameLoader.IdByText(cmbGame.Text)
-  cmbVariant.List = MGameLoader.VariantsByText(cmbGame.Text)
+  Dim hGameDef As CGameDef = MGameLoader.GameDefs[MGameLoader.IdByText(cmbGame.Text)]
+
   cmbVariant.List = MGameLoader.LocalizedVariants(MGameLoader.VariantsByText(cmbGame.Text))
+  cmbVariant.Index = hGameDef.VariantIndex
+
+End
+
+Private Sub initPlayers()
+
+  Dim hComboBox As ComboBox
+  Dim hParent As Container
+  Dim i As Integer
+
+  For i = 0 To MAX_PLAYERS - 1
+    If i < 4 Then
+      hParent = VBox1
+    Else
+      hParent = VBox2
+    Endif
+
+    $hCmbPlayers[i] = New ComboBox(hParent)
+    With $hCmbPlayers[i]
+      .Font = cmbGame.Font
+      .Height = cmbGame.Height
+      .List = MSettings.PlayerNames
+      .ReadOnly = True
+      .Text = .List[0]
+    End With
+  Next
+
+End
+
+Private Sub LoadPlayerSelection()
+
+  Dim i As Integer
+
+  For i = 0 To MAX_PLAYERS - 1
+    Try $hCmbPlayers[i].Text = MSettings.PlayerSelection[i]
+  Next
+
+End
+
+Private Sub SavePlayerSelection()
+
+  Dim aPlayers As New String[MAX_PLAYERS]
+  Dim i As Integer
+
+  For i = 0 To MAX_PLAYERS - 1
+    aPlayers[i] = $hCmbPlayers[i].Text
+  Next
+
+  MSettings.PlayerSelection = aPlayers
+
+End
+
+Public Sub spbPlayers_Change()
+
+  Dim i As Integer
+
+  For i = 0 To MAX_PLAYERS - 1
+    If spbPlayers.Value > i Then
+      Try $hCmbPlayers[i].Enabled = True
+    Else
+      Try $hCmbPlayers[i].Enabled = False
+    Endif
+  Next
+
+End
+
+Public Sub bntShuffle_Click()
+
+  Dim i As Integer
+  Dim iPlayers As Integer = spbPlayers.Value
+  Dim iSwapIndex As Integer
+  Dim iStoredIndex As Integer
+
+  For i = 0 To iPlayers - 1
+    iSwapIndex = Int(Rnd(1, iPlayers - 1))
+    iStoredIndex = $hCmbPlayers[i].Index
+    $hCmbPlayers[i].Index = $hCmbPlayers[iSwapIndex].Index
+    $hCmbPlayers[iSwapIndex].Index = iStoredIndex
+  Next
 
 End

@@ -8,15 +8,7 @@ End
 
 Public Sub btnOK_Click()
 
-  Dim sName As String
-  Dim sNames As String
-
-  For Each sName In lbxPlayers.List
-    sNames = sNames & "|" & sName
-  Next
-
-  Settings[FMain.KEY_PLAYER_NAMES] = String.Right(sNames, -1)
-  Settings.Save()
+  MSettings.PlayerNames = lbxPlayers.List
   Me.Close(True)
 
 End
@@ -29,11 +21,7 @@ End
 
 Public Sub Form_Open()
 
-  Dim sNames As String = Settings[FMain.KEY_PLAYER_NAMES]
-
-  If sNames Then
-    lbxPlayers.List = Split(sNames, "|", "", True, False)
-  Endif
+  lbxPlayers.List = MSettings.PlayerNames
 
 End
 

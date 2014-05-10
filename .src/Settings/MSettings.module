@@ -3,9 +3,12 @@
 Property Players As Integer
 Property ReverseMouseScroll As Boolean
 Property GameId As String
+Property {Variant} As Integer
 Property ShowHints As Boolean
 Property ShowMaxCol As Boolean
 Property ShowTopCol As Boolean
+Property PlayerNames As String[]
+Property PlayerSelection As String[]
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
@@ -14,6 +17,8 @@ Private Const KEY_GAME_VARIANT As String = "Game/Variant"
 Private Const KEY_SCORECARD_SHOW_HINTS As String = "Scorecard/ShowHints"
 Private Const KEY_SCORECARD_SHOW_MAXCOL As String = "Scorecard/ShowMax"
 Private Const KEY_SCORECARD_SHOW_TOPCOL As String = "Scorecard/ShowTop"
+Private Const KEY_PLAYER_NAMES As String = "Players"
+Private Const KEY_PLAYER_SELECTION As String = "Game/PlayerSelection"
 
 Private Function Players_Read() As Integer
 
@@ -90,6 +95,67 @@ End
 Private Sub ShowTopCol_Write(Value As Boolean)
 
   Settings[KEY_SCORECARD_SHOW_TOPCOL] = Value
+  Settings.Save
+
+End
+
+Private Function PlayerNames_Read() As String[]
+
+  Return LoadStringArray(KEY_PLAYER_NAMES)
+
+End
+
+Private Sub PlayerNames_Write(Value As String[])
+
+  SaveStringArray(KEY_PLAYER_NAMES, Value)
+
+End
+
+Private Function PlayerSelection_Read() As String[]
+
+  Return LoadStringArray(KEY_PLAYER_SELECTION)
+
+End
+
+Private Sub PlayerSelection_Write(Value As String[])
+
+  SaveStringArray(KEY_PLAYER_SELECTION, Value)
+
+End
+
+Private Function LoadStringArray(sKey As String) As String[]
+
+  Dim sNames As String = Settings[sKey]
+
+  If sNames Then
+    Return Split(sNames, "|", "", True, False)
+  Endif
+
+End
+
+Private Sub SaveStringArray(sKey As String, Value As String[])
+
+  Dim sName As String
+  Dim sNames As String
+
+  For Each sName In Value
+    sNames = sNames & "|" & sName
+  Next
+
+  Settings[sKey] = String.Right(sNames, -1)
+  Settings.Save()
+
+End
+
+Private Function Variant_Read() As Integer
+
+  Return Settings[KEY_GAME_VARIANT, 0]
+
+End
+
+Private Sub Variant_Write(Value As Integer)
+
+  Settings[KEY_GAME_VARIANT] = Value
   Settings.Save
 
 End

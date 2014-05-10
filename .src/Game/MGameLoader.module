@@ -54,8 +54,6 @@ Public Function LocalizedVariants(aVariants As String[]) As String[]
   Dim sKey As String
 
   For Each sKey In aVariants
-    Debug sKey
-    Debug Variants[sKey]
     aL10NVariants.Add(Variants[sKey])
   Next
 

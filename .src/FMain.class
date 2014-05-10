@@ -1,7 +1,6 @@
 ' Gambas class file
 
 Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
-Public Const KEY_PLAYER_NAMES As String = "Players"
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
