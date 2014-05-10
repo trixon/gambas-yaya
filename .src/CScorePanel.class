@@ -46,10 +46,31 @@ Public Sub GridView_Data(Row As Integer, Column As Integer)
   '$hGridView = Null
   hGameRow = $hGameDef.Rows[Row]
   hData = $hGridView.Data
+  hData.Padding = 4
   Debug Row; "x"; Column
   If Column = 0 Then
     hData.Text = hGameRow.Text
     hData.Background = Color.Orange
+  Endif
+  If Column = 1 Then
+    If Row = 0 Then
+      hData.Text = ("Max")
+      hData.Alignment = Align.Center
+    Else
+      hData.Text = hGameRow.Max
+      hData.Alignment = Align.Right
+      hData.Padding = 4
+    Endif
+  Endif
+  If Column = 2 Then
+    If Row = 0 Then
+      hData.Text = ("Top")
+      hData.Alignment = Align.Center
+    Else
+      hData.Text = hGameRow.Lim
+      hData.Alignment = Align.Right
+      hData.Padding = 8
+    Endif
   Endif
 
   If hGameRow.IsSum Or hGameRow.IsCounter Then
@@ -62,12 +83,12 @@ End
 
 Public Sub NewGame()
 
-  Debug
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
   $hGameDef.Debug
   $hGridView = New GridView($hPanel) As "GridView"
+
   With $hGridView
-    .Columns.Count = MSettings.Players + 1
+    .Columns.Count = MSettings.Players + 3
     .Rows.Count = $hGameDef.Rows.Count
     .Columns.Width = 52
     .W = 400
@@ -75,5 +96,28 @@ Public Sub NewGame()
     .Border = Border.None
     .Background = &HFFFFDF
   End With
+  $hGridView.Columns[0].Width = 128
+
+  Settings()
+  CalcGridWidth()
+
+End
+
+Public Sub Settings()
+
+  If MSettings.ShowMaxCol Then
+    $hGridView.Columns[1].Width = 48
+  Else
+    $hGridView.Columns[1].Width = 0
+  Endif
+
+End
+
+Private Sub CalcGridWidth()
+
+  Dim iWidth As Integer
+
+  iWidth = $hGridView.Columns[0].Width + $hGridView.Columns[1].Width + $hGridView.Columns[2].Width + MSettings.Players * 52
+  $hGridView.Width = iWidth
 
 End

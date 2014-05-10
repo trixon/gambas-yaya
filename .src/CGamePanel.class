@@ -63,6 +63,12 @@ Public Sub Open()
 
 End
 
+Public Sub Settings()
+
+  $hScorePanel.Settings()
+
+End
+
 Private Function Panel_Read() As Panel
 
   Return $hPanel

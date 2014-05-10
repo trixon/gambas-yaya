@@ -133,7 +133,7 @@ Private Sub SettingsDialog()
 
   Dim hForm As New FSettings
 
-  hForm.Run()
+  If hForm.Run() Then $hGamePanel.Settings()
 
 End
 
