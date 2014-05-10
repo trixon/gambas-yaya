@@ -3,11 +3,17 @@
 Property Players As Integer
 Property ReverseMouseScroll As Boolean
 Property GameId As String
+Property ShowHints As Boolean
+Property ShowMaxCol As Boolean
+Property ShowTopCol As Boolean
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
 Private Const KEY_GAME_ID As String = "Game/Id"
 Private Const KEY_GAME_VARIANT As String = "Game/Variant"
+Private Const KEY_SCORECARD_SHOW_HINTS As String = "Scorecard/ShowHints"
+Private Const KEY_SCORECARD_SHOW_MAXCOL As String = "Scorecard/ShowMax"
+Private Const KEY_SCORECARD_SHOW_TOPCOL As String = "Scorecard/ShowTop"
 
 Private Function Players_Read() As Integer
 
@@ -45,6 +51,45 @@ End
 Private Sub GameId_Write(Value As String)
 
   Settings[KEY_GAME_ID] = Value
+  Settings.Save
+
+End
+
+Private Function ShowHints_Read() As Boolean
+
+  Return Settings[KEY_SCORECARD_SHOW_HINTS, True]
+
+End
+
+Private Sub ShowHints_Write(Value As Boolean)
+
+  Settings[KEY_SCORECARD_SHOW_HINTS] = Value
+  Settings.Save
+
+End
+
+Private Function ShowMaxCol_Read() As Boolean
+
+  Return Settings[KEY_SCORECARD_SHOW_MAXCOL, True]
+
+End
+
+Private Sub ShowMaxCol_Write(Value As Boolean)
+
+  Settings[KEY_SCORECARD_SHOW_MAXCOL] = Value
+  Settings.Save
+
+End
+
+Private Function ShowTopCol_Read() As Boolean
+
+  Return Settings[KEY_SCORECARD_SHOW_TOPCOL, True]
+
+End
+
+Private Sub ShowTopCol_Write(Value As Boolean)
+
+  Settings[KEY_SCORECARD_SHOW_TOPCOL] = Value
   Settings.Save
 
 End

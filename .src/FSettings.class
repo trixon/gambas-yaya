@@ -8,6 +8,9 @@ End
 
 Public Sub btnOK_Click()
 
+  MSettings.ShowHints = cbxShowHints.Value
+  MSettings.ShowMaxCol = cbxShowMaxCol.Value
+  MSettings.ShowTopCol = cbxShowTopCol.Value
   MSettings.ReverseMouseScroll = cbxMouseScroll.Value
   Me.Close(True)
 
@@ -19,12 +22,11 @@ Public Sub btnCancel_Click()
 
 End
 
-Public Sub HBox1_MouseDown()
-
-End
-
 Public Sub Form_Open()
 
+  cbxShowHints.Value = MSettings.ShowHints
+  cbxShowMaxCol.Value = MSettings.ShowMaxCol
+  cbxShowTopCol.Value = MSettings.ShowTopCol
   cbxMouseScroll.Value = MSettings.ReverseMouseScroll
 
 End

@@ -1,24 +1,54 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,65,29)
+  MoveScaled(0,0,95,49)
   Text = ("Settings")
   Resizable = False
   Stacking = Window.Above
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
-  { Panel2 Panel
-    MoveScaled(4,1,53,15)
+  { IconPanel1 IconPanel
+    MoveScaled(2,4,85,35)
     Expand = True
-    Border = Border.Raised
-    { cbxMouseScroll CheckBox
-      MoveScaled(3,2,24,4)
-      Text = ("Reverse mouse scroll")
+    Arrangement = Arrange.Vertical
+    Margin = True
+    Count = 2
+    Border = True
+    Index = 0
+    Text = ("Miscellaneous")
+    Picture = Picture["icon:/32/bookmark"]
+    { Frame1 Frame
+      MoveScaled(3,1,48,18)
+      Text = ("Scorecard")
+      { cbxShowHints CheckBox
+        MoveScaled(1,3,24,4)
+        Text = ("Show suggestions")
+      }
+      { cbxShowMaxCol CheckBox
+        MoveScaled(1,8,24,4)
+        Text = ("Show Max column")
+      }
+      { cbxShowTopCol CheckBox
+        MoveScaled(1,13,24,4)
+        Text = ("Show Top column")
+      }
     }
+    { Frame2 Frame
+      MoveScaled(3,19,47,8)
+      Text = ("Dice")
+      { cbxMouseScroll CheckBox
+        MoveScaled(1,3,24,4)
+        Text = ("Reverse mouse scroll")
+      }
+    }
+    Index = 1
+    Text = ("Themes")
+    Picture = Picture["icon:/32/color"]
+    Index = 0
   }
   { HBox1 HBox
-    MoveScaled(8,19,50,4)
+    MoveScaled(10,42,50,4)
     AutoResize = True
     Spacing = True
     { Panel1 Panel

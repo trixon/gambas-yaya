@@ -1,7 +1,7 @@
 # Gambas Project File 3.0
 # Compiled with Gambas 3.5.3
 Title=YaYa
-Startup=FMain
+Startup=FSettings
 Icon=logo.png
 Version=0.0.5
 Component=gb.image
