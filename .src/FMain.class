@@ -6,7 +6,7 @@ Private $hGamePanel As CGamePanel
 Public Sub _new()
 
   MGameLoader.LoadAll()
-  $hGamePanel = New CGamePanel(pnlMain)
+  $hGamePanel = New CGamePanel(Me)
 
 End
 
@@ -36,7 +36,6 @@ Public Sub Action_Activate(key As String) As Boolean
 
     Case "full_screen"
       Me.FullScreen = Not Me.FullScreen
-      UpdateToolBarBackground()
 
     Case "quit"
       Me.Close
@@ -48,24 +47,12 @@ Public Sub Action_Activate(key As String) As Boolean
 
 End
 
-Private Sub UpdateToolBarBackground()
-
-  If Me.FullScreen Then
-    Panel1.Background = pnlMain.Background
-  Else
-    Panel1.Background = Color.Default
-  Endif
-
-End
-
 Public Sub Form_Open()
 
   Settings.Read(Me)
   Me.FullScreen = Settings[KEY_FULL_SCREEN]
-  UpdateToolBarBackground()
 
   $hGamePanel.Open()
-  Form_Resize()
   $hGamePanel.NewGame()
 
 End
@@ -75,12 +62,6 @@ Public Sub Form_Close()
   $hGamePanel.Close()
   Settings.Write(Me)
   Settings[KEY_FULL_SCREEN] = Me.FullScreen
-
-End
-
-Public Sub Form_Resize()
-
-  MGuiUtils.CenterInParent($hGamePanel.Panel)
 
 End
 

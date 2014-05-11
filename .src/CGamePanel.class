@@ -1,11 +1,10 @@
 ' Gambas class file
 
 Property Read DicePanel As DicePanel
-
 Property Read Panel As Panel
 
-Private $hPanel As Panel
 Private $hDicePanel As DicePanel
+Private $hPanel As Panel
 Private $hScorePanel As CScorePanel
 
 Public Sub _new(hContainer As Container)
@@ -14,11 +13,7 @@ Public Sub _new(hContainer As Container)
 
   With $hPanel
     .Arrangement = Arrange.Vertical
-    .Background = &H1B3F0F&
-    .Border = Border.Sunken
-    .Height = 700
-    .Padding = 8
-    .Width = 1024
+    .Expand = True
   End With
 
   $hScorePanel = New CScorePanel($hPanel)

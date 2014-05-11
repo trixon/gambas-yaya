@@ -10,4 +10,5 @@ vgcore.*
 .kdbg*
 .*.prof
 .lang/*.pot
+.directory
 

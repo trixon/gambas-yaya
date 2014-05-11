@@ -2,8 +2,10 @@
 
 { Form Form
   MoveScaled(0,0,48,34)
+  Background = &HFF9F3F&
   NoTabFocus = True
   Text = ("Players")
+  Picture = Picture["images/board.jpg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
@@ -40,7 +42,6 @@
     MoveScaled(1,9,16,16)
     Font = Font["+2"]
     Expand = True
-    List = Null
     Sorted = True
   }
   { HBox1 HBox

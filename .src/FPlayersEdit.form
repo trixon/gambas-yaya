@@ -2,7 +2,9 @@
 
 { Form Form
   MoveScaled(0,0,46,13)
+  Background = &HFF9F3F&
   Text = ("Player")
+  Picture = Picture["images/board.jpg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Margin = True

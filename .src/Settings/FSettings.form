@@ -2,7 +2,9 @@
 
 { Form Form
   MoveScaled(0,0,95,49)
+  Background = &HFF9F3F&
   Text = ("Settings")
+  Picture = Picture["images/board.jpg"]
   Resizable = False
   Stacking = Window.Above
   Arrangement = Arrange.Vertical
@@ -20,6 +22,7 @@
     Picture = Picture["icon:/32/bookmark"]
     { Frame1 Frame
       MoveScaled(3,1,48,18)
+      Foreground = &HFFFF00&
       Text = ("Scorecard")
       { cbxShowHints CheckBox
         MoveScaled(1,3,24,4)
@@ -36,6 +39,7 @@
     }
     { Frame2 Frame
       MoveScaled(3,19,47,8)
+      Foreground = &HFFFF00&
       Text = ("Dice")
       { cbxMouseScroll CheckBox
         MoveScaled(1,3,24,4)

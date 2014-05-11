@@ -2,6 +2,8 @@
 
 Property Read Panel As Panel
 
+Private $hLeftPanel As Panel
+Private $hRightPanel As Panel
 Private $hPanel As Panel
 Private $hGridView As GridView
 Private $hButton As Button
@@ -13,22 +15,8 @@ Public Sub _new(hContainer As Container)
 
   With $hPanel
     .Arrangement = Arrange.Horizontal
-    .Background = &HFFFFDF
     .Expand = True
   End With
-
-  ' $hGameDef = MGameLoader.GameDefs["default"]
-  ' $hGameDef.Debug
-  ' $hGridView = New GridView($hPanel) As "GridView"
-  ' With $hGridView
-  '   .Columns.Count = MSettings.Players + 1
-  '   .Rows.Count = $hGameDef.Rows.Count
-  '   .Columns.Width = 52
-  '   .W = 400
-  '   .H = 200
-  '   .Border = Border.None
-  '   .Background = &HFFFFDF
-  ' End With
 
 End
 
@@ -73,8 +61,9 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
   Endif
 
   hCell = $hGridView[Row, Column]
-  hCell.Padding = 4
+  hCell.Padding = 8
   hCell.Alignment = Align.Right
+  hCell.Font = Font["10"]
 
   If Column = 0 Then
     hCell.Text = hGameRow.Text
@@ -145,8 +134,16 @@ Private Sub GridInit()
   Dim iCol As Integer
   Dim iRow As Integer
 
+  Try $hLeftPanel.Delete
   Try $hGridView.Delete
+  Try $hRightPanel.Delete
+
+  $hLeftPanel = New Panel($hPanel)
   $hGridView = New GridView($hPanel) As "GridView"
+  $hRightPanel = New Panel($hPanel)
+
+  $hLeftPanel.Expand = True
+  $hRightPanel.Expand = True
 
   With $hGridView
     .Columns.Count = iMaxCol + 1
@@ -156,6 +153,7 @@ Private Sub GridInit()
     .Height = 200
     .Border = Border.None
     .Background = &HFFFFDF
+    .AutoResize = False
   End With
 
   $hGridView.Columns[0].Width = 128

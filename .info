@@ -147,6 +147,14 @@ CenterInParent
 M
 
 (hControl)Control;
+CenterInParentX
+M
+
+(hControl)Control;
+CenterInParentY
+M
+
+(hControl)Control;
 #UrlLabel
 Label
 C
