@@ -66,6 +66,7 @@ Public Sub Form_Open()
 
   $hGamePanel.Open()
   Form_Resize()
+  $hGamePanel.NewGame()
 
 End
 

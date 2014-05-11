@@ -15,17 +15,17 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:105
+#: .project:2 FMain.class:106
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScorePanel.class:57
+#: CScorePanel.class:84
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
-#: CScorePanel.class:67
+#: CScorePanel.class:90
 msgid "Top"
-msgstr ""
+msgstr "Topp"
 
 #: FAbout.form:22 FMain.form:72
 msgid "About"
@@ -55,7 +55,7 @@ msgstr "Licens"
 msgid "Close"
 msgstr "Stäng"
 
-#: FMain.class:104
+#: FMain.class:105
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
@@ -71,7 +71,7 @@ msgstr "Fullskärm"
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:83 FNewGame.form:28
+#: FMain.form:83 FNewGame.form:27
 msgid "New Game"
 msgstr "Nytt spel"
 
@@ -79,23 +79,19 @@ msgstr "Nytt spel"
 msgid "Undo"
 msgstr "Ångra"
 
-#: FMain.form:105 FNewGame.form:79 FPlayers.form:18
+#: FMain.form:105 FNewGame.form:78 FPlayers.form:18
 msgid "Players"
 msgstr "Spelare"
 
-#: FNewGame.form:43
+#: FNewGame.form:42
 msgid "Game"
 msgstr "Spel"
 
-#: FNewGame.form:59
+#: FNewGame.form:58
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:89
-msgid "Number of players:"
-msgstr "Antal spelare:"
-
-#: FNewGame.form:107
+#: FNewGame.form:100
 msgid "Shuffle"
 msgstr "Blanda"
 

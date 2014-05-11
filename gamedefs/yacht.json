@@ -12,6 +12,9 @@
     "author": "Patrik Karlsson",
     "rows": [
         {
+            "id": "player"
+        },
+        {
             "id": "rolls",
             "title": "Throws",
             "title-sv": "Slag",
