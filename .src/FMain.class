@@ -123,3 +123,16 @@ Public Sub ToolButton4_Click()
   mnuMain.Popup()
 
 End
+
+Public Sub Form_Menu()
+
+  mnuMain.Popup
+
+End
+
+Public Sub mnuPopup_Click()
+
+  Debug Last.Tag
+  NewGame
+
+End

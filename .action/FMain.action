@@ -23,6 +23,7 @@
   }
   { Action new
     Text = "New Game"
+    Shortcut = ""
     Picture = "images/document-new.png"
   }
   { Action players

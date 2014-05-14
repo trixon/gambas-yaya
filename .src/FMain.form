@@ -9,6 +9,12 @@
   { mnuMain Menu
     Text = ("Menu")
     Visible = False
+    { mnuNewGame Menu
+      Action = "new"
+      Text = ("New Game")
+    }
+    { Menu3 Menu
+    }
     { mnuDev Menu
       #Translate = False
       Text = "Dev"
@@ -50,6 +56,7 @@
   }
   { Panel1 Panel
     MoveScaled(0,2,89,6)
+    Visible = False
     Arrangement = Arrange.Horizontal
     { ToolButton5 ToolButton
       MoveScaled(2,1,4.5714,4.5714)
@@ -90,6 +97,9 @@
       Picture = Picture["images/configure.png"]
     }
   }
+  { Panel2 Panel
+    MoveScaled(3,10,69,6)
+  }
 }
 
 # Gambas Action File 3.0
@@ -117,6 +127,7 @@
   }
   { Action new
     Text = "New Game"
+    Shortcut = ""
     Picture = "images/document-new.png"
   }
   { Action players
