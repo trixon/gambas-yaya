@@ -14,20 +14,18 @@
       Text = ("New Game")
       Shortcut = "Ctrl+N"
     }
-    { Menu3 Menu
-    }
     { mnuUndo Menu
       Action = "undo"
       Text = ("Undo")
       Enabled = False
       Shortcut = "Ctrl+Z"
     }
+    { Menu3 Menu
+    }
     { mnuFullScreen Menu
       Action = "full_screen"
       Text = ("Full Screen")
       Shortcut = "F11"
-    }
-    { Menu1 Menu
     }
     { mnuSettings Menu
       Action = "settings"
@@ -38,6 +36,13 @@
     { mnuAbout Menu
       Action = "about"
       Text = ("About")
+    }
+    { Menu1 Menu
+    }
+    { mnuQuit Menu
+      Action = "quit"
+      Text = ("Quit")
+      Shortcut = "Ctrl+Q"
     }
   }
   { Panel2 Panel
@@ -59,6 +64,10 @@
   { Action new
     Text = "New Game"
     Shortcut = "Ctrl+N"
+  }
+  { Action quit
+    Text = "Quit"
+    Shortcut = "Ctrl+Q"
   }
   { Action settings
     Text = "Settings"

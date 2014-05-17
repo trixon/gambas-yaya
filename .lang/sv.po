@@ -15,7 +15,7 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:106
+#: .project:2 FMain.class:79
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
@@ -27,7 +27,7 @@ msgstr "Max"
 msgid "Top"
 msgstr "Topp"
 
-#: FAbout.form:22 FMain.form:72
+#: FAbout.form:22 FMain.form:59
 msgid "About"
 msgstr "Om"
 
@@ -55,73 +55,49 @@ msgstr "Licens"
 msgid "Close"
 msgstr "Stäng"
 
-#: FMain.class:105
+#: FMain.class:78
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
-#: FMain.form:29
+#: FMain.form:24
 msgid "Menu"
 msgstr "Meny"
 
-#: FMain.form:56
-msgid "Full Screen"
-msgstr "Fullskärm"
-
-#: FMain.form:64 FSettings.form:18
-msgid "Settings"
-msgstr "Inställningar"
-
-#: FMain.form:83 FNewGame.form:27
+#: FMain.form:29 FNewGame.form:27
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: FMain.form:96
+#: FMain.form:35
 msgid "Undo"
 msgstr "Ångra"
 
-#: FMain.form:105 FNewGame.form:78 FPlayers.form:18
-msgid "Players"
-msgstr "Spelare"
+#: FMain.form:45
+msgid "Full Screen"
+msgstr "Fullskärm"
 
-#: FNewGame.form:42
+#: FMain.form:51 FSettings.form:28
+msgid "Settings"
+msgstr "Inställningar"
+
+#: FMain.form:67
+msgid "Quit"
+msgstr "Avsluta"
+
+#: FNewGame.form:44
 msgid "Game"
 msgstr "Spel"
 
-#: FNewGame.form:58
+#: FNewGame.form:61
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:100
+#: FNewGame.form:82 FSettings.form:43
+msgid "Players"
+msgstr "Spelare"
+
+#: FNewGame.form:104
 msgid "Shuffle"
 msgstr "Blanda"
-
-#: FPlayers.class:33
-msgid "Remove '&1'?"
-msgstr "Ta bort '&1'?"
-
-#: FPlayers.class:34
-msgid "Confirm"
-msgstr "Bekräfta"
-
-#: FPlayers.class:36
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: FPlayers.class:36
-msgid "Remove"
-msgstr "Ta bort"
-
-#: FPlayers.class:47
-msgid "Remove All"
-msgstr "Ta bort alla"
-
-#: FPlayers.class:47
-msgid "Remove all players?"
-msgstr "Ta bort alla spelare?"
-
-#: FPlayers.class:64
-msgid "Player already exists."
-msgstr "Spelaren finns redan."
 
 #: FPlayersEdit.class:10
 msgid "Edit"
@@ -131,43 +107,79 @@ msgstr "Redigera"
 msgid "Add"
 msgstr "Lägg till"
 
-#: FPlayersEdit.form:12
+#: FPlayersEdit.form:13
 msgid "Player"
 msgstr "Spelare"
 
-#: FPlayersEdit.form:20
+#: FPlayersEdit.form:22
 msgid "TextBox1"
 msgstr ""
 
-#: FSettings.form:33
+#: FSettings.class:40
+msgid "Create at least one player."
+msgstr ""
+
+#: FSettings.class:50
+msgid "Remove '&1'?"
+msgstr "Ta bort '&1'?"
+
+#: FSettings.class:51
+msgid "Confirm"
+msgstr "Bekräfta"
+
+#: FSettings.class:53
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: FSettings.class:53
+msgid "Remove"
+msgstr "Ta bort"
+
+#: FSettings.class:64
+msgid "Remove All"
+msgstr "Ta bort alla"
+
+#: FSettings.class:64
+msgid "Remove all players?"
+msgstr "Ta bort alla spelare?"
+
+#: FSettings.class:81
+msgid "Player already exists."
+msgstr "Spelaren finns redan."
+
+#: FSettings.form:86
 msgid "Miscellaneous"
 msgstr ""
 
-#: FSettings.form:38
+#: FSettings.form:97
 msgid "Scorecard"
 msgstr "Protokoll"
 
-#: FSettings.form:42
+#: FSettings.form:102
 msgid "Show suggestions"
 msgstr "Visa förslag"
 
-#: FSettings.form:47
+#: FSettings.form:107
 msgid "Show Max column"
 msgstr "Visa Maxkolumn"
 
-#: FSettings.form:52
+#: FSettings.form:112
 msgid "Show Top column"
 msgstr "Visa Toppkolumn"
 
-#: FSettings.form:58
+#: FSettings.form:117
+msgid "Symbols"
+msgstr ""
+
+#: FSettings.form:128
 msgid "Dice"
 msgstr "Tärningar"
 
-#: FSettings.form:62
+#: FSettings.form:133
 msgid "Reverse mouse scroll"
 msgstr "Omvänd rullningsriktning"
 
-#: FSettings.form:66
+#: FSettings.form:137
 msgid "Themes"
 msgstr ""
 
