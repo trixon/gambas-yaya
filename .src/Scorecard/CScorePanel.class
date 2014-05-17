@@ -6,7 +6,6 @@ Private $hLeftPanel As Panel
 Private $hRightPanel As Panel
 Private $hPanel As Panel
 Private $hGrid As CScoreGrid
-Private $hButton As Button
 Private $hGameDef As CGameDef
 
 Public Sub _new(hContainer As Container)
@@ -32,34 +31,15 @@ Public Sub NewGame()
 
   GridInit()
   Settings()
-  CalcGridWidth()
 
 End
 
 Public Sub Settings()
 
-  If MSettings.ShowMaxCol Then
-    $hGrid.Columns[1].Width = 48
-  Else
-    $hGrid.Columns[1].Width = 0
-  Endif
-
-  If MSettings.ShowTopCol Then
-    $hGrid.Columns[2].Width = 48
-  Else
-    $hGrid.Columns[2].Width = 0
-  Endif
-
-  'UpdateHeaderText()
-
-End
-
-Private Sub CalcGridWidth()
-
-  Dim iWidth As Integer
-
-  iWidth = $hGrid.Columns[0].Width + $hGrid.Columns[1].Width + $hGrid.Columns[2].Width + MSettings.Players * 52
-  $hGrid.Width = iWidth
+  $hGrid.ShowMaxCol(MSettings.ShowMaxCol)
+  $hGrid.ShowTopCol(MSettings.ShowTopCol)
+  $hGrid.RecalcWidth()
+  $hGrid.ShowTextAsSymbols(MSettings.ShowSymbols)
 
 End
 
@@ -73,10 +53,27 @@ Private Sub GridInit()
   Try $hRightPanel.Delete
 
   $hLeftPanel = New Panel($hPanel)
-  $hGrid = New CScoreGrid($hPanel, $hGameDef) As "GridView"
+  $hGrid = New CScoreGrid($hPanel, $hGameDef) As "Grid"
   $hRightPanel = New Panel($hPanel)
 
   $hLeftPanel.Expand = True
   $hRightPanel.Expand = True
+
+End
+
+Public Sub Grid_Click()
+
+  Debug $hGrid.Row, $hGrid.Column
+
+End
+
+Public Sub Grid_MouseMove()
+
+  Dim iRow As Integer = $hGrid.RowAt(Mouse.Y)
+
+  If iRow > 0 And If iRow < $hGameDef.Rows.Count Then
+    $hGrid.HoverRow(iRow)
+
+  Endif
 
 End

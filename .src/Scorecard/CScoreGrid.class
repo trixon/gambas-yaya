@@ -1,6 +1,10 @@
 ' Gambas class file
 
 Inherits GridView
+
+Private Const COL_WIDTH_TEXT As Integer = 128
+Private Const COL_WIDTH_MAXTOP As Integer = 48
+Private Const COL_WIDTH_PLAYERS As Integer = 96
 Private $hGameDef As CGameDef
 
 Public Sub _new(hGameDef As CGameDef)
@@ -11,36 +15,34 @@ Public Sub _new(hGameDef As CGameDef)
   Dim iRow As Integer
 
   $hGameDef = hGameDef
-  Debug
+
   With Me
     .Columns.Count = iMaxCol + 1
     .Rows.Count = iMaxRow + 1
-    .Columns.Width = 52
-    .Width = 400
-    .Height = 200
+    .Columns.Width = COL_WIDTH_PLAYERS
     .Border = Border.None
     .Background = &HFFFFDF
     .AutoResize = False
+    .ScrollBar = Scroll.Vertical
   End With
 
-  Me.Columns[0].Width = 128
+  Me.Columns[0].Width = COL_WIDTH_TEXT
 
   For iCol = 0 To iMaxCol
     For iRow = 0 To iMaxRow
-      GridInitCell(iRow, iCol)
+      InitCell(iRow, iCol)
     Next
   Next
 
-  GridInitHeaderRow()
+  InitHeaderRow()
 
 End
 
-Private Sub GridInitCell(Row As Integer, Column As Integer)
+Private Sub InitCell(Row As Integer, Column As Integer)
 
   Dim hGameRow As CGameRow
   Dim hCell As _GridView_Cell
 
-  '  Debug Row; "x"; Column
   If Row > $hGameDef.Rows.Length - 1 Then
     hGameRow = New CGameRow
   Else
@@ -53,11 +55,6 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
   hCell.Font = Font["10"]
 
   If Column = 0 Then
-    If MSettings.ShowSymbols Then
-      hCell.Text = hGameRow.Symbol
-    Else
-      hCell.Text = hGameRow.Text
-    Endif
     hCell.Background = Color.Orange
     hCell.Alignment = Align.Left
   Else If Column = 1 Then
@@ -74,7 +71,7 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
     Endif
   Else
     If Row = 0 Then
-      '       hCell.Text = MSettings.PlayerSelection[Column - 3]
+      hCell.Text = MSettings.PlayerSelection[Column - 3]
     Endif
   Endif
 
@@ -89,7 +86,7 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
 
 End
 
-Private Sub GridInitHeaderRow()
+Private Sub InitHeaderRow()
 
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iCol As Integer
@@ -107,11 +104,76 @@ Private Sub GridInitHeaderRow()
       hCell.Font = Font[""]
     Endif
 
-    ' If MSettings.ShowSymbols Then
-    '   hCell.Text = hGameRow.Symbol
-    ' Else
-    '   hCell.Text = hGameRow.Text
-    ' Endif
+  Next
+
+End
+
+Public Sub ShowTopCol(Value As Boolean)
+
+  If Value Then
+    Me.Columns[2].Width = COL_WIDTH_MAXTOP
+  Else
+    Me.Columns[2].Width = 0
+  Endif
+
+End
+
+Public Sub ShowMaxCol(Value As Boolean)
+
+  If Value Then
+    Me.Columns[1].Width = COL_WIDTH_MAXTOP
+  Else
+    Me.Columns[1].Width = 0
+  Endif
+
+End
+
+Public Sub ShowTextAsSymbols(Value As Boolean)
+
+  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
+  Dim iRow As Integer
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell
+
+  For iRow = 1 To iMaxRow
+    hCell = Me[iRow, 0]
+    If iRow > $hGameDef.Rows.Length - 1 Then
+      hGameRow = New CGameRow
+    Else
+      hGameRow = $hGameDef.Rows[iRow]
+    Endif
+
+    If Value Then
+      hCell.Text = hGameRow.Symbol
+      hCell.Font = Font["12"]
+    Else
+      hCell.Text = hGameRow.Text
+      hCell.Font = Font[""]
+    Endif
+
+  Next
+
+End
+
+Public Sub RecalcWidth()
+
+  Dim iWidth As Integer
+
+  iWidth = Me.Columns[0].Width + Me.Columns[1].Width + Me.Columns[2].Width + MSettings.Players * COL_WIDTH_PLAYERS
+  Me.Width = iWidth
+
+End
+
+Public Sub HoverRow(iRow As Integer)
+
+  Dim iMaxCol As Integer = MSettings.Players + 2
+  Dim iCol As Integer
+  Dim hCell As _GridView_Cell
+
+  For iCol = 0 To iMaxCol
+    hCell = Me[iRow, iCol]
+
+    '     hCell.Background = Color.Green
 
   Next
 
