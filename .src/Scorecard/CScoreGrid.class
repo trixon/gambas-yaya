@@ -1,3 +1,118 @@
 ' Gambas class file
 
 Inherits GridView
+Private $hGameDef As CGameDef
+
+Public Sub _new(hGameDef As CGameDef)
+
+  Dim iMaxCol As Integer = MSettings.Players + 2
+  Dim iMaxRow As Integer = hGameDef.Rows.Count - 1
+  Dim iCol As Integer
+  Dim iRow As Integer
+
+  $hGameDef = hGameDef
+  Debug
+  With Me
+    .Columns.Count = iMaxCol + 1
+    .Rows.Count = iMaxRow + 1
+    .Columns.Width = 52
+    .Width = 400
+    .Height = 200
+    .Border = Border.None
+    .Background = &HFFFFDF
+    .AutoResize = False
+  End With
+
+  Me.Columns[0].Width = 128
+
+  For iCol = 0 To iMaxCol
+    For iRow = 0 To iMaxRow
+      GridInitCell(iRow, iCol)
+    Next
+  Next
+
+  GridInitHeaderRow()
+
+End
+
+Private Sub GridInitCell(Row As Integer, Column As Integer)
+
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell
+
+  '  Debug Row; "x"; Column
+  If Row > $hGameDef.Rows.Length - 1 Then
+    hGameRow = New CGameRow
+  Else
+    hGameRow = $hGameDef.Rows[Row]
+  Endif
+
+  hCell = Me[Row, Column]
+  hCell.Padding = 8
+  hCell.Alignment = Align.Right
+  hCell.Font = Font["10"]
+
+  If Column = 0 Then
+    If MSettings.ShowSymbols Then
+      hCell.Text = hGameRow.Symbol
+    Else
+      hCell.Text = hGameRow.Text
+    Endif
+    hCell.Background = Color.Orange
+    hCell.Alignment = Align.Left
+  Else If Column = 1 Then
+    If Row = 0 Then
+      hCell.Text = ("Max")
+    Else
+      hCell.Text = hGameRow.Max
+    Endif
+  Else If Column = 2 Then
+    If Row = 0 Then
+      hCell.Text = ("Top")
+    Else
+      hCell.Text = hGameRow.Lim
+    Endif
+  Else
+    If Row = 0 Then
+      '       hCell.Text = MSettings.PlayerSelection[Column - 3]
+    Endif
+  Endif
+
+  If Row = 0 Then
+    hCell.Alignment = Align.Center
+  Endif
+
+  If hGameRow.IsSum Or hGameRow.IsCounter Then
+    hCell.Background = Color.Yellow
+    hCell.Font = Font["Bold"]
+  Endif
+
+End
+
+Private Sub GridInitHeaderRow()
+
+  Dim iMaxCol As Integer = MSettings.Players + 2
+  Dim iCol As Integer
+  Dim hCell As _GridView_Cell
+
+  For iCol = 0 To iMaxCol
+    hCell = Me[0, iCol]
+
+    hCell.Background = Color.Lighter(Color.Gray)
+    hCell.Background = &HFFFFDF
+    hCell.Font = Font["Bold"]
+
+    If iCol = 0 Then
+      hCell.Text = MGameLoader.TextById($hGameDef.Id)
+      hCell.Font = Font[""]
+    Endif
+
+    ' If MSettings.ShowSymbols Then
+    '   hCell.Text = hGameRow.Symbol
+    ' Else
+    '   hCell.Text = hGameRow.Text
+    ' Endif
+
+  Next
+
+End
