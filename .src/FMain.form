@@ -25,6 +25,7 @@
     { mnuFullScreen Menu
       Action = "full_screen"
       Text = ("Full Screen")
+      Toggle = True
       Shortcut = "F11"
     }
     { mnuSettings Menu

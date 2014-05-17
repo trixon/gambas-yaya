@@ -1,12 +1,11 @@
 ' Gambas class file
 
-Public Const KEY_FULL_SCREEN As String = "Window/FullScreen"
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
 
   MGameLoader.LoadAll()
-  $hGamePanel = New CGamePanel(Me)
+  $hGamePanel = New CGamePanel(Me) As "GamePanel"
 
 End
 
@@ -23,7 +22,7 @@ Public Sub Action_Activate(key As String) As Boolean
       SettingsDialog()
 
     Case "full_screen"
-      Me.FullScreen = Not Me.FullScreen
+      FullScreenToggle()
 
     Case "quit"
       Me.Close
@@ -38,8 +37,8 @@ End
 Public Sub Form_Open()
 
   Settings.Read(Me)
-  Me.FullScreen = Settings[KEY_FULL_SCREEN]
-
+  Me.FullScreen = MSettings.FullScreen
+  mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
   $hGamePanel.NewGame()
 
@@ -49,7 +48,7 @@ Public Sub Form_Close()
 
   $hGamePanel.Close()
   Settings.Write(Me)
-  Settings[KEY_FULL_SCREEN] = Me.FullScreen
+  MSettings.FullScreen = Me.FullScreen
 
 End
 
@@ -64,7 +63,7 @@ Public Sub Form_KeyPress()
   Else If Key.Code = Key["Z"] And If Key.Control And If mnuUndo.Enabled
     Undo()
   Else If Key.Code = Key["F11"]
-    Me.FullScreen = Not Me.FullScreen
+    FullScreenToggle()
   Endif
 
 End
@@ -81,6 +80,13 @@ Private Sub About()
   End With
 
   hForm.Run()
+
+End
+
+Public Sub FullScreenToggle()
+
+  Me.FullScreen = Not Me.FullScreen
+  mnuFullScreen.Checked = Me.FullScreen
 
 End
 
@@ -117,12 +123,5 @@ End
 Public Sub Form_Menu()
 
   mnuMain.Popup
-
-End
-
-Public Sub mnuPopup_Click()
-
-  Debug Last.Tag
-  NewGame
 
 End

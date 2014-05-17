@@ -93,7 +93,7 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
     Endif
   Else
     If Row = 0 Then
-'       hCell.Text = MSettings.PlayerSelection[Column - 3]
+      '       hCell.Text = MSettings.PlayerSelection[Column - 3]
     Endif
   Endif
 
