@@ -5,30 +5,13 @@
     Text = "About"
     Shortcut = ""
   }
-  { Action dice4
-    Text = "4 dice"
-    Shortcut = ""
-  }
-  { Action dice5
-    Text = "5 dice"
-    Shortcut = ""
-  }
-  { Action dice6
-    Text = "6 dice"
-    Shortcut = ""
-  }
   { Action full_screen
     Text = "Full Screen"
-    Shortcut = ""
+    Shortcut = "F11"
   }
   { Action new
     Text = "New Game"
-    Shortcut = ""
-    Picture = "images/document-new.png"
-  }
-  { Action players
-    Text = "Players"
-    Picture = "images/system-users.png"
+    Shortcut = "Ctrl+N"
   }
   { Action settings
     Text = "Settings"
@@ -36,7 +19,7 @@
   }
   { Action undo
     Text = "Undo"
-    Picture = "images/edit-undo.png"
+    Shortcut = "Ctrl+Z"
   }
 }
 

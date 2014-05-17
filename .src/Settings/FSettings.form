@@ -15,38 +15,87 @@
     Expand = True
     Arrangement = Arrange.Vertical
     Margin = True
-    Count = 2
-    Border = True
+    Count = 3
     Index = 0
+    Text = ("Players")
+    Picture = Picture["images/system-users.png"]
+    { Panel2 Panel
+      MoveScaled(0,0,42,6)
+      Arrangement = Arrange.Horizontal
+      { tlbAdd ToolButton
+        MoveScaled(2,1,4,4)
+        NoTabFocus = True
+        AutoResize = True
+        Picture = Picture["images/list-add-user.png"]
+      }
+      { tlbEdit ToolButton
+        MoveScaled(8,1,4,4)
+        NoTabFocus = True
+        AutoResize = True
+        Picture = Picture["images/user-properties.png"]
+      }
+      { tlbRemove ToolButton
+        MoveScaled(15,1,4,4)
+        NoTabFocus = True
+        AutoResize = True
+        Picture = Picture["images/list-remove-user.png"]
+      }
+      { tlbRemoveAll ToolButton
+        MoveScaled(21,1,4,4)
+        NoTabFocus = True
+        AutoResize = True
+        Picture = Picture["images/user-group-delete.png"]
+      }
+    }
+    { lbxPlayers ListBox
+      MoveScaled(0,7,16,16)
+      Font = Font["+2"]
+      Expand = True
+      Sorted = True
+    }
+    Index = 1
     Text = ("Miscellaneous")
     Picture = Picture["icon:/32/bookmark"]
-    { Frame1 Frame
-      MoveScaled(3,1,48,18)
+    { VBox1 VBox
+      MoveScaled(2,1,42,23)
       Foreground = &HFFFF00&
-      Text = ("Scorecard")
+      AutoResize = True
+      { Label1 Label
+        MoveScaled(0,0,24,4)
+        Font = Font["Bold"]
+        Text = ("Scorecard")
+      }
       { cbxShowHints CheckBox
-        MoveScaled(1,3,24,4)
+        MoveScaled(0,5,24,4)
         Text = ("Show suggestions")
       }
       { cbxShowMaxCol CheckBox
-        MoveScaled(1,8,24,4)
+        MoveScaled(0,10,24,4)
         Text = ("Show Max column")
       }
       { cbxShowTopCol CheckBox
-        MoveScaled(1,13,24,4)
+        MoveScaled(0,15,24,4)
         Text = ("Show Top column")
       }
+      { cbxShowSymbols CheckBox
+        MoveScaled(0,19,24,4)
+        Text = ("Symbols")
+      }
     }
-    { Frame2 Frame
-      MoveScaled(3,19,47,8)
+    { VBox2 VBox
+      MoveScaled(2,25,42,9)
       Foreground = &HFFFF00&
-      Text = ("Dice")
+      { Label2 Label
+        MoveScaled(1,0,24,4)
+        Font = Font["Bold"]
+        Text = ("Dice")
+      }
       { cbxMouseScroll CheckBox
-        MoveScaled(1,3,24,4)
+        MoveScaled(0,3,24,4)
         Text = ("Reverse mouse scroll")
       }
     }
-    Index = 1
+    Index = 2
     Text = ("Themes")
     Picture = Picture["icon:/32/color"]
     Index = 0

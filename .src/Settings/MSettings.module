@@ -9,6 +9,7 @@ Property ShowMaxCol As Boolean
 Property ShowTopCol As Boolean
 Property PlayerNames As String[]
 Property PlayerSelection As String[]
+Property ShowSymbols As Boolean
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
@@ -16,6 +17,7 @@ Private Const KEY_GAME_ID As String = "Game/Id"
 Private Const KEY_GAME_VARIANT As String = "Game/Variant"
 Private Const KEY_SCORECARD_SHOW_HINTS As String = "Scorecard/ShowHints"
 Private Const KEY_SCORECARD_SHOW_MAXCOL As String = "Scorecard/ShowMax"
+Private Const KEY_SCORECARD_SHOW_SYMBOLS As String = "Scorecard/ShowSymbols"
 Private Const KEY_SCORECARD_SHOW_TOPCOL As String = "Scorecard/ShowTop"
 Private Const KEY_PLAYER_NAMES As String = "Players"
 Private Const KEY_PLAYER_SELECTION As String = "Game/PlayerSelection"
@@ -129,6 +131,8 @@ Private Function LoadStringArray(sKey As String) As String[]
 
   If sNames Then
     Return Split(sNames, "|", "", True, False)
+  Else
+    Return New String[]
   Endif
 
 End
@@ -156,6 +160,19 @@ End
 Private Sub Variant_Write(Value As Integer)
 
   Settings[KEY_GAME_VARIANT] = Value
+  Settings.Save
+
+End
+
+Private Function ShowSymbols_Read() As Boolean
+
+  Return Settings[KEY_SCORECARD_SHOW_SYMBOLS, False]
+
+End
+
+Private Sub ShowSymbols_Write(Value As Boolean)
+
+  Settings[KEY_SCORECARD_SHOW_SYMBOLS] = Value
   Settings.Save
 
 End

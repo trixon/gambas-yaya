@@ -8,10 +8,15 @@ End
 
 Public Sub btnOK_Click()
 
+  MSettings.PlayerNames = lbxPlayers.List
+
   MSettings.ShowHints = cbxShowHints.Value
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
   MSettings.ShowTopCol = cbxShowTopCol.Value
+  MSettings.ShowSymbols = cbxShowSymbols.Value
+
   MSettings.ReverseMouseScroll = cbxMouseScroll.Value
+
   Me.Close(True)
 
 End
@@ -24,9 +29,80 @@ End
 
 Public Sub Form_Open()
 
+  lbxPlayers.List = MSettings.PlayerNames
   cbxShowHints.Value = MSettings.ShowHints
   cbxShowMaxCol.Value = MSettings.ShowMaxCol
   cbxShowTopCol.Value = MSettings.ShowTopCol
+  cbxShowSymbols.Value = MSettings.ShowSymbols
   cbxMouseScroll.Value = MSettings.ReverseMouseScroll
+
+  If MSettings.PlayerNames.Count = 0 Then
+    Balloon.Warning(("Create at least one player."), tlbAdd)
+  Endif
+
+End
+
+Public Sub tlbRemove_Click()
+
+  Dim sMessage As String
+
+  If Not lbxPlayers.Text Then Return
+  sMessage = Subst(("Remove '&1'?"), lbxPlayers.Text)
+  Message.Title = ("Confirm")
+
+  If Message.Error(sMessage, ("Remove"), ("Cancel")) = 1 Then
+    lbxPlayers.Remove(lbxPlayers.Index)
+  Endif
+
+End
+
+Public Sub tlbRemoveAll_Click()
+
+  If lbxPlayers.Count = 0 Then Return
+  Message.Title = ("Confirm")
+
+  If Message.Error(("Remove all players?"), ("Remove All"), ("Cancel")) = 1 Then
+    lbxPlayers.Clear
+  Endif
+
+End
+
+Public Sub tlbAdd_Click()
+
+  Dim hForm As New FPlayersEdit
+  Dim sName As String
+
+  sName = hForm.Run()
+  If Not sName Then Return
+
+  If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
+    lbxPlayers.Add(sName)
+  Else
+    Balloon.Warning(("Player already exists."), Last)
+  Endif
+
+End
+
+Public Sub tlbEdit_Click()
+
+  Dim hForm As New FPlayersEdit
+  Dim sName As String
+
+  If Not lbxPlayers.Text Then Return
+  sName = hForm.Run(lbxPlayers.Text)
+  If Not sName Or lbxPlayers.Text == sName Then Return
+
+  If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
+    lbxPlayers.Remove(lbxPlayers.Index)
+    lbxPlayers.Add(sName)
+  Else
+    Balloon.Warning(("Player already exists."), Last)
+  Endif
+
+End
+
+Public Sub lbxPlayers_DblClick()
+
+  tlbEdit_Click()
 
 End

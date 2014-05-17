@@ -19,20 +19,8 @@ Public Sub Action_Activate(key As String) As Boolean
     Case "new"
       NewGame()
 
-    Case "players"
-      Players()
-
     Case "settings"
       SettingsDialog()
-
-    Case "dice4"
-      $hGamePanel.DicePanel.DiceCount = 4
-
-    Case "dice5"
-      $hGamePanel.DicePanel.DiceCount = 5
-
-    Case "dice6"
-      $hGamePanel.DicePanel.DiceCount = 6
 
     Case "full_screen"
       Me.FullScreen = Not Me.FullScreen
@@ -73,6 +61,10 @@ Public Sub Form_KeyPress()
     Me.Close()
   Else If Key.Code = Key["N"] And If Key.Control
     NewGame()
+  Else If Key.Code = Key["Z"] And If Key.Control And If mnuUndo.Enabled
+    Undo()
+  Else If Key.Code = Key["F11"]
+    Me.FullScreen = Not Me.FullScreen
   Endif
 
 End
@@ -96,17 +88,21 @@ Private Sub NewGame()
 
   Dim hForm As New FNewGame
 
-  If hForm.Run() Then
-    $hGamePanel.NewGame()
+  If MSettings.PlayerNames.Count = 0 Then
+    SettingsDialog()
+  Endif
+
+  If MSettings.PlayerNames.Count > 0 Then
+    If hForm.Run() Then
+      $hGamePanel.NewGame()
+    Endif
   Endif
 
 End
 
-Private Sub Players()
+Public Sub Undo()
 
-  Dim hForm As New FPlayers
-
-  hForm.Run()
+  Debug
 
 End
 
@@ -115,12 +111,6 @@ Private Sub SettingsDialog()
   Dim hForm As New FSettings
 
   If hForm.Run() Then $hGamePanel.Settings()
-
-End
-
-Public Sub ToolButton4_Click()
-
-  mnuMain.Popup()
 
 End
 

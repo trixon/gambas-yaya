@@ -45,7 +45,6 @@ End
 
 Public Sub NewGame()
 
-  Debug
   $hScorePanel.NewGame()
   $hDicePanel.NewGame()
 

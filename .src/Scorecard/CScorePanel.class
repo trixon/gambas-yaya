@@ -5,7 +5,7 @@ Property Read Panel As Panel
 Private $hLeftPanel As Panel
 Private $hRightPanel As Panel
 Private $hPanel As Panel
-Private $hGridView As GridView
+Private $hGrid As CScoreGrid
 Private $hButton As Button
 Private $hGameDef As CGameDef
 
@@ -26,14 +26,14 @@ Private Function Panel_Read() As Panel
 
 End
 
-Private Sub GridInitHeader()
+Private Sub GridInitHeaderRow()
 
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iCol As Integer
   Dim hCell As _GridView_Cell
 
   For iCol = 0 To iMaxCol
-    hCell = $hGridView[0, iCol]
+    hCell = $hGrid[0, iCol]
 
     hCell.Background = Color.Lighter(Color.Gray)
     hCell.Background = &HFFFFDF
@@ -43,6 +43,12 @@ Private Sub GridInitHeader()
       hCell.Text = MGameLoader.TextById($hGameDef.Id)
       hCell.Font = Font[""]
     Endif
+
+    ' If MSettings.ShowSymbols Then
+    '   hCell.Text = hGameRow.Symbol
+    ' Else
+    '   hCell.Text = hGameRow.Text
+    ' Endif
 
   Next
 
@@ -60,13 +66,17 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
     hGameRow = $hGameDef.Rows[Row]
   Endif
 
-  hCell = $hGridView[Row, Column]
+  hCell = $hGrid[Row, Column]
   hCell.Padding = 8
   hCell.Alignment = Align.Right
   hCell.Font = Font["10"]
 
   If Column = 0 Then
-    hCell.Text = hGameRow.Text
+    If MSettings.ShowSymbols Then
+      hCell.Text = hGameRow.Symbol
+    Else
+      hCell.Text = hGameRow.Text
+    Endif
     hCell.Background = Color.Orange
     hCell.Alignment = Align.Left
   Else If Column = 1 Then
@@ -83,7 +93,7 @@ Private Sub GridInitCell(Row As Integer, Column As Integer)
     Endif
   Else
     If Row = 0 Then
-      hCell.Text = MSettings.PlayerSelection[Column - 3]
+'       hCell.Text = MSettings.PlayerSelection[Column - 3]
     Endif
   Endif
 
@@ -111,10 +121,18 @@ End
 Public Sub Settings()
 
   If MSettings.ShowMaxCol Then
-    $hGridView.Columns[1].Width = 48
+    $hGrid.Columns[1].Width = 48
   Else
-    $hGridView.Columns[1].Width = 0
+    $hGrid.Columns[1].Width = 0
   Endif
+
+  If MSettings.ShowTopCol Then
+    $hGrid.Columns[2].Width = 48
+  Else
+    $hGrid.Columns[2].Width = 0
+  Endif
+
+  'UpdateHeaderText()
 
 End
 
@@ -122,8 +140,8 @@ Private Sub CalcGridWidth()
 
   Dim iWidth As Integer
 
-  iWidth = $hGridView.Columns[0].Width + $hGridView.Columns[1].Width + $hGridView.Columns[2].Width + MSettings.Players * 52
-  $hGridView.Width = iWidth
+  iWidth = $hGrid.Columns[0].Width + $hGrid.Columns[1].Width + $hGrid.Columns[2].Width + MSettings.Players * 52
+  $hGrid.Width = iWidth
 
 End
 
@@ -135,17 +153,17 @@ Private Sub GridInit()
   Dim iRow As Integer
 
   Try $hLeftPanel.Delete
-  Try $hGridView.Delete
+  Try $hGrid.Delete
   Try $hRightPanel.Delete
 
   $hLeftPanel = New Panel($hPanel)
-  $hGridView = New GridView($hPanel) As "GridView"
+  $hGrid = New CScoreGrid($hPanel) As "GridView"
   $hRightPanel = New Panel($hPanel)
 
   $hLeftPanel.Expand = True
   $hRightPanel.Expand = True
 
-  With $hGridView
+  With $hGrid
     .Columns.Count = iMaxCol + 1
     .Rows.Count = iMaxRow + 1
     .Columns.Width = 52
@@ -156,7 +174,7 @@ Private Sub GridInit()
     .AutoResize = False
   End With
 
-  $hGridView.Columns[0].Width = 128
+  $hGrid.Columns[0].Width = 128
 
   For iCol = 0 To iMaxCol
     For iRow = 0 To iMaxRow
@@ -164,6 +182,6 @@ Private Sub GridInit()
     Next
   Next
 
-  GridInitHeader()
+  GridInitHeaderRow()
 
 End
