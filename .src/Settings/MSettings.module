@@ -10,6 +10,7 @@ Property ShowTopCol As Boolean
 Property PlayerNames As String[]
 Property PlayerSelection As String[]
 Property ShowSymbols As Boolean
+Property FullScreen As Boolean
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
@@ -21,6 +22,7 @@ Private Const KEY_SCORECARD_SHOW_SYMBOLS As String = "Scorecard/ShowSymbols"
 Private Const KEY_SCORECARD_SHOW_TOPCOL As String = "Scorecard/ShowTop"
 Private Const KEY_PLAYER_NAMES As String = "Players"
 Private Const KEY_PLAYER_SELECTION As String = "Game/PlayerSelection"
+Private Const KEY_FULL_SCREEN As String = "Window/FullScreen"
 
 Private Function Players_Read() As Integer
 
@@ -173,6 +175,19 @@ End
 Private Sub ShowSymbols_Write(Value As Boolean)
 
   Settings[KEY_SCORECARD_SHOW_SYMBOLS] = Value
+  Settings.Save
+
+End
+
+Private Function FullScreen_Read() As Boolean
+
+  Return Settings[KEY_FULL_SCREEN, False]
+
+End
+
+Private Sub FullScreen_Write(Value As Boolean)
+
+  Settings[KEY_FULL_SCREEN] = Value
   Settings.Save
 
 End
