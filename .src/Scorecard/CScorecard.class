@@ -7,6 +7,10 @@ Private $hRightPanel As Panel
 Private $hPanel As Panel
 Private $hGrid As CScoreGrid
 Private $hGameDef As CGameDef
+Private $bRegisterable As Boolean
+Private $iNumOfRolls As Integer
+Private $iActivePlayer As Integer
+Private $hCurrentPlayer As CCircularInt
 
 Public Sub _new(hContainer As Container)
 
@@ -27,6 +31,17 @@ End
 
 Public Sub NewGame()
 
+  $bRegisterable = False
+  $iActivePlayer = 0
+  $iNumOfRolls = 0
+  '        mUndoAction.setEnabled(False);
+  $hCurrentPlayer = New CCircularInt(0, MSettings.Players - 1)
+  '
+  '        For (PlayerColumn playerColumn: mPlayers){
+  '            playerColumn.newGame();
+  '        }
+  '
+  '        mPlayers.get(mActivePlayer).setEnabled(True);
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
 
   GridInit()
@@ -75,5 +90,22 @@ Public Sub Grid_MouseMove()
     $hGrid.HoverRow(iRow)
 
   Endif
+
+End
+
+Public Sub ParseDice(aValues As Integer[])
+
+  Dim iValue As Integer
+
+  $bRegisterable = True
+  Inc $iNumOfRolls
+  ' mPlayers.get(mActivePlayer).incNumOfRolls();
+  ' mPlayers.get(mActivePlayer).parse(values);
+  '
+  ' mPlayers.get(mActivePlayer).setVisibleIndicators(mOptions.isShowingIndicators());
+
+  For Each iValue In aValues
+    Print iValue,
+  Next
 
 End

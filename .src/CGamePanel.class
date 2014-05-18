@@ -5,7 +5,7 @@ Property Read Panel As Panel
 
 Private $hDicePanel As DicePanel
 Private $hPanel As Panel
-Private $hScorePanel As CScorePanel
+Private $hScorecard As CScorecard
 
 Public Sub _new(hContainer As Container)
 
@@ -16,7 +16,7 @@ Public Sub _new(hContainer As Container)
     .Expand = True
   End With
 
-  $hScorePanel = New CScorePanel($hPanel)
+  $hScorecard = New CScorecard($hPanel)
   $hDicePanel = New DicePanel($hPanel) As "DicePanel"
   $hDicePanel.DiceCount = 5
 
@@ -26,7 +26,7 @@ End
 
 Public Sub DicePanel_RollFinished()
 
-  Debug "roll finished - eval"
+  $hScorecard.ParseDice($hDicePanel.Values)
 
 End
 
@@ -44,7 +44,7 @@ End
 
 Public Sub NewGame()
 
-  $hScorePanel.NewGame()
+  $hScorecard.NewGame()
   $hDicePanel.NewGame()
 
 End
@@ -57,7 +57,7 @@ End
 
 Public Sub Settings()
 
-  $hScorePanel.Settings()
+  $hScorecard.Settings()
 
 End
 
