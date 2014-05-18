@@ -19,7 +19,7 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
   $aArgList.Clear
   Print $hGameRow.Text, $hGameRow.Formula;;
 
-  For i = 1 To aParseString.Length - 1
+  For i = 1 To aParseString.Max
     $aArgList.Add(CInt(aParseString[i]))
     'Print $aArgList[$aArgList.Length - 1]
   Next
@@ -31,6 +31,7 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
     Case "PAIR"
       iResult = CalcPair($aArgList[0])
     Case "STRAIGHT"
+      iResult = CalcStraight($aArgList[0])
     Case "SUM"
       iResult = CalcSum()
     Default
@@ -103,6 +104,41 @@ Private Function CalcPair(iNumOfPairs As Integer) As Integer
 
   If iPairCounter < iNumOfPairs Then
     iResult = 0
+  Endif
+
+  Return iResult
+
+End
+
+Private Function CalcStraight(iSizeOfStraight As Integer) As Integer
+
+  Dim i As Integer
+  Dim iFace As Integer
+  Dim iResult As Integer
+  Dim aSortedSet As New Integer[]
+  Dim iSetSum As Integer
+
+  For Each iFace In $aValues
+    If aSortedSet.Exist(iFace) = 0 Then
+      aSortedSet.Add(iFace)
+    Endif
+  Next
+
+  If aSortedSet.Length >= iSizeOfStraight Then
+    For i = 0 To aSortedSet.Max
+      iSetSum += aSortedSet[i]
+    Next
+
+    If aSortedSet.Length > iSizeOfStraight Then
+      If iSetSum >= $hGameRow.Lim Then
+        iResult = $hGameRow.Max
+      Endif
+    Else
+      If iSetSum = $hGameRow.Lim Then
+        iResult = $hGameRow.Max
+      Endif
+
+    Endif
   Endif
 
   Return iResult

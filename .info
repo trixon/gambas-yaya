@@ -185,8 +185,8 @@ C
 Frequency
 M
 i
-(avValues)Variant[];(vValue)v
-FrequencyInt
+(avValues)v(vValue)v
+FrequencyInteger
 M
 i
 (aArray)Integer[];(iValue)i
