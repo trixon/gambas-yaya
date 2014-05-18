@@ -21,13 +21,13 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
 
   For i = 1 To aParseString.Max
     $aArgList.Add(CInt(aParseString[i]))
-    'Print $aArgList[$aArgList.Length - 1]
   Next
 
   Select String.UCase(sCommand)
     Case "DUPLICATES"
       iResult = CalcDuplicates($aArgList[0])
     Case "HOUSE"
+      iResult = CalcHouse($aArgList[0], $aArgList[1])
     Case "PAIR"
       iResult = CalcPair($aArgList[0])
     Case "STRAIGHT"
@@ -75,6 +75,45 @@ Private Function CalcDuplicatesFace(iNumOfDuplicates As Integer, iFace As Intege
   iFreq = MCollections.Frequency($aValues, iFace)
   If iFreq >= iNumOfDuplicates Then
     iResult = iNumOfDuplicates * iFace
+  Endif
+
+  Return iResult
+
+End
+
+Private Function CalcHouse(iFirstSetCount As Integer, iSecondSetCount As Integer) As Integer
+
+  Dim i As Integer
+  Dim iResult As Integer
+  Dim aValues As Integer[]
+  Dim iFreq As Integer
+  Dim iFirstValue As Integer
+  Dim iSecondValue As Integer
+
+  aValues = $aValues.Copy()
+  aValues.Sort
+
+  For i = 6 DownTo 1
+    iFreq = MCollections.Frequency(aValues, i)
+    If iFreq >= iFirstSetCount Then
+      iFirstValue = i
+      aValues.Remove(aValues.Find(i), iFreq)
+      Break
+    Endif
+  Next
+
+  If iFirstValue > 0 Then
+    For i = 6 DownTo 1
+      iFreq = MCollections.Frequency(aValues, i)
+      If iFreq >= iSecondSetCount Then
+        iSecondValue = i
+        Break
+      Endif
+    Next
+  Endif
+
+  If iFirstValue > 0 And If iSecondValue > 0 Then
+    iResult = iFirstSetCount * iFirstValue + iSecondSetCount * iSecondValue
   Endif
 
   Return iResult
@@ -155,6 +194,12 @@ Private Function CalcSum() As Integer
 
 End
 
+Private Function CalcSumOf(iFace As Integer) As Integer
+
+  Return iFace * MCollections.Frequency($aValues, iFace)
+
+End
+
 Private Function CalcSumTotal() As Integer
 
   Dim iResult As Integer
@@ -165,11 +210,5 @@ Private Function CalcSumTotal() As Integer
   Next
 
   Return iResult
-
-End
-
-Private Function CalcSumOf(iFace As Integer) As Integer
-
-  Return iFace * MCollections.Frequency($aValues, iFace)
 
 End
