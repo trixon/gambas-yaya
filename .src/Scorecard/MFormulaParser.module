@@ -17,25 +17,26 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
   sCommand = aParseString[0]
 
   $aArgList.Clear
-  Print $hGameRow.Formula, sCommand
+  Print $hGameRow.Text, $hGameRow.Formula;;
 
   For i = 1 To aParseString.Length - 1
     $aArgList.Add(CInt(aParseString[i]))
-    Print $aArgList[$aArgList.Length - 1]
+    'Print $aArgList[$aArgList.Length - 1]
   Next
 
   Select String.UCase(sCommand)
     Case "DUPLICATES"
       iResult = CalcDuplicates($aArgList[0])
-      Debug ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  DUP  " & iResult
     Case "HOUSE"
     Case "PAIR"
     Case "STRAIGHT"
     Case "SUM"
-      'Print "yummy sum " & Frequency(aValues, 1)
+      iResult = CalcSum()
     Default
       Debug "Unknown command: " & sCommand
   End Select
+
+  Print iResult
 
   Return iResult
 
@@ -48,7 +49,7 @@ Private Function CalcDuplicates(iNumOfDuplicates As Integer) As Integer
   Dim iResult As Integer
 
   For i = 6 DownTo 1
-    iCount = Frequency($aValues, i)
+    iCount = MCollections.Frequency($aValues, i)
     If iCount >= iNumOfDuplicates Then
       iResult = iNumOfDuplicates * i
       If $hGameRow.Max = $hGameRow.Lim Then
@@ -62,17 +63,31 @@ Private Function CalcDuplicates(iNumOfDuplicates As Integer) As Integer
 
 End
 
-Private Function Frequency(aArray As Integer[], iValue As Integer) As Integer
+Private Function CalcSum() As Integer
 
-  Dim iCount As Integer
+  If $aArgList.Length = 0 Then
+    Return CalcSumTotal()
+  Else
+    Return CalcSumOf($aArgList[0])
+  Endif
+
+End
+
+Private Function CalcSumTotal() As Integer
+
+  Dim iResult As Integer
   Dim iItem As Integer
 
-  For Each iItem In aArray
-    If iItem = iValue Then
-      Inc iCount
-    Endif
+  For Each iItem In $aValues
+    iResult += iItem
   Next
 
-  Return iCount
+  Return iResult
+
+End
+
+Private Function CalcSumOf(iFace As Integer) As Integer
+
+  Return iFace * MCollections.Frequency($aValues, iFace)
 
 End

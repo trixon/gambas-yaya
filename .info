@@ -179,6 +179,17 @@ UrlLabel_MouseUp
 m
 
 
+#MCollections
+
+C
+Frequency
+M
+i
+(avValues)Variant[];(vValue)v
+FrequencyInt
+M
+i
+(aArray)Integer[];(iValue)i
 #MGuiUtils
 
 C

@@ -106,7 +106,7 @@ Public Sub ParseDice(aValues As Integer[])
   ' mPlayers.get(mActivePlayer).setVisibleIndicators(mOptions.isShowingIndicators());
 
   For Each iValue In aValues
-    Print iValue,
+    Print iValue;;
   Next
   Print
 
