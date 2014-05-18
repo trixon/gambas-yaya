@@ -18,18 +18,61 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
 
   $aArgList.Clear
   Print $hGameRow.Formula, sCommand
+
   For i = 1 To aParseString.Length - 1
     $aArgList.Add(CInt(aParseString[i]))
     Print $aArgList[$aArgList.Length - 1]
   Next
 
-  ' Try {
-  '     Formula formula = Formula.valueOf(command.toUpperCase());
-  '     result = processFormula(formula);
-  ' } Catch (IllegalArgumentException e){
-  '     System.err.println("Unknown command: " + command);
-  ' }
+  Select String.UCase(sCommand)
+    Case "DUPLICATES"
+      iResult = CalcDuplicates($aArgList[0])
+      Debug ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  DUP  " & iResult
+    Case "HOUSE"
+    Case "PAIR"
+    Case "STRAIGHT"
+    Case "SUM"
+      'Print "yummy sum " & Frequency(aValues, 1)
+    Default
+      Debug "Unknown command: " & sCommand
+  End Select
 
   Return iResult
+
+End
+
+Private Function CalcDuplicates(iNumOfDuplicates As Integer) As Integer
+
+  Dim i As Integer
+  Dim iCount As Integer
+  Dim iResult As Integer
+
+  For i = 6 DownTo 1
+    iCount = Frequency($aValues, i)
+    If iCount >= iNumOfDuplicates Then
+      iResult = iNumOfDuplicates * i
+      If $hGameRow.Max = $hGameRow.Lim Then
+        iResult = $hGameRow.Max
+      Endif
+      Break
+    Endif
+  Next
+
+  Return iResult
+
+End
+
+Private Function Frequency(aArray As Integer[], iValue As Integer) As Integer
+
+  Dim iCount As Integer
+  Dim iItem As Integer
+
+  For Each iItem In aArray
+    If iItem = iValue Then
+      Inc iCount
+    Endif
+  Next
+
+  Return iCount
 
 End
