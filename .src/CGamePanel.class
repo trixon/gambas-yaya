@@ -6,6 +6,7 @@ Property Read Panel As Panel
 Private $hDicePanel As DicePanel
 Private $hPanel As Panel
 Private $hScorecard As CScorecard
+Private $hGameDef As CGameDef
 
 Public Sub _new(hContainer As Container)
 
@@ -18,7 +19,6 @@ Public Sub _new(hContainer As Container)
 
   $hScorecard = New CScorecard($hPanel)
   $hDicePanel = New DicePanel($hPanel) As "DicePanel"
-  $hDicePanel.DiceCount = 5
 
   DicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
 
@@ -44,7 +44,10 @@ End
 
 Public Sub NewGame()
 
+  $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
+
   $hScorecard.NewGame()
+  $hDicePanel.DiceCount = $hGameDef.Dice
   $hDicePanel.NewGame()
 
 End

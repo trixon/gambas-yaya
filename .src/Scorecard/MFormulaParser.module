@@ -29,6 +29,7 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
       iResult = CalcDuplicates($aArgList[0])
     Case "HOUSE"
     Case "PAIR"
+      iResult = CalcPair($aArgList[0])
     Case "STRAIGHT"
     Case "SUM"
       iResult = CalcSum()
@@ -58,6 +59,51 @@ Private Function CalcDuplicates(iNumOfDuplicates As Integer) As Integer
       Break
     Endif
   Next
+
+  Return iResult
+
+End
+
+Private Function CalcDuplicatesFace(iNumOfDuplicates As Integer, iFace As Integer) As Integer
+
+  Dim i As Integer
+  Dim iCount As Integer
+  Dim iResult As Integer
+  Dim iFreq As Integer
+
+  iFreq = MCollections.Frequency($aValues, iFace)
+  If iFreq >= iNumOfDuplicates Then
+    iResult = iNumOfDuplicates * iFace
+  Endif
+
+  Return iResult
+
+End
+
+Private Function CalcPair(iNumOfPairs As Integer) As Integer
+
+  Dim iResult As Integer
+  Dim i As Integer
+  Dim j As Integer
+  Dim iPairCounter As Integer
+  Dim iStartFace As Integer = 6
+  Dim iPairSum As Integer
+
+  For i = 0 To iNumOfPairs
+    For j = iStartFace DownTo 1
+      iPairSum = CalcDuplicatesFace(2, j)
+      If iPairSum > 0 Then
+        iResult += iPairSum
+        Inc iPairCounter
+        iStartFace = j - 1
+        Break
+      Endif
+    Next
+  Next
+
+  If iPairCounter < iNumOfPairs Then
+    iResult = 0
+  Endif
 
   Return iResult
 
