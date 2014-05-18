@@ -1,0 +1,35 @@
+' Gambas module file
+
+Private $aValues As Integer[]
+Private $aArgList As New Integer[]
+Private $hGameRow As CGameRow
+
+Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Integer
+
+  Dim i As Integer
+  Dim iResult As Integer = -1
+  Dim aParseString As String[]
+  Dim sCommand As String
+
+  $aValues = aValues
+  $hGameRow = hGameRow
+  aParseString = Split(hGameRow.Formula, " ")
+  sCommand = aParseString[0]
+
+  $aArgList.Clear
+  Print $hGameRow.Formula, sCommand
+  For i = 1 To aParseString.Length - 1
+    $aArgList.Add(CInt(aParseString[i]))
+    Print $aArgList[$aArgList.Length - 1]
+  Next
+
+  ' Try {
+  '     Formula formula = Formula.valueOf(command.toUpperCase());
+  '     result = processFormula(formula);
+  ' } Catch (IllegalArgumentException e){
+  '     System.err.println("Unknown command: " + command);
+  ' }
+
+  Return iResult
+
+End

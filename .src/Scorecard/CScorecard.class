@@ -96,6 +96,7 @@ End
 Public Sub ParseDice(aValues As Integer[])
 
   Dim iValue As Integer
+  Dim hGameRow As CGameRow
 
   $bRegisterable = True
   Inc $iNumOfRolls
@@ -106,6 +107,13 @@ Public Sub ParseDice(aValues As Integer[])
 
   For Each iValue In aValues
     Print iValue,
+  Next
+  Print
+
+  For Each hGameRow In $hGameDef.Rows
+    If hGameRow.Formula Then
+      MFormulaParser.ParseFormula(aValues, hGameRow)
+    Endif
   Next
 
 End
