@@ -1,7 +1,7 @@
 ' Gambas module file
 
 Private $aValues As Integer[]
-Private $aArgList As New Integer[]
+Private $aArguments As New Variant[]
 Private $hGameRow As CGameRow
 
 Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Integer
@@ -16,28 +16,33 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
   aParseString = Split(hGameRow.Formula, " ")
   sCommand = aParseString[0]
 
-  $aArgList.Clear
+  $aArguments.Clear
   Print $hGameRow.Text, $hGameRow.Formula;;
 
   For i = 1 To aParseString.Max
-    $aArgList.Add(CInt(aParseString[i]))
+    '     $aArguments.Add(CInt(aParseString[i]))
+    $aArguments.Add(aParseString[i])
   Next
 
   Select String.UCase(sCommand)
+    Case "CRAG"
+      iResult = CalcCrag()
     Case "DUPLICATES"
-      iResult = CalcDuplicates($aArgList[0])
+      iResult = CalcDuplicates($aArguments[0])
+    Case "EQUALS"
+      iResult = CalcEquals()
     Case "HOUSE"
-      iResult = CalcHouse($aArgList[0], $aArgList[1])
+      iResult = CalcHouse($aArguments[0], $aArguments[1])
     Case "PAIR"
-      iResult = CalcPair($aArgList[0])
+      iResult = CalcPair($aArguments[0])
     Case "SEQUENCE"
-      iResult = CalcSequence($aArgList[0])
+      iResult = CalcSequence($aArguments[0])
     Case "STRAIGHT"
-      iResult = CalcStraight($aArgList[0])
+      iResult = CalcStraight($aArguments[0])
     Case "SUM"
       iResult = CalcSum()
     Case "SUM_N"
-      iResult = CalcSumN($aArgList[0])
+      iResult = CalcSumN($aArguments[0])
     Default
       Debug "Unknown command: " & sCommand
   End Select
@@ -45,6 +50,16 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
   Print iResult
 
   Return iResult
+
+End
+
+Private Function CalcCrag() As Integer
+
+  If CalcPair(1) And If CalcSumTotal($aValues) = 13 Then
+    Return $aArguments[0]
+  Else
+    Return 0
+  Endif
 
 End
 
@@ -80,6 +95,20 @@ Private Function CalcDuplicatesFace(iNumOfDuplicates As Integer, iFace As Intege
   Endif
 
   Return iResult
+
+End
+
+Private Function CalcEquals() As Integer
+
+  Dim aValues As Integer[]
+
+  aValues = Split($aArguments[0], ",")
+
+  If MCollections.Equals(aValues, $aValues) Then
+    Return $aArguments[1]
+  Else
+    Return -1
+  Endif
 
 End
 
@@ -163,8 +192,8 @@ Private Function CalcSequence(iSizeOfSequence As Integer) As Integer
   aSequence = MCollections.FindLargestSequence($aValues)
 
   If aSequence.Length >= iSizeOfSequence Then
-    If $aArgList.Length > 3 Then
-      iResult = $aArgList[3]
+    If $aArguments.Length > 3 Then
+      iResult = $aArguments[3]
     Else
       iResult = CalcSumTotal(aSequence)
     Endif
@@ -209,10 +238,16 @@ End
 
 Private Function CalcSum() As Integer
 
-  If $aArgList.Length = 0 Then
-    Return CalcSumTotal($aValues)
+  Dim iSum As Integer = CalcSumTotal($aValues)
+
+  If $aArguments.Length = 0 Then
+    Return iSum
+  Else If $aArguments.Length = 1
+    Return CalcSumOf($aArguments[0])
+  Else If $aArguments.Length = 2 And If iSum = $aArguments[0]
+    Return $aArguments[1]
   Else
-    Return CalcSumOf($aArgList[0])
+    Return -1
   Endif
 
 End

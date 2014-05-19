@@ -182,6 +182,10 @@ m
 #MCollections
 
 C
+Equals
+M
+b
+(aFirst)Integer[];(aSecond)Integer[];
 FindLargestSequence
 M
 Integer[]
