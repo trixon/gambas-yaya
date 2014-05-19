@@ -30,10 +30,14 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
       iResult = CalcHouse($aArgList[0], $aArgList[1])
     Case "PAIR"
       iResult = CalcPair($aArgList[0])
+    Case "SEQUENCE"
+      iResult = CalcSequence($aArgList[0])
     Case "STRAIGHT"
       iResult = CalcStraight($aArgList[0])
     Case "SUM"
       iResult = CalcSum()
+    Case "SUM_N"
+      iResult = CalcSumN($aArgList[0])
     Default
       Debug "Unknown command: " & sCommand
   End Select
@@ -67,8 +71,6 @@ End
 
 Private Function CalcDuplicatesFace(iNumOfDuplicates As Integer, iFace As Integer) As Integer
 
-  Dim i As Integer
-  Dim iCount As Integer
   Dim iResult As Integer
   Dim iFreq As Integer
 
@@ -113,7 +115,11 @@ Private Function CalcHouse(iFirstSetCount As Integer, iSecondSetCount As Integer
   Endif
 
   If iFirstValue > 0 And If iSecondValue > 0 Then
-    iResult = iFirstSetCount * iFirstValue + iSecondSetCount * iSecondValue
+    If $hGameRow.Lim = $hGameRow.Max Then
+      iResult = $hGameRow.Max
+    Else
+      iResult = iFirstSetCount * iFirstValue + iSecondSetCount * iSecondValue
+    Endif
   Endif
 
   Return iResult
@@ -149,26 +155,44 @@ Private Function CalcPair(iNumOfPairs As Integer) As Integer
 
 End
 
+Private Function CalcSequence(iSizeOfSequence As Integer) As Integer
+
+  Dim iResult As Integer
+  Dim aSequence As Integer[]
+
+  aSequence = MCollections.FindLargestSequence($aValues)
+
+  If aSequence.Length >= iSizeOfSequence Then
+    If $aArgList.Length > 3 Then
+      iResult = $aArgList[3]
+    Else
+      iResult = CalcSumTotal(aSequence)
+    Endif
+  Endif
+
+  Return iResult
+
+End
+
 Private Function CalcStraight(iSizeOfStraight As Integer) As Integer
 
   Dim i As Integer
-  Dim iFace As Integer
   Dim iResult As Integer
-  Dim aSortedSet As New Integer[]
+  Dim aUniqueValues As New Integer[]
   Dim iSetSum As Integer
 
-  For Each iFace In $aValues
-    If aSortedSet.Exist(iFace) = 0 Then
-      aSortedSet.Add(iFace)
+  For i = 0 To $aValues.Max
+    If Not aUniqueValues.Exist($aValues[i]) Then
+      aUniqueValues.Add($aValues[i])
     Endif
   Next
 
-  If aSortedSet.Length >= iSizeOfStraight Then
-    For i = 0 To aSortedSet.Max
-      iSetSum += aSortedSet[i]
+  If aUniqueValues.Length >= iSizeOfStraight Then
+    For i = 0 To aUniqueValues.Max
+      iSetSum += aUniqueValues[i]
     Next
 
-    If aSortedSet.Length > iSizeOfStraight Then
+    If aUniqueValues.Length > iSizeOfStraight Then
       If iSetSum >= $hGameRow.Lim Then
         iResult = $hGameRow.Max
       Endif
@@ -176,7 +200,6 @@ Private Function CalcStraight(iSizeOfStraight As Integer) As Integer
       If iSetSum = $hGameRow.Lim Then
         iResult = $hGameRow.Max
       Endif
-
     Endif
   Endif
 
@@ -187,9 +210,26 @@ End
 Private Function CalcSum() As Integer
 
   If $aArgList.Length = 0 Then
-    Return CalcSumTotal()
+    Return CalcSumTotal($aValues)
   Else
     Return CalcSumOf($aArgList[0])
+  Endif
+
+End
+
+Private Function CalcSumN(iNumOfDuplicates As Integer) As Integer
+
+  Dim i As Integer
+  Dim iFreq As Integer
+
+  For i = 1 To 6
+    iFreq = Max(iFreq, MCollections.Frequency($aValues, i))
+  Next
+
+  If iFreq >= iNumOfDuplicates Then
+    Return CalcSumTotal($aValues)
+  Else
+    Return 0
   Endif
 
 End
@@ -200,12 +240,12 @@ Private Function CalcSumOf(iFace As Integer) As Integer
 
 End
 
-Private Function CalcSumTotal() As Integer
+Private Function CalcSumTotal(aValues As Integer[]) As Integer
 
   Dim iResult As Integer
   Dim iItem As Integer
 
-  For Each iItem In $aValues
+  For Each iItem In aValues
     iResult += iItem
   Next
 

@@ -1,0 +1,56 @@
+' Gambas module file
+
+Public Sub Main()
+
+  Dim i As Integer
+  Dim a As New Integer[]
+  Dim b As New Integer[]
+  Dim c As Integer[]
+
+  a.Add(1)
+  a.Add(2)
+  a.Add(3)
+  a.Add(4)
+  a.Add(1)
+  a.Add(12)
+  a.Add(8)
+  a.Add(9)
+  a.Add(10)
+  a.Add(11)
+  a.Add(13)
+  a.Add(13)
+  a.Add(55)
+  a.Add(6)
+  a.Clear()
+  a.Add(13)
+  a.Add(9)
+  a.Add(8)
+  a.Clear()
+  a.Add(3)
+  a.Add(5)
+  a.Add(1)
+  a.Add(6)
+  a.Add(4)
+  '   a.Add(99)
+  Print "-------"
+
+  For i = 0 To a.Max
+    Print i, a[i]
+  Next
+  Print "-------"
+
+  b = MCollections.FindLargestSequence(a)
+  For i = 0 To b.Max
+    Print ">"; i, b[i]
+  Next
+  Print "-------"
+
+  Print "-------"
+
+  c = MCollections.FindLargestSequence(a)
+  For i = 0 To c.Max
+    Print ">"; i, c[i]
+  Next
+  Print "-------"
+
+End

@@ -182,6 +182,10 @@ m
 #MCollections
 
 C
+FindLargestSequence
+M
+Integer[]
+(aArray)Integer[];
 Frequency
 M
 i

@@ -4,10 +4,10 @@
     "title-sv": "Yatzy",
     "numOfDice": 5,
     "numOfRolls": 3,
-    "resultRow": 19,
+    "resultRow": 17,
     "defaultVariant": 0,
     "variants": "standard downwards upwards upper_lower lower_upper random",
-    "version": "2014-04-21",
+    "version": "2014-05-19",
     "author": "Patrik Karlsson",
     "rows": [
         {
@@ -97,28 +97,8 @@
             "isSum": true,
             "isBonus": true,
             "lim": 63,
-            "max": 50,
+            "max": 35,
             "sum": "1-6"
-        },
-        {
-            "id": "onePair",
-            "title": "One pair",
-            "title-sv": "Par",
-            "titleSym": "◼ ◼",
-            "isPlayable": true,
-            "lim": 6,
-            "max": 12,
-            "formula": "duplicates 2"
-        },
-        {
-            "id": "twoPair",
-            "title": "Two pair",
-            "title-sv": "Tvåpar",
-            "titleSym": "◼ ◼ ◻ ◻",
-            "isPlayable": true,
-            "lim": 12,
-            "max": 22,
-            "formula": "pair 2"
         },
         {
             "id": "threeOfAKind",
@@ -128,7 +108,7 @@
             "isPlayable": true,
             "lim": 12,
             "max": 18,
-            "formula": "duplicates 3"
+            "formula": "sum_n 3"
         },
         {
             "id": "fourOfAKind",
@@ -138,27 +118,27 @@
             "isPlayable": true,
             "lim": 16,
             "max": 24,
-            "formula": "duplicates 4"
+            "formula": "sum_n 4"
         },
         {
             "id": "smallStraight",
             "title": "Small Straight",
             "title-sv": "Liten stege",
-            "titleSym": "⚀ ⚁ ⚂ ⚃ ⚄",
+            "titleSym": "⚀ ⚁ ⚂ ⚃",
             "isPlayable": true,
-            "lim": 15,
-            "max": 15,
-            "formula": "straight 5"
+            "lim": 30,
+            "max": 30,
+            "formula": "sequence 4 0 0 30"
         },
         {
             "id": "largeStraight",
             "title": "Large Straight",
             "title-sv": "Stor stege",
-            "titleSym": "⚁ ⚂ ⚃ ⚄ ⚅",
+            "titleSym": "⚀ ⚁ ⚂ ⚃ ⚄",
             "isPlayable": true,
-            "lim": 20,
-            "max": 20,
-            "formula": "straight 5"
+            "lim": 40,
+            "max": 40,
+            "formula": "sequence 5 0 0 40"
         },
         {
             "id": "fullHouse",
@@ -166,19 +146,9 @@
             "title-sv": "Kåk",
             "titleSym": "◼ ◼ ◼ ◻ ◻",
             "isPlayable": true,
-            "lim": 16,
-            "max": 28,
+            "lim": 25,
+            "max": 25,
             "formula": "house 3 2"
-        },
-        {
-            "id": "chance",
-            "title": "Chance",
-            "title-sv": "Chans",
-            "titleSym": "� � � � �",
-            "isPlayable": true,
-            "lim": 20,
-            "max": 30,
-            "formula": "sum"
         },
         {
             "id": "yahtzee",
@@ -191,13 +161,23 @@
             "formula": "duplicates 5"
         },
         {
+            "id": "chance",
+            "title": "Chance",
+            "title-sv": "Chans",
+            "titleSym": "� � � � �",
+            "isPlayable": true,
+            "lim": 20,
+            "max": 30,
+            "formula": "sum"
+        },
+        {
             "id": "sum2",
             "title": "Sum 2",
             "title-sv": "Delsumma 2",
             "titleSym": "∑₂",
             "isSum": true,
             "max": 219,
-            "sum": "8-16"
+            "sum": "8-14"
         },
         {
             "id": "total",
@@ -206,7 +186,7 @@
             "titleSym": "∑",
             "isSum": true,
             "max": 374,
-            "sum": "1-6,8-17"
+            "sum": "1-6,8-15"
         }
     ]
 }
