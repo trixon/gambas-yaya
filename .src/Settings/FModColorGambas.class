@@ -1,0 +1,252 @@
+' Gambas class file
+
+Static Private $aTheme As String[] = ["amethyst", "amber", "emerald", "gambas", "ruby", "sapphire", "visual", "obsidian", "quest", "quick"]
+Static Private $aThemeName As String[] = [("Amethyst"), ("Amber"), ("Emerald"), ("Gambas"), ("Ruby"), ("Sapphire"), ("Visual"), ("Obsidian"), ("Quest"), ("Quick")]
+Private $cLast As Collection
+Private $cCurrent As Collection
+Private $sStyle As String
+Private $hDraw As DrawingArea
+
+Public Sub _new()
+
+  Dim iInd As Integer
+  Dim hHBox As HBox
+  Dim hColor As DrawingArea
+  Dim hButton As Button
+
+  cmbTheme.List = $aThemeName.Copy().Sort(gb.Language)
+  cmbTheme.Add(("Select a theme"), 0)
+  $cLast = MTheme.ReadSettings(Settings, "/Highlight", True)
+  $cCurrent = MTheme.Copy($cLast)
+
+  For iInd = 0 To MTheme.ColorKeys.Max
+
+    hHBox = New HBox(svwTheme)
+    hHBox.Tag = MTheme.ColorKeys[iInd]
+    hHBox.Height = 4 * Desktop.Scale
+    hHBox.Spacing = 4
+    hColor = New DrawingArea(hHBox) As "dwgStyle"
+    hColor.Expand = True
+    hButton = New Button(hHBox) As "btnStyle"
+    hButton.Text = ("Define...")
+    hButton.Width = Desktop.Scale * 16
+
+  Next
+  RefreshStyle()
+
+End
+
+Public Sub Form_Open()
+
+End
+
+Public Sub cmbTheme_Click()
+
+  If cmbTheme.Index <= 0 Then Return
+
+  $cCurrent = MTheme.ReadFile($aTheme[$aThemeName.Find(cmbTheme.Text)])
+  RefreshEditor
+  RefreshStyle()
+
+End
+
+Public Sub btnUndo_Click()
+
+  $cCurrent = MTheme.Copy($cLast)
+  cmbTheme.Index = 0
+  RefreshEditor
+
+End
+
+Public Sub btnExport_Click()
+
+  Dialog.Path = Settings["/FOption/ThemePath", System.User.Home &/ System.User.Name & ".gambas.theme"]
+  Dialog.Filter = ["*.gambas.theme", ("Gambas highlight theme files")]
+  Dialog.Title = ("Export a theme file")
+  Dialog.AutoExt = True
+  If Dialog.SaveFile() Then Return
+  Settings["/FOption/ThemePath"] = Dialog.Path
+
+  MTheme.WriteFile(Dialog.Path, $cCurrent)
+
+End
+
+Public Sub btnImport_Click()
+
+  Dialog.Path = Settings["/FOption/ThemePath", System.User.Home]
+  Dialog.Filter = ["*.gambas.theme", ("Gambas highlight theme files")]
+  Dialog.Title = ("Select a theme file")
+  If Dialog.OpenFile() Then Return
+
+  'Enhanced Dialog.OpenFile() is buggy
+  If Not Dialog.Path Or If IsDir(Dialog.Path) Then Return
+
+  Settings["/FOption/ThemePath"] = Dialog.Path
+
+  $cCurrent = MTheme.ReadFile(Dialog.Path)
+  cmbTheme.Index = 0
+  RefreshEditor
+
+End
+
+Private Sub RefreshEditor()
+
+  Debug "REMOVE ME"
+
+End
+
+Private Sub RefreshStyle()
+
+  Dim hHBox As HBox
+
+  'panTheme.Background = CStyle[$cCurrent["Background"]].Foreground
+
+  For Each hHBox In svwTheme.Children
+    hHBox.Children[0].Refresh
+  Next
+
+End
+
+Public Sub btnStyle_Click()
+
+  $hDraw = Last.Parent.Children[0]
+  $sStyle = Last.Parent.Tag
+  mnuPopup.Popup
+
+End
+
+Public Sub dwgStyle_Draw()
+
+  Dim hDraw As DrawingArea = Last
+  Dim sKey As String = hDraw.Parent.Tag
+  Dim hStyle As CStyle = CStyle[$cCurrent[sKey]]
+  Dim sName As String
+  Dim iForeground As Integer
+  Dim iBackground As Integer
+
+  sName = MTheme.ColorNames[MTheme.ColorKeys.Find(sKey)]
+
+  '  Draw.Font = Font[txtEditorFont.Text]
+  If hStyle.Underline Then Draw.Font.Underline = True
+  If hStyle.Italic Then Draw.Font.Italic = True
+
+  If MTheme.IsBackgroundStyle(sKey) Then
+    iBackground = hStyle.Foreground
+    iForeground = CStyle[$cCurrent["Normal"]].Foreground
+  Else
+    iBackground = hStyle.Background
+    iForeground = hStyle.Foreground
+  Endif
+
+  If iBackground = Color.Default Then iBackground = CStyle[$cCurrent["Background"]].Foreground
+
+  'If iBackground <> Color.Default Then
+  Draw.FillColor = iBackground
+  Draw.FillStyle = Fill.Solid
+  Draw.LineStyle = Line.None
+  Draw.Rect(0, 0, hDraw.Width, hDraw.Height)
+  'Endif
+  Draw.Foreground = iForeground
+  Draw.Text(sName, 4, 0, hDraw.Width - 8, hDraw.Height, Align.Normal)
+  If hStyle.Bold Then Draw.Text(sName, 5, 0, hDraw.Width - 8, hDraw.Height, Align.Normal)
+
+End
+
+Public Sub mnuPopup_Show()
+
+  With CStyle[$cCurrent[$sStyle]]
+
+    mnuBold.Checked = .Bold
+    mnuItalic.Checked = .Italic
+    mnuUnderline.Checked = .Underline
+
+    If MTheme.IsBackgroundStyle($sStyle) Then
+      mnuForeground.Hide
+      mnuBackground.Checked = False
+    Else
+      mnuForeground.Show
+      mnuBackground.Checked = .Background <> Color.Default
+    Endif
+
+  End With
+
+End
+
+Private Sub UpdateStyle()
+
+  Dim hStyle As New CStyle($cCurrent[$sStyle])
+
+  With hStyle
+    .Bold = mnuBold.Checked
+    .Italic = mnuItalic.Checked
+    .Underline = mnuUnderline.Checked
+  End With
+
+  $cCurrent[$sStyle] = hStyle.ToString()
+  RefreshEditor
+
+End
+
+Public Sub mnuBold_Click()
+
+  mnuBold.Checked = Not mnuBold.Checked
+  UpdateStyle
+
+End
+
+Public Sub mnuItalic_Click()
+
+  mnuItalic.Checked = Not mnuItalic.Checked
+  UpdateStyle
+
+End
+
+Public Sub mnuUnderline_Click()
+
+  mnuUnderline.Checked = Not mnuUnderline.Checked
+  UpdateStyle
+
+End
+
+Public Sub mnuForeground_Click()
+
+  Dim hStyle As New CStyle($cCurrent[$sStyle])
+  Dim iColor As Integer = hStyle.Foreground
+
+  If FColorChooser.Run("&H" & Hex$(iColor, 6) & "&") Then Return
+
+  hStyle.Foreground = FColorChooser.Value
+  $cCurrent[$sStyle] = hStyle.ToString()
+  RefreshEditor
+
+End
+
+Public Sub mnuBackground_Click()
+
+  Dim hStyle As New CStyle($cCurrent[$sStyle])
+  Dim iColor As Integer = hStyle.Background
+  Dim iDefault As Integer
+
+  If MTheme.IsBackgroundStyle($sStyle) Then
+    mnuForeground_Click
+    Return
+  Endif
+
+  iDefault = CStyle[$cCurrent["Background"]].Foreground
+  If iColor = Color.Default Then iColor = iDefault
+
+  If FColorChooser.Run("&H" & Hex$(iColor, 6) & "&") Then Return
+
+  If FColorChooser.Color = "" Or If FColorChooser.Value = iDefault Then
+    hStyle.Background = Color.Default
+  Else
+    hStyle.Background = FColorChooser.Value
+  Endif
+  $cCurrent[$sStyle] = hStyle.ToString()
+  RefreshEditor
+
+End
+
+Public Sub Save()
+
+End

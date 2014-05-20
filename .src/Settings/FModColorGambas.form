@@ -1,0 +1,73 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,73,49)
+  Arrangement = Arrange.Vertical
+  { mnuPopup Menu
+    Visible = False
+    { mnuForeground Menu
+      Text = ("Menu1")
+    }
+    { mnuBackground Menu
+      Text = ("Menu2")
+    }
+    { Menu2 Menu
+    }
+    { mnuBold Menu
+      Text = ("Menu1")
+    }
+    { mnuItalic Menu
+      Text = ("Menu1")
+    }
+    { mnuUnderline Menu
+      Text = ("Menu1")
+    }
+  }
+  { Label27 Label
+    MoveScaled(0,0,63,3)
+    Font = Font["Bold"]
+    Text = ("Colors")
+  }
+  { HBox2 HBox
+    MoveScaled(1,3,65,4)
+    AutoResize = True
+    Indent = True
+    { Label54 Label
+      MoveScaled(0,0,18,4)
+      Expand = True
+      Text = ("Theme")
+    }
+    { cmbTheme ComboBox
+      MoveScaled(20,0,32,4)
+      ReadOnly = True
+    }
+    { Panel3 Panel
+      MoveScaled(52,0,1,4)
+    }
+    { btnImport ToolButton
+      MoveScaled(53,0,4,4)
+      ToolTip = ("Import theme")
+      Picture = Picture["icon:/small/open"]
+    }
+    { btnExport ToolButton
+      MoveScaled(57,0,4,4)
+      ToolTip = ("Export theme")
+      Picture = Picture["icon:/small/save"]
+    }
+    { btnUndo ToolButton
+      MoveScaled(61,0,4,4)
+      ToolTip = ("Undo")
+      Picture = Picture["icon:/small/undo"]
+    }
+  }
+  { svwTheme ScrollView
+    MoveScaled(1,9,64,38)
+    Foreground = Color.TextForeground
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Spacing = True
+    Margin = True
+    Padding = 4
+    ScrollBar = Scroll.Vertical
+  }
+}

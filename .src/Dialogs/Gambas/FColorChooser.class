@@ -1,0 +1,152 @@
+' Gambas class file
+
+Static Public Color As String
+Static Public Value As Integer
+
+Static Private $sColor As String
+Static Private $bAlpha As Boolean
+Static Private $aSystem As String[] = ["Background", "Foreground", "SelectedBackground", "SelectedForeground", "LightBackground", "LightForeground", "TextBackground", "TextForeground", "ButtonBackground", "ButtonForeground", "TooltipBackground", "TooltipForeground"]
+Static Private $sTitle As String
+
+Private Const DEFAULT_COLOR As String = "-"
+
+Private $cColor As New Collection
+
+Static Public Function Run(Optional sColor As String, Optional bAlpha As Boolean, Optional sTitle As String) As Boolean
+
+  $sColor = sColor
+  $bAlpha = bAlpha
+  $sTitle = sTitle
+  'IF NOT $sColor THEN $sColor = Color
+  'IF NOT $sColor THEN $sColor = "&H" & Hex$(Value, 6)
+  If FColorChooser.ShowModal() Then
+    Color = $sColor
+    If $sColor Then
+      Try Value = Val($sColor)
+      If Error Then 
+        Value = Object.GetProperty(Classes["Color"], $sColor)
+      Else 
+        If $bAlpha Then
+          Color = "&H" & Hex$(Value, 8) & "&"
+        Else
+          Color = "&H" & Hex$(Value, 6) & "&"
+        Endif
+      Endif
+    Else
+      Value = -1
+    Endif
+    'DEBUG Value;; "'"; Color; "'"
+  Else
+    Return True
+  Endif
+
+End
+
+
+Private Sub AddColor(sText As String, sTag As String, sColor As String)
+
+  Dim hBox As HBox
+  Dim hLabel As Label
+  Dim hColor As Label
+  Dim hPict As PictureBox
+
+  hBox = New HBox(lstSystem)
+  hBox.Padding = 4
+  hBox.Spacing = True
+  hBox.Margin = True
+  hBox.Height = 24
+  hBox.Tag = sTag
+
+  If sColor = DEFAULT_COLOR Then
+    hPict = New PictureBox(hBox)
+    'hPict.Border = Border.Plain
+    hPict.Picture = Picture["img/16/tile.png"]
+    hPict.Resize(16, 16)
+    hPict.Design = True
+  Else
+    hColor = New Label(hBox)
+    hColor.Background = Object.GetProperty(Classes["Color"], sColor)
+    hColor.Border = Border.Plain
+    hColor.Resize(16, 16)
+    hColor.Design = True
+  Endif
+
+  hLabel = New Label(hBox)
+  hLabel.Expand = True
+  hLabel.Text = sText
+  hLabel.Design = True
+
+  $cColor[sColor] = hBox
+
+End
+
+Public Sub btnOK_Click()
+
+  If tabColor.Index = 1 Then
+    $sColor = dlgColor.SelectedColor
+  Else
+    Try $sColor = lstSystem.Current.Tag
+  Endif
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
+
+  Me.Close
+
+End
+
+Public Sub Form_Open()
+
+  Dim sSystem As String
+
+  Settings.Read(Me)
+
+  lstSystem.Clear
+  AddColor("Default", "", DEFAULT_COLOR)
+  For Each sSystem In $aSystem
+    AddColor(sSystem, sSystem, sSystem)
+  Next
+
+  If Not IsNull(Val($sColor)) Then
+    dlgColor.SelectedColor = Val($sColor)
+    tabColor.Index = 1
+  Else
+    If $sColor Then
+      lstSystem.Select($cColor[$sColor])
+    Else
+      lstSystem.Select($cColor[DEFAULT_COLOR])
+    Endif
+    tabColor.Index = 0
+  Endif
+  
+  dlgColor.ShowAlpha = $bAlpha
+  
+  If $sTitle Then
+    Me.Title = $sTitle
+  Else
+    $sTitle = ("Select a color")
+  Endif
+
+End
+
+Public Sub dlgColor_Activate()
+
+  btnOK.Value = True
+
+End
+
+
+Public Sub lstSystem_Activate()
+
+  btnOK.Value = True
+
+End
+
+
+Public Sub Form_Close()
+
+  Settings.Write(Me)  
+
+End

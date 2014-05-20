@@ -1,0 +1,30 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  cbxShowHints.Value = MSettings.ShowHints
+  cbxShowMaxCol.Value = MSettings.ShowMaxCol
+  cbxShowTopCol.Value = MSettings.ShowTopCol
+  cbxShowSymbols.Value = MSettings.ShowSymbols
+
+End
+
+Public Sub Save()
+
+  MSettings.ShowHints = cbxShowHints.Value
+  MSettings.ShowMaxCol = cbxShowMaxCol.Value
+  MSettings.ShowTopCol = cbxShowTopCol.Value
+  MSettings.ShowSymbols = cbxShowSymbols.Value
+
+End
+
+Public Sub txtEditorFont_Click()
+
+  Dim sFont As String
+
+  sFont = FFontChooser.Run(txtEditorFont.Text)
+  If Not sFont Then Return
+  txtEditorFont.Text = sFont
+  'RefreshEditor
+
+End

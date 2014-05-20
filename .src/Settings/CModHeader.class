@@ -1,0 +1,13 @@
+' Gambas class file
+
+Public Text As String
+Public Picture As String
+Public Index As Integer
+
+Public Sub _new(sText As String, sPicture As String, iIndex As Integer)
+
+  Text = sText
+  Picture = sPicture
+  Index = iIndex
+
+End

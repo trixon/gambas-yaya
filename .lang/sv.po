@@ -15,19 +15,19 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:79
+#: .project:2 FMain.class:78
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScorePanel.class:84
+#: CScoreGrid.class:62
 msgid "Max"
 msgstr "Max"
 
-#: CScorePanel.class:90
+#: CScoreGrid.class:68
 msgid "Top"
 msgstr "Topp"
 
-#: FAbout.form:22 FMain.form:59
+#: FAbout.form:22 FMain.form:60
 msgid "About"
 msgstr "Om"
 
@@ -55,7 +55,7 @@ msgstr "Licens"
 msgid "Close"
 msgstr "Stäng"
 
-#: FMain.class:78
+#: FMain.class:77
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
@@ -67,7 +67,7 @@ msgstr "Meny"
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: FMain.form:35
+#: FMain.form:35 FSettings.form:95
 msgid "Undo"
 msgstr "Ångra"
 
@@ -75,11 +75,11 @@ msgstr "Ångra"
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:51 FSettings.form:28
+#: FMain.form:52 FSettings.form:37
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:67
+#: FMain.form:68
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -91,7 +91,7 @@ msgstr "Spel"
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:82 FSettings.form:43
+#: FNewGame.form:82 FSettings.form:111
 msgid "Players"
 msgstr "Spelare"
 
@@ -117,7 +117,7 @@ msgstr ""
 
 #: FSettings.class:40
 msgid "Create at least one player."
-msgstr ""
+msgstr "Skapa minst en spelare."
 
 #: FSettings.class:50
 msgid "Remove '&1'?"
@@ -147,41 +147,53 @@ msgstr "Ta bort alla spelare?"
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
-#: FSettings.form:86
+#: FSettings.form:52
+msgid "Colors"
+msgstr "Färger"
+
+#: FSettings.form:69
+msgid "Theme"
+msgstr "Schema"
+
+#: FSettings.form:83
+msgid "Import theme"
+msgstr ""
+
+#: FSettings.form:89
+msgid "Export theme"
+msgstr ""
+
+#: FSettings.form:154
 msgid "Miscellaneous"
 msgstr ""
 
-#: FSettings.form:97
+#: FSettings.form:165
 msgid "Scorecard"
 msgstr "Protokoll"
 
-#: FSettings.form:102
+#: FSettings.form:170
 msgid "Show suggestions"
 msgstr "Visa förslag"
 
-#: FSettings.form:107
+#: FSettings.form:175
 msgid "Show Max column"
 msgstr "Visa Maxkolumn"
 
-#: FSettings.form:112
+#: FSettings.form:180
 msgid "Show Top column"
 msgstr "Visa Toppkolumn"
 
-#: FSettings.form:117
+#: FSettings.form:185
 msgid "Symbols"
 msgstr ""
 
-#: FSettings.form:128
+#: FSettings.form:196
 msgid "Dice"
 msgstr "Tärningar"
 
-#: FSettings.form:133
+#: FSettings.form:201
 msgid "Reverse mouse scroll"
 msgstr "Omvänd rullningsriktning"
-
-#: FSettings.form:137
-msgid "Themes"
-msgstr ""
 
 #: MGameLoader.module:15
 msgid "Standard"

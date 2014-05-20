@@ -1,0 +1,13 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  cbxMouseScroll.Value = MSettings.ReverseMouseScroll
+
+End
+
+Public Sub Save()
+
+  MSettings.ReverseMouseScroll = cbxMouseScroll.Value
+
+End

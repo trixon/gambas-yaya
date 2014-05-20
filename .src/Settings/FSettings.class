@@ -1,5 +1,41 @@
 ' Gambas class file
 
+Private $hModPlayers As FModPlayers
+Private $hModScorecard As FModScorecard
+Private $hModDice As FModDice
+Private $hModColors As FModColorGambas
+Private Enum Players, Scorecard, Dice, Colors
+
+Public Sub _new()
+
+  Dim i As Integer
+  Dim aModHeader As New CModHeader[]
+  Dim hModHeader As CModHeader
+
+  hModHeader = New CModHeader(("Players"), "images/system-users.png", Players)
+  aModHeader.Add(hModHeader)
+  hModHeader = New CModHeader(("Scorecard"), "images/accessories-text-editor.png", Scorecard)
+  aModHeader.Add(hModHeader)
+  hModHeader = New CModHeader(("Dice"), "images/dice.png", Dice)
+  aModHeader.Add(hModHeader)
+  hModHeader = New CModHeader(("Colors"), "images/preferences-desktop-color.png", Colors)
+  aModHeader.Add(hModHeader)
+
+  ipnModules.Count = aModHeader.Length
+
+  For i = 0 To aModHeader.Max
+    ipnModules[aModHeader[i].Index].Text = aModHeader[i].Text
+    ipnModules[aModHeader[i].Index].Picture = Picture.Load(aModHeader[i].Picture)
+  Next
+
+  $hModPlayers = New FModPlayers(ipnModules[Players])
+  $hModScorecard = New FModScorecard(ipnModules[Scorecard])
+  $hModDice = New FModDice(ipnModules[Dice])
+  $hModColors = New FModColorGambas(ipnModules[Colors])
+  ipnModules.Index = Players
+
+End
+
 Public Sub Run() As Boolean
 
   Return Me.ShowModal()
@@ -8,14 +44,10 @@ End
 
 Public Sub btnOK_Click()
 
-  MSettings.PlayerNames = lbxPlayers.List
-
-  MSettings.ShowHints = cbxShowHints.Value
-  MSettings.ShowMaxCol = cbxShowMaxCol.Value
-  MSettings.ShowTopCol = cbxShowTopCol.Value
-  MSettings.ShowSymbols = cbxShowSymbols.Value
-
-  MSettings.ReverseMouseScroll = cbxMouseScroll.Value
+  $hModPlayers.Save()
+  $hModScorecard.Save()
+  $hModDice.Save()
+  $hModColors.Save()
 
   Me.Close(True)
 
@@ -24,85 +56,5 @@ End
 Public Sub btnCancel_Click()
 
   Me.Close
-
-End
-
-Public Sub Form_Open()
-
-  lbxPlayers.List = MSettings.PlayerNames
-  cbxShowHints.Value = MSettings.ShowHints
-  cbxShowMaxCol.Value = MSettings.ShowMaxCol
-  cbxShowTopCol.Value = MSettings.ShowTopCol
-  cbxShowSymbols.Value = MSettings.ShowSymbols
-  cbxMouseScroll.Value = MSettings.ReverseMouseScroll
-
-  If MSettings.PlayerNames.Count = 0 Then
-    Balloon.Warning(("Create at least one player."), tlbAdd)
-  Endif
-
-End
-
-Public Sub tlbRemove_Click()
-
-  Dim sMessage As String
-
-  If Not lbxPlayers.Text Then Return
-  sMessage = Subst(("Remove '&1'?"), lbxPlayers.Text)
-  Message.Title = ("Confirm")
-
-  If Message.Error(sMessage, ("Remove"), ("Cancel")) = 1 Then
-    lbxPlayers.Remove(lbxPlayers.Index)
-  Endif
-
-End
-
-Public Sub tlbRemoveAll_Click()
-
-  If lbxPlayers.Count = 0 Then Return
-  Message.Title = ("Confirm")
-
-  If Message.Error(("Remove all players?"), ("Remove All"), ("Cancel")) = 1 Then
-    lbxPlayers.Clear
-  Endif
-
-End
-
-Public Sub tlbAdd_Click()
-
-  Dim hForm As New FPlayersEdit
-  Dim sName As String
-
-  sName = hForm.Run()
-  If Not sName Then Return
-
-  If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
-    lbxPlayers.Add(sName)
-  Else
-    Balloon.Warning(("Player already exists."), Last)
-  Endif
-
-End
-
-Public Sub tlbEdit_Click()
-
-  Dim hForm As New FPlayersEdit
-  Dim sName As String
-
-  If Not lbxPlayers.Text Then Return
-  sName = hForm.Run(lbxPlayers.Text)
-  If Not sName Or lbxPlayers.Text == sName Then Return
-
-  If lbxPlayers.Find(sName, gb.IgnoreCase) = -1 Then
-    lbxPlayers.Remove(lbxPlayers.Index)
-    lbxPlayers.Add(sName)
-  Else
-    Balloon.Warning(("Player already exists."), Last)
-  Endif
-
-End
-
-Public Sub lbxPlayers_DblClick()
-
-  tlbEdit_Click()
 
 End

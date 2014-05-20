@@ -1,0 +1,40 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,78,42)
+  Arrangement = Arrange.Vertical
+  { Panel2 Panel
+    MoveScaled(0,0,42,6)
+    Arrangement = Arrange.Horizontal
+    { tlbAdd ToolButton
+      MoveScaled(2,1,4,4)
+      NoTabFocus = True
+      AutoResize = True
+      Picture = Picture["images/list-add-user.png"]
+    }
+    { tlbEdit ToolButton
+      MoveScaled(8,1,4,4)
+      NoTabFocus = True
+      AutoResize = True
+      Picture = Picture["images/user-properties.png"]
+    }
+    { tlbRemove ToolButton
+      MoveScaled(15,1,4,4)
+      NoTabFocus = True
+      AutoResize = True
+      Picture = Picture["images/list-remove-user.png"]
+    }
+    { tlbRemoveAll ToolButton
+      MoveScaled(21,1,4,4)
+      NoTabFocus = True
+      AutoResize = True
+      Picture = Picture["images/user-group-delete.png"]
+    }
+  }
+  { lbxPlayers ListBox
+    MoveScaled(0,7,16,16)
+    Font = Font["+2"]
+    Expand = True
+    Sorted = True
+  }
+}

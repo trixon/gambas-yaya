@@ -1,0 +1,44 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,89,50)
+  Expand = True
+  Arrangement = Arrange.Vertical
+  { VBox1 VBox
+    MoveScaled(0,0,76,40)
+    Foreground = &HFFFF00&
+    AutoResize = True
+    { Label1 Label
+      MoveScaled(0,0,24,4)
+      Font = Font["Bold"]
+      Text = ("Scorecard")
+    }
+    { cbxShowHints CheckBox
+      MoveScaled(0,5,24,4)
+      Text = ("Show suggestions")
+    }
+    { cbxShowMaxCol CheckBox
+      MoveScaled(0,10,24,4)
+      Text = ("Show Max column")
+    }
+    { cbxShowTopCol CheckBox
+      MoveScaled(0,15,24,4)
+      Text = ("Show Top column")
+    }
+    { cbxShowSymbols CheckBox
+      MoveScaled(0,19,24,4)
+      Text = ("Symbols")
+    }
+    { Label26 Label
+      MoveScaled(1,23,20,4)
+      Text = ("Font")
+    }
+    { txtEditorFont ButtonBox
+      MoveScaled(2,28,44,4)
+      Foreground = &H000000&
+      Expand = True
+      Picture = Picture["icon:/small/font"]
+      ReadOnly = True
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,75,41)
+  Arrangement = Arrange.Vertical
+  { VBox2 VBox
+    MoveScaled(0,0,42,9)
+    Foreground = &HFFFF00&
+    { Label2 Label
+      MoveScaled(1,0,24,4)
+      Font = Font["Bold"]
+      Text = ("Dice")
+    }
+    { cbxMouseScroll CheckBox
+      MoveScaled(0,3,24,4)
+      Text = ("Reverse mouse scroll")
+    }
+  }
+}
