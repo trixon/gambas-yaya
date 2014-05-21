@@ -7,4 +7,10 @@
     MoveScaled(39,12,8,4)
     Foreground = &H00FFFF&
   }
+  { Label1 Label
+    MoveScaled(12,6,24,4)
+    Background = &H5FFFD7&
+    Foreground = &HFF3F6F&
+    Text = ("Label1")
+  }
 }

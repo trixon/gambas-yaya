@@ -1,0 +1,82 @@
+' Gambas class file
+
+Public ColorNames As String[] = [("Header"), ("Name"), ("Sum"), ("Row"), ("Indicator, high"), ("Indicator, low")]
+Private $aColorBgButton As New ColorButton[ColorNames.Length]
+Private $aColorFgButton As New ColorButton[ColorNames.Length]
+Private $aLabel As New Label[ColorNames.Length]
+Private $aColorBg As Integer[] = [MColor.HeaderBg, MColor.NameBg, MColor.SumBg, MColor.CellBg, MColor.IndicatorHiBg, MColor.IndicatorLoBg]
+Private $aColorFg As Integer[] = [MColor.HeaderFg, MColor.NameFg, MColor.SumFg, MColor.CellFg, MColor.IndicatorHiFg, MColor.IndicatorLoFg]
+
+Static Public Sub _init()
+
+  MColor.Load()
+
+End
+
+Public Sub _new()
+
+  Dim i As Integer
+  Dim hColorButton As ColorButton
+  Dim hHBox As HBox
+  Dim hLabel As Label
+
+  For i = 0 To ColorNames.Max
+    hHBox = New HBox(svwTheme)
+    hHBox.Tag = i
+    hHBox.Height = 4 * Desktop.Scale
+    hHBox.Spacing = 4
+
+    hColorButton = New ColorButton(hHBox) As "btnColorBg"
+    hColorButton.Width = Desktop.Scale * 6
+    hColorButton.Tag = i
+    hColorButton.Color = $aColorBg[i]
+    $aColorBgButton[i] = hColorButton
+
+    hColorButton = New ColorButton(hHBox) As "btnColorFg"
+    hColorButton.Width = Desktop.Scale * 6
+    hColorButton.Tag = i
+    hColorButton.Color = $aColorFg[i]
+    $aColorFgButton[i] = hColorButton
+
+    hLabel = New Label(hHBox)
+    hLabel.Padding = 4
+    hLabel.Expand = True
+    hLabel.Text = ColorNames[i]
+    hLabel.Background = $aColorBg[i]
+    hLabel.Foreground = $aColorFg[i]
+    $aLabel[i] = hLabel
+  Next
+
+End
+
+Public Sub btnColorBg_Change()
+
+  $aLabel[Last.Tag].Background = Last.Color
+
+End
+
+Public Sub btnColorFg_Change()
+
+  $aLabel[Last.Tag].Foreground = Last.Color
+
+End
+
+Public Sub Save()
+
+  MColor.HeaderBg = $aColorBg[0]
+  MColor.NameBg = $aColorBg[1]
+  MColor.SumBg = $aColorBg[2]
+  MColor.CellBg = $aColorBg[3]
+  MColor.IndicatorHiBg = $aColorBg[4]
+  MColor.IndicatorLoBg = $aColorBg[5]
+
+  MColor.HeaderFg = $aColorFg[0]
+  MColor.NameFg = $aColorFg[1]
+  MColor.SumFg = $aColorFg[2]
+  MColor.CellFg = $aColorFg[3]
+  MColor.IndicatorHiFg = $aColorFg[4]
+  MColor.IndicatorLoFg = $aColorFg[5]
+
+  MColor.Save()
+
+End

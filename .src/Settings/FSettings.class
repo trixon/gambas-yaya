@@ -3,7 +3,7 @@
 Private $hModPlayers As FModPlayers
 Private $hModScorecard As FModScorecard
 Private $hModDice As FModDice
-Private $hModColors As FModColorGambas
+Private $hModColors As FModColor
 Private Enum Players, Scorecard, Dice, Colors
 
 Public Sub _new()
@@ -31,8 +31,9 @@ Public Sub _new()
   $hModPlayers = New FModPlayers(ipnModules[Players])
   $hModScorecard = New FModScorecard(ipnModules[Scorecard])
   $hModDice = New FModDice(ipnModules[Dice])
-  $hModColors = New FModColorGambas(ipnModules[Colors])
+  $hModColors = New FModColor(ipnModules[Colors])
   ipnModules.Index = Players
+  ipnModules.Index = Colors
 
 End
 
