@@ -36,6 +36,7 @@ End
 
 Public Sub Form_Open()
 
+  MColor.Load()
   Settings.Read(Me)
   Me.FullScreen = MSettings.FullScreen
   mnuFullScreen.Checked = Me.FullScreen

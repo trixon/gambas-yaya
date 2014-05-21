@@ -3,4 +3,8 @@
 { Form Form
   MoveScaled(0,0,67,33)
   Picture = Picture["dice-images/board/default.jpg"]
+  { ColorButton1 ColorButton
+    MoveScaled(39,12,8,4)
+    Foreground = &H00FFFF&
+  }
 }

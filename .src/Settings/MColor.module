@@ -1,0 +1,251 @@
+' Gambas module file
+
+Property CellBg As Integer
+Property CellFg As Integer
+Property HeaderBg As Integer
+Property HeaderFg As Integer
+Property HintHiBg As Integer
+Property HintHiFg As Integer
+Property HintLoBg As Integer
+Property HintLoFg As Integer
+Property Mask As Integer
+Property NameBg As Integer
+Property NameFg As Integer
+Property SumBg As Integer
+Property SumFg As Integer
+
+Public Const DEFAULT_CELL_BG As Integer = &HFFFF9F
+Public Const DEFAULT_CELL_FG As Integer = &H555555
+Public Const DEFAULT_HEADER_BG As Integer = &HFFC71F
+Public Const DEFAULT_HEADER_FG As Integer = &H000000
+Public Const DEFAULT_HINTHI_BG As Integer = &H00FF00
+Public Const DEFAULT_HINTHI_FG As Integer = &HFFFFFF
+Public Const DEFAULT_HINTLO_BG As Integer = &HFF0000
+Public Const DEFAULT_HINTLO_FG As Integer = &HFFFFFF
+Public Const DEFAULT_MASK As Integer = &HBBBBBB
+Public Const DEFAULT_NAME_BG As Integer = &H444444
+Public Const DEFAULT_NAME_FG As Integer = &H888888
+Public Const DEFAULT_SUM_BG As Integer = &HFFFF00
+Public Const DEFAULT_SUM_FG As Integer = &H000000
+
+Private $iCellBg As Integer
+Private $iCellFg As Integer
+Private $iHeaderBg As Integer
+Private $iHeaderFg As Integer
+Private $iHintHiBg As Integer
+Private $iHintHiFg As Integer
+Private $iHintLoBg As Integer
+Private $iHintLoFg As Integer
+Private $iMask As Integer
+Private $iNameBg As Integer
+Private $iNameFg As Integer
+Private $iSumBg As Integer
+Private $iSumFg As Integer
+
+Private Const KEY_CELL_BG As String = "Colors/CellBg"
+Private Const KEY_CELL_FG As String = "Colors/CellFg"
+Private Const KEY_HEADER_BG As String = "Colors/HeaderBg"
+Private Const KEY_HEADER_FG As String = "Colors/HeaderFg"
+Private Const KEY_HINTHI_BG As String = "Colors/HintHiBg"
+Private Const KEY_HINTHI_FG As String = "Colors/HintHiFg"
+Private Const KEY_HINTLO_BG As String = "Colors/HintLoBg"
+Private Const KEY_HINTLO_FG As String = "Colors/HintLoFg"
+Private Const KEY_MASK As String = "Colors/Mask"
+Private Const KEY_NAME_BG As String = "Colors/NameBg"
+Private Const KEY_NAME_FG As String = "Colors/NameFg"
+Private Const KEY_SUM_BG As String = "Colors/SumBg"
+Private Const KEY_SUM_FG As String = "Colors/SumFg"
+
+Public Sub Load()
+
+  $iCellBg = Settings[KEY_CELL_BG, DEFAULT_CELL_BG]
+  $iCellFg = Settings[KEY_CELL_FG, DEFAULT_CELL_FG]
+  $iHeaderBg = Settings[KEY_HEADER_BG, DEFAULT_HEADER_BG]
+  $iHeaderFg = Settings[KEY_HEADER_FG, DEFAULT_HEADER_FG]
+  $iHintHiBg = Settings[KEY_HINTHI_BG, DEFAULT_HINTHI_BG]
+  $iHintHiFg = Settings[KEY_HINTHI_FG, DEFAULT_HINTHI_FG]
+  $iHintLoBg = Settings[KEY_HINTLO_BG, DEFAULT_HINTLO_BG]
+  $iHintLoFg = Settings[KEY_HINTLO_FG, DEFAULT_HINTLO_FG]
+  $iMask = Settings[KEY_MASK, DEFAULT_MASK]
+  $iNameBg = Settings[KEY_NAME_BG, DEFAULT_NAME_BG]
+  $iNameFg = Settings[KEY_NAME_FG, DEFAULT_NAME_FG]
+  $iSumBg = Settings[KEY_NAME_BG, DEFAULT_SUM_BG]
+  $iSumFg = Settings[KEY_NAME_FG, DEFAULT_SUM_FG]
+
+End
+
+Public Sub Save()
+
+  Settings[KEY_CELL_BG] = $iCellBg
+  Settings[KEY_CELL_FG] = $iCellFg
+  Settings[KEY_HEADER_BG] = $iHeaderBg
+  Settings[KEY_HEADER_FG] = $iHeaderFg
+  Settings[KEY_HINTHI_BG] = $iHintHiBg
+  Settings[KEY_HINTHI_FG] = $iHintHiFg
+  Settings[KEY_HINTLO_BG] = $iHintLoBg
+  Settings[KEY_HINTLO_FG] = $iHintLoFg
+  Settings[KEY_MASK] = $iMask
+  Settings[KEY_NAME_BG] = $iNameBg
+  Settings[KEY_NAME_FG] = $iNameFg
+  Settings[KEY_SUM_BG] = $iSumBg
+  Settings[KEY_SUM_FG] = $iSumFg
+
+  Settings.Save()
+
+End
+
+Private Function HeaderBg_Read() As Integer
+
+  Return $iHeaderBg
+
+End
+
+Private Sub HeaderBg_Write(Value As Integer)
+
+  $iHeaderBg = Value
+
+End
+
+Private Function HeaderFg_Read() As Integer
+
+  Return $iHeaderFg
+
+End
+
+Private Sub HeaderFg_Write(Value As Integer)
+
+  $iHeaderFg = Value
+
+End
+
+Private Function NameBg_Read() As Integer
+
+  Return $iNameBg
+
+End
+
+Private Sub NameBg_Write(Value As Integer)
+
+  $iNameBg = Value
+
+End
+
+Private Function NameFg_Read() As Integer
+
+  Return $iNameFg
+
+End
+
+Private Sub NameFg_Write(Value As Integer)
+
+  $iNameFg = Value
+
+End
+
+Private Function SumBg_Read() As Integer
+
+  Return $iSumBg
+
+End
+
+Private Sub SumBg_Write(Value As Integer)
+
+  $iSumBg = Value
+
+End
+
+Private Function SumFg_Read() As Integer
+
+  Return $iSumFg
+
+End
+
+Private Sub SumFg_Write(Value As Integer)
+
+  $iSumFg = Value
+
+End
+
+Private Function CellBg_Read() As Integer
+
+  Return $iCellBg
+
+End
+
+Private Sub CellBg_Write(Value As Integer)
+
+  $iCellBg = Value
+
+End
+
+Private Function CellFg_Read() As Integer
+
+  Return $iCellFg
+
+End
+
+Private Sub CellFg_Write(Value As Integer)
+
+  $iCellBg = Value
+
+End
+
+Private Function HintHiBg_Read() As Integer
+
+  Return $iHintHiBg
+
+End
+
+Private Sub HintHiBg_Write(Value As Integer)
+
+  $iHintHiBg = Value
+
+End
+
+Private Function HintHiFg_Read() As Integer
+
+  Return $iHintHiFg
+
+End
+
+Private Sub HintHiFg_Write(Value As Integer)
+
+  $iHintHiFg = Value
+
+End
+
+Private Function HintLoBg_Read() As Integer
+
+  Return $iHintLoBg
+
+End
+
+Private Sub HintLoBg_Write(Value As Integer)
+
+  $iHintLoBg = Value
+
+End
+
+Private Function HintLoFg_Read() As Integer
+
+  Return $iHintLoFg
+
+End
+
+Private Sub HintLoFg_Write(Value As Integer)
+
+  $iHintLoFg = Value
+
+End
+
+Private Function Mask_Read() As Integer
+
+  Return $iMask
+
+End
+
+Private Sub Mask_Write(Value As Integer)
+
+  $iMask = Value
+
+End
