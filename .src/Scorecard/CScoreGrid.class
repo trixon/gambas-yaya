@@ -1,12 +1,16 @@
 ' Gambas class file
 
 Inherits GridView
+Property MaxCol As Boolean
+Property TopCol As Boolean
+
 Private Const ALPHA As Integer = &H44000000
 Private Const ROW_HEIGHT_MARGIN As Integer = 6
 Private Const COL_WIDTH_MARGIN As Integer = 32
 Private Const COL_WIDTH_TEXT As Integer = 128
-Private Const COL_WIDTH_MAXTOP As Integer = 48
 Private Const COL_WIDTH_PLAYERS As Integer = 96
+Private $bMaxCol As Boolean
+Private $bTopCol As Boolean
 Private $hGameDef As CGameDef
 
 Public Sub _new(hGameDef As CGameDef)
@@ -24,7 +28,7 @@ Public Sub _new(hGameDef As CGameDef)
     .Columns.Width = COL_WIDTH_PLAYERS
     .Border = Border.None
     .Background = MSettings.GetBackground(MSettings.Score)
-    .Background = &DD000000 '&FF000000
+    .Background = &DD000000
     .Foreground = MSettings.GetForeground(MSettings.Score)
     .AutoResize = False
     .ScrollBar = Scroll.None
@@ -125,26 +129,6 @@ Private Sub InitHeaderRow()
 
 End
 
-Public Sub ShowTopCol(Value As Boolean)
-
-  If Value Then
-    Me.Columns[2].Width = COL_WIDTH_MAXTOP
-  Else
-    Me.Columns[2].Width = 0
-  Endif
-
-End
-
-Public Sub ShowMaxCol(Value As Boolean)
-
-  If Value Then
-    Me.Columns[1].Width = COL_WIDTH_MAXTOP
-  Else
-    Me.Columns[1].Width = 0
-  Endif
-
-End
-
 Public Sub ShowTextAsSymbols(Value As Boolean)
 
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
@@ -199,24 +183,39 @@ Public Sub RecalcWidth()
         sText = Me[iRow, iCol].Text
         iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
       Next
-    Else If iCol = 1 Or iCol = 2
-      'Second and third column, max and top values.
-      sText = "8888"
-      iColumnWidth = hFont.TextWidth(sText)
+    Else If iCol = 1
+      'Second column, max values.
+      If $bMaxCol Then
+        sText = "8888"
+        'iColumnWidth = hFont.TextWidth(sText)
+        iColumnWidth = 0
+        For iRow = 0 To iMaxRow
+          hFont = Me[iRow, iCol].Font
+          iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
+        Next
+      Else
+        iColumnWidth = - COL_WIDTH_MARGIN
+      Endif
+    Else If iCol = 2
+      'Third column, top values.
+      If $bTopCol Then
+        sText = "8888"
+        iColumnWidth = 0
+        For iRow = 0 To iMaxRow
+          hFont = Me[iRow, iCol].Font
+          iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
+        Next
+      Else
+        iColumnWidth = - COL_WIDTH_MARGIN
+      Endif
     Else
       'Remaining columns, player names, scores, and sums.
       iColumnWidth = 0
       For iRow = 0 To iMaxRow
         hFont = Me[iRow, iCol].Font
 
-        If iRow > $hGameDef.Rows.Length - 1 Then
-          hGameRow = New CGameRow
-        Else
-          hGameRow = $hGameDef.Rows[iRow]
-        Endif
-
         If iRow = 0 Then
-          sText = "WWWWWWWWW"
+          sText = "WWWWWWW"
         Else
           sText = "8888"
         Endif
@@ -241,7 +240,6 @@ Public Sub ApplyLayout()
   Dim hGameRow As CGameRow
   Dim iFontHeight As Integer
 
-  '   Me.Font = Font[MSettings.Font]
   For iCol = 0 To iMaxCol
     For iRow = 0 To iMaxRow
       InitCell(iRow, iCol)
@@ -281,5 +279,29 @@ Public Sub HoverRow(iRow As Integer)
     '     hCell.Background = Color.Green
 
   Next
+
+End
+
+Private Function MaxCol_Read() As Boolean
+
+  Return $bMaxCol
+
+End
+
+Private Sub MaxCol_Write(Value As Boolean)
+
+  $bMaxCol = Value
+
+End
+
+Private Function TopCol_Read() As Boolean
+
+  Return $bTopCol
+
+End
+
+Private Sub TopCol_Write(Value As Boolean)
+
+  $bTopCol = Value
 
 End

@@ -17,11 +17,10 @@ Public Sub _new()
       .Tag = i
       .Height = 4 * Desktop.Scale
       .Spacing = 4
-      '      .Expand = True
       .AutoResize = True
     End With
 
-    hLabel = New Label(hHBox)
+    hLabel = New Label(hHBox) As "lblDefine"
     With hLabel
       .AutoResize = True
       .Padding = 4
@@ -36,10 +35,7 @@ Public Sub _new()
     hButton = New Button(hHBox) As "btnDefine"
     With hButton
       .Width = Desktop.Scale * 12
-      '       .Height = Desktop.Scale * 3
-      .Tag = i
       .Text = ("Set...")
-      '     hButton.Color = MSettings.GetBackground(i)
     End With
     $aDefineButtons[i] = hButton
   Next
@@ -77,7 +73,14 @@ End
 
 Public Sub btnDefine_Click()
 
-  $iIndex = Last.Tag
+  $iIndex = Last.Parent.Tag
+  mnuPopup.Popup()
+
+End
+
+Public Sub lblDefine_MouseDown()
+
+  $iIndex = Last.Parent.Tag
   mnuPopup.Popup()
 
 End
