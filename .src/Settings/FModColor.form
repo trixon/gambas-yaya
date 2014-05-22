@@ -2,53 +2,19 @@
 
 { Form Form
   MoveScaled(0,0,69,51)
+  Expand = True
   Arrangement = Arrange.Vertical
   { Label27 Label
     MoveScaled(7,1,63,3)
     Font = Font["Bold"]
     Text = ("Colors")
   }
-  { HBox2 HBox
-    MoveScaled(1,3,65,4)
-    Visible = False
-    AutoResize = True
-    Indent = True
-    { Label54 Label
-      MoveScaled(0,0,18,4)
-      Expand = True
-      Text = ("Theme")
-    }
-    { cmbTheme ComboBox
-      MoveScaled(20,0,32,4)
-      ReadOnly = True
-    }
-    { Panel3 Panel
-      MoveScaled(52,0,1,4)
-    }
-    { btnImport ToolButton
-      MoveScaled(53,0,4,4)
-      ToolTip = ("Import theme")
-      Picture = Picture["icon:/small/open"]
-    }
-    { btnExport ToolButton
-      MoveScaled(57,0,4,4)
-      ToolTip = ("Export theme")
-      Picture = Picture["icon:/small/save"]
-    }
-    { btnUndo ToolButton
-      MoveScaled(61,0,4,4)
-      ToolTip = ("Undo")
-      Picture = Picture["icon:/small/undo"]
-    }
-  }
   { svwTheme ScrollView
-    MoveScaled(0,8,64,38)
-    Foreground = Color.TextForeground
+    MoveScaled(0,8,65,13)
     Expand = True
     Arrangement = Arrange.Vertical
     Spacing = True
     Margin = True
     Padding = 4
-    ScrollBar = Scroll.Vertical
   }
 }

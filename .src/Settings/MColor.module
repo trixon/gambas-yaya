@@ -1,19 +1,5 @@
 ' Gambas module file
 
-Property CellBg As Integer
-Property CellFg As Integer
-Property HeaderBg As Integer
-Property HeaderFg As Integer
-Property IndicatorHiBg As Integer
-Property IndicatorHiFg As Integer
-Property IndicatorLoBg As Integer
-Property IndicatorLoFg As Integer
-Property Mask As Integer
-Property NameBg As Integer
-Property NameFg As Integer
-Property SumBg As Integer
-Property SumFg As Integer
-Public Enum Cell, Header, IndicatorHi, IndicatorLo, Mask2, Name, Sum
 Public Const DEFAULT_CELL_BG As Integer = &HFFFF9F
 Public Const DEFAULT_CELL_FG As Integer = &H555555
 Public Const DEFAULT_HEADER_BG As Integer = &HFFC71F
@@ -28,244 +14,84 @@ Public Const DEFAULT_NAME_FG As Integer = &HFFC71F
 Public Const DEFAULT_SUM_BG As Integer = &HFFFF00
 Public Const DEFAULT_SUM_FG As Integer = &H000000
 
-Private $aColorBg As Integer[] = [DEFAULT_CELL_BG, DEFAULT_HEADER_BG, DEFAULT_INDICATOR_HI_BG, DEFAULT_INDICATOR_LO_BG, DEFAULT_MASK, DEFAULT_NAME_BG, DEFAULT_SUM_BG]
+Public ColorNames As String[] = [("Header column"), ("Header row"), ("Sum"), ("Row"), ("Indicator, high"), ("Indicator, low")]
 
-Private $iCellBg As Integer
-Private $iCellFg As Integer
-Private $iHeaderBg As Integer
-Private $iHeaderFg As Integer
-Private $iIndicatorHiBg As Integer
-Private $iIndicatorHiFg As Integer
-Private $iIndicatorLoBg As Integer
-Private $iIndicatorLoFg As Integer
-Private $iMask As Integer
-Private $iNameBg As Integer
-Private $iNameFg As Integer
-Private $iSumBg As Integer
-Private $iSumFg As Integer
+Public Enum Header, Name, Sum, Cell, IndicatorHi, IndicatorLo, Mask
 
-Private Const KEY_CELL_BG As String = "Colors/CellBg"
-Private Const KEY_CELL_FG As String = "Colors/CellFg"
-Private Const KEY_HEADER_BG As String = "Colors/HeaderBg"
-Private Const KEY_HEADER_FG As String = "Colors/HeaderFg"
-Private Const KEY_INDICATOR_HI_BG As String = "Colors/IndicatorHiBg"
-Private Const KEY_INDICATOR_HI_FG As String = "Colors/IndicatorHiFg"
-Private Const KEY_INDICATOR_LO_BG As String = "Colors/IndicatorLoBg"
-Private Const KEY_INDICATOR_LO_FG As String = "Colors/IndicatorLoFg"
-Private Const KEY_MASK As String = "Colors/Mask"
-Private Const KEY_NAME_BG As String = "Colors/NameBg"
-Private Const KEY_NAME_FG As String = "Colors/NameFg"
-Private Const KEY_SUM_BG As String = "Colors/SumBg"
-Private Const KEY_SUM_FG As String = "Colors/SumFg"
+Private Const KEY_BACKGROUND As String = "Colors/Background_"
+Private Const KEY_FOREGROUND As String = "Colors/Foreground_"
 
-Public Function Background(Item As Integer) As Integer
+Private $aBackgroundDefaults As Integer[] =
+  [DEFAULT_HEADER_BG,
+  DEFAULT_NAME_BG,
+  DEFAULT_SUM_BG,
+  DEFAULT_CELL_BG,
+  DEFAULT_INDICATOR_HI_BG,
+  DEFAULT_INDICATOR_LO_BG,
+  DEFAULT_MASK]
+Private $aForegroundDefaults As Integer[] =
+  [DEFAULT_HEADER_FG,
+  DEFAULT_NAME_FG,
+  DEFAULT_SUM_FG,
+  DEFAULT_CELL_FG,
+  DEFAULT_INDICATOR_HI_FG,
+  DEFAULT_INDICATOR_LO_FG,
+  DEFAULT_MASK]
+Private $aBackground As New Integer[$aBackgroundDefaults.Length]
+Private $aForeground As New Integer[$aForegroundDefaults.Length]
 
-  Return 0
+Public Function GetBackground(Index As Integer) As Integer
+
+  Return $aBackground[Index]
+
+End
+
+Public Sub SetBackground(Index As Integer, Color As Integer)
+
+  $aBackground[Index] = Color
+
+End
+
+Public Function GetForeground(Index As Integer) As Integer
+
+  Return $aForeground[Index]
+
+End
+
+Public Sub SetForeground(Index As Integer, Color As Integer)
+
+  $aForeground[Index] = Color
 
 End
 
 Public Sub Load()
 
-  $iCellBg = Settings[KEY_CELL_BG, DEFAULT_CELL_BG]
-  $iCellFg = Settings[KEY_CELL_FG, DEFAULT_CELL_FG]
+  Dim i As Integer
 
-  $iHeaderBg = Settings[KEY_HEADER_BG, DEFAULT_HEADER_BG]
-  $iHeaderFg = Settings[KEY_HEADER_FG, DEFAULT_HEADER_FG]
+  For i = 0 To $aBackground.Max
+    $aBackground[i] = Settings[KEY_BACKGROUND & i, $aBackgroundDefaults[i]]
+  Next
 
-  $iIndicatorHiBg = Settings[KEY_INDICATOR_HI_BG, DEFAULT_INDICATOR_HI_BG]
-  $iIndicatorHiFg = Settings[KEY_INDICATOR_HI_FG, DEFAULT_INDICATOR_HI_FG]
-
-  $iIndicatorLoBg = Settings[KEY_INDICATOR_LO_BG, DEFAULT_INDICATOR_LO_BG]
-  $iIndicatorLoFg = Settings[KEY_INDICATOR_LO_FG, DEFAULT_INDICATOR_LO_FG]
-
-  $iMask = Settings[KEY_MASK, DEFAULT_MASK]
-
-  $iNameBg = Settings[KEY_NAME_BG, DEFAULT_NAME_BG]
-  $iNameFg = Settings[KEY_NAME_FG, DEFAULT_NAME_FG]
-
-  $iSumBg = Settings[KEY_SUM_BG, DEFAULT_SUM_BG]
-  $iSumFg = Settings[KEY_SUM_FG, DEFAULT_SUM_FG]
+  For i = 0 To $aForeground.Max
+    $aForeground[i] = Settings[KEY_FOREGROUND & i, $aForegroundDefaults[i]]
+  Next
 
 End
 
 Public Sub Save()
 
-  Settings[KEY_CELL_BG] = $iCellBg
-  Settings[KEY_CELL_FG] = $iCellFg
+  Dim i As Integer
 
-  Settings[KEY_HEADER_BG] = $iHeaderBg
-  Settings[KEY_HEADER_FG] = $iHeaderFg
+  Settings.Reload()
 
-  Settings[KEY_INDICATOR_HI_BG] = $iIndicatorHiBg
-  Settings[KEY_INDICATOR_HI_FG] = $iIndicatorHiFg
+  For i = 0 To $aBackground.Max
+    Settings[KEY_BACKGROUND & i] = $aBackground[i]
+  Next
 
-  Settings[KEY_INDICATOR_LO_BG] = $iIndicatorLoBg
-  Settings[KEY_INDICATOR_LO_FG] = $iIndicatorLoFg
-
-  Settings[KEY_MASK] = $iMask
-
-  Settings[KEY_NAME_BG] = $iNameBg
-  Settings[KEY_NAME_FG] = $iNameFg
-
-  Settings[KEY_SUM_BG] = $iSumBg
-  Settings[KEY_SUM_FG] = $iSumFg
+  For i = 0 To $aForeground.Max
+    Settings[KEY_FOREGROUND & i] = $aForeground[i]
+  Next
 
   Settings.Save()
-
-End
-
-Private Function HeaderBg_Read() As Integer
-
-  Return $iHeaderBg
-
-End
-
-Private Sub HeaderBg_Write(Value As Integer)
-
-  $iHeaderBg = Value
-
-End
-
-Private Function HeaderFg_Read() As Integer
-
-  Return $iHeaderFg
-
-End
-
-Private Sub HeaderFg_Write(Value As Integer)
-
-  $iHeaderFg = Value
-
-End
-
-Private Function NameBg_Read() As Integer
-
-  Return $iNameBg
-
-End
-
-Private Sub NameBg_Write(Value As Integer)
-
-  $iNameBg = Value
-
-End
-
-Private Function NameFg_Read() As Integer
-
-  Return $iNameFg
-
-End
-
-Private Sub NameFg_Write(Value As Integer)
-
-  $iNameFg = Value
-
-End
-
-Private Function SumBg_Read() As Integer
-
-  Return $iSumBg
-
-End
-
-Private Sub SumBg_Write(Value As Integer)
-
-  $iSumBg = Value
-
-End
-
-Private Function SumFg_Read() As Integer
-
-  Return $iSumFg
-
-End
-
-Private Sub SumFg_Write(Value As Integer)
-
-  $iSumFg = Value
-
-End
-
-Private Function CellBg_Read() As Integer
-
-  Return $iCellBg
-
-End
-
-Private Sub CellBg_Write(Value As Integer)
-
-  $iCellBg = Value
-
-End
-
-Private Function CellFg_Read() As Integer
-
-  Return $iCellFg
-
-End
-
-Private Sub CellFg_Write(Value As Integer)
-
-  $iCellBg = Value
-
-End
-
-Private Function IndicatorHiBg_Read() As Integer
-
-  Return $iIndicatorHiBg
-
-End
-
-Private Sub IndicatorHiBg_Write(Value As Integer)
-
-  $iIndicatorHiBg = Value
-
-End
-
-Private Function IndicatorHiFg_Read() As Integer
-
-  Return $iIndicatorHiFg
-
-End
-
-Private Sub IndicatorHiFg_Write(Value As Integer)
-
-  $iIndicatorHiFg = Value
-
-End
-
-Private Function IndicatorLoBg_Read() As Integer
-
-  Return $iIndicatorLoBg
-
-End
-
-Private Sub IndicatorLoBg_Write(Value As Integer)
-
-  $iIndicatorLoBg = Value
-
-End
-
-Private Function IndicatorLoFg_Read() As Integer
-
-  Return $iIndicatorLoFg
-
-End
-
-Private Sub IndicatorLoFg_Write(Value As Integer)
-
-  $iIndicatorLoFg = Value
-
-End
-
-Private Function Mask_Read() As Integer
-
-  Return $iMask
-
-End
-
-Private Sub Mask_Write(Value As Integer)
-
-  $iMask = Value
 
 End

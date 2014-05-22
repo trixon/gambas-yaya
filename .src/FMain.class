@@ -41,7 +41,7 @@ Public Sub Form_Open()
   Me.FullScreen = MSettings.FullScreen
   mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
-  $hGamePanel.NewGame()
+  NewGame()
 
 End
 
@@ -65,6 +65,8 @@ Public Sub Form_KeyPress()
     Undo()
   Else If Key.Code = Key["F11"]
     FullScreenToggle()
+  Else If Key.Code = Key["S"]
+    SettingsDialog()
   Endif
 
 End

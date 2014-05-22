@@ -11,10 +11,12 @@ End
 
 Public Sub Save()
 
+  Settings.Reload()
   MSettings.ShowHints = cbxShowHints.Value
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
   MSettings.ShowTopCol = cbxShowTopCol.Value
   MSettings.ShowSymbols = cbxShowSymbols.Value
+  Settings.Save()
 
 End
 

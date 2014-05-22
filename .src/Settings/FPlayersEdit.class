@@ -40,7 +40,3 @@ Public Sub txtName_Change()
   Endif
 
 End
-
-Public Sub Form_Open()
-
-End

@@ -51,10 +51,14 @@ End
 
 Public Sub Settings()
 
-  $hGrid.ShowMaxCol(MSettings.ShowMaxCol)
-  $hGrid.ShowTopCol(MSettings.ShowTopCol)
-  $hGrid.RecalcWidth()
-  $hGrid.ShowTextAsSymbols(MSettings.ShowSymbols)
+  Settings.Reload()
+  If Not IsNull($hGrid) Then
+    $hGrid.ShowMaxCol(MSettings.ShowMaxCol)
+    $hGrid.ShowTopCol(MSettings.ShowTopCol)
+    $hGrid.RecalcWidth()
+    $hGrid.ShowTextAsSymbols(MSettings.ShowSymbols)
+    $hGrid.ApplyLayout()
+  Endif
 
 End
 

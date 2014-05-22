@@ -31,6 +31,7 @@
     { mnuSettings Menu
       Action = "settings"
       Text = ("Settings")
+      Shortcut = "S"
     }
     { Menu2 Menu
     }
@@ -72,7 +73,7 @@
   }
   { Action settings
     Text = "Settings"
-    Shortcut = ""
+    Shortcut = "S"
   }
   { Action undo
     Text = "Undo"

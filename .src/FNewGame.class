@@ -25,10 +25,12 @@ End
 
 Public Sub btnOK_Click()
 
+  Settings.Reload()
   MSettings.GameId = MGameLoader.IdByText(cmbGame.Text)
   MSettings.Variant = cmbVariant.Index
   MSettings.Players = spbPlayers.Value
   SavePlayerSelection()
+  Settings.Save()
   Me.Close(True)
 
 End

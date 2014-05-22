@@ -19,7 +19,7 @@
   }
   { Action settings
     Text = "Settings"
-    Shortcut = ""
+    Shortcut = "S"
   }
   { Action undo
     Text = "Undo"

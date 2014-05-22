@@ -1,11 +1,8 @@
 ' Gambas class file
 
-Public ColorNames As String[] = [("Header"), ("Name"), ("Sum"), ("Row"), ("Indicator, high"), ("Indicator, low")]
-Private $aColorBgButton As New ColorButton[ColorNames.Length]
-Private $aColorFgButton As New ColorButton[ColorNames.Length]
-Private $aLabel As New Label[ColorNames.Length]
-Private $aColorBg As Integer[] = [MColor.HeaderBg, MColor.NameBg, MColor.SumBg, MColor.CellBg, MColor.IndicatorHiBg, MColor.IndicatorLoBg]
-Private $aColorFg As Integer[] = [MColor.HeaderFg, MColor.NameFg, MColor.SumFg, MColor.CellFg, MColor.IndicatorHiFg, MColor.IndicatorLoFg]
+Private $aColorBgButton As New ColorButton[MColor.ColorNames.Length]
+Private $aColorFgButton As New ColorButton[MColor.ColorNames.Length]
+Private $aLabel As New Label[MColor.ColorNames.Length]
 
 Static Public Sub _init()
 
@@ -20,7 +17,7 @@ Public Sub _new()
   Dim hHBox As HBox
   Dim hLabel As Label
 
-  For i = 0 To ColorNames.Max
+  For i = 0 To MColor.ColorNames.Max
     hHBox = New HBox(svwTheme)
     hHBox.Tag = i
     hHBox.Height = 4 * Desktop.Scale
@@ -29,21 +26,21 @@ Public Sub _new()
     hColorButton = New ColorButton(hHBox) As "btnColorBg"
     hColorButton.Width = Desktop.Scale * 6
     hColorButton.Tag = i
-    hColorButton.Color = $aColorBg[i]
+    hColorButton.Color = MColor.GetBackground(i)
     $aColorBgButton[i] = hColorButton
 
     hColorButton = New ColorButton(hHBox) As "btnColorFg"
     hColorButton.Width = Desktop.Scale * 6
     hColorButton.Tag = i
-    hColorButton.Color = $aColorFg[i]
+    hColorButton.Color = MColor.GetForeground(i)
     $aColorFgButton[i] = hColorButton
 
     hLabel = New Label(hHBox)
     hLabel.Padding = 4
     hLabel.Expand = True
-    hLabel.Text = ColorNames[i]
-    hLabel.Background = $aColorBg[i]
-    hLabel.Foreground = $aColorFg[i]
+    hLabel.Text = MColor.ColorNames[i]
+    hLabel.Background = $aColorBgButton[i].Color
+    hLabel.Foreground = $aColorFgButton[i].Color
     $aLabel[i] = hLabel
   Next
 
@@ -63,19 +60,15 @@ End
 
 Public Sub Save()
 
-  MColor.HeaderBg = $aColorBg[0]
-  MColor.NameBg = $aColorBg[1]
-  MColor.SumBg = $aColorBg[2]
-  MColor.CellBg = $aColorBg[3]
-  MColor.IndicatorHiBg = $aColorBg[4]
-  MColor.IndicatorLoBg = $aColorBg[5]
+  Dim i As Integer
 
-  MColor.HeaderFg = $aColorFg[0]
-  MColor.NameFg = $aColorFg[1]
-  MColor.SumFg = $aColorFg[2]
-  MColor.CellFg = $aColorFg[3]
-  MColor.IndicatorHiFg = $aColorFg[4]
-  MColor.IndicatorLoFg = $aColorFg[5]
+  For i = 0 To $aColorBgButton.Max
+    MColor.SetBackground(i, $aColorBgButton[i].Color)
+  Next
+
+  For i = 0 To $aColorFgButton.Max
+    MColor.SetForeground(i, $aColorFgButton[i].Color)
+  Next
 
   MColor.Save()
 

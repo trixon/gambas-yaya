@@ -3,6 +3,7 @@
 { Form Form
   MoveScaled(0,0,111,55)
   Background = &HFF9F3F&
+  Expand = True
   Text = ("Settings")
   Picture = Picture["images/board.jpg"]
   Resizable = False

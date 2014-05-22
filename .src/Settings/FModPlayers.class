@@ -12,7 +12,9 @@ End
 
 Public Sub Save()
 
+  Settings.Reload()
   MSettings.PlayerNames = lbxPlayers.List
+  Settings.Save()
 
 End
 

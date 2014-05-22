@@ -33,7 +33,6 @@ End
 Private Sub Players_Write(Value As Integer)
 
   Settings[KEY_GAME_PLAYERS] = Value
-  Settings.Save
 
 End
 
@@ -47,7 +46,6 @@ Private Sub ReverseMouseScroll_Write(Value As Boolean)
 
   DicePanel.ReverseMouseScroll = Value
   Settings[KEY_REVERSE_MOUSE_SCROLL] = Value
-  Settings.Save
 
 End
 
@@ -60,7 +58,6 @@ End
 Private Sub GameId_Write(Value As String)
 
   Settings[KEY_GAME_ID] = Value
-  Settings.Save
 
 End
 
@@ -73,7 +70,6 @@ End
 Private Sub ShowHints_Write(Value As Boolean)
 
   Settings[KEY_SCORECARD_SHOW_HINTS] = Value
-  Settings.Save
 
 End
 
@@ -86,7 +82,6 @@ End
 Private Sub ShowMaxCol_Write(Value As Boolean)
 
   Settings[KEY_SCORECARD_SHOW_MAXCOL] = Value
-  Settings.Save
 
 End
 
@@ -99,7 +94,6 @@ End
 Private Sub ShowTopCol_Write(Value As Boolean)
 
   Settings[KEY_SCORECARD_SHOW_TOPCOL] = Value
-  Settings.Save
 
 End
 
@@ -149,7 +143,6 @@ Private Sub SaveStringArray(sKey As String, Value As String[])
   Next
 
   Settings[sKey] = String.Right(sNames, -1)
-  Settings.Save()
 
 End
 
@@ -162,7 +155,6 @@ End
 Private Sub Variant_Write(Value As Integer)
 
   Settings[KEY_GAME_VARIANT] = Value
-  Settings.Save
 
 End
 
@@ -175,7 +167,6 @@ End
 Private Sub ShowSymbols_Write(Value As Boolean)
 
   Settings[KEY_SCORECARD_SHOW_SYMBOLS] = Value
-  Settings.Save
 
 End
 
@@ -188,6 +179,5 @@ End
 Private Sub FullScreen_Write(Value As Boolean)
 
   Settings[KEY_FULL_SCREEN] = Value
-  Settings.Save
 
 End
