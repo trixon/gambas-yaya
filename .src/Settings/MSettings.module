@@ -121,8 +121,6 @@ Public Sub Load()
 
   Dim i As Integer
 
-  Debug
-
   For i = 0 To $aBackground.Max
     $aBackground[i] = Settings[KEY_BACKGROUND & i, $aBackgroundDefaults[i]]
   Next
@@ -141,7 +139,6 @@ Public Sub Save()
 
   Dim i As Integer
 
-  Debug
   'Settings.Reload()
 
   For i = 0 To $aBackground.Max

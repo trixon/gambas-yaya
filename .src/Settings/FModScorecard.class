@@ -59,7 +59,6 @@ Public Sub Save()
 
   Dim i As Integer
 
-  Debug
   '   Settings.Reload()
   MSettings.ShowHints = cbxShowHints.Value
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
@@ -67,7 +66,6 @@ Public Sub Save()
   MSettings.ShowSymbols = cbxShowSymbols.Value
 
   For i = 0 To MSettings.StyleNames.Max
-    Debug i
     MSettings.SetBackground(i, $aLabel[i].Background)
     MSettings.SetForeground(i, $aLabel[i].Foreground)
     MSettings.SetFont(i, $aLabel[i].Font)

@@ -207,23 +207,22 @@ Public Sub RecalcWidth()
       'Remaining columns, player names, scores, and sums.
       iColumnWidth = 0
       For iRow = 0 To iMaxRow
+        hFont = Me[iRow, iCol].Font
+
         If iRow > $hGameDef.Rows.Length - 1 Then
           hGameRow = New CGameRow
         Else
           hGameRow = $hGameDef.Rows[iRow]
         Endif
-        hFont = Me[iRow, iCol].Font
+
         If iRow = 0 Then
           sText = "WWWWWWWWW"
         Else
           sText = "8888"
         Endif
-        Debug sText, hFont.ToString()
-        '         sText = Me[iRow, iCol].Text
+
         iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
       Next
-      ' sText = "WWWWWWWWW"
-      ' iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
     Endif
     Me.Columns[iCol].Width = iColumnWidth + COL_WIDTH_MARGIN
   Next

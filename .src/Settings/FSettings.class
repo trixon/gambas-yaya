@@ -3,7 +3,6 @@
 Private $hModPlayers As FModPlayers
 Private $hModScorecard As FModScorecard
 Private $hModDice As FModDice
-' Private $hModColors As FModColor
 Private Enum Players, Scorecard, Dice, Colors
 
 Public Sub _new()
@@ -18,8 +17,6 @@ Public Sub _new()
   aModHeader.Add(hModHeader)
   hModHeader = New CModHeader(("Dice"), "images/dice.png", Dice)
   aModHeader.Add(hModHeader)
-  ' hModHeader = New CModHeader(("Colors"), "images/preferences-desktop-color.png", Colors)
-  ' aModHeader.Add(hModHeader)
 
   ipnModules.Count = aModHeader.Length
 
@@ -31,7 +28,6 @@ Public Sub _new()
   $hModPlayers = New FModPlayers(ipnModules[Players])
   $hModScorecard = New FModScorecard(ipnModules[Scorecard])
   $hModDice = New FModDice(ipnModules[Dice])
-  '   $hModColors = New FModColor(ipnModules[Colors])
 
   ipnModules.Index = Scorecard
 
@@ -48,7 +44,6 @@ Public Sub btnOK_Click()
   $hModPlayers.Save()
   $hModScorecard.Save()
   $hModDice.Save()
-  '   $hModColors.Save()
   MSettings.Save()
   Settings.Save()
 
