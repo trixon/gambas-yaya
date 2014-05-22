@@ -33,7 +33,6 @@ Public Sub _new()
   $hModDice = New FModDice(ipnModules[Dice])
   $hModColors = New FModColor(ipnModules[Colors])
   ipnModules.Index = Players
-  ipnModules.Index = Colors
 
 End
 

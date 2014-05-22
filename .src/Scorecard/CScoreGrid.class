@@ -21,8 +21,8 @@ Public Sub _new(hGameDef As CGameDef)
     .Rows.Count = iMaxRow + 1
     .Columns.Width = COL_WIDTH_PLAYERS
     .Border = Border.None
-    .Background = MColor.GetBackground(MColor.Cell)
-    .Foreground = MColor.GetForeground(MColor.Cell)
+    .Background = MSettings.GetBackground(MSettings.Cell)
+    .Foreground = MSettings.GetForeground(MSettings.Cell)
     .AutoResize = False
     .ScrollBar = Scroll.None
   End With
@@ -64,8 +64,8 @@ Private Sub InitCell(Row As Integer, Column As Integer)
   hCell.Alignment = Align.Right
   hCell.Font = Font["10"]
   If Column = 0 Then
-    hCell.Background = MColor.GetBackground(MColor.Header)
-    hCell.Foreground = MColor.GetForeground(MColor.Header)
+    hCell.Background = MSettings.GetBackground(MSettings.Header)
+    hCell.Foreground = MSettings.GetForeground(MSettings.Header)
     hCell.Alignment = Align.Left
   Else If Column = 1 Then
     If Row = 0 Then
@@ -90,8 +90,8 @@ Private Sub InitCell(Row As Integer, Column As Integer)
   Endif
 
   If hGameRow.IsSum Or hGameRow.IsCounter Then
-    hCell.Background = MColor.GetBackground(MColor.Sum)
-    hCell.Foreground = MColor.GetForeground(MColor.Sum)
+    hCell.Background = MSettings.GetBackground(MSettings.Sum)
+    hCell.Foreground = MSettings.GetForeground(MSettings.Sum)
     hCell.Font = Font["Bold"]
   Endif
 
@@ -106,8 +106,8 @@ Private Sub InitHeaderRow()
   For iCol = 0 To iMaxCol
     hCell = Me[0, iCol]
 
-    hCell.Background = MColor.GetBackground(MColor.Name)
-    hCell.Foreground = MColor.GetForeground(MColor.Name)
+    hCell.Background = MSettings.GetBackground(MSettings.Name)
+    hCell.Foreground = MSettings.GetForeground(MSettings.Name)
     hCell.Font = Font["Bold"]
 
     If iCol = 0 Then

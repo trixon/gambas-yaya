@@ -36,12 +36,11 @@ End
 
 Public Sub Form_Open()
 
-  MColor.Load()
+  MSettings.Load()
   Settings.Read(Me)
   Me.FullScreen = MSettings.FullScreen
   mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
-  NewGame()
 
 End
 
@@ -126,5 +125,11 @@ End
 Public Sub Form_Menu()
 
   mnuMain.Popup
+
+End
+
+Public Sub Form_Show()
+
+  NewGame()
 
 End

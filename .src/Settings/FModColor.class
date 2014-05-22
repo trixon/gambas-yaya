@@ -1,12 +1,12 @@
 ' Gambas class file
 
-Private $aColorBgButton As New ColorButton[MColor.ColorNames.Length]
-Private $aColorFgButton As New ColorButton[MColor.ColorNames.Length]
-Private $aLabel As New Label[MColor.ColorNames.Length]
+Private $aColorBgButton As New ColorButton[MSettings.ColorNames.Length]
+Private $aColorFgButton As New ColorButton[MSettings.ColorNames.Length]
+Private $aLabel As New Label[MSettings.ColorNames.Length]
 
 Static Public Sub _init()
 
-  MColor.Load()
+  MSettings.Load()
 
 End
 
@@ -17,7 +17,7 @@ Public Sub _new()
   Dim hHBox As HBox
   Dim hLabel As Label
 
-  For i = 0 To MColor.ColorNames.Max
+  For i = 0 To MSettings.ColorNames.Max
     hHBox = New HBox(svwTheme)
     hHBox.Tag = i
     hHBox.Height = 4 * Desktop.Scale
@@ -26,19 +26,19 @@ Public Sub _new()
     hColorButton = New ColorButton(hHBox) As "btnColorBg"
     hColorButton.Width = Desktop.Scale * 6
     hColorButton.Tag = i
-    hColorButton.Color = MColor.GetBackground(i)
+    hColorButton.Color = MSettings.GetBackground(i)
     $aColorBgButton[i] = hColorButton
 
     hColorButton = New ColorButton(hHBox) As "btnColorFg"
     hColorButton.Width = Desktop.Scale * 6
     hColorButton.Tag = i
-    hColorButton.Color = MColor.GetForeground(i)
+    hColorButton.Color = MSettings.GetForeground(i)
     $aColorFgButton[i] = hColorButton
 
     hLabel = New Label(hHBox)
     hLabel.Padding = 4
     hLabel.Expand = True
-    hLabel.Text = MColor.ColorNames[i]
+    hLabel.Text = MSettings.ColorNames[i]
     hLabel.Background = $aColorBgButton[i].Color
     hLabel.Foreground = $aColorFgButton[i].Color
     $aLabel[i] = hLabel
@@ -63,13 +63,13 @@ Public Sub Save()
   Dim i As Integer
 
   For i = 0 To $aColorBgButton.Max
-    MColor.SetBackground(i, $aColorBgButton[i].Color)
+    MSettings.SetBackground(i, $aColorBgButton[i].Color)
   Next
 
   For i = 0 To $aColorFgButton.Max
-    MColor.SetForeground(i, $aColorFgButton[i].Color)
+    MSettings.SetForeground(i, $aColorFgButton[i].Color)
   Next
 
-  MColor.Save()
+  MSettings.Save()
 
 End
