@@ -38,7 +38,7 @@ Public Sub _new()
       .Width = Desktop.Scale * 12
       '       .Height = Desktop.Scale * 3
       .Tag = i
-      .Text = ("Define...")
+      .Text = ("Set...")
       '     hButton.Color = MSettings.GetBackground(i)
     End With
     $aDefineButtons[i] = hButton

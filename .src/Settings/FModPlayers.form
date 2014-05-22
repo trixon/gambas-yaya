@@ -3,8 +3,13 @@
 { Form Form
   MoveScaled(0,0,78,42)
   Arrangement = Arrange.Vertical
+  { Label1 Label
+    MoveScaled(1,1,24,4)
+    Font = Font["Bold"]
+    Text = ("Players")
+  }
   { Panel2 Panel
-    MoveScaled(0,0,42,6)
+    MoveScaled(0,5,42,6)
     Arrangement = Arrange.Horizontal
     { tlbAdd ToolButton
       MoveScaled(2,1,4,4)
@@ -32,7 +37,7 @@
     }
   }
   { lbxPlayers ListBox
-    MoveScaled(0,7,16,16)
+    MoveScaled(4,13,16,16)
     Font = Font["+2"]
     Expand = True
     Sorted = True

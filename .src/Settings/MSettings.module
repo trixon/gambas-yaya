@@ -34,7 +34,7 @@ Public Const DEFAULT_FONT_MASK As String = ""
 Public Const DEFAULT_FONT_NAME As String = "Italic"
 Public Const DEFAULT_FONT_SUM As String = "Bold"
 
-Public StyleNames As String[] = [("Header row"), ("Header column"), ("Score"), ("Sum"), ("Indicator, high"), ("Indicator, low")]
+Public StyleNames As String[] = [("Name row"), ("Header column"), ("Score"), ("Sum"), ("Indicator, good"), ("Indicator, bad")]
 
 Public Enum Name, Header, Score, Sum, IndicatorHi, IndicatorLo, Mask
 

@@ -57,7 +57,7 @@ msgstr "Stäng"
 
 #: FColorChooser.form:13
 msgid "Select a color"
-msgstr ""
+msgstr "Välj en färg"
 
 #: FColorChooser.form:40 FFontChooser.form:39
 msgid "OK"
@@ -69,7 +69,7 @@ msgstr "Avbryt"
 
 #: FFontChooser.form:13
 msgid "Select a font"
-msgstr ""
+msgstr "Välj ett teckensnitt"
 
 #: FMain.class:81
 msgid "Copyright © 2014 Patrik Karlsson"
@@ -83,7 +83,7 @@ msgstr "Meny"
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: FMain.form:35 FModColorGambas.form:92
+#: FMain.form:35
 msgid "Undo"
 msgstr "Ångra"
 
@@ -99,93 +99,7 @@ msgstr "Inställningar"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: FModColor.form:15 FModColorGambas.form:55
-msgid "Colors"
-msgstr "Färger"
-
-#: FModColorGambas.class:4
-msgid "Amber"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Amethyst"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Emerald"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Gambas"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Obsidian"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Quest"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Quick"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Ruby"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Sapphire"
-msgstr ""
-
-#: FModColorGambas.class:4
-msgid "Visual"
-msgstr ""
-
-#: FModColorGambas.class:18
-msgid "Select a theme"
-msgstr ""
-
-#: FModColorGambas.class:31 FModScorecard.class:41
-msgid "Define..."
-msgstr ""
-
-#: FModColorGambas.class:64
-msgid "Gambas highlight theme files"
-msgstr ""
-
-#: FModColorGambas.class:65
-msgid "Export a theme file"
-msgstr ""
-
-#: FModColorGambas.class:78
-msgid "Select a theme file"
-msgstr ""
-
-#: FModColorGambas.form:29
-#, fuzzy
-msgid "Menu1"
-msgstr "Meny"
-
-#: FModColorGambas.form:33
-#, fuzzy
-msgid "Menu2"
-msgstr "Meny"
-
-#: FModColorGambas.form:66
-msgid "Theme"
-msgstr "Schema"
-
-#: FModColorGambas.form:80
-msgid "Import theme"
-msgstr ""
-
-#: FModColorGambas.form:86
-msgid "Export theme"
-msgstr ""
-
-#: FModDice.form:19 FSettings.class:19
+#: FModDice.form:19 FSettings.class:18
 msgid "Dice"
 msgstr "Tärningar"
 
@@ -221,29 +135,33 @@ msgstr "Ta bort alla spelare?"
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
+#: FModScorecard.class:41
+msgid "Set..."
+msgstr "Sätt..."
+
 #: FModScorecard.form:28
 msgid "Background color..."
-msgstr ""
+msgstr "Bakgrundsfärg..."
 
 #: FModScorecard.form:32
 msgid "Text color..."
-msgstr ""
+msgstr "Textfärg..."
 
 #: FModScorecard.form:39
 msgid "Font..."
-msgstr ""
+msgstr "Teckensnitt.."
 
-#: FModScorecard.form:46 FSettings.class:17
+#: FModScorecard.form:46 FSettings.class:16
 msgid "Scorecard"
 msgstr "Protokoll"
 
 #: FModScorecard.form:60
 msgid "Show indicators"
-msgstr ""
+msgstr "Visa indikatorer"
 
-#: FModScorecard.form:65 MTheme.module:6
+#: FModScorecard.form:65
 msgid "Symbols"
-msgstr ""
+msgstr "Symboler"
 
 #: FModScorecard.form:76
 msgid "Show Max column"
@@ -261,7 +179,7 @@ msgstr "Spel"
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:82 FSettings.class:15
+#: FNewGame.form:82 FSettings.class:14
 msgid "Players"
 msgstr "Spelare"
 
@@ -315,97 +233,25 @@ msgstr "Förbruka"
 
 #: MSettings.module:37
 msgid "Header column"
-msgstr ""
+msgstr "Rubrikkolumn"
 
 #: MSettings.module:37
-msgid "Header row"
-msgstr ""
+msgid "Indicator, bad"
+msgstr "Indikator, dåligt"
 
 #: MSettings.module:37
-msgid "Indicator, high"
-msgstr ""
+msgid "Indicator, good"
+msgstr "Indikator, bra"
 
 #: MSettings.module:37
-msgid "Indicator, low"
-msgstr ""
+msgid "Name row"
+msgstr "Namnrad"
 
 #: MSettings.module:37
-#, fuzzy
 msgid "Score"
-msgstr "Protokoll"
+msgstr "Poäng"
 
 #: MSettings.module:37
 msgid "Sum"
-msgstr ""
+msgstr "Summa"
 
-#: MTheme.module:6
-msgid "Background"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Breakpoints"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Comments"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Current line"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Data types"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Editing line"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Errors"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Help"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Highlighting"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Keywords"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Normal text"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Numbers"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Operators"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Preprocessor"
-msgstr ""
-
-#: MTheme.module:6
-msgid "Selection"
-msgstr ""
-
-#: MTheme.module:6
-#, fuzzy
-msgid "Strings"
-msgstr "Inställningar"
-
-#: MTheme.module:6
-msgid "Subroutines"
-msgstr ""
-
-#~ msgid "Show suggestions"
-#~ msgstr "Visa förslag"
