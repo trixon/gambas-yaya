@@ -11,6 +11,7 @@ Property PlayerNames As String[]
 Property PlayerSelection As String[]
 Property ShowSymbols As Boolean
 Property FullScreen As Boolean
+Property {Font} As String
 
 Public Const DEFAULT_CELL_BG As Integer = &HFFFF9F
 Public Const DEFAULT_CELL_FG As Integer = &H555555
@@ -34,6 +35,7 @@ Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
 Private Const KEY_GAME_ID As String = "Game/Id"
 Private Const KEY_GAME_VARIANT As String = "Game/Variant"
+Private Const KEY_SCORECARD_FONT As String = "Scorecard/Font"
 Private Const KEY_SCORECARD_SHOW_HINTS As String = "Scorecard/ShowHints"
 Private Const KEY_SCORECARD_SHOW_MAXCOL As String = "Scorecard/ShowMax"
 Private Const KEY_SCORECARD_SHOW_SYMBOLS As String = "Scorecard/ShowSymbols"
@@ -274,5 +276,17 @@ End
 Private Sub FullScreen_Write(Value As Boolean)
 
   Settings[KEY_FULL_SCREEN] = Value
+
+End
+
+Private Function Font_Read() As String
+
+  Return Settings[KEY_SCORECARD_FONT, Application.Font.ToString()]
+
+End
+
+Private Sub Font_Write(Value As String)
+
+  Settings[KEY_SCORECARD_FONT] = Value
 
 End

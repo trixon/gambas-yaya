@@ -62,7 +62,7 @@ Private Sub InitCell(Row As Integer, Column As Integer)
   hCell = Me[Row, Column]
   hCell.Padding = 8
   hCell.Alignment = Align.Right
-  hCell.Font = Font["10"]
+  ' hCell.Font = Font["10"]
   If Column = 0 Then
     hCell.Background = MSettings.GetBackground(MSettings.Header)
     hCell.Foreground = MSettings.GetForeground(MSettings.Header)
@@ -92,7 +92,7 @@ Private Sub InitCell(Row As Integer, Column As Integer)
   If hGameRow.IsSum Or hGameRow.IsCounter Then
     hCell.Background = MSettings.GetBackground(MSettings.Sum)
     hCell.Foreground = MSettings.GetForeground(MSettings.Sum)
-    hCell.Font = Font["Bold"]
+    '  hCell.Font = Font["Bold"]
   Endif
 
 End
@@ -108,11 +108,11 @@ Private Sub InitHeaderRow()
 
     hCell.Background = MSettings.GetBackground(MSettings.Name)
     hCell.Foreground = MSettings.GetForeground(MSettings.Name)
-    hCell.Font = Font["Bold"]
+    'hCell.Font = Font["Bold"]
 
     If iCol = 0 Then
       hCell.Text = MGameLoader.TextById($hGameDef.Id)
-      hCell.Font = Font[""]
+      ' hCell.Font = Font[""]
     Endif
 
   Next
@@ -182,6 +182,7 @@ Public Sub ApplyLayout()
   Dim iCol As Integer
   Dim iRow As Integer
 
+  Me.Font = Font[MSettings.Font]
   For iCol = 0 To iMaxCol
     For iRow = 0 To iMaxRow
       InitCell(iRow, iCol)

@@ -3,11 +3,10 @@
 { Form Form
   MoveScaled(0,0,89,50)
   Expand = True
-  Arrangement = Arrange.Vertical
+  Arrangement = Arrange.Fill
   { VBox1 VBox
     MoveScaled(0,0,76,40)
     Foreground = &HFFFF00&
-    AutoResize = True
     { Label1 Label
       MoveScaled(0,0,24,4)
       Font = Font["Bold"]
@@ -34,11 +33,15 @@
       Text = ("Font")
     }
     { txtEditorFont ButtonBox
-      MoveScaled(2,28,44,4)
+      MoveScaled(1,27,44,4)
       Foreground = &H000000&
-      Expand = True
       Picture = Picture["icon:/small/font"]
       ReadOnly = True
+    }
+    { lblDemo Label
+      MoveScaled(2,32,24,4)
+      AutoResize = True
+      Text = ("Lorem ipsum dolor sit amet. 123")
     }
   }
 }

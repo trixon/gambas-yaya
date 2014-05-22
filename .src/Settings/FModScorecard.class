@@ -6,6 +6,8 @@ Public Sub Form_Open()
   cbxShowMaxCol.Value = MSettings.ShowMaxCol
   cbxShowTopCol.Value = MSettings.ShowTopCol
   cbxShowSymbols.Value = MSettings.ShowSymbols
+  txtEditorFont.Text = MSettings.Font
+  lblDemo.Font = Font[MSettings.Font]
 
 End
 
@@ -16,6 +18,7 @@ Public Sub Save()
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
   MSettings.ShowTopCol = cbxShowTopCol.Value
   MSettings.ShowSymbols = cbxShowSymbols.Value
+  MSettings.Font = txtEditorFont.Text
   Settings.Save()
 
 End
@@ -27,6 +30,6 @@ Public Sub txtEditorFont_Click()
   sFont = FFontChooser.Run(txtEditorFont.Text)
   If Not sFont Then Return
   txtEditorFont.Text = sFont
-  'RefreshEditor
+  lblDemo.Font = Font[sFont]
 
 End
