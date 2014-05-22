@@ -2,14 +2,19 @@
 
 { Form Form
   MoveScaled(7.1429,38,67,56)
+  Background = &HFF9F3F&
   Text = ("Select a font")
+  Picture = Picture["images/board.jpg"]
   Persistent = True
+  Stacking = Window.Above
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
   { dlgFont FontChooser
     MoveScaled(2,2,63,48)
+    Foreground = &HFFFF00&
     Expand = True
+    Border = False
   }
   { Panel2 HBox
     MoveScaled(6,51,49,4)

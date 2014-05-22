@@ -1,8 +1,8 @@
 ' Gambas class file
 
-Private $aColorBgButton As New ColorButton[MSettings.ColorNames.Length]
-Private $aColorFgButton As New ColorButton[MSettings.ColorNames.Length]
-Private $aLabel As New Label[MSettings.ColorNames.Length]
+Private $aColorBgButton As New ColorButton[MSettings.StyleNames.Length]
+Private $aColorFgButton As New ColorButton[MSettings.StyleNames.Length]
+Private $aLabel As New Label[MSettings.StyleNames.Length]
 
 Static Public Sub _init()
 
@@ -17,7 +17,7 @@ Public Sub _new()
   Dim hHBox As HBox
   Dim hLabel As Label
 
-  For i = 0 To MSettings.ColorNames.Max
+  For i = 0 To MSettings.StyleNames.Max
     hHBox = New HBox(svwTheme)
     hHBox.Tag = i
     hHBox.Height = 4 * Desktop.Scale
@@ -38,7 +38,7 @@ Public Sub _new()
     hLabel = New Label(hHBox)
     hLabel.Padding = 4
     hLabel.Expand = True
-    hLabel.Text = MSettings.ColorNames[i]
+    hLabel.Text = MSettings.StyleNames[i]
     hLabel.Background = $aColorBgButton[i].Color
     hLabel.Foreground = $aColorFgButton[i].Color
     $aLabel[i] = hLabel
@@ -62,7 +62,9 @@ Public Sub Save()
 
   Dim i As Integer
 
-  For i = 0 To $aColorBgButton.Max
+  Settings.Reload()
+
+  For i = 0 To MSettings.StyleNames.Max
     MSettings.SetBackground(i, $aColorBgButton[i].Color)
   Next
 

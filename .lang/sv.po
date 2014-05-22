@@ -15,23 +15,23 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:78
+#: .project:2 FMain.class:82
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:62
+#: CScoreGrid.class:78
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:68
+#: CScoreGrid.class:84
 msgid "Top"
 msgstr "Topp"
 
-#: FAbout.form:22 FMain.form:60
+#: FAbout.form:22 FMain.form:61
 msgid "About"
 msgstr "Om"
 
-#: FAbout.form:56
+#: FAbout.form:56 FTest.form:20
 msgid "Label1"
 msgstr ""
 
@@ -55,7 +55,23 @@ msgstr "Licens"
 msgid "Close"
 msgstr "Stäng"
 
-#: FMain.class:77
+#: FColorChooser.form:13
+msgid "Select a color"
+msgstr ""
+
+#: FColorChooser.form:40 FFontChooser.form:39
+msgid "OK"
+msgstr ""
+
+#: FColorChooser.form:46 FFontChooser.form:45 FModPlayers.class:29
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: FFontChooser.form:13
+msgid "Select a font"
+msgstr ""
+
+#: FMain.class:81
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
@@ -67,7 +83,7 @@ msgstr "Meny"
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: FMain.form:35 FSettings.form:95
+#: FMain.form:35 FModColorGambas.form:92
 msgid "Undo"
 msgstr "Ångra"
 
@@ -75,13 +91,167 @@ msgstr "Ångra"
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:52 FSettings.form:37
+#: FMain.form:52 FSettings.form:14
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:68
+#: FMain.form:69
 msgid "Quit"
 msgstr "Avsluta"
+
+#: FModColor.form:15 FModColorGambas.form:55
+msgid "Colors"
+msgstr "Färger"
+
+#: FModColorGambas.class:4
+msgid "Amber"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Amethyst"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Emerald"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Gambas"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Obsidian"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Quest"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Quick"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Ruby"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Sapphire"
+msgstr ""
+
+#: FModColorGambas.class:4
+msgid "Visual"
+msgstr ""
+
+#: FModColorGambas.class:18
+msgid "Select a theme"
+msgstr ""
+
+#: FModColorGambas.class:31 FModScorecard.class:41
+msgid "Define..."
+msgstr ""
+
+#: FModColorGambas.class:64
+msgid "Gambas highlight theme files"
+msgstr ""
+
+#: FModColorGambas.class:65
+msgid "Export a theme file"
+msgstr ""
+
+#: FModColorGambas.class:78
+msgid "Select a theme file"
+msgstr ""
+
+#: FModColorGambas.form:29
+#, fuzzy
+msgid "Menu1"
+msgstr "Meny"
+
+#: FModColorGambas.form:33
+#, fuzzy
+msgid "Menu2"
+msgstr "Meny"
+
+#: FModColorGambas.form:66
+msgid "Theme"
+msgstr "Schema"
+
+#: FModColorGambas.form:80
+msgid "Import theme"
+msgstr ""
+
+#: FModColorGambas.form:86
+msgid "Export theme"
+msgstr ""
+
+#: FModDice.form:19 FSettings.class:19
+msgid "Dice"
+msgstr "Tärningar"
+
+#: FModDice.form:24
+msgid "Reverse mouse scroll"
+msgstr "Omvänd rullningsriktning"
+
+#: FModPlayers.class:8
+msgid "Create at least one player."
+msgstr "Skapa minst en spelare."
+
+#: FModPlayers.class:26
+msgid "Remove '&1'?"
+msgstr "Ta bort '&1'?"
+
+#: FModPlayers.class:27
+msgid "Confirm"
+msgstr "Bekräfta"
+
+#: FModPlayers.class:29
+msgid "Remove"
+msgstr "Ta bort"
+
+#: FModPlayers.class:40
+msgid "Remove All"
+msgstr "Ta bort alla"
+
+#: FModPlayers.class:40
+msgid "Remove all players?"
+msgstr "Ta bort alla spelare?"
+
+#: FModPlayers.class:57
+msgid "Player already exists."
+msgstr "Spelaren finns redan."
+
+#: FModScorecard.form:28
+msgid "Background color..."
+msgstr ""
+
+#: FModScorecard.form:32
+msgid "Text color..."
+msgstr ""
+
+#: FModScorecard.form:39
+msgid "Font..."
+msgstr ""
+
+#: FModScorecard.form:46 FSettings.class:17
+msgid "Scorecard"
+msgstr "Protokoll"
+
+#: FModScorecard.form:60
+msgid "Show indicators"
+msgstr ""
+
+#: FModScorecard.form:65 MTheme.module:6
+msgid "Symbols"
+msgstr ""
+
+#: FModScorecard.form:76
+msgid "Show Max column"
+msgstr "Visa Maxkolumn"
+
+#: FModScorecard.form:81
+msgid "Show Top column"
+msgstr "Visa Toppkolumn"
 
 #: FNewGame.form:44
 msgid "Game"
@@ -91,7 +261,7 @@ msgstr "Spel"
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:82 FSettings.form:111
+#: FNewGame.form:82 FSettings.class:15
 msgid "Players"
 msgstr "Spelare"
 
@@ -114,86 +284,6 @@ msgstr "Spelare"
 #: FPlayersEdit.form:22
 msgid "TextBox1"
 msgstr ""
-
-#: FSettings.class:40
-msgid "Create at least one player."
-msgstr "Skapa minst en spelare."
-
-#: FSettings.class:50
-msgid "Remove '&1'?"
-msgstr "Ta bort '&1'?"
-
-#: FSettings.class:51
-msgid "Confirm"
-msgstr "Bekräfta"
-
-#: FSettings.class:53
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: FSettings.class:53
-msgid "Remove"
-msgstr "Ta bort"
-
-#: FSettings.class:64
-msgid "Remove All"
-msgstr "Ta bort alla"
-
-#: FSettings.class:64
-msgid "Remove all players?"
-msgstr "Ta bort alla spelare?"
-
-#: FSettings.class:81
-msgid "Player already exists."
-msgstr "Spelaren finns redan."
-
-#: FSettings.form:52
-msgid "Colors"
-msgstr "Färger"
-
-#: FSettings.form:69
-msgid "Theme"
-msgstr "Schema"
-
-#: FSettings.form:83
-msgid "Import theme"
-msgstr ""
-
-#: FSettings.form:89
-msgid "Export theme"
-msgstr ""
-
-#: FSettings.form:154
-msgid "Miscellaneous"
-msgstr ""
-
-#: FSettings.form:165
-msgid "Scorecard"
-msgstr "Protokoll"
-
-#: FSettings.form:170
-msgid "Show suggestions"
-msgstr "Visa förslag"
-
-#: FSettings.form:175
-msgid "Show Max column"
-msgstr "Visa Maxkolumn"
-
-#: FSettings.form:180
-msgid "Show Top column"
-msgstr "Visa Toppkolumn"
-
-#: FSettings.form:185
-msgid "Symbols"
-msgstr ""
-
-#: FSettings.form:196
-msgid "Dice"
-msgstr "Tärningar"
-
-#: FSettings.form:201
-msgid "Reverse mouse scroll"
-msgstr "Omvänd rullningsriktning"
 
 #: MGameLoader.module:15
 msgid "Standard"
@@ -223,3 +313,99 @@ msgstr "Slump"
 msgid "Consume"
 msgstr "Förbruka"
 
+#: MSettings.module:37
+msgid "Header column"
+msgstr ""
+
+#: MSettings.module:37
+msgid "Header row"
+msgstr ""
+
+#: MSettings.module:37
+msgid "Indicator, high"
+msgstr ""
+
+#: MSettings.module:37
+msgid "Indicator, low"
+msgstr ""
+
+#: MSettings.module:37
+#, fuzzy
+msgid "Score"
+msgstr "Protokoll"
+
+#: MSettings.module:37
+msgid "Sum"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Background"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Breakpoints"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Comments"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Current line"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Data types"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Editing line"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Errors"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Help"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Highlighting"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Keywords"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Normal text"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Numbers"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Operators"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Preprocessor"
+msgstr ""
+
+#: MTheme.module:6
+msgid "Selection"
+msgstr ""
+
+#: MTheme.module:6
+#, fuzzy
+msgid "Strings"
+msgstr "Inställningar"
+
+#: MTheme.module:6
+msgid "Subroutines"
+msgstr ""
+
+#~ msgid "Show suggestions"
+#~ msgstr "Visa förslag"

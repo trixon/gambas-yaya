@@ -1,47 +1,64 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,89,50)
+  MoveScaled(0,0,99,70)
   Expand = True
-  Arrangement = Arrange.Fill
-  { VBox1 VBox
-    MoveScaled(0,0,76,40)
-    Foreground = &HFFFF00&
-    { Label1 Label
-      MoveScaled(0,0,24,4)
-      Font = Font["Bold"]
-      Text = ("Scorecard")
+  Arrangement = Arrange.Vertical
+  { mnuPopup Menu
+    Visible = False
+    { mnuBackground Menu
+      Text = ("Background color...")
     }
-    { cbxShowHints CheckBox
-      MoveScaled(0,5,24,4)
-      Text = ("Show suggestions")
+    { mnuForeground Menu
+      Text = ("Text color...")
     }
-    { cbxShowMaxCol CheckBox
-      MoveScaled(0,10,24,4)
-      Text = ("Show Max column")
+    { Menu1 Menu
     }
-    { cbxShowTopCol CheckBox
-      MoveScaled(0,15,24,4)
-      Text = ("Show Top column")
+    { mnuFont Menu
+      Text = ("Font...")
     }
-    { cbxShowSymbols CheckBox
-      MoveScaled(0,19,24,4)
-      Text = ("Symbols")
-    }
-    { Label26 Label
-      MoveScaled(1,23,20,4)
-      Text = ("Font")
-    }
-    { txtEditorFont ButtonBox
-      MoveScaled(1,27,44,4)
-      Foreground = &H000000&
-      Picture = Picture["icon:/small/font"]
-      ReadOnly = True
-    }
-    { lblDemo Label
-      MoveScaled(2,32,24,4)
+  }
+  { Label1 Label
+    MoveScaled(0,0,24,4)
+    Font = Font["Bold"]
+    Text = ("Scorecard")
+  }
+  { HBox1 HBox
+    MoveScaled(3,5,71,22)
+    AutoResize = True
+    { VBox2 VBox
+      MoveScaled(3,2,31,17)
+      Expand = True
       AutoResize = True
-      Text = ("Lorem ipsum dolor sit amet. 123")
+      { cbxShowHints CheckBox
+        MoveScaled(0,0,24,4)
+        Text = ("Show indicators")
+      }
+      { cbxShowSymbols CheckBox
+        MoveScaled(0,4,24,4)
+        Text = ("Symbols")
+      }
     }
+    { VBox3 VBox
+      MoveScaled(38,2,30,17)
+      Expand = True
+      AutoResize = True
+      { cbxShowMaxCol CheckBox
+        MoveScaled(0,0,24,4)
+        Text = ("Show Max column")
+      }
+      { cbxShowTopCol CheckBox
+        MoveScaled(0,5,24,4)
+        Text = ("Show Top column")
+      }
+    }
+  }
+  { svwTheme ScrollView
+    MoveScaled(2,28,65,13)
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Spacing = True
+    Margin = True
+    Padding = 4
   }
 }

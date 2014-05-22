@@ -1,18 +1,17 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,111,55)
+  MoveScaled(0,0,89,55)
   Background = &HFF9F3F&
   Expand = True
   Text = ("Settings")
   Picture = Picture["images/board.jpg"]
   Resizable = False
-  Stacking = Window.Above
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
   { ipnModules IconPanel
-    MoveScaled(2,4,104,35)
+    MoveScaled(2,4,77,35)
     Foreground = &HFFFF00&
     Expand = True
     Arrangement = Arrange.Vertical

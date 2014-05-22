@@ -8,8 +8,8 @@ End
 
 Public Sub Save()
 
-  Settings.Reload()
+  '   Settings.Reload()
   MSettings.ReverseMouseScroll = cbxMouseScroll.Value
-  Settings.Save()
+  '   Settings.Save()
 
 End

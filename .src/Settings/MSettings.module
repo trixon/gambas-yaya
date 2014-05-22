@@ -11,31 +11,37 @@ Property PlayerNames As String[]
 Property PlayerSelection As String[]
 Property ShowSymbols As Boolean
 Property FullScreen As Boolean
-Property {Font} As String
 
-Public Const DEFAULT_CELL_BG As Integer = &HFFFF9F
-Public Const DEFAULT_CELL_FG As Integer = &H555555
-Public Const DEFAULT_HEADER_BG As Integer = &HFFC71F
-Public Const DEFAULT_HEADER_FG As Integer = &H000000
-Public Const DEFAULT_INDICATOR_HI_BG As Integer = &H00FF00
-Public Const DEFAULT_INDICATOR_HI_FG As Integer = &HFFFFFF
-Public Const DEFAULT_INDICATOR_LO_BG As Integer = &HFF0000
-Public Const DEFAULT_INDICATOR_LO_FG As Integer = &HFFFFFF
-Public Const DEFAULT_MASK As Integer = &HBBBBBB
-Public Const DEFAULT_NAME_BG As Integer = &H444444
-Public Const DEFAULT_NAME_FG As Integer = &HFFC71F
-Public Const DEFAULT_SUM_BG As Integer = &HFFFF00
-Public Const DEFAULT_SUM_FG As Integer = &H000000
+Public Const DEFAULT_COLOR_SCORE_BG As Integer = &HFFFF9F
+Public Const DEFAULT_COLOR_SCORE_FG As Integer = &H555555
+Public Const DEFAULT_COLOR_HEADER_BG As Integer = &HFFC71F
+Public Const DEFAULT_COLOR_HEADER_FG As Integer = &H000000
+Public Const DEFAULT_COLOR_INDICATOR_HI_BG As Integer = &H00FF00
+Public Const DEFAULT_COLOR_INDICATOR_HI_FG As Integer = &H000000
+Public Const DEFAULT_COLOR_INDICATOR_LO_BG As Integer = &HFF0000
+Public Const DEFAULT_COLOR_INDICATOR_LO_FG As Integer = &H000000
+Public Const DEFAULT_COLOR_MASK As Integer = &HBBBBBB
+Public Const DEFAULT_COLOR_NAME_BG As Integer = &H444444
+Public Const DEFAULT_COLOR_NAME_FG As Integer = &HFFC71F
+Public Const DEFAULT_COLOR_SUM_BG As Integer = &HFFFF00
+Public Const DEFAULT_COLOR_SUM_FG As Integer = &H000000
 
-Public ColorNames As String[] = [("Header column"), ("Header row"), ("Sum"), ("Row"), ("Indicator, high"), ("Indicator, low")]
+Public Const DEFAULT_FONT_SCORE As String = ""
+Public Const DEFAULT_FONT_HEADER As String = ""
+Public Const DEFAULT_FONT_INDICATOR_HI As String = ""
+Public Const DEFAULT_FONT_INDICATOR_LO As String = ""
+Public Const DEFAULT_FONT_MASK As String = ""
+Public Const DEFAULT_FONT_NAME As String = "Italic"
+Public Const DEFAULT_FONT_SUM As String = "Bold"
 
-Public Enum Header, Name, Sum, Cell, IndicatorHi, IndicatorLo, Mask
+Public StyleNames As String[] = [("Header row"), ("Header column"), ("Score"), ("Sum"), ("Indicator, high"), ("Indicator, low")]
+
+Public Enum Name, Header, Score, Sum, IndicatorHi, IndicatorLo, Mask
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
 Private Const KEY_GAME_ID As String = "Game/Id"
 Private Const KEY_GAME_VARIANT As String = "Game/Variant"
-Private Const KEY_SCORECARD_FONT As String = "Scorecard/Font"
 Private Const KEY_SCORECARD_SHOW_HINTS As String = "Scorecard/ShowHints"
 Private Const KEY_SCORECARD_SHOW_MAXCOL As String = "Scorecard/ShowMax"
 Private Const KEY_SCORECARD_SHOW_SYMBOLS As String = "Scorecard/ShowSymbols"
@@ -43,27 +49,37 @@ Private Const KEY_SCORECARD_SHOW_TOPCOL As String = "Scorecard/ShowTop"
 Private Const KEY_PLAYER_NAMES As String = "Players"
 Private Const KEY_PLAYER_SELECTION As String = "Game/PlayerSelection"
 Private Const KEY_FULL_SCREEN As String = "Window/FullScreen"
-Private Const KEY_BACKGROUND As String = "Colors/Background_"
-Private Const KEY_FOREGROUND As String = "Colors/Foreground_"
+Private Const KEY_BACKGROUND As String = "Style/Background_"
+Private Const KEY_FOREGROUND As String = "Style/Foreground_"
+Private Const KEY_FONT As String = "Style/Font_"
 
 Private $aBackgroundDefaults As Integer[] =
-  [DEFAULT_HEADER_BG,
-  DEFAULT_NAME_BG,
-  DEFAULT_SUM_BG,
-  DEFAULT_CELL_BG,
-  DEFAULT_INDICATOR_HI_BG,
-  DEFAULT_INDICATOR_LO_BG,
-  DEFAULT_MASK]
+  [DEFAULT_COLOR_NAME_BG,
+  DEFAULT_COLOR_HEADER_BG,
+  DEFAULT_COLOR_SCORE_BG,
+  DEFAULT_COLOR_SUM_BG,
+  DEFAULT_COLOR_INDICATOR_HI_BG,
+  DEFAULT_COLOR_INDICATOR_LO_BG,
+  DEFAULT_COLOR_MASK]
 Private $aForegroundDefaults As Integer[] =
-  [DEFAULT_HEADER_FG,
-  DEFAULT_NAME_FG,
-  DEFAULT_SUM_FG,
-  DEFAULT_CELL_FG,
-  DEFAULT_INDICATOR_HI_FG,
-  DEFAULT_INDICATOR_LO_FG,
-  DEFAULT_MASK]
+  [DEFAULT_COLOR_NAME_FG,
+  DEFAULT_COLOR_HEADER_FG,
+  DEFAULT_COLOR_SCORE_FG,
+  DEFAULT_COLOR_SUM_FG,
+  DEFAULT_COLOR_INDICATOR_HI_FG,
+  DEFAULT_COLOR_INDICATOR_LO_FG,
+  DEFAULT_COLOR_MASK]
+Private $aFontDefaults As String[] =
+  [DEFAULT_FONT_NAME,
+  DEFAULT_FONT_HEADER,
+  DEFAULT_FONT_SCORE,
+  DEFAULT_FONT_SUM,
+  DEFAULT_FONT_INDICATOR_HI,
+  DEFAULT_FONT_INDICATOR_LO,
+  DEFAULT_FONT_MASK]
 Private $aBackground As New Integer[$aBackgroundDefaults.Length]
 Private $aForeground As New Integer[$aForegroundDefaults.Length]
+Private $aFont As New String[$aFontDefaults.Length]
 
 Public Function GetBackground(Index As Integer) As Integer
 
@@ -89,9 +105,23 @@ Public Sub SetForeground(Index As Integer, Color As Integer)
 
 End
 
+Public Function GetFont(Index As Integer) As Font
+
+  Return Font[$aFont[Index]]
+
+End
+
+Public Sub SetFont(Index As Integer, hFont As Font)
+
+  $aFont[Index] = hFont.ToString()
+
+End
+
 Public Sub Load()
 
   Dim i As Integer
+
+  Debug
 
   For i = 0 To $aBackground.Max
     $aBackground[i] = Settings[KEY_BACKGROUND & i, $aBackgroundDefaults[i]]
@@ -101,13 +131,18 @@ Public Sub Load()
     $aForeground[i] = Settings[KEY_FOREGROUND & i, $aForegroundDefaults[i]]
   Next
 
+  For i = 0 To $aFont.Max
+    $aFont[i] = Settings[KEY_FONT & i, $aFontDefaults[i]]
+  Next
+
 End
 
 Public Sub Save()
 
   Dim i As Integer
 
-  Settings.Reload()
+  Debug
+  'Settings.Reload()
 
   For i = 0 To $aBackground.Max
     Settings[KEY_BACKGROUND & i] = $aBackground[i]
@@ -117,7 +152,11 @@ Public Sub Save()
     Settings[KEY_FOREGROUND & i] = $aForeground[i]
   Next
 
-  Settings.Save()
+  For i = 0 To $aFont.Max
+    Settings[KEY_FONT & i] = $aFont[i]
+  Next
+
+  ' Settings.Save()
 
 End
 
@@ -276,17 +315,5 @@ End
 Private Sub FullScreen_Write(Value As Boolean)
 
   Settings[KEY_FULL_SCREEN] = Value
-
-End
-
-Private Function Font_Read() As String
-
-  Return Settings[KEY_SCORECARD_FONT, Application.Font.ToString()]
-
-End
-
-Private Sub Font_Write(Value As String)
-
-  Settings[KEY_SCORECARD_FONT] = Value
 
 End

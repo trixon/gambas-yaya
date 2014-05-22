@@ -55,9 +55,9 @@ Public Sub Settings()
   If Not IsNull($hGrid) Then
     $hGrid.ShowMaxCol(MSettings.ShowMaxCol)
     $hGrid.ShowTopCol(MSettings.ShowTopCol)
-    $hGrid.RecalcWidth()
-    $hGrid.ShowTextAsSymbols(MSettings.ShowSymbols)
     $hGrid.ApplyLayout()
+    $hGrid.ShowTextAsSymbols(MSettings.ShowSymbols)
+    $hGrid.RecalcWidth()
   Endif
 
 End

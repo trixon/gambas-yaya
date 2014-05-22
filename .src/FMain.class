@@ -47,8 +47,10 @@ End
 Public Sub Form_Close()
 
   $hGamePanel.Close()
+  'Settings.Reload()
   Settings.Write(Me)
   MSettings.FullScreen = Me.FullScreen
+  '   Settings.Save()
 
 End
 
@@ -56,7 +58,7 @@ Public Sub Form_KeyPress()
 
   If Key.Code = Key.Esc Then
     Me.Close()
-  Else If Key.Code = Key["Q"] And If Key.Control
+  Else If Key.Code = Key["Q"] And If Key.Control Or Key.Code = Key["Q"]
     Me.Close()
   Else If Key.Code = Key["N"] And If Key.Control
     NewGame()

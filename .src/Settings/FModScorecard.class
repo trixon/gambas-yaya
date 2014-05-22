@@ -1,35 +1,107 @@
 ' Gambas class file
 
+Private $aDefineButtons As New Button[MSettings.StyleNames.Length]
+Private $aLabel As New Label[MSettings.StyleNames.Length]
+Private $iIndex As Integer
+
+Public Sub _new()
+
+  Dim i As Integer
+  Dim hButton As Button
+  Dim hHBox As HBox
+  Dim hLabel As Label
+
+  For i = 0 To MSettings.StyleNames.Max
+    hHBox = New HBox(svwTheme)
+    With hHBox
+      .Tag = i
+      .Height = 4 * Desktop.Scale
+      .Spacing = 4
+      '      .Expand = True
+      .AutoResize = True
+    End With
+
+    hLabel = New Label(hHBox)
+    With hLabel
+      .AutoResize = True
+      .Padding = 4
+      .Expand = True
+      .Text = MSettings.StyleNames[i]
+      .Background = MSettings.GetBackground(i)
+      .Foreground = MSettings.GetForeground(i)
+      .Font = MSettings.GetFont(i)
+    End With
+    $aLabel[i] = hLabel
+
+    hButton = New Button(hHBox) As "btnDefine"
+    With hButton
+      .Width = Desktop.Scale * 12
+      '       .Height = Desktop.Scale * 3
+      .Tag = i
+      .Text = ("Define...")
+      '     hButton.Color = MSettings.GetBackground(i)
+    End With
+    $aDefineButtons[i] = hButton
+  Next
+
+End
+
 Public Sub Form_Open()
 
   cbxShowHints.Value = MSettings.ShowHints
   cbxShowMaxCol.Value = MSettings.ShowMaxCol
   cbxShowTopCol.Value = MSettings.ShowTopCol
   cbxShowSymbols.Value = MSettings.ShowSymbols
-  txtEditorFont.Text = MSettings.Font
-  lblDemo.Font = Font[MSettings.Font]
 
 End
 
 Public Sub Save()
 
-  Settings.Reload()
+  Dim i As Integer
+
+  Debug
+  '   Settings.Reload()
   MSettings.ShowHints = cbxShowHints.Value
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
   MSettings.ShowTopCol = cbxShowTopCol.Value
   MSettings.ShowSymbols = cbxShowSymbols.Value
-  MSettings.Font = txtEditorFont.Text
-  Settings.Save()
+
+  For i = 0 To MSettings.StyleNames.Max
+    Debug i
+    MSettings.SetBackground(i, $aLabel[i].Background)
+    MSettings.SetForeground(i, $aLabel[i].Foreground)
+    MSettings.SetFont(i, $aLabel[i].Font)
+  Next
+
+  '   Settings.Save()
 
 End
 
-Public Sub txtEditorFont_Click()
+Public Sub btnDefine_Click()
+
+  $iIndex = Last.Tag
+  mnuPopup.Popup()
+
+End
+
+Public Sub mnuBackground_Click()
+
+  $aLabel[$iIndex].Background = FColorChooser.Run($aLabel[$iIndex].Background)
+
+End
+
+Public Sub mnuForeground_Click()
+
+  $aLabel[$iIndex].Foreground = FColorChooser.Run($aLabel[$iIndex].Foreground)
+
+End
+
+Public Sub mnuFont_Click()
 
   Dim sFont As String
 
-  sFont = FFontChooser.Run(txtEditorFont.Text)
+  sFont = FFontChooser.Run($aLabel[$iIndex].Font.ToString())
   If Not sFont Then Return
-  txtEditorFont.Text = sFont
-  lblDemo.Font = Font[sFont]
+  $aLabel[$iIndex].Font = Font[sFont]
 
 End
