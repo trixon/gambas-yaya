@@ -19,11 +19,11 @@ msgstr "-"
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:78
+#: CScoreGrid.class:82
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:84
+#: CScoreGrid.class:88
 msgid "Top"
 msgstr "Topp"
 
@@ -135,41 +135,65 @@ msgstr "Ta bort alla spelare?"
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
-#: FModScorecard.class:41
+#: FModPlayers.form:19 FNewGame.form:82 FSettings.class:14
+msgid "Players"
+msgstr "Spelare"
+
+#: FModScorecard.class:4
+msgid "Darkness"
+msgstr ""
+
+#: FModScorecard.class:4
+msgid "Plain paper"
+msgstr ""
+
+#: FModScorecard.class:4
+msgid "Yaya"
+msgstr ""
+
+#: FModScorecard.class:18
+msgid "Select a theme"
+msgstr "Välj ett schema"
+
+#: FModScorecard.class:44
 msgid "Set..."
 msgstr "Sätt..."
 
-#: FModScorecard.form:28
+#: FModScorecard.form:31
 msgid "Background color..."
 msgstr "Bakgrundsfärg..."
 
-#: FModScorecard.form:32
+#: FModScorecard.form:35
 msgid "Text color..."
 msgstr "Textfärg..."
 
-#: FModScorecard.form:39
+#: FModScorecard.form:42
 msgid "Font..."
 msgstr "Teckensnitt.."
 
-#: FModScorecard.form:46 FSettings.class:16
+#: FModScorecard.form:49 FSettings.class:16
 msgid "Scorecard"
 msgstr "Protokoll"
 
-#: FModScorecard.form:60
+#: FModScorecard.form:63
 msgid "Show indicators"
 msgstr "Visa indikatorer"
 
-#: FModScorecard.form:65
+#: FModScorecard.form:68
 msgid "Symbols"
 msgstr "Symboler"
 
-#: FModScorecard.form:76
+#: FModScorecard.form:79
 msgid "Show Max column"
 msgstr "Visa Maxkolumn"
 
-#: FModScorecard.form:81
+#: FModScorecard.form:84
 msgid "Show Top column"
 msgstr "Visa Toppkolumn"
+
+#: FModScorecard.form:96
+msgid "Theme"
+msgstr "Schema"
 
 #: FNewGame.form:44
 msgid "Game"
@@ -178,10 +202,6 @@ msgstr "Spel"
 #: FNewGame.form:61
 msgid "Variant"
 msgstr "Variant"
-
-#: FNewGame.form:82 FSettings.class:14
-msgid "Players"
-msgstr "Spelare"
 
 #: FNewGame.form:104
 msgid "Shuffle"

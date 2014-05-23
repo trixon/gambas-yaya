@@ -1,5 +1,8 @@
 ' Gambas class file
 
+Static Private $aTheme As String[] = ["yaya", "plainpaper", "darkness"]
+Static Private $aThemeName As String[] = [("Yaya"), ("Plain paper"), ("Darkness")]
+
 Private $aDefineButtons As New Button[MSettings.StyleNames.Length]
 Private $aLabel As New Label[MSettings.StyleNames.Length]
 Private $iIndex As Integer
@@ -10,6 +13,9 @@ Public Sub _new()
   Dim hButton As Button
   Dim hHBox As HBox
   Dim hLabel As Label
+
+  cmbTheme.List = $aThemeName.Copy().Sort(gb.Language)
+  cmbTheme.Add(("Select a theme"), 0)
 
   For i = 0 To MSettings.StyleNames.Max
     hHBox = New HBox(svwTheme)
@@ -75,6 +81,15 @@ Public Sub btnDefine_Click()
 
   $iIndex = Last.Parent.Tag
   mnuPopup.Popup()
+
+End
+
+Public Sub cmbTheme_Click()
+
+  If cmbTheme.Index <= 0 Then Return
+
+  '  $cCurrent = MTheme.ReadFile($aTheme[$aThemeName.Find(cmbTheme.Text)])
+  '  RefreshEditor
 
 End
 
