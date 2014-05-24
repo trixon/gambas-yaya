@@ -17,7 +17,7 @@ Public Sub _new(hContainer As Container)
     .Expand = True
   End With
 
-  $hScorecard = New CScorecard($hPanel)
+  $hScorecard = New CScorecard($hPanel) As "Scorecard"
   $hDicePanel = New DicePanel($hPanel) As "DicePanel"
 
   DicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
@@ -32,7 +32,12 @@ End
 
 Public Sub DicePanel_RollRequest()
 
-  $hDicePanel.Roll()
+  $hScorecard.Undoable = False
+
+  If $hScorecard.Rollable Then
+    $hScorecard.NewRoll()
+    $hDicePanel.Roll()
+  Endif
 
 End
 
@@ -49,6 +54,7 @@ Public Sub NewGame()
   $hScorecard.NewGame()
   $hDicePanel.DiceCount = $hGameDef.Dice
   $hDicePanel.NewGame()
+  $hDicePanel.NewTurn()
 
 End
 
@@ -73,5 +79,23 @@ End
 Private Function DicePanel_Read() As DicePanel
 
   Return $hDicePanel
+
+End
+
+Public Sub Scorecard_Register()
+
+  $hDicePanel.NewTurn()
+
+End
+
+Public Sub Scorecard_Undo()
+
+  $hDicePanel.Undo()
+
+End
+
+Public Sub Scorecard_GameOver()
+
+  $hDicePanel.GameOver()
 
 End

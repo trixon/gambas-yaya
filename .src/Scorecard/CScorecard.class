@@ -1,6 +1,12 @@
 ' Gambas class file
 
+Event GameOver()
+Event Undo()
+Event Register()
+
 Property Read Panel As Panel
+Property Undoable As Boolean
+Property Rollable As Boolean
 
 Private $hLeftPanel As Panel
 Private $hRightPanel As Panel
@@ -8,9 +14,12 @@ Private $hPanel As Panel
 Private $hGrid As CScoreGrid
 Private $hGameDef As CGameDef
 Private $bRegisterable As Boolean
+Private $bRollable As Boolean
+Private $bUndoable As Boolean
 Private $iNumOfRolls As Integer
 Private $iActivePlayer As Integer
 Private $hCurrentPlayer As CCircularInt
+Private $cPlayers As New Collection
 
 Public Sub _new(hContainer As Container)
 
@@ -32,9 +41,10 @@ End
 Public Sub NewGame()
 
   $bRegisterable = False
+  $bUndoable = False
   $iActivePlayer = 0
   $iNumOfRolls = 0
-  '        mUndoAction.setEnabled(False);
+
   $hCurrentPlayer = New CCircularInt(0, MSettings.Players - 1)
   '
   '        For (PlayerColumn playerColumn: mPlayers){
@@ -83,6 +93,11 @@ End
 Public Sub Grid_Click()
 
   Debug $hGrid.Row, $hGrid.Column
+  If $hGrid.Row = 0 And $hGrid.Column = 0 Then
+    Raise Undo()
+    Raise Register()
+    Raise GameOver()
+  Endif
 
 End
 
@@ -119,5 +134,35 @@ Public Sub ParseDice(aValues As Integer[])
       MFormulaParser.ParseFormula(aValues, hGameRow)
     Endif
   Next
+
+End
+
+Private Function Undoable_Read() As Boolean
+
+  Return $bUndoable
+
+End
+
+Private Sub Undoable_Write(Value As Boolean)
+
+  $bUndoable = Value
+
+End
+
+Private Function Rollable_Read() As Boolean
+
+  Return $bRollable
+
+End
+
+Private Sub Rollable_Write(Value As Boolean)
+
+  $bRollable = Value
+
+End
+
+Public Sub NewRoll()
+
+  Debug
 
 End

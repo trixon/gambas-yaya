@@ -112,6 +112,18 @@ MarginPanel_Menu
 m
 
 
+GameOver
+m
+
+
+NewTurn
+m
+
+
+Undo
+m
+
+
 #FAbout
 Form
 C

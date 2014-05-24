@@ -19,4 +19,9 @@ Environment="GB_GUIkk=gb.gtk\nLANG=sv_SE.UTF-8\nLC_ALL=sv_SE.UTF-8"
 TabSize=2
 Translate=1
 Language=en
+Maintainer=patrik
+Address=patrik@patos
+License=General Public License
+PackageName=yaya-8.5.90
 Packager=1
+Systems=autotools
