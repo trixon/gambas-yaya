@@ -52,9 +52,16 @@ Public Sub NewGame()
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
 
   $hScorecard.NewGame()
-  $hDicePanel.DiceCount = $hGameDef.Dice
+  InitGame()
   $hDicePanel.NewGame()
   $hDicePanel.NewTurn()
+
+End
+
+Private Sub InitGame()
+
+  $hDicePanel.DiceCount = $hGameDef.Dice
+  $hDicePanel.MaxRolls = $hGameDef.Rolls
 
 End
 

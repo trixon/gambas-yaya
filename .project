@@ -15,7 +15,7 @@ Component=gb.sdl.sound
 Component=gb.web
 Description="Yet Another Yahtzee"
 Authors="Patrik Karlsson"
-Environment="GB_GUIkk=gb.gtk\nLANG=sv_SE.UTF-8\nLC_ALL=sv_SE.UTF-8"
+Environment="GB_GUI=gb.qt4\nLANG=sv_SE.UTF-8\nLC_ALL=sv_SE.UTF-8"
 TabSize=2
 Translate=1
 Language=en

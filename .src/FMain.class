@@ -41,6 +41,7 @@ Public Sub Form_Open()
   Me.FullScreen = MSettings.FullScreen
   mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
+  $hGamePanel.NewGame()
 
 End
 
@@ -132,6 +133,6 @@ End
 
 Public Sub Form_Show()
 
-  NewGame()
+  '   NewGame()
 
 End
