@@ -13,4 +13,10 @@
     Foreground = &HFF3F6F&
     Text = ("Label1")
   }
+  { Panel1 Panel
+    MoveScaled(6,7,24,24)
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(42,8,16,16)
+  }
 }
