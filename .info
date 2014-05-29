@@ -72,6 +72,10 @@ Rolls
 p
 i
 
+SOUND_DIR
+C
+s
+dice-sounds
 ReverseMouseScroll
 V
 b
@@ -136,6 +140,10 @@ Die_InvertSelection
 m
 
 
+SoundPath
+M
+s
+(sFilename)s
 MarginPanel_Menu
 m
 

@@ -2,9 +2,59 @@
 
 Private $hPlayer As MediaPlayer
 Private $hOutput As MediaControl
+Private $fPos As Float
+Private $fLength As Float
+
+Public Sub ExtractSounds()
+
+  Dim sDir As String = "dice-sounds"
+  Dim sFile As String
+  Dim sTemp As String
+
+  '   Copy "internal.mp3" To sTemp
+  Debug Now
+  For Each sFile In Dir(sDir, "*.mp3").Sort()
+    Print sFile
+    '     sTemp = File.SetExt(Temp$(sFile), "mp3")
+    sTemp = Temp$(sFile)
+    Print sTemp
+    Copy sDir &/ sFile To sTemp
+  Next
+  Debug Now
+
+End
 
 Public Sub Form_Open()
 
+  'ExtractSounds()
+  'Return
+  ' $fPos = $hPlayer.Position
+  ' If $fLength = 0 Then $fLength = $hPlayer.Duration
   $hPlayer = New MediaPlayer As "MediaPlayer"
+  $hPlayer.URL = Media.URL("internal.mp3")
+  Debug $hPlayer.URL
+  $hPlayer.URL = Media.URL("/home/patrik/external.mp3")
+  Debug Application.Args[0]
+  Debug $hPlayer.URL
+  Try $hPlayer.Play
+  '  Dump($hPlayer)
+  '   Music.Load("internal.mp3")
+  '   Music.Play
+  '   Sound.play("sound.mp3")
+
+End
+
+Public Sub MediaPlayer_Progress()
+
+  Debug
+
+End
+
+Public Sub timTime_Timer()
+
+  $fPos = $hPlayer.Position
+  If $fLength = 0 Then $fLength = $hPlayer.Duration
+  'Debug Format(CDate(($fPos + 0.5) / 86400), "hh:nn:ss") & " / " & Format(CDate($fLength / 86400), "hh:nn:ss")
+  Debug $fPos, $fLength
 
 End

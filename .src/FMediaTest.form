@@ -2,4 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,64,31)
+  { timTime #Timer
+    Delay = 200
+  }
 }
