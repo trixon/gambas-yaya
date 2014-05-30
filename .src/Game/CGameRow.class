@@ -22,7 +22,6 @@ Private $iMax As Integer
 
 Private $sId As String
 Private $sFormula As String
-Private $sSum As String
 Private $sSymbol As String
 Private $sText As String
 
