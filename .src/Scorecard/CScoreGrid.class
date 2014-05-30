@@ -93,6 +93,9 @@ Private Sub InitCell(Row As Integer, Column As Integer)
     If Row = 0 Then
       hCell.Text = MSettings.PlayerSelection[Column - 3]
     Endif
+    If hGameRow.IsCounter Then
+      hCell.Text = "0"
+    Endif
   Endif
 
   If Row = 0 Then
@@ -303,5 +306,25 @@ End
 Private Sub TopCol_Write(Value As Boolean)
 
   $bTopCol = Value
+
+End
+
+Public Sub UpdateRolls(iPlayer As Integer, sRolls As String)
+
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell
+  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
+  Dim iRow As Integer
+
+  For iRow = 0 To iMaxRow
+    If iRow > $hGameDef.Rows.Length - 1 Then
+      hGameRow = New CGameRow
+    Else
+      hGameRow = $hGameDef.Rows[iRow]
+    Endif
+    If hGameRow.IsCounter Then
+      Me[iRow, iPlayer + 3].Text = sRolls
+    Endif
+  Next
 
 End

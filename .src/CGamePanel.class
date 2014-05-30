@@ -33,11 +33,11 @@ End
 Public Sub DicePanel_RollRequest()
 
   $hScorecard.Undoable = False
-  $hScorecard.Rollable = True
-  If $hScorecard.Rollable Then
-    $hScorecard.NewRoll()
-    $hDicePanel.Roll()
-  Endif
+  '$hScorecard.Rollable = True
+  'If $hScorecard.Rollable Then
+  $hScorecard.NewRoll()
+  $hDicePanel.Roll()
+  'Endif
 
 End
 

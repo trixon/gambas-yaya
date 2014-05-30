@@ -1,1 +1,22 @@
 ' Gambas class file
+
+Property Rolls As Integer
+Private $iRolls As Integer
+
+Public Sub NewGame()
+
+  $iRolls = 0
+
+End
+
+Private Function Rolls_Read() As Integer
+
+  Return $iRolls
+
+End
+
+Private Sub Rolls_Write(Value As Integer)
+
+  $iRolls = Value
+
+End

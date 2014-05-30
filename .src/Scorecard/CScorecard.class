@@ -6,20 +6,23 @@ Event Register()
 
 Property Read Panel As Panel
 Property Undoable As Boolean
-Property Rollable As Boolean
+' Property Rollable As Boolean
 
+Private $aPlayers As CPlayerColumn[]
+
+Private $hCurrentPlayer As CCircularInt
 Private $hLeftPanel As Panel
 Private $hRightPanel As Panel
 Private $hPanel As Panel
 Private $hGrid As CScoreGrid
 Private $hGameDef As CGameDef
+
 Private $bRegisterable As Boolean
-Private $bRollable As Boolean
+' Private $bRollable As Boolean
 Private $bUndoable As Boolean
+
 Private $iNumOfRolls As Integer
 Private $iActivePlayer As Integer
-Private $hCurrentPlayer As CCircularInt
-Private $cPlayers As New Collection
 
 Public Sub _new(hContainer As Container)
 
@@ -40,10 +43,18 @@ End
 
 Public Sub NewGame()
 
+  Dim i As Integer
+
   $bRegisterable = False
   $bUndoable = False
   $iActivePlayer = 0
   $iNumOfRolls = 0
+  $aPlayers = New CPlayerColumn[MSettings.Players]
+
+  For i = 0 To $aPlayers.Max
+    $aPlayers[i] = New CPlayerColumn
+    $aPlayers[i].NewGame()
+  Next
 
   $hCurrentPlayer = New CCircularInt(0, MSettings.Players - 1)
   '
@@ -112,6 +123,12 @@ Public Sub Grid_MouseMove()
 
 End
 
+Private Function GenerateRollsIndicator() As String
+
+  Return Subst("&1 (&2/&3)", $iNumOfRolls, $aPlayers[$iActivePlayer].Rolls, $hGameDef.Rolls)
+
+End
+
 Public Sub ParseDice(aValues As Integer[])
 
   Dim iValue As Integer
@@ -119,7 +136,8 @@ Public Sub ParseDice(aValues As Integer[])
 
   $bRegisterable = True
   Inc $iNumOfRolls
-  ' mPlayers.get(mActivePlayer).incNumOfRolls();
+  $aPlayers[$iActivePlayer].Rolls = $aPlayers[$iActivePlayer].Rolls + 1
+  $hGrid.UpdateRolls($iActivePlayer, GenerateRollsIndicator())
   ' mPlayers.get(mActivePlayer).parse(values);
   '
   ' mPlayers.get(mActivePlayer).setVisibleIndicators(mOptions.isShowingIndicators());
@@ -149,19 +167,20 @@ Private Sub Undoable_Write(Value As Boolean)
 
 End
 
-Private Function Rollable_Read() As Boolean
-
-  Return $bRollable
-
-End
-
-Private Sub Rollable_Write(Value As Boolean)
-
-  $bRollable = Value
-
-End
+' Private Function Rollable_Read() As Boolean
+'
+'   Return $bRollable
+'
+' End
+'
+' Private Sub Rollable_Write(Value As Boolean)
+'
+'   $bRollable = Value
+'
+' End
 
 Public Sub NewRoll()
+  'TODO:         mPlayers.get(mActivePlayer).clearPreview();
 
   Debug
 
