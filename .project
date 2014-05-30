@@ -3,7 +3,7 @@
 Title=YaYa
 Startup=FMain
 Icon=logo.png
-Version=0.0.11
+Version=0.0.12
 Component=gb.image
 Component=gb.gui
 Component=gb.form
@@ -18,9 +18,11 @@ Environment="GB_GUI=gb.qt4\nLANG=sv_SE.UTF-8\nLC_ALL=sv_SE.UTF-8"
 TabSize=2
 Translate=1
 Language=en
-Maintainer=patrik
-Address=patrik@patos
+Maintainer=Patrik Karlsson
+Vendor=Trixon
+Address=patrik@trixon.se
+Url=http://www.trixon.se
 License=General Public License
-PackageName=yaya-8.5.90
+PackageName=yaya-0.0.12
 Packager=1
 Systems=autotools

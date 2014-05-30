@@ -43,7 +43,8 @@ End
 
 Public Sub Close()
 
-  Try $hDicePanel.Close()
+  $hDicePanel.Close()
+  Debug
 
 End
 

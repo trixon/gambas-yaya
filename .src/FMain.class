@@ -51,6 +51,7 @@ Public Sub Form_Close()
   Settings.Write(Me)
   MSettings.FullScreen = Me.FullScreen
   '   Settings.Save()
+  Debug
 
 End
 
