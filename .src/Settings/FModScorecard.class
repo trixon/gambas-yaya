@@ -50,7 +50,7 @@ End
 
 Public Sub Form_Open()
 
-  cbxShowHints.Value = MSettings.ShowHints
+  cbxShowIndicators.Value = MSettings.ShowIndicators
   cbxShowMaxCol.Value = MSettings.ShowMaxCol
   cbxShowTopCol.Value = MSettings.ShowTopCol
   cbxShowSymbols.Value = MSettings.ShowSymbols
@@ -62,7 +62,7 @@ Public Sub Save()
   Dim i As Integer
 
   '   Settings.Reload()
-  MSettings.ShowHints = cbxShowHints.Value
+  MSettings.ShowIndicators = cbxShowIndicators.Value
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
   MSettings.ShowTopCol = cbxShowTopCol.Value
   MSettings.ShowSymbols = cbxShowSymbols.Value

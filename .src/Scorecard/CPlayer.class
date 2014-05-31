@@ -1,0 +1,66 @@
+' Gambas class file
+
+Property Rolls As Integer
+Property Read Playable As Boolean[]
+Property Read Order As Integer[]
+
+Property Read Values As Integer[]
+Private $iRolls As Integer
+Private $aPlayable As Boolean[]
+Private $aRowOrder As Integer[]
+Private $aValues As Integer[]
+Private $hGameDef As CGameDef
+
+Public Sub NewGame(hGameDef As CGameDef)
+
+  Dim i As Integer
+
+  $hGameDef = hGameDef
+  $iRolls = 0
+  $aRowOrder = New Integer[]
+  $aPlayable = New Boolean[$hGameDef.Rows.Length]
+  $aValues = New Integer[$hGameDef.Rows.Length]
+  For i = 0 To $hGameDef.Rows.Max
+    $aPlayable[i] = True
+    $aValues[i] = 0
+  Next
+
+End
+
+Public Sub Store(Row As Integer, Value As Integer)
+
+  $aValues[Row] = Value
+  $aRowOrder.Add(Row)
+  $aPlayable[Row] = False
+
+End
+
+Private Function Rolls_Read() As Integer
+
+  Return $iRolls
+
+End
+
+Private Sub Rolls_Write(Value As Integer)
+
+  $iRolls = Value
+
+End
+
+Private Function Playable_Read() As Boolean[]
+
+  Return $aPlayable
+
+End
+
+Private Function Values_Read() As Integer[]
+
+  Return $aValues
+
+End
+
+Private Function Order_Read() As Integer[]
+
+  Return $aRowOrder
+
+End

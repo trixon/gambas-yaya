@@ -6,11 +6,14 @@ Event Register()
 
 Property Read Panel As Panel
 Property Undoable As Boolean
+
 ' Property Rollable As Boolean
 
-Private $aPlayers As CPlayerColumn[]
-
-Private $hCurrentPlayer As CCircularInt
+Private $aPlayers As CPlayer[]
+Private $hCurrentPlayer As CPlayer
+Private $aTempValues As Integer[]
+Private $aLastValues As Integer[]
+Private $hPlayerIndex As CCircularInt
 Private $hLeftPanel As Panel
 Private $hRightPanel As Panel
 Private $hPanel As Panel
@@ -22,7 +25,7 @@ Private $bRegisterable As Boolean
 Private $bUndoable As Boolean
 
 Private $iNumOfRolls As Integer
-Private $iActivePlayer As Integer
+' Private $iActivePlayer As Integer
 
 Public Sub _new(hContainer As Container)
 
@@ -45,28 +48,37 @@ Public Sub NewGame()
 
   Dim i As Integer
 
+  $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
   $bRegisterable = False
   $bUndoable = False
-  $iActivePlayer = 0
+  '   $iActivePlayer = 0
   $iNumOfRolls = 0
-  $aPlayers = New CPlayerColumn[MSettings.Players]
 
+  $aPlayers = New CPlayer[MSettings.Players]
   For i = 0 To $aPlayers.Max
-    $aPlayers[i] = New CPlayerColumn
-    $aPlayers[i].NewGame()
+    $aPlayers[i] = New CPlayer
+    $aPlayers[i].NewGame($hGameDef)
   Next
 
-  $hCurrentPlayer = New CCircularInt(0, MSettings.Players - 1)
-  '
-  '        For (PlayerColumn playerColumn: mPlayers){
-  '            playerColumn.newGame();
-  '        }
-  '
-  '        mPlayers.get(mActivePlayer).setEnabled(True);
-  $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
+  $hPlayerIndex = New CCircularInt(0, MSettings.Players - 1)
+  $hCurrentPlayer = $aPlayers[0]
 
   GridInit()
   Settings()
+
+End
+
+Private Sub ActivateNextPlayer()
+
+  $hCurrentPlayer = $aPlayers[$hPlayerIndex.Inc()]
+  $iNumOfRolls = 0
+
+End
+
+Private Sub ActivatePreviousPlayer()
+
+  $hCurrentPlayer = $aPlayers[$hPlayerIndex.Dec()]
+  $iNumOfRolls = 0
 
 End
 
@@ -103,11 +115,35 @@ End
 
 Public Sub Grid_Click()
 
-  Debug $hGrid.Row, $hGrid.Column
-  If $hGrid.Row = 0 And $hGrid.Column = 0 Then
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell = $hGrid.Current
+
+  Dim iRow As Integer = $hGrid.Row
+  Dim iCol As Integer = $hGrid.Column
+
+  Debug iRow, iCol
+  If iRow = 0 And iCol = 0 Then
+    $hGrid[0, 0].Picture = Picture["icon:/16/undo"]
     Raise Undo()
-    Raise Register()
-    Raise GameOver()
+    'Raise GameOver()
+  Endif
+
+  '   Debug $iActivePlayer
+
+  If iCol = $hPlayerIndex.Value + 3 Then
+    hGameRow = $hGameDef.Rows[iRow]
+
+    If hGameRow.IsPlayable And $hCurrentPlayer.Playable[iRow] Then
+      Debug Subst$("hGameRow.Text &1, $aTempValues[iRow] &2", hGameRow.Text, $aTempValues[iRow])
+      $hCurrentPlayer.Store(iRow, $aTempValues[iRow])
+      ' $hCurrentPlayer.Playable[iRow] = False
+      ' $hCurrentPlayer.Values[iRow] = $aTempValues[iRow]
+      '       $hPlayerIndex.Inc
+      '       $iActivePlayer = $hCurrentPlayer.Value
+      $aLastValues = $aTempValues.Copy()
+      ActivateNextPlayer()
+      Raise Register()
+    Endif
   Endif
 
 End
@@ -125,33 +161,73 @@ End
 
 Private Function GenerateRollsIndicator() As String
 
-  Return Subst("&1 (&2/&3)", $iNumOfRolls, $aPlayers[$iActivePlayer].Rolls, $hGameDef.Rolls)
+  Return Subst("&1 (&2/&3)", $iNumOfRolls, $hCurrentPlayer.Rolls, $hGameDef.Rolls)
 
 End
 
-Public Sub ParseDice(aValues As Integer[])
+Public Sub RollFinished(aValues As Integer[])
 
-  Dim iValue As Integer
-  Dim hGameRow As CGameRow
-
-  $bRegisterable = True
   Inc $iNumOfRolls
-  $aPlayers[$iActivePlayer].Rolls = $aPlayers[$iActivePlayer].Rolls + 1
-  $hGrid.UpdateRolls($iActivePlayer, GenerateRollsIndicator())
-  ' mPlayers.get(mActivePlayer).parse(values);
-  '
-  ' mPlayers.get(mActivePlayer).setVisibleIndicators(mOptions.isShowingIndicators());
+  $hCurrentPlayer.Rolls = $hCurrentPlayer.Rolls + 1
+  $hGrid.UpdateRolls($hPlayerIndex.Value, GenerateRollsIndicator())
 
-  For Each iValue In aValues
-    Print iValue;;
-  Next
-  Print
+  $aTempValues = CalculatePossibleScores(aValues)
+  ShowIndicators(MSettings.ShowIndicators)
 
-  For Each hGameRow In $hGameDef.Rows
-    If hGameRow.Formula Then
-      MFormulaParser.ParseFormula(aValues, hGameRow)
+End
+
+Private Sub ShowIndicators(Show As Boolean)
+
+  Dim iRow As Integer
+  Dim iBackground As Integer
+  Dim iForeground As Integer
+  Dim hFont As Font
+  Dim sText As String
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell
+
+  For iRow = 0 To $hGameDef.Rows.Max
+    hGameRow = $hGameDef.Rows[iRow]
+    hCell = $hGrid[iRow, $hPlayerIndex.Value + 3]
+    If hGameRow.IsPlayable And $aTempValues[iRow] > 0 And $hCurrentPlayer.Playable[iRow] Then
+      hCell.Text = $aTempValues[iRow]
     Endif
+    If Show Then
+    Else
+      iBackground = MSettings.GetBackground(MSettings.Score)
+      iForeground = MSettings.GetForeground(MSettings.Score)
+      hFont = MSettings.GetFont(MSettings.Score)
+    Endif
+
   Next
+
+End
+
+Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
+
+  Dim aScores As New Integer[$hGameDef.Rows.Length]
+  Dim hGameRow As CGameRow
+  Dim iRow As Integer
+  Dim iScore As Integer
+  Dim iValue As Integer
+  Dim sValues As String
+
+  For Each iValue In Values
+    sValues &= iValue & " "
+  Next
+  Debug sValues
+
+  For iRow = 0 To $hGameDef.Rows.Max
+    hGameRow = $hGameDef.Rows[iRow]
+
+    If hGameRow.Formula Then
+      iScore = MFormulaParser.ParseFormula(Values, hGameRow)
+      aScores[iRow] = iScore
+    Endif
+
+  Next
+
+  Return aScores
 
 End
 

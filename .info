@@ -1,19 +1,19 @@
 #CCircularInt
 
 C
+Value
+p
+i
+
 _new
 m
 
-(iMin)i(iMax)i[(iValue)i]
+(Min)i(Max)i[(Value)i]
 Dec
 m
 i
 
 PeekPrev
-m
-i
-
-Get
 m
 i
 
@@ -25,10 +25,6 @@ PeekNext
 m
 i
 
-set
-m
-
-(iValue)i
 #DicePanel
 
 C

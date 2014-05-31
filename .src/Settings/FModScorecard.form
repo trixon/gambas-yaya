@@ -30,7 +30,7 @@
       MoveScaled(3,2,31,17)
       Expand = True
       AutoResize = True
-      { cbxShowHints CheckBox
+      { cbxShowIndicators CheckBox
         MoveScaled(0,0,24,4)
         Text = ("Show indicators")
       }
