@@ -40,22 +40,12 @@ End
 
 Public Sub NewGame()
 
-  Dim iMaxCol As Integer = MSettings.Players + 2
-  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
-  Dim iCol As Integer
-  Dim iRow As Integer
-
-  For iCol = 0 To iMaxCol
-    For iRow = 0 To iMaxRow
-      InitCell(iRow, iCol)
-    Next
-  Next
-
+  ResetLayout()
   InitHeaderRow()
 
 End
 
-Private Sub InitCell(Row As Integer, Column As Integer)
+Private Sub ResetLayoutByCell(Row As Integer, Column As Integer)
 
   Dim hGameRow As CGameRow
   Dim hCell As _GridView_Cell
@@ -111,6 +101,7 @@ Private Sub InitCell(Row As Integer, Column As Integer)
 End
 
 Private Sub InitHeaderRow()
+  'TODO: Don't asume header row = 0
 
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iCol As Integer
@@ -126,6 +117,33 @@ Private Sub InitHeaderRow()
     If iCol = 0 Then
       hCell.Text = MGameLoader.TextById($hGameDef.Id)
       hCell.Font.Bold = False
+    Endif
+
+  Next
+
+End
+
+Public Sub ShowIndicators(Show As Boolean, PlayerIndex As CCircularInt, CurrentPlayer As CPlayer, Values As Integer[])
+
+  Dim iRow As Integer
+  Dim iBackground As Integer
+  Dim iForeground As Integer
+  Dim hFont As Font
+  Dim sText As String
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell
+
+  For iRow = 0 To $hGameDef.Rows.Max
+    hGameRow = $hGameDef.Rows[iRow]
+    hCell = Me[iRow, PlayerIndex.Value + 3]
+    If hGameRow.IsPlayable And Values[iRow] > 0 And CurrentPlayer.Playable[iRow] Then
+      hCell.Text = Values[iRow]
+    Endif
+    If Show Then
+    Else
+      iBackground = MSettings.GetBackground(MSettings.Score)
+      iForeground = MSettings.GetForeground(MSettings.Score)
+      hFont = MSettings.GetFont(MSettings.Score)
     Endif
 
   Next
@@ -234,21 +252,38 @@ Public Sub RecalcWidth()
 
 End
 
-Public Sub ApplyLayout()
+Public Sub ResetLayout()
 
   Dim iMaxCol As Integer = MSettings.Players + 2
-  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iCol As Integer
+
+  For iCol = 0 To iMaxCol
+    ResetLayoutByColumn(iCol)
+  Next
+
+End
+
+Public Sub ResetLayoutByColumn(Column As Integer)
+
+  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
+  Dim iRow As Integer
+
+  For iRow = 0 To iMaxRow
+    ResetLayoutByCell(iRow, Column)
+  Next
+
+  InitHeaderRow()
+
+End
+
+Public Sub ApplyLayout()
+
+  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iRow As Integer
   Dim hGameRow As CGameRow
   Dim iFontHeight As Integer
 
-  For iCol = 0 To iMaxCol
-    For iRow = 0 To iMaxRow
-      InitCell(iRow, iCol)
-    Next
-  Next
-
+  ResetLayout()
   InitHeaderRow()
 
   For iRow = 0 To iMaxRow
@@ -270,18 +305,19 @@ Public Sub ApplyLayout()
 
 End
 
-Public Sub HoverRow(iRow As Integer)
+Public Sub HoverRow(Row As Integer, Column As Integer, Playable As Boolean)
 
-  Dim iMaxCol As Integer = MSettings.Players + 2
-  Dim iCol As Integer
-  Dim hCell As _GridView_Cell
+  Dim hGameRow As CGameRow
+  Dim iHover As Integer = &H555555
 
-  For iCol = 0 To iMaxCol
-    hCell = Me[iRow, iCol]
+  ResetLayoutByColumn(0)
+  ResetLayoutByColumn(Column)
 
-    '     hCell.Background = Color.Green
-
-  Next
+  hGameRow = $hGameDef.Rows[Row]
+  If hGameRow.IsPlayable And Playable Then
+    Me[Row, 0].Background = MSettings.GetBackground(MSettings.Header) Or iHover Or ALPHA
+    Me[Row, Column].Background = MSettings.GetBackground(MSettings.Score) Or iHover Or ALPHA
+  Endif
 
 End
 

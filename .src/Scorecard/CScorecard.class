@@ -23,6 +23,7 @@ Private $hGameDef As CGameDef
 Private $bRegisterable As Boolean
 ' Private $bRollable As Boolean
 Private $bUndoable As Boolean
+Private $iLastHoveredRow As Integer = -1
 
 Private $iNumOfRolls As Integer
 
@@ -137,13 +138,21 @@ Public Sub Grid_Click()
 
 End
 
+Public Sub Grid_Leave()
+
+  $hGrid.ResetLayoutByColumn(0)
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
+  $iLastHoveredRow = -1
+
+End
+
 Public Sub Grid_MouseMove()
 
   Dim iRow As Integer = $hGrid.RowAt(Mouse.Y)
 
-  If iRow > 0 And If iRow < $hGameDef.Rows.Count Then
-    $hGrid.HoverRow(iRow)
-
+  If iRow <> $iLastHoveredRow And iRow > 0 And If iRow < $hGameDef.Rows.Count Then
+    $hGrid.HoverRow(iRow, $hPlayerIndex.Value + 3, $hCurrentPlayer.Playable[iRow])
+    $iLastHoveredRow = iRow
   Endif
 
 End
@@ -161,37 +170,37 @@ Public Sub RollFinished(aValues As Integer[])
   $hGrid.UpdateRolls($hPlayerIndex.Value, GenerateRollsIndicator())
 
   $aTempValues = CalculatePossibleScores(aValues)
-  ShowIndicators(MSettings.ShowIndicators)
+  $hGrid.ShowIndicators(MSettings.ShowIndicators, $hPlayerIndex, $hCurrentPlayer, $aTempValues)
   $bRegisterable = True
 
 End
 
-Private Sub ShowIndicators(Show As Boolean)
-
-  Dim iRow As Integer
-  Dim iBackground As Integer
-  Dim iForeground As Integer
-  Dim hFont As Font
-  Dim sText As String
-  Dim hGameRow As CGameRow
-  Dim hCell As _GridView_Cell
-
-  For iRow = 0 To $hGameDef.Rows.Max
-    hGameRow = $hGameDef.Rows[iRow]
-    hCell = $hGrid[iRow, $hPlayerIndex.Value + 3]
-    If hGameRow.IsPlayable And $aTempValues[iRow] > 0 And $hCurrentPlayer.Playable[iRow] Then
-      hCell.Text = $aTempValues[iRow]
-    Endif
-    If Show Then
-    Else
-      iBackground = MSettings.GetBackground(MSettings.Score)
-      iForeground = MSettings.GetForeground(MSettings.Score)
-      hFont = MSettings.GetFont(MSettings.Score)
-    Endif
-
-  Next
-
-End
+' Private Sub ShowIndicators(Show As Boolean)
+'
+'   Dim iRow As Integer
+'   Dim iBackground As Integer
+'   Dim iForeground As Integer
+'   Dim hFont As Font
+'   Dim sText As String
+'   Dim hGameRow As CGameRow
+'   Dim hCell As _GridView_Cell
+'
+'   For iRow = 0 To $hGameDef.Rows.Max
+'     hGameRow = $hGameDef.Rows[iRow]
+'     hCell = $hGrid[iRow, $hPlayerIndex.Value + 3]
+'     If hGameRow.IsPlayable And $aTempValues[iRow] > 0 And $hCurrentPlayer.Playable[iRow] Then
+'       hCell.Text = $aTempValues[iRow]
+'     Endif
+'     If Show Then
+'     Else
+'       iBackground = MSettings.GetBackground(MSettings.Score)
+'       iForeground = MSettings.GetForeground(MSettings.Score)
+'       hFont = MSettings.GetFont(MSettings.Score)
+'     Endif
+'
+'   Next
+'
+' End
 
 Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
 
@@ -200,12 +209,12 @@ Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
   Dim iRow As Integer
   Dim iScore As Integer
   Dim iValue As Integer
-  Dim sValues As String
+  '   Dim sValues As String
 
-  For Each iValue In Values
-    sValues &= iValue & " "
-  Next
-  Debug sValues
+  ' For Each iValue In Values
+  '   sValues &= iValue & " "
+  ' Next
+  ' Debug sValues
 
   For iRow = 0 To $hGameDef.Rows.Max
     hGameRow = $hGameDef.Rows[iRow]
@@ -214,7 +223,6 @@ Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
       iScore = MFormulaParser.ParseFormula(Values, hGameRow)
       aScores[iRow] = iScore
     Endif
-
   Next
 
   Return aScores
@@ -255,6 +263,7 @@ End
 Private Sub Register(Row As Integer)
 
   Debug Row
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
   $hCurrentPlayer.Register(Row, $aTempValues[Row])
   $aLastValues = $aTempValues.Copy()
   ActivateNextPlayer()

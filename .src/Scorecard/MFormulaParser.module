@@ -17,10 +17,9 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
   sCommand = aParseString[0]
 
   $aArguments.Clear
-  Print $hGameRow.Text, $hGameRow.Formula;;
+  'Print $hGameRow.Text, $hGameRow.Formula;;
 
   For i = 1 To aParseString.Max
-    '     $aArguments.Add(CInt(aParseString[i]))
     $aArguments.Add(aParseString[i])
   Next
 
@@ -47,7 +46,7 @@ Public Function ParseFormula(aValues As Integer[], hGameRow As CGameRow) As Inte
       Debug "Unknown command: " & sCommand
   End Select
 
-  Print iResult
+  'Print iResult
 
   Return iResult
 
