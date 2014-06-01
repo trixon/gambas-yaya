@@ -7,6 +7,9 @@ Private $hDicePanel As DicePanel
 Private $hPanel As Panel
 Private $hScorecard As CScorecard
 Private $hGameDef As CGameDef
+
+Private $iRollCounter As Integer
+
 Private $mnuUndo As Menu
 
 Public Sub _new(hContainer As Container, hUndo As Menu)
@@ -27,19 +30,18 @@ End
 
 Public Sub DicePanel_RollFinished()
 
+  Inc $iRollCounter
   $mnuUndo.Enabled = False
   $hScorecard.RollFinished($hDicePanel.Values)
+  $hDicePanel.Enabled = $iRollCounter < $hGameDef.Rolls
 
 End
 
 Public Sub DicePanel_RollRequest()
 
   $hScorecard.Undoable = False
-  '$hScorecard.Rollable = True
-  'If $hScorecard.Rollable Then
   $hScorecard.NewRoll()
   $hDicePanel.Roll()
-  'Endif
 
 End
 
@@ -58,7 +60,6 @@ Public Sub NewGame()
 
   With $hDicePanel
     .DiceCount = $hGameDef.Dice
-    .MaxRolls = $hGameDef.Rolls
     .NewGame()
     .NewTurn()
   End With
@@ -97,6 +98,7 @@ End
 
 Public Sub Scorecard_Register()
 
+  $iRollCounter = 0
   $hDicePanel.NewTurn()
   $mnuUndo.Enabled = True
 

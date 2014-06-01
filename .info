@@ -60,14 +60,6 @@ DiceToFloor
 p
 i
 
-MaxRolls
-p
-i
-
-Rolls
-p
-i
-
 SOUND_DIR
 C
 s
@@ -75,10 +67,6 @@ dice-sounds
 ReverseMouseScroll
 V
 b
-
-_free
-m
-
 
 _new
 m
