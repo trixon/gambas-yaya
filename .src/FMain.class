@@ -5,7 +5,7 @@ Private $hGamePanel As CGamePanel
 Public Sub _new()
 
   MGameLoader.LoadAll()
-  $hGamePanel = New CGamePanel(Me) As "GamePanel"
+  $hGamePanel = New CGamePanel(Me, mnuUndo) As "GamePanel"
 
 End
 
@@ -26,6 +26,9 @@ Public Sub Action_Activate(key As String) As Boolean
 
     Case "quit"
       Me.Close
+
+    Case "undo"
+      Undo()
 
     Default
       Print "Unknown action: " & key
@@ -113,7 +116,7 @@ End
 
 Public Sub Undo()
 
-  Debug
+  $hGamePanel.Undo()
 
 End
 

@@ -27,11 +27,17 @@ Public Sub NewGame(hGameDef As CGameDef)
 
 End
 
-Public Sub Store(Row As Integer, Value As Integer)
+Public Sub Register(Row As Integer, Value As Integer)
 
   $aValues[Row] = Value
   $aRowOrder.Add(Row)
   $aPlayable[Row] = False
+
+End
+
+Public Sub Undo()
+
+  $aPlayable[$aRowOrder.Pop()] = True
 
 End
 

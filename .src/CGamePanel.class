@@ -7,11 +7,12 @@ Private $hDicePanel As DicePanel
 Private $hPanel As Panel
 Private $hScorecard As CScorecard
 Private $hGameDef As CGameDef
+Private $mnuUndo As Menu
 
-Public Sub _new(hContainer As Container)
+Public Sub _new(hContainer As Container, hUndo As Menu)
 
   $hPanel = New Panel(hContainer) As "Panel"
-
+  $mnuUndo = hUndo
   With $hPanel
     .Arrangement = Arrange.Vertical
     .Expand = True
@@ -26,6 +27,7 @@ End
 
 Public Sub DicePanel_RollFinished()
 
+  $mnuUndo.Enabled = False
   $hScorecard.RollFinished($hDicePanel.Values)
 
 End
@@ -51,18 +53,15 @@ End
 Public Sub NewGame()
 
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
-
+  $mnuUndo.Enabled = False
   $hScorecard.NewGame()
-  InitGame()
-  $hDicePanel.NewGame()
-  $hDicePanel.NewTurn()
 
-End
-
-Private Sub InitGame()
-
-  $hDicePanel.DiceCount = $hGameDef.Dice
-  $hDicePanel.MaxRolls = $hGameDef.Rolls
+  With $hDicePanel
+    .DiceCount = $hGameDef.Dice
+    .MaxRolls = $hGameDef.Rolls
+    .NewGame()
+    .NewTurn()
+  End With
 
 End
 
@@ -75,6 +74,12 @@ End
 Public Sub Settings()
 
   $hScorecard.Settings()
+
+End
+
+Public Sub Undo()
+
+  $hScorecard.Undo()
 
 End
 
@@ -93,11 +98,13 @@ End
 Public Sub Scorecard_Register()
 
   $hDicePanel.NewTurn()
+  $mnuUndo.Enabled = True
 
 End
 
 Public Sub Scorecard_Undo()
 
+  $mnuUndo.Enabled = False
   $hDicePanel.Undo()
 
 End

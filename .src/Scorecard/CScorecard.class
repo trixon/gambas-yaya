@@ -25,7 +25,6 @@ Private $bRegisterable As Boolean
 Private $bUndoable As Boolean
 
 Private $iNumOfRolls As Integer
-' Private $iActivePlayer As Integer
 
 Public Sub _new(hContainer As Container)
 
@@ -51,7 +50,6 @@ Public Sub NewGame()
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
   $bRegisterable = False
   $bUndoable = False
-  '   $iActivePlayer = 0
   $iNumOfRolls = 0
 
   $aPlayers = New CPlayer[MSettings.Players]
@@ -86,11 +84,13 @@ Public Sub Settings()
 
   Settings.Reload()
   If Not IsNull($hGrid) Then
-    $hGrid.MaxCol = MSettings.ShowMaxCol
-    $hGrid.TopCol = MSettings.ShowTopCol
-    $hGrid.ApplyLayout()
-    $hGrid.ShowTextAsSymbols(MSettings.ShowSymbols)
-    $hGrid.RecalcWidth()
+    With $hGrid
+      .MaxCol = MSettings.ShowMaxCol
+      .TopCol = MSettings.ShowTopCol
+      .ApplyLayout()
+      .ShowTextAsSymbols(MSettings.ShowSymbols)
+      .RecalcWidth()
+    End With
   Endif
 
 End
@@ -121,28 +121,17 @@ Public Sub Grid_Click()
   Dim iRow As Integer = $hGrid.Row
   Dim iCol As Integer = $hGrid.Column
 
-  Debug iRow, iCol
-  If iRow = 0 And iCol = 0 Then
-    $hGrid[0, 0].Picture = Picture["icon:/16/undo"]
-    Raise Undo()
-    'Raise GameOver()
+  Debug Subst$("Row &1, Col &2", iRow, iCol)
+  If $bUndoable And iRow = 0 And iCol = 0 Then
+    Undo()
   Endif
 
-  '   Debug $iActivePlayer
-
-  If iCol = $hPlayerIndex.Value + 3 Then
+  If $bRegisterable And iCol = $hPlayerIndex.Value + 3 Then
     hGameRow = $hGameDef.Rows[iRow]
 
     If hGameRow.IsPlayable And $hCurrentPlayer.Playable[iRow] Then
       Debug Subst$("hGameRow.Text &1, $aTempValues[iRow] &2", hGameRow.Text, $aTempValues[iRow])
-      $hCurrentPlayer.Store(iRow, $aTempValues[iRow])
-      ' $hCurrentPlayer.Playable[iRow] = False
-      ' $hCurrentPlayer.Values[iRow] = $aTempValues[iRow]
-      '       $hPlayerIndex.Inc
-      '       $iActivePlayer = $hCurrentPlayer.Value
-      $aLastValues = $aTempValues.Copy()
-      ActivateNextPlayer()
-      Raise Register()
+      Register(iRow)
     Endif
   Endif
 
@@ -173,6 +162,7 @@ Public Sub RollFinished(aValues As Integer[])
 
   $aTempValues = CalculatePossibleScores(aValues)
   ShowIndicators(MSettings.ShowIndicators)
+  $bRegisterable = True
 
 End
 
@@ -259,5 +249,30 @@ Public Sub NewRoll()
   'TODO:         mPlayers.get(mActivePlayer).clearPreview();
 
   Debug
+
+End
+
+Private Sub Register(Row As Integer)
+
+  Debug Row
+  $hCurrentPlayer.Register(Row, $aTempValues[Row])
+  $aLastValues = $aTempValues.Copy()
+  ActivateNextPlayer()
+  $bRegisterable = False
+  $bUndoable = True
+
+  Raise Register()
+
+End
+
+Public Sub Undo()
+
+  Debug
+  ActivatePreviousPlayer()
+  $bRegisterable = True
+  $bUndoable = False
+  $hCurrentPlayer.Undo()
+  '$hGrid[0, 0].Picture = Picture["icon:/16/undo"]
+  Raise Undo()
 
 End
