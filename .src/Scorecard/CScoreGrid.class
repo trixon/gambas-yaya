@@ -1,17 +1,27 @@
 ' Gambas class file
 
 Inherits GridView
+Property Indicators As Boolean
 Property MaxCol As Boolean
 Property TopCol As Boolean
+Property TempPlayer As CPlayer
+Property TempPlayerIndex As CCircularInt
+Property TempValues As Integer[]
 
 Private Const ALPHA As Integer = &H44000000
 Private Const ROW_HEIGHT_MARGIN As Integer = 6
 Private Const COL_WIDTH_MARGIN As Integer = 32
 Private Const COL_WIDTH_TEXT As Integer = 128
 Private Const COL_WIDTH_PLAYERS As Integer = 96
+
+Private $bIndicators As Boolean
 Private $bMaxCol As Boolean
 Private $bTopCol As Boolean
 Private $hGameDef As CGameDef
+
+Private $aTempValues As New Integer[999]
+Private $hTempPlayer As CPlayer
+Private $hTempPlayerIndex As CCircularInt
 
 Public Sub _new(hGameDef As CGameDef)
 
@@ -123,7 +133,11 @@ Private Sub InitHeaderRow()
 
 End
 
-Public Sub ShowIndicators(Show As Boolean, PlayerIndex As CCircularInt, CurrentPlayer As CPlayer, Values As Integer[])
+Public Sub SetTempValues(PlayerIndex As CCircularInt, CurrentPlayer As CPlayer, Values As Integer[])
+
+End
+
+Public Sub XXX999(Show As Boolean, PlayerIndex As CCircularInt, CurrentPlayer As CPlayer, Values As Integer[])
 
   Dim iRow As Integer
   Dim iBackground As Integer
@@ -272,6 +286,7 @@ Public Sub ResetLayoutByColumn(Column As Integer)
     ResetLayoutByCell(iRow, Column)
   Next
 
+  Try Me.Indicators = Me.Indicators
   InitHeaderRow()
 
 End
@@ -309,15 +324,29 @@ Public Sub HoverRow(Row As Integer, Column As Integer, Playable As Boolean)
 
   Dim hGameRow As CGameRow
   Dim iHover As Integer = &H555555
+  Dim iValue As Integer
 
   ResetLayoutByColumn(0)
   ResetLayoutByColumn(Column)
 
   hGameRow = $hGameDef.Rows[Row]
+  iValue = $aTempValues[Row]
+
   If hGameRow.IsPlayable And Playable Then
     Me[Row, 0].Background = MSettings.GetBackground(MSettings.Header) Or iHover Or ALPHA
-    Me[Row, Column].Background = MSettings.GetBackground(MSettings.Score) Or iHover Or ALPHA
+    Debug iValue, hGameRow.Lim
+    If iValue > 0 Then
+      If iValue >= hGameRow.Lim Then
+        Me[Row, Column].Background = MSettings.GetBackground(MSettings.IndicatorHi) Or iHover Or ALPHA
+      Else
+        Me[Row, Column].Background = MSettings.GetBackground(MSettings.IndicatorLo) Or iHover Or ALPHA
+      Endif
+    Else
+      Me[Row, Column].Background = MSettings.GetBackground(MSettings.Score) Or iHover Or ALPHA
+    Endif
   Endif
+
+  '   Try Me.Indicators = Me.Indicators
 
 End
 
@@ -360,6 +389,98 @@ Public Sub UpdateRolls(iPlayer As Integer, sRolls As String)
     Endif
     If hGameRow.IsCounter Then
       Me[iRow, iPlayer + 3].Text = sRolls
+    Endif
+  Next
+
+End
+
+Private Function TempValues_Read() As Integer[]
+
+  Return $aTempValues
+
+End
+
+Private Sub TempValues_Write(Value As Integer[])
+
+  $aTempValues = Value
+
+End
+
+Private Function TempPlayer_Read() As CPlayer
+
+  Return $hTempPlayer
+
+End
+
+Private Sub TempPlayer_Write(Value As CPlayer)
+
+  $hTempPlayer = Value
+
+End
+
+Private Function TempPlayerIndex_Read() As CCircularInt
+
+  Return $hTempPlayerIndex
+
+End
+
+Private Sub TempPlayerIndex_Write(Value As CCircularInt)
+
+  $hTempPlayerIndex = Value
+
+End
+
+Private Function Indicators_Read() As Boolean
+
+  Return $bIndicators
+
+End
+
+Private Sub Indicators_Write(Value As Boolean)
+
+  Dim iRow As Integer
+  Dim iBackground As Integer
+  Dim iForeground As Integer
+  Dim iValue As Integer
+  Dim hFont As Font
+  Dim sText As String
+  Dim hGameRow As CGameRow
+  Dim hCell As _GridView_Cell
+
+  $bIndicators = Value
+
+  For iRow = 0 To $hGameDef.Rows.Max
+    hGameRow = $hGameDef.Rows[iRow]
+    hCell = Me[iRow, $hTempPlayerIndex.Value + 3]
+    iValue = $aTempValues[iRow]
+    ' iBackground = MSettings.GetBackground(MSettings.Score)
+    ' iForeground = MSettings.GetForeground(MSettings.Score)
+    ' hFont = MSettings.GetFont(MSettings.Score)
+
+    If $bIndicators Then
+      If hGameRow.IsPlayable And iValue > 0 And $hTempPlayer.Playable[iRow] Then
+        If iValue >= hGameRow.Lim Then
+          iBackground = MSettings.GetBackground(MSettings.IndicatorHi)
+          iForeground = MSettings.GetForeground(MSettings.IndicatorHi)
+          hFont = MSettings.GetFont(MSettings.IndicatorHi)
+        Else
+          iBackground = MSettings.GetBackground(MSettings.IndicatorLo)
+          iForeground = MSettings.GetForeground(MSettings.IndicatorLo)
+          hFont = MSettings.GetFont(MSettings.IndicatorLo)
+        Endif
+      Endif
+    Else
+      iBackground = MSettings.GetBackground(MSettings.Score)
+      iForeground = MSettings.GetForeground(MSettings.Score)
+      hFont = MSettings.GetFont(MSettings.Score)
+    Endif
+
+    If hGameRow.IsPlayable And iValue > 0 And $hTempPlayer.Playable[iRow] Then
+      hCell.Background = iBackground Or ALPHA
+      hCell.Foreground = iForeground Or ALPHA
+      hCell.Font = hFont
+      hCell.Text = iValue
+      hCell.Alignment = Align.Left
     Endif
   Next
 

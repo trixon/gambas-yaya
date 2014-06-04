@@ -170,37 +170,13 @@ Public Sub RollFinished(aValues As Integer[])
   $hGrid.UpdateRolls($hPlayerIndex.Value, GenerateRollsIndicator())
 
   $aTempValues = CalculatePossibleScores(aValues)
-  $hGrid.ShowIndicators(MSettings.ShowIndicators, $hPlayerIndex, $hCurrentPlayer, $aTempValues)
+  $hGrid.TempPlayer = $hCurrentPlayer
+  $hGrid.TempPlayerIndex = $hPlayerIndex
+  $hGrid.TempValues = $aTempValues
+  $hGrid.Indicators = MSettings.ShowIndicators
   $bRegisterable = True
 
 End
-
-' Private Sub ShowIndicators(Show As Boolean)
-'
-'   Dim iRow As Integer
-'   Dim iBackground As Integer
-'   Dim iForeground As Integer
-'   Dim hFont As Font
-'   Dim sText As String
-'   Dim hGameRow As CGameRow
-'   Dim hCell As _GridView_Cell
-'
-'   For iRow = 0 To $hGameDef.Rows.Max
-'     hGameRow = $hGameDef.Rows[iRow]
-'     hCell = $hGrid[iRow, $hPlayerIndex.Value + 3]
-'     If hGameRow.IsPlayable And $aTempValues[iRow] > 0 And $hCurrentPlayer.Playable[iRow] Then
-'       hCell.Text = $aTempValues[iRow]
-'     Endif
-'     If Show Then
-'     Else
-'       iBackground = MSettings.GetBackground(MSettings.Score)
-'       iForeground = MSettings.GetForeground(MSettings.Score)
-'       hFont = MSettings.GetFont(MSettings.Score)
-'     Endif
-'
-'   Next
-'
-' End
 
 Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
 
