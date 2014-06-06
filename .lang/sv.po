@@ -15,15 +15,15 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:82
+#: .project:2 FMain.class:86
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:82
+#: CScoreGrid.class:93
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:88
+#: CScoreGrid.class:99
 msgid "Top"
 msgstr "Topp"
 
@@ -31,7 +31,7 @@ msgstr "Topp"
 msgid "About"
 msgstr "Om"
 
-#: FAbout.form:56 FTest.form:20
+#: FAbout.form:56 FTest.form:22
 msgid "Label1"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr "Avbryt"
 msgid "Select a font"
 msgstr "Välj ett teckensnitt"
 
-#: FMain.class:81
+#: FMain.class:85
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
@@ -191,7 +191,7 @@ msgstr "Visa Maxkolumn"
 msgid "Show Top column"
 msgstr "Visa Toppkolumn"
 
-#: FModScorecard.form:96
+#: FModScorecard.form:97
 msgid "Theme"
 msgstr "Schema"
 
@@ -251,27 +251,31 @@ msgstr "Slump"
 msgid "Consume"
 msgstr "Förbruka"
 
-#: MSettings.module:37
+#: MSettings.module:40
 msgid "Header column"
 msgstr "Rubrikkolumn"
 
-#: MSettings.module:37
+#: MSettings.module:40
 msgid "Indicator, bad"
 msgstr "Indikator, dåligt"
 
-#: MSettings.module:37
+#: MSettings.module:40
 msgid "Indicator, good"
 msgstr "Indikator, bra"
 
-#: MSettings.module:37
+#: MSettings.module:40
 msgid "Name row"
 msgstr "Namnrad"
 
-#: MSettings.module:37
+#: MSettings.module:40
 msgid "Score"
 msgstr "Poäng"
 
-#: MSettings.module:37
+#: MSettings.module:40
+msgid "Score, inactive"
+msgstr "Poäng, inaktiv"
+
+#: MSettings.module:40
 msgid "Sum"
 msgstr "Summa"
 

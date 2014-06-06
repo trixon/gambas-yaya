@@ -12,8 +12,10 @@ Property PlayerSelection As String[]
 Property ShowSymbols As Boolean
 Property FullScreen As Boolean
 
-Public Const DEFAULT_COLOR_SCORE_BG As Integer = &HFFFF9F
+Public Const DEFAULT_COLOR_SCORE_BG As Integer = &HEEEEEE
 Public Const DEFAULT_COLOR_SCORE_FG As Integer = &H555555
+Public Const DEFAULT_COLOR_SCORE_INACTIVE_BG As Integer = &HDDDDDD
+Public Const DEFAULT_COLOR_SCORE_INACTIVE_FG As Integer = &H555555
 Public Const DEFAULT_COLOR_HEADER_BG As Integer = &HFFC71F
 Public Const DEFAULT_COLOR_HEADER_FG As Integer = &H000000
 Public Const DEFAULT_COLOR_INDICATOR_HI_BG As Integer = &H00FF00
@@ -27,6 +29,7 @@ Public Const DEFAULT_COLOR_SUM_BG As Integer = &HFFFF00
 Public Const DEFAULT_COLOR_SUM_FG As Integer = &H000000
 
 Public Const DEFAULT_FONT_SCORE As String = ""
+Public Const DEFAULT_FONT_SCORE_INACTIVE As String = ""
 Public Const DEFAULT_FONT_HEADER As String = ""
 Public Const DEFAULT_FONT_INDICATOR_HI As String = ""
 Public Const DEFAULT_FONT_INDICATOR_LO As String = ""
@@ -34,9 +37,9 @@ Public Const DEFAULT_FONT_MASK As String = ""
 Public Const DEFAULT_FONT_NAME As String = "Italic"
 Public Const DEFAULT_FONT_SUM As String = "Bold"
 
-Public StyleNames As String[] = [("Name row"), ("Header column"), ("Score"), ("Sum"), ("Indicator, good"), ("Indicator, bad")]
+Public StyleNames As String[] = [("Name row"), ("Header column"), ("Score"), ("Score, inactive"), ("Sum"), ("Indicator, good"), ("Indicator, bad")]
 
-Public Enum Name, Header, Score, Sum, IndicatorHi, IndicatorLo, Mask
+Public Enum Name, Header, Score, ScoreInactive, Sum, IndicatorHi, IndicatorLo, Mask
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
@@ -57,6 +60,7 @@ Private $aBackgroundDefaults As Integer[] =
   [DEFAULT_COLOR_NAME_BG,
   DEFAULT_COLOR_HEADER_BG,
   DEFAULT_COLOR_SCORE_BG,
+  DEFAULT_COLOR_SCORE_INACTIVE_BG,
   DEFAULT_COLOR_SUM_BG,
   DEFAULT_COLOR_INDICATOR_HI_BG,
   DEFAULT_COLOR_INDICATOR_LO_BG,
@@ -65,6 +69,7 @@ Private $aForegroundDefaults As Integer[] =
   [DEFAULT_COLOR_NAME_FG,
   DEFAULT_COLOR_HEADER_FG,
   DEFAULT_COLOR_SCORE_FG,
+  DEFAULT_COLOR_SCORE_INACTIVE_FG,
   DEFAULT_COLOR_SUM_FG,
   DEFAULT_COLOR_INDICATOR_HI_FG,
   DEFAULT_COLOR_INDICATOR_LO_FG,
@@ -73,6 +78,7 @@ Private $aFontDefaults As String[] =
   [DEFAULT_FONT_NAME,
   DEFAULT_FONT_HEADER,
   DEFAULT_FONT_SCORE,
+  DEFAULT_FONT_SCORE_INACTIVE,
   DEFAULT_FONT_SUM,
   DEFAULT_FONT_INDICATOR_HI,
   DEFAULT_FONT_INDICATOR_LO,

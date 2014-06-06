@@ -67,17 +67,30 @@ Public Sub NewGame()
 
 End
 
+Private Sub ActivateCurrent()
+
+  $iNumOfRolls = 0
+  '   $hGrid.ActivePlayer = $hPlayerIndex.Value
+  $hGrid.SetCurrentPlayer($hCurrentPlayer)
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
+
+End
+
 Private Sub ActivateNextPlayer()
 
   $hCurrentPlayer = $aPlayers[$hPlayerIndex.Inc()]
-  $iNumOfRolls = 0
+
+  ActivateCurrent()
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekPrev() + 3)
 
 End
 
 Private Sub ActivatePreviousPlayer()
 
   $hCurrentPlayer = $aPlayers[$hPlayerIndex.Dec()]
-  $iNumOfRolls = 0
+
+  ActivateCurrent()
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekNext() + 3)
 
 End
 
@@ -91,6 +104,7 @@ Public Sub Settings()
       .ApplyLayout()
       .ShowTextAsSymbols(MSettings.ShowSymbols)
       .RecalcWidth()
+      Try .ShowIndicators(MSettings.ShowIndicators)
     End With
   Endif
 
@@ -140,19 +154,26 @@ End
 
 Public Sub Grid_Leave()
 
-  $hGrid.ResetLayoutByColumn(0)
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
-  $iLastHoveredRow = -1
+  If $iLastHoveredRow <> -1 Then
+    $hGrid.ResetLayoutByColumn(0)
+    $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
+    Try $hGrid.ShowIndicators(MSettings.ShowIndicators)
+    $iLastHoveredRow = -1
+  Endif
 
 End
 
 Public Sub Grid_MouseMove()
 
+  Dim iCol As Integer = $hGrid.ColumnAt(Mouse.X)
   Dim iRow As Integer = $hGrid.RowAt(Mouse.Y)
+  Dim iPlayerColumn As Integer = $hPlayerIndex.Value + 3
 
-  If iRow <> $iLastHoveredRow And iRow > 0 And If iRow < $hGameDef.Rows.Count Then
-    $hGrid.HoverRow(iRow, $hPlayerIndex.Value + 3, $hCurrentPlayer.Playable[iRow])
+  If iRow <> $iLastHoveredRow And iRow > 0 And If iRow < $hGameDef.Rows.Count And If iPlayerColumn = iCol Then
+    $hGrid.HoverRow(iRow, iPlayerColumn, $hCurrentPlayer.Playable[iRow])
     $iLastHoveredRow = iRow
+  Else If iPlayerColumn <> iCol
+    Grid_Leave()
   Endif
 
 End
@@ -170,10 +191,14 @@ Public Sub RollFinished(aValues As Integer[])
   $hGrid.UpdateRolls($hPlayerIndex.Value, GenerateRollsIndicator())
 
   $aTempValues = CalculatePossibleScores(aValues)
-  $hGrid.TempPlayer = $hCurrentPlayer
-  $hGrid.TempPlayerIndex = $hPlayerIndex
-  $hGrid.TempValues = $aTempValues
-  $hGrid.Indicators = MSettings.ShowIndicators
+  $hGrid.SetTempData($hPlayerIndex, $hCurrentPlayer, $aTempValues)
+  ' $hGrid.TempPlayer = $hCurrentPlayer
+  ' $hGrid.TempPlayerIndex = $hPlayerIndex
+  ' $hGrid.TempValues = $aTempValues
+  '   $hGrid.Indicators = MSettings.ShowIndicators
+
+  $hGrid.ShowIndicators(MSettings.ShowIndicators)
+
   $bRegisterable = True
 
 End
@@ -239,8 +264,9 @@ End
 Private Sub Register(Row As Integer)
 
   Debug Row
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
+
   $hCurrentPlayer.Register(Row, $aTempValues[Row])
+  $hGrid.Register()
   $aLastValues = $aTempValues.Copy()
   ActivateNextPlayer()
   $bRegisterable = False

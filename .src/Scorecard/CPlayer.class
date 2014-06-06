@@ -1,14 +1,18 @@
 ' Gambas class file
 
-Property Rolls As Integer
-Property Read Playable As Boolean[]
 Property Read Order As Integer[]
-
+Property Read Playable As Boolean[]
+Property Rolls As Integer
+Property TempValues As Integer[]
 Property Read Values As Integer[]
-Private $iRolls As Integer
+
 Private $aPlayable As Boolean[]
 Private $aRowOrder As Integer[]
+Private $aTempValues As Integer[]
 Private $aValues As Integer[]
+
+Private $iRolls As Integer
+
 Private $hGameDef As CGameDef
 
 Public Sub NewGame(hGameDef As CGameDef)
@@ -68,5 +72,17 @@ End
 Private Function Order_Read() As Integer[]
 
   Return $aRowOrder
+
+End
+
+Private Function TempValues_Read() As Integer[]
+
+  Return $aTempValues
+
+End
+
+Private Sub TempValues_Write(Value As Integer[])
+
+  $aTempValues = Value
 
 End
