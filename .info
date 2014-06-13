@@ -76,10 +76,18 @@ Roller_RequestRoll
 m
 
 
+Roller_Shake
+m
+
+
 Roll
 m
 
 
+SoundPath
+M
+s
+(sFilename)s
 RollPostOp
 m
 
@@ -108,6 +116,10 @@ MarginPanel_MouseWheel
 m
 
 
+MediaPlayerDtf_End
+m
+
+
 Die_Toggled
 m
 
@@ -124,10 +136,6 @@ Die_InvertSelection
 m
 
 
-SoundPath
-M
-s
-(sFilename)s
 MarginPanel_Menu
 m
 

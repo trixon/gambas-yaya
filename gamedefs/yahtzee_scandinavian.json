@@ -3,7 +3,7 @@
     "title": "Yahtzee (Scandinavian)",
     "title-sv": "Yatzy (Skandinavisk)",
     "numOfDice": 5,
-    "numOfRolls": 3,
+    "numOfRolls": 99,
     "resultRow": 19,
     "defaultVariant": 0,
     "variants": "standard downwards upwards upper_lower lower_upper random",
