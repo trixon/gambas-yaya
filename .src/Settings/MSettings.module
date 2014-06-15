@@ -183,7 +183,7 @@ End
 
 Private Sub ReverseMouseScroll_Write(Value As Boolean)
 
-  DicePanel.ReverseMouseScroll = Value
+  CDicePanel.ReverseMouseScroll = Value
   Settings[KEY_REVERSE_MOUSE_SCROLL] = Value
 
 End

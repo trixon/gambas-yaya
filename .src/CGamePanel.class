@@ -1,9 +1,9 @@
 ' Gambas class file
 
-Property Read DicePanel As DicePanel
+Property Read DicePanel As CDicePanel
 Property Read Panel As Panel
 
-Private $hDicePanel As DicePanel
+Private $hDicePanel As CDicePanel
 Private $hPanel As Panel
 Private $hScorecard As CScorecard
 Private $hGameDef As CGameDef
@@ -22,9 +22,9 @@ Public Sub _new(hContainer As Container, hUndo As Menu)
   End With
 
   $hScorecard = New CScorecard($hPanel) As "Scorecard"
-  $hDicePanel = New DicePanel($hPanel) As "DicePanel"
+  $hDicePanel = New CDicePanel($hPanel) As "DicePanel"
 
-  DicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
+  CDicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
 
 End
 
@@ -90,7 +90,7 @@ Private Function Panel_Read() As Panel
 
 End
 
-Private Function DicePanel_Read() As DicePanel
+Private Function DicePanel_Read() As CDicePanel
 
   Return $hDicePanel
 
