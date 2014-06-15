@@ -50,8 +50,8 @@ Public Sub NewGame()
   $bRegisterable = False
   $bUndoable = False
   $iNumOfRolls = 0
-
   $aPlayers = New CPlayer[MSettings.Players]
+
   For i = 0 To $aPlayers.Max
     $aPlayers[i] = New CPlayer
     $aPlayers[i].NewGame($hGameDef)
@@ -65,34 +65,6 @@ Public Sub NewGame()
 
 End
 
-Private Sub ActivateCurrent()
-
-  $iNumOfRolls = 0
-  '   $hGrid.ActivePlayer = $hPlayerIndex.Value
-  $hGrid.SetCurrentPlayer($hCurrentPlayer)
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
-
-End
-
-Private Sub ActivateNextPlayer()
-
-  $hCurrentPlayer = $aPlayers[$hPlayerIndex.Inc()]
-
-  ActivateCurrent()
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
-  '$hGrid.ResetContentByColumn($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
-
-End
-
-Private Sub ActivatePreviousPlayer()
-
-  $hCurrentPlayer = $aPlayers[$hPlayerIndex.Dec()]
-
-  ActivateCurrent()
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekNext() + CScoreGrid.COL_OFFSET_PLAYERS)
-
-End
-
 Public Sub Settings()
 
   Settings.Reload()
@@ -101,7 +73,7 @@ Public Sub Settings()
       .MaxCol = MSettings.ShowMaxCol
       .TopCol = MSettings.ShowTopCol
       .ApplyLayout()
-      .ResetContent()
+      .ResetText()
       .ShowTextAsSymbols(MSettings.ShowSymbols)
       .RecalcWidth()
       Try .ShowIndicators(MSettings.ShowIndicators)
@@ -111,9 +83,6 @@ Public Sub Settings()
 End
 
 Private Sub GridInit()
-
-  Dim iMaxCol As Integer = MSettings.Players + 2
-  Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
 
   Try $hLeftPanel.Delete
   Try $hGrid.Delete
@@ -131,8 +100,6 @@ End
 Public Sub Grid_Click()
 
   Dim hGameRow As CGameRow
-  Dim hCell As _GridView_Cell = $hGrid.Current
-
   Dim iRow As Integer = $hGrid.Row
   Dim iCol As Integer = $hGrid.Column
 
@@ -154,8 +121,8 @@ End
 Public Sub Grid_Leave()
 
   If $iLastHoveredRow <> -1 Then
-    $hGrid.ResetLayoutByColumn(0)
-    $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
+    $hGrid.ResetColumnLayout(0)
+    $hGrid.ResetColumnLayout($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
     Try $hGrid.ShowIndicators(MSettings.ShowIndicators)
     $iLastHoveredRow = -1
   Endif
@@ -177,17 +144,15 @@ Public Sub Grid_MouseMove()
 
 End
 
-Private Function GenerateRollsIndicator() As String
-
-  Return Subst("&1 (&2/&3)", $iNumOfRolls, $hCurrentPlayer.Rolls, $hGameDef.Rolls)
-
-End
-
 Public Sub RollFinished(aValues As Integer[])
+
+  Dim sRolls As String
 
   Inc $iNumOfRolls
   $hCurrentPlayer.Rolls = $hCurrentPlayer.Rolls + 1
-  $hGrid.UpdateRolls($hPlayerIndex.Value, GenerateRollsIndicator())
+  sRolls = Subst("&1 (&2/&3)", $hCurrentPlayer.Rolls, $iNumOfRolls, $hGameDef.Rolls)
+
+  $hGrid.SetPlayerRolls($hPlayerIndex.Value, sRolls)
 
   $aTempValues = CalculatePossibleScores(aValues)
   $hGrid.SetTempData($hPlayerIndex, $hCurrentPlayer, $aTempValues)
@@ -247,12 +212,23 @@ Private Sub Register(Row As Integer)
 
   Debug Row, $aTempValues[Row]
 
+  $aLastValues = $aTempValues.Copy()
   $hCurrentPlayer.Register(Row, $aTempValues[Row])
   $hGrid.Register(Row)
-  $aLastValues = $aTempValues.Copy()
-  ActivateNextPlayer()
+
+  'TODO: Move to Grid.Register
+  $hGrid.SetPlayerRolls($hPlayerIndex.Value, $hCurrentPlayer.Rolls)
+  $hCurrentPlayer = $aPlayers[$hPlayerIndex.Inc()]
+  $hGrid.SetCurrentPlayer($hCurrentPlayer)
+  $hGrid.ResetColumnLayout($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
+  $hGrid.ResetColumnLayout($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
+
+  $iNumOfRolls = 0
+
   $bRegisterable = False
   $bUndoable = True
+
+  Grid_Leave()
 
   Raise Register()
 
@@ -260,12 +236,20 @@ End
 
 Public Sub Undo()
 
+  Dim iUndoRow As Integer
+
   Debug
-  ActivatePreviousPlayer()
+  $aTempValues = $aLastValues.Copy()
+  $hCurrentPlayer = $aPlayers[$hPlayerIndex.Dec()]
+
+  $hGrid.SetTempData($hPlayerIndex, $hCurrentPlayer, $aTempValues)
+  iUndoRow = $hCurrentPlayer.Undo()
+  $hGrid.Undo(iUndoRow)
+
   $bRegisterable = True
   $bUndoable = False
-  $hCurrentPlayer.Undo()
-  '$hGrid[0, 0].Picture = Picture["icon:/16/undo"]
+  '   $hGrid[0, 0].Picture = Picture["icon:/16/undo"]
+
   Raise Undo()
 
 End

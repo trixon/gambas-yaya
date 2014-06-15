@@ -39,9 +39,14 @@ Public Sub Register(Row As Integer, Value As Integer)
 
 End
 
-Public Sub Undo()
+Public Function Undo() As Integer
 
-  $aPlayable[$aRowOrder.Pop()] = True
+  Dim iRow As Integer = $aRowOrder.Pop()
+
+  $aValues[iRow] = 0
+  $aPlayable[iRow] = True
+
+  Return iRow
 
 End
 

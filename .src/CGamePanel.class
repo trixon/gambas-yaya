@@ -24,6 +24,7 @@ Public Sub _new(hContainer As Container, hUndo As Menu)
 
   $hScorecard = New CScorecard($hPanel) As "Scorecard"
   $hDicePanel = New CDicePanel($hPanel) As "DicePanel"
+  $hDicePanel.DiceToFloor = 200
 
   CDicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
 
