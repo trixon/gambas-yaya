@@ -334,7 +334,6 @@ Public Sub HoverRow(Row As Integer, Column As Integer, Playable As Boolean)
     Me[Row, 0].Font.Underline = Not MSettings.GetFont(MSettings.Header).Underline
     '  Me[Row, Column].Background = MSettings.GetBackground(MSettings.ScoreInactive) Or ALPHA
 
-    Debug iValue, hGameRow.Lim
     If iValue > 0 And MSettings.ShowIndicators Then
       If iValue >= hGameRow.Lim Then
         Me[Row, Column].Background = MSettings.GetBackground(MSettings.IndicatorHi) ' And iHover Or ALPHA

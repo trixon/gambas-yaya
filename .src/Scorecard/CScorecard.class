@@ -192,11 +192,6 @@ Public Sub RollFinished(aValues As Integer[])
 
   $aTempValues = CalculatePossibleScores(aValues)
   $hGrid.SetTempData($hPlayerIndex, $hCurrentPlayer, $aTempValues)
-  ' $hGrid.TempPlayer = $hCurrentPlayer
-  ' $hGrid.TempPlayerIndex = $hPlayerIndex
-  ' $hGrid.TempValues = $aTempValues
-  '   $hGrid.Indicators = MSettings.ShowIndicators
-
   $hGrid.ShowIndicators(MSettings.ShowIndicators)
 
   $bRegisterable = True
