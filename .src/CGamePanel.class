@@ -4,9 +4,9 @@ Property Read DicePanel As CDicePanel
 Property Read Panel As Panel
 
 Private $hDicePanel As CDicePanel
+Private $hGameDef As CGameDef
 Private $hPanel As Panel
 Private $hScorecard As CScorecard
-Private $hGameDef As CGameDef
 
 Private $iRollCounter As Integer
 
@@ -16,6 +16,7 @@ Public Sub _new(hContainer As Container, hUndo As Menu)
 
   $hPanel = New Panel(hContainer) As "Panel"
   $mnuUndo = hUndo
+
   With $hPanel
     .Arrangement = Arrange.Vertical
     .Expand = True

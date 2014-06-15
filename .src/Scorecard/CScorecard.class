@@ -7,24 +7,22 @@ Event Register()
 Property Read Panel As Panel
 Property Undoable As Boolean
 
-' Property Rollable As Boolean
-
-Private $aPlayers As CPlayer[]
-Private $hCurrentPlayer As CPlayer
-Private $aTempValues As Integer[]
 Private $aLastValues As Integer[]
-Private $hPlayerIndex As CCircularInt
-Private $hLeftPanel As Panel
-Private $hRightPanel As Panel
-Private $hPanel As Panel
-Private $hGrid As CScoreGrid
-Private $hGameDef As CGameDef
+Private $aPlayers As CPlayer[]
+Private $aTempValues As Integer[]
 
 Private $bRegisterable As Boolean
-' Private $bRollable As Boolean
 Private $bUndoable As Boolean
-Private $iLastHoveredRow As Integer = -1
 
+Private $hCurrentPlayer As CPlayer
+Private $hGameDef As CGameDef
+Private $hGrid As CScoreGrid
+Private $hLeftPanel As Panel
+Private $hPanel As Panel
+Private $hPlayerIndex As CCircularInt
+Private $hRightPanel As Panel
+
+Private $iLastHoveredRow As Integer = -1
 Private $iNumOfRolls As Integer
 
 Public Sub _new(hContainer As Container)
@@ -72,7 +70,7 @@ Private Sub ActivateCurrent()
   $iNumOfRolls = 0
   '   $hGrid.ActivePlayer = $hPlayerIndex.Value
   $hGrid.SetCurrentPlayer($hCurrentPlayer)
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
 
 End
 
@@ -81,7 +79,8 @@ Private Sub ActivateNextPlayer()
   $hCurrentPlayer = $aPlayers[$hPlayerIndex.Inc()]
 
   ActivateCurrent()
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekPrev() + 3)
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
+  '$hGrid.ResetContentByColumn($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
 
 End
 
@@ -90,7 +89,7 @@ Private Sub ActivatePreviousPlayer()
   $hCurrentPlayer = $aPlayers[$hPlayerIndex.Dec()]
 
   ActivateCurrent()
-  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekNext() + 3)
+  $hGrid.ResetLayoutByColumn($hPlayerIndex.PeekNext() + CScoreGrid.COL_OFFSET_PLAYERS)
 
 End
 
@@ -102,6 +101,7 @@ Public Sub Settings()
       .MaxCol = MSettings.ShowMaxCol
       .TopCol = MSettings.ShowTopCol
       .ApplyLayout()
+      .ResetContent()
       .ShowTextAsSymbols(MSettings.ShowSymbols)
       .RecalcWidth()
       Try .ShowIndicators(MSettings.ShowIndicators)
@@ -136,12 +136,11 @@ Public Sub Grid_Click()
   Dim iRow As Integer = $hGrid.Row
   Dim iCol As Integer = $hGrid.Column
 
-  Debug Subst$("Row &1, Col &2", iRow, iCol)
   If $bUndoable And iRow = 0 And iCol = 0 Then
     Undo()
   Endif
 
-  If $bRegisterable And iCol = $hPlayerIndex.Value + 3 Then
+  If $bRegisterable And iCol = $hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS Then
     hGameRow = $hGameDef.Rows[iRow]
 
     If hGameRow.IsPlayable And $hCurrentPlayer.Playable[iRow] Then
@@ -156,7 +155,7 @@ Public Sub Grid_Leave()
 
   If $iLastHoveredRow <> -1 Then
     $hGrid.ResetLayoutByColumn(0)
-    $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + 3)
+    $hGrid.ResetLayoutByColumn($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
     Try $hGrid.ShowIndicators(MSettings.ShowIndicators)
     $iLastHoveredRow = -1
   Endif
@@ -167,7 +166,7 @@ Public Sub Grid_MouseMove()
 
   Dim iCol As Integer = $hGrid.ColumnAt(Mouse.X)
   Dim iRow As Integer = $hGrid.RowAt(Mouse.Y)
-  Dim iPlayerColumn As Integer = $hPlayerIndex.Value + 3
+  Dim iPlayerColumn As Integer = $hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS
 
   If iRow <> $iLastHoveredRow And iRow > 0 And If iRow < $hGameDef.Rows.Count And If iPlayerColumn = iCol Then
     $hGrid.HoverRow(iRow, iPlayerColumn, $hCurrentPlayer.Playable[iRow])
@@ -237,18 +236,6 @@ Private Sub Undoable_Write(Value As Boolean)
 
 End
 
-' Private Function Rollable_Read() As Boolean
-'
-'   Return $bRollable
-'
-' End
-'
-' Private Sub Rollable_Write(Value As Boolean)
-'
-'   $bRollable = Value
-'
-' End
-
 Public Sub NewRoll()
   'TODO:         mPlayers.get(mActivePlayer).clearPreview();
 
@@ -258,10 +245,10 @@ End
 
 Private Sub Register(Row As Integer)
 
-  Debug Row
+  Debug Row, $aTempValues[Row]
 
   $hCurrentPlayer.Register(Row, $aTempValues[Row])
-  $hGrid.Register()
+  $hGrid.Register(Row)
   $aLastValues = $aTempValues.Copy()
   ActivateNextPlayer()
   $bRegisterable = False

@@ -1,1 +1,13 @@
 ' Gambas class file
+
+Public Sub Form_Open()
+
+  TestOpt()
+
+End
+
+Private Sub TestOpt(Optional Row As Integer = -1)
+
+  Debug Row
+
+End
