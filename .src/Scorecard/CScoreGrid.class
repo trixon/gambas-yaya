@@ -88,6 +88,11 @@ Private Sub ResetCellLayout(Row As Integer, Column As Integer)
     hCell.Font = MSettings.GetFont(MSettings.Header)
     hCell.Alignment = Align.Left
   Endif
+  If Column = 1 Or Column = 2 Then
+    hCell.Background = MSettings.GetBackground(MSettings.Header) Or ALPHA
+    hCell.Foreground = MSettings.GetForeground(MSettings.Header)
+    hCell.Font = MSettings.GetFont(MSettings.Header)
+  Endif
 
   If Row = 0 Then
     hCell.Alignment = Align.Center
