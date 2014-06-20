@@ -2,10 +2,8 @@
 
 { Form Form
   MoveScaled(0,0,59,54)
-  Background = &HFF9F3F&
   Expand = True
   Text = ("New Game")
-  Picture = Picture["images/board.jpg"]
   Resizable = False
   Stacking = Window.Above
   SkipTaskbar = True
@@ -18,7 +16,6 @@
     { Label1 Label
       MoveScaled(0,0,24,4)
       Font = Font["Bold,+1"]
-      Foreground = &HFFFF00&
       Text = ("Game")
       Alignment = Align.Center
     }
@@ -34,7 +31,6 @@
     { Label2 Label
       MoveScaled(1,9,24,4)
       Font = Font["Bold,+1"]
-      Foreground = &HFFFF00&
       Text = ("Variant")
       Alignment = Align.Center
     }
@@ -52,13 +48,12 @@
       { Label3 Label
         MoveScaled(1,0,24,4)
         Font = Font["Bold,+1"]
-        Foreground = &HFFFF00&
         AutoResize = True
         Text = ("Players")
         Alignment = Align.Center
       }
       { HBox3 HBox
-        MoveScaled(-1,6,45,3.7143)
+        MoveScaled(-1,6,45,3.75)
         AutoResize = True
         { spbPlayers SpinBox
           MoveScaled(2,0,9,4)
@@ -100,12 +95,14 @@
     { btnOK Button
       MoveScaled(15,0,6,6)
       AutoResize = True
+      Text = ("Play")
       Picture = Picture["images/dialog-ok-apply.png"]
       Default = True
     }
     { btnCancel Button
       MoveScaled(32,0,16,4)
       AutoResize = True
+      Text = ("Cancel")
       Picture = Picture["images/dialog-cancel.png"]
       Cancel = True
     }

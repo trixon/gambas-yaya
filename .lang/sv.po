@@ -19,41 +19,13 @@ msgstr "-"
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:93
+#: CScoreGrid.class:123
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:99
+#: CScoreGrid.class:125
 msgid "Top"
 msgstr "Topp"
-
-#: FAbout.form:22 FMain.form:61
-msgid "About"
-msgstr "Om"
-
-#: FAbout.form:56 FTest.form:22
-msgid "Label1"
-msgstr ""
-
-#: FAbout.form:70
-msgid "UrlLabel1"
-msgstr ""
-
-#: FAbout.form:86
-msgid "GNU GENERAL PUBLIC LICENSE"
-msgstr "-"
-
-#: FAbout.form:99
-msgid "Thanks"
-msgstr "Tack"
-
-#: FAbout.form:105
-msgid "License"
-msgstr "Licens"
-
-#: FAbout.form:115
-msgid "Close"
-msgstr "Stäng"
 
 #: FColorChooser.form:13
 msgid "Select a color"
@@ -63,7 +35,7 @@ msgstr "Välj en färg"
 msgid "OK"
 msgstr ""
 
-#: FColorChooser.form:46 FFontChooser.form:45 FModPlayers.class:29
+#: FNewGame.form:141 FSettings.form:50
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -79,7 +51,7 @@ msgstr "Copyright © 2014 Patrik Karlsson"
 msgid "Menu"
 msgstr "Meny"
 
-#: FMain.form:29 FNewGame.form:27
+#: FMain.form:29 FNewGame.form:26
 msgid "New Game"
 msgstr "Nytt spel"
 
@@ -91,19 +63,23 @@ msgstr "Ångra"
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:52 FSettings.form:14
+#: FMain.form:52 FSettings.form:13
 msgid "Settings"
 msgstr "Inställningar"
+
+#: FMain.form:61
+msgid "About"
+msgstr "Om"
 
 #: FMain.form:69
 msgid "Quit"
 msgstr "Avsluta"
 
-#: FModDice.form:19 FSettings.class:18
+#: FModDice.form:18 FSettings.class:18
 msgid "Dice"
 msgstr "Tärningar"
 
-#: FModDice.form:24
+#: FModDice.form:23
 msgid "Reverse mouse scroll"
 msgstr "Omvänd rullningsriktning"
 
@@ -135,7 +111,7 @@ msgstr "Ta bort alla spelare?"
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
-#: FModPlayers.form:19 FNewGame.form:82 FSettings.class:14
+#: FModPlayers.form:19 FNewGame.form:77 FSettings.class:14
 msgid "Players"
 msgstr "Spelare"
 
@@ -195,17 +171,21 @@ msgstr "Visa Toppkolumn"
 msgid "Theme"
 msgstr "Schema"
 
-#: FNewGame.form:44
+#: FNewGame.form:41
 msgid "Game"
 msgstr "Spel"
 
-#: FNewGame.form:61
+#: FNewGame.form:57
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:104
+#: FNewGame.form:99
 msgid "Shuffle"
 msgstr "Blanda"
+
+#: FNewGame.form:133
+msgid "Play"
+msgstr "Spela"
 
 #: FPlayersEdit.class:10
 msgid "Edit"
@@ -221,6 +201,14 @@ msgstr "Spelare"
 
 #: FPlayersEdit.form:22
 msgid "TextBox1"
+msgstr ""
+
+#: FSettings.form:42
+msgid "Apply"
+msgstr "Verkställ"
+
+#: FTest.form:22
+msgid "Label1"
 msgstr ""
 
 #: MGameLoader.module:15

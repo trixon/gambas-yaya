@@ -5,7 +5,6 @@
   Arrangement = Arrange.Vertical
   { VBox2 VBox
     MoveScaled(0,0,42,9)
-    Foreground = &HFFFF00&
     { Label2 Label
       MoveScaled(1,0,24,4)
       Font = Font["Bold"]
