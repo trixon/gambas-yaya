@@ -2,9 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,46,13)
-  Background = &HFF9F3F&
   Text = ("Player")
-  Picture = Picture["images/board.jpg"]
   Resizable = False
   Arrangement = Arrange.Vertical
   Margin = True
@@ -23,15 +21,13 @@
       Expand = True
     }
     { btnOK Button
-      MoveScaled(9,0,6,6)
-      AutoResize = True
-      Picture = Picture["images/dialog-ok-apply.png"]
+      MoveScaled(9,0,12,4)
+      Text = ("OK")
       Default = True
     }
     { btnCancel Button
-      MoveScaled(26,0,16,4)
-      AutoResize = True
-      Picture = Picture["images/dialog-cancel.png"]
+      MoveScaled(26,0,12,4)
+      Text = ("Cancel")
       Cancel = True
     }
   }

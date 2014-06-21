@@ -11,7 +11,7 @@ Public Sub Form_Open()
 
   spbPlayers.Value = MSettings.Players
 
-  initPlayers()
+  InitPlayers()
   spbPlayers_Change()
   LoadPlayerSelection()
 
@@ -50,7 +50,7 @@ Public Sub cmbGame_Click()
 
 End
 
-Private Sub initPlayers()
+Private Sub InitPlayers()
 
   Dim hComboBox As ComboBox
   Dim hParent As Container
@@ -112,7 +112,7 @@ Public Sub spbPlayers_Change()
 
 End
 
-Public Sub bntShuffle_Click()
+Public Sub btnShuffle_Click()
 
   Dim i As Integer
   Dim iPlayers As Integer = spbPlayers.Value

@@ -64,7 +64,7 @@ Public Sub Form_KeyPress()
     Me.Close()
   Else If Key.Code = Key["Q"] And If Key.Control Or Key.Code = Key["Q"]
     Me.Close()
-  Else If Key.Code = Key["N"] And If Key.Control
+  Else If Key.Code = Key["N"] 'And If Key.Control
     NewGame()
   Else If Key.Code = Key["Z"] And If Key.Control And If mnuUndo.Enabled
     Undo()
@@ -136,7 +136,7 @@ End
 
 Public Sub Form_Show()
 
-  '   NewGame()
+  'NewGame()
   $hGamePanel.NewGame()
 
 End

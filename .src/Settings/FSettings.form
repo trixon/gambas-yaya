@@ -26,17 +26,13 @@
       Expand = True
     }
     { btnOK Button
-      MoveScaled(15,0,6,6)
-      AutoResize = True
-      Text = ("Apply")
-      Picture = Picture["images/dialog-ok-apply.png"]
+      MoveScaled(15,0,12,4)
+      Text = ("OK")
       Default = True
     }
     { btnCancel Button
-      MoveScaled(32,0,16,4)
-      AutoResize = True
+      MoveScaled(32,0,12,4)
       Text = ("Cancel")
-      Picture = Picture["images/dialog-cancel.png"]
       Cancel = True
     }
   }
