@@ -200,6 +200,7 @@ Public Sub RecalcWidth()
         hFont = Me[iRow, iCol].Font
         sText = Me[iRow, iCol].Text
         iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
+        iColumnWidth += 1
       Next
     Else If iCol = 1
       'Second column, max values.

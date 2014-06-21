@@ -6,10 +6,10 @@ Event Register()
 
 Property Read Panel As Panel
 Property Undoable As Boolean
-
 Private $aLastValues As Integer[]
 Private $aPlayers As CPlayer[]
 Private $aTempValues As Integer[]
+Private $aUndoPicturePath As String[] = ["images/edit-undo16_disabled.png", "images/edit-undo16_enabled.png"]
 
 Private $bRegisterable As Boolean
 Private $bUndoable As Boolean
@@ -62,6 +62,7 @@ Public Sub NewGame()
 
   GridInit()
   Settings()
+  UpdateUndoPicture()
 
 End
 
@@ -205,6 +206,7 @@ Public Sub NewRoll()
   'TODO:         mPlayers.get(mActivePlayer).clearPreview();
 
   Debug
+  UpdateUndoPicture()
 
 End
 
@@ -227,6 +229,7 @@ Private Sub Register(Row As Integer)
 
   $bRegisterable = False
   $bUndoable = True
+  UpdateUndoPicture()
 
   Grid_Leave()
 
@@ -248,8 +251,14 @@ Public Sub Undo()
 
   $bRegisterable = True
   $bUndoable = False
-  '   $hGrid[0, 0].Picture = Picture["icon:/16/undo"]
+  UpdateUndoPicture()
 
   Raise Undo()
+
+End
+
+Private Sub UpdateUndoPicture()
+
+  $hGrid[0, 0].Picture = Picture.Load($aUndoPicturePath[MArrays.BoolToIndex($bUndoable)])
 
 End
