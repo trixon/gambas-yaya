@@ -19,29 +19,13 @@ msgstr "-"
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:123
+#: CScoreGrid.class:128
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:125
+#: CScoreGrid.class:130
 msgid "Top"
 msgstr "Topp"
-
-#: FColorChooser.form:13
-msgid "Select a color"
-msgstr "Välj en färg"
-
-#: FColorChooser.form:40 FFontChooser.form:39
-msgid "OK"
-msgstr ""
-
-#: FNewGame.form:141 FSettings.form:50
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: FFontChooser.form:13
-msgid "Select a font"
-msgstr "Välj ett teckensnitt"
 
 #: FMain.class:85
 msgid "Copyright © 2014 Patrik Karlsson"
@@ -51,7 +35,7 @@ msgstr "Copyright © 2014 Patrik Karlsson"
 msgid "Menu"
 msgstr "Meny"
 
-#: FMain.form:29 FNewGame.form:26
+#: FMain.form:29 FNewGame.form:25
 msgid "New Game"
 msgstr "Nytt spel"
 
@@ -95,6 +79,10 @@ msgstr "Ta bort '&1'?"
 msgid "Confirm"
 msgstr "Bekräfta"
 
+#: FSettings.form:47
+msgid "Cancel"
+msgstr "Avbryt"
+
 #: FModPlayers.class:29
 msgid "Remove"
 msgstr "Ta bort"
@@ -111,7 +99,7 @@ msgstr "Ta bort alla spelare?"
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
-#: FModPlayers.form:19 FNewGame.form:77 FSettings.class:14
+#: FModPlayers.form:19 FNewGame.form:73 FSettings.class:14
 msgid "Players"
 msgstr "Spelare"
 
@@ -135,55 +123,59 @@ msgstr "Välj ett schema"
 msgid "Set..."
 msgstr "Sätt..."
 
-#: FModScorecard.form:31
+#: FModScorecard.form:36
 msgid "Background color..."
 msgstr "Bakgrundsfärg..."
 
-#: FModScorecard.form:35
+#: FModScorecard.form:40
 msgid "Text color..."
 msgstr "Textfärg..."
 
-#: FModScorecard.form:42
+#: FModScorecard.form:47
 msgid "Font..."
 msgstr "Teckensnitt.."
 
-#: FModScorecard.form:49 FSettings.class:16
+#: FModScorecard.form:54 FSettings.class:16
 msgid "Scorecard"
 msgstr "Protokoll"
 
-#: FModScorecard.form:63
+#: FModScorecard.form:68
 msgid "Show indicators"
 msgstr "Visa indikatorer"
 
-#: FModScorecard.form:68
+#: FModScorecard.form:73
 msgid "Symbols"
 msgstr "Symboler"
 
-#: FModScorecard.form:79
+#: FModScorecard.form:84
 msgid "Show Max column"
 msgstr "Visa Maxkolumn"
 
-#: FModScorecard.form:84
+#: FModScorecard.form:89
 msgid "Show Top column"
 msgstr "Visa Toppkolumn"
 
-#: FModScorecard.form:97
+#: FModScorecard.form:101
+msgid "Opacity"
+msgstr "Opacitet"
+
+#: FModScorecard.form:123
 msgid "Theme"
 msgstr "Schema"
 
-#: FNewGame.form:41
+#: FNewGame.form:39
 msgid "Game"
 msgstr "Spel"
 
-#: FNewGame.form:57
+#: FNewGame.form:54
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:99
+#: FNewGame.form:94
 msgid "Shuffle"
 msgstr "Blanda"
 
-#: FNewGame.form:133
+#: FNewGame.form:127
 msgid "Play"
 msgstr "Spela"
 
@@ -195,20 +187,24 @@ msgstr "Redigera"
 msgid "Add"
 msgstr "Lägg till"
 
-#: FPlayersEdit.form:13
+#: FPlayersEdit.form:12
 msgid "Player"
 msgstr "Spelare"
 
-#: FPlayersEdit.form:22
+#: FPlayersEdit.form:20
 msgid "TextBox1"
 msgstr ""
 
-#: FSettings.form:42
-msgid "Apply"
-msgstr "Verkställ"
+#: FPlayersEdit.form:36 FSettings.form:41
+msgid "OK"
+msgstr ""
 
-#: FTest.form:22
+#: FTest.form:23
 msgid "Label1"
+msgstr ""
+
+#: FTest.form:33
+msgid "Button1"
 msgstr ""
 
 #: MGameLoader.module:15
@@ -239,31 +235,31 @@ msgstr "Slump"
 msgid "Consume"
 msgstr "Förbruka"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Header column"
 msgstr "Rubrikkolumn"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Indicator, bad"
 msgstr "Indikator, dåligt"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Indicator, good"
 msgstr "Indikator, bra"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Name row"
 msgstr "Namnrad"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Score"
 msgstr "Poäng"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Score, inactive"
 msgstr "Poäng, inaktiv"
 
-#: MSettings.module:40
+#: MSettings.module:41
 msgid "Sum"
 msgstr "Summa"
 

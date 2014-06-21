@@ -5,9 +5,6 @@ Property MaxCol As Boolean
 Property TopCol As Boolean
 
 Public Const COL_OFFSET_PLAYERS As Integer = 3
-
-Private Const ALPHA As Integer = &H1A000000
-'Private Const ALPHA As Integer = &H44000000
 Private Const ROW_HEIGHT_MARGIN As Integer = 6
 Private Const COL_WIDTH_MARGIN As Integer = 32
 Private Const COL_WIDTH_TEXT As Integer = 128
@@ -15,13 +12,14 @@ Private Const COL_WIDTH_PLAYERS As Integer = 96
 
 Private $aTempValues As Integer[]
 
-' Private $bIndicators As Boolean
 Private $bMaxCol As Boolean
 Private $bTopCol As Boolean
 
 Private $hCurrentPlayer As CPlayer
 Private $hPlayerIndex As New CCircularInt(0, 0)
 Private $hGameDef As CGameDef
+
+Private $iAlpha As Integer
 
 Public Sub _new(hGameDef As CGameDef)
 
@@ -77,29 +75,29 @@ Private Sub ResetCellLayout(Row As Integer, Column As Integer)
   hCell.Font = MSettings.GetFont(MSettings.Score)
 
   If Column = $hPlayerIndex.Value + COL_OFFSET_PLAYERS Then
-    hCell.Background = MSettings.GetBackground(MSettings.Score) Or ALPHA
+    hCell.Background = MSettings.GetBackground(MSettings.Score) Or $iAlpha
   Else
-    hCell.Background = MSettings.GetBackground(MSettings.ScoreInactive) Or ALPHA
+    hCell.Background = MSettings.GetBackground(MSettings.ScoreInactive) Or $iAlpha
   Endif
 
   If Column = 0 Then
-    hCell.Background = MSettings.GetBackground(MSettings.Header) Or ALPHA
+    hCell.Background = MSettings.GetBackground(MSettings.Header) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Header)
     hCell.Font = MSettings.GetFont(MSettings.Header)
     hCell.Alignment = Align.Left
   Endif
   If Column = 1 Or Column = 2 Then
-    hCell.Background = MSettings.GetBackground(MSettings.Header) Or ALPHA
+    hCell.Background = MSettings.GetBackground(MSettings.Header) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Header)
     hCell.Font = MSettings.GetFont(MSettings.Header)
   Endif
 
-  If Row = 0 Then
+  If Row = 0 And Column <> 0 Then
     hCell.Alignment = Align.Center
   Endif
 
   If hGameRow.IsSum Or hGameRow.IsCounter Then
-    hCell.Background = MSettings.GetBackground(MSettings.Sum) Or ALPHA
+    hCell.Background = MSettings.GetBackground(MSettings.Sum) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Sum)
     hCell.Font = MSettings.GetFont(MSettings.Sum)
   Endif
@@ -351,6 +349,8 @@ Public Sub ApplyLayout()
   Dim hGameRow As CGameRow
   Dim iFontHeight As Integer
 
+  $iAlpha = Lsl(255 - MSettings.Opacity, 24)
+
   ResetLayout()
   InitHeaderRow()
 
@@ -475,8 +475,8 @@ Public Sub ShowIndicators(Show As Boolean)
     Endif
 
     If hGameRow.IsPlayable And iValue > 0 And $hCurrentPlayer.Playable[iRow] Then
-      hCell.Background = iBackground Or ALPHA
-      hCell.Foreground = iForeground Or ALPHA
+      hCell.Background = iBackground Or $iAlpha
+      hCell.Foreground = iForeground 'Or $iAlpha
       hCell.Font = hFont
       hCell.Text = iValue
       hCell.Alignment = Align.Left

@@ -1,16 +1,17 @@
 ' Gambas module file
 
-Property Players As Integer
-Property ReverseMouseScroll As Boolean
+Property FullScreen As Boolean
 Property GameId As String
-Property {Variant} As Integer
-Property ShowIndicators As Boolean
-Property ShowMaxCol As Boolean
-Property ShowTopCol As Boolean
+Property Opacity As Integer
+Property Players As Integer
 Property PlayerNames As String[]
 Property PlayerSelection As String[]
+Property ReverseMouseScroll As Boolean
+Property ShowIndicators As Boolean
+Property ShowMaxCol As Boolean
 Property ShowSymbols As Boolean
-Property FullScreen As Boolean
+Property ShowTopCol As Boolean
+Property {Variant} As Integer
 
 Public Const DEFAULT_COLOR_SCORE_BG As Integer = &HEEEEEE
 Public Const DEFAULT_COLOR_SCORE_FG As Integer = &H555555
@@ -45,6 +46,7 @@ Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
 Private Const KEY_GAME_ID As String = "Game/Id"
 Private Const KEY_GAME_VARIANT As String = "Game/Variant"
+Private Const KEY_SCORECARD_OPACITY As String = "Scorecard/Opacity"
 Private Const KEY_SCORECARD_SHOW_INDICATORS As String = "Scorecard/ShowIndicators"
 Private Const KEY_SCORECARD_SHOW_MAXCOL As String = "Scorecard/ShowMax"
 Private Const KEY_SCORECARD_SHOW_SYMBOLS As String = "Scorecard/ShowSymbols"
@@ -318,5 +320,17 @@ End
 Private Sub FullScreen_Write(Value As Boolean)
 
   Settings[KEY_FULL_SCREEN] = Value
+
+End
+
+Private Function Opacity_Read() As Integer
+
+  Return Settings[KEY_SCORECARD_OPACITY, 208]
+
+End
+
+Private Sub Opacity_Write(Value As Integer)
+
+  Settings[KEY_SCORECARD_OPACITY] = Value
 
 End

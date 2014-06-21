@@ -54,6 +54,7 @@ Public Sub Form_Open()
   cbxShowMaxCol.Value = MSettings.ShowMaxCol
   cbxShowTopCol.Value = MSettings.ShowTopCol
   cbxShowSymbols.Value = MSettings.ShowSymbols
+  sldOpacity.Value = MSettings.Opacity
 
 End
 
@@ -66,6 +67,7 @@ Public Sub Save()
   MSettings.ShowMaxCol = cbxShowMaxCol.Value
   MSettings.ShowTopCol = cbxShowTopCol.Value
   MSettings.ShowSymbols = cbxShowSymbols.Value
+  MSettings.Opacity = sldOpacity.Value
 
   For i = 0 To MSettings.StyleNames.Max
     MSettings.SetBackground(i, $aLabel[i].Background)
