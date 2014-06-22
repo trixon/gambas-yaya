@@ -3,7 +3,8 @@
 Private $hModPlayers As FModPlayers
 Private $hModScorecard As FModScorecard
 Private $hModDice As FModDice
-Private Enum Players, Scorecard, Dice, Colors
+Private $hModBackground As FModBackground
+Private Enum Players, Scorecard, Dice, Background
 
 Public Sub _new()
 
@@ -17,6 +18,8 @@ Public Sub _new()
   aModHeader.Add(hModHeader)
   hModHeader = New CModHeader(("Dice"), "images/dice.png", Dice)
   aModHeader.Add(hModHeader)
+  hModHeader = New CModHeader(("Background"), "images/games-config-background.png", Background)
+  aModHeader.Add(hModHeader)
 
   ipnModules.Count = aModHeader.Length
 
@@ -28,6 +31,7 @@ Public Sub _new()
   $hModPlayers = New FModPlayers(ipnModules[Players])
   $hModScorecard = New FModScorecard(ipnModules[Scorecard])
   $hModDice = New FModDice(ipnModules[Dice])
+  $hModBackground = New FModBackground(ipnModules[Background])
 
   ipnModules.Index = Scorecard
 
@@ -44,6 +48,7 @@ Public Sub btnOK_Click()
   $hModPlayers.Save()
   $hModScorecard.Save()
   $hModDice.Save()
+  $hModBackground.Save()
   MSettings.Save()
   Settings.Save()
 
@@ -54,5 +59,9 @@ End
 Public Sub btnCancel_Click()
 
   Me.Close
+
+End
+
+Public Sub Form_Open()
 
 End

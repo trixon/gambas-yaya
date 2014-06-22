@@ -61,13 +61,13 @@ Public Sub NewGame()
   $hCurrentPlayer = $aPlayers[0]
 
   GridInit()
-  Settings()
+  ReloadSettings()
   UpdateUndoPicture()
   InitMaxTopRolls()
 
 End
 
-Public Sub Settings()
+Public Sub ReloadSettings()
 
   Settings.Reload()
   If Not IsNull($hGrid) Then

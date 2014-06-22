@@ -1,5 +1,7 @@
 ' Gambas module file
 
+Property BackgroundType As Boolean
+Property Background As Integer
 Property FullScreen As Boolean
 Property GameId As String
 Property Opacity As Integer
@@ -28,6 +30,7 @@ Public Const DEFAULT_COLOR_NAME_BG As Integer = &H444444
 Public Const DEFAULT_COLOR_NAME_FG As Integer = &HFFC71F
 Public Const DEFAULT_COLOR_SUM_BG As Integer = &HFFFF00
 Public Const DEFAULT_COLOR_SUM_FG As Integer = &H000000
+Public Const DEFAULT_OPACITY As Integer = 208
 
 Public Const DEFAULT_FONT_SCORE As String = ""
 Public Const DEFAULT_FONT_SCORE_INACTIVE As String = ""
@@ -37,6 +40,9 @@ Public Const DEFAULT_FONT_INDICATOR_LO As String = ""
 Public Const DEFAULT_FONT_MASK As String = ""
 Public Const DEFAULT_FONT_NAME As String = "Italic"
 Public Const DEFAULT_FONT_SUM As String = "Bold"
+
+Public Const DEFAULT_WINDOW_BACKGROUND_TYPE As Boolean = True
+Public Const DEFAULT_WINDOW_BACKGROUND As Integer = &HB9AA7E
 
 Public StyleNames As String[] = [("Name row"), ("Header column"), ("Score"), ("Score, inactive"), ("Sum"), ("Indicator, good"), ("Indicator, bad")]
 
@@ -53,7 +59,9 @@ Private Const KEY_SCORECARD_SHOW_SYMBOLS As String = "Scorecard/ShowSymbols"
 Private Const KEY_SCORECARD_SHOW_TOPCOL As String = "Scorecard/ShowTop"
 Private Const KEY_PLAYER_NAMES As String = "Players"
 Private Const KEY_PLAYER_SELECTION As String = "Game/PlayerSelection"
-Private Const KEY_FULL_SCREEN As String = "Window/FullScreen"
+Private Const KEY_WINDOW_BACKGROUND As String = "Window/Background"
+Private Const KEY_WINDOW_BACKGROUND_TYPE As String = "Window/BackgroundType"
+Private Const KEY_WINDOW_FULL_SCREEN As String = "Window/FullScreen"
 Private Const KEY_BACKGROUND As String = "Style/Background_"
 Private Const KEY_FOREGROUND As String = "Style/Foreground_"
 Private Const KEY_FONT As String = "Style/Font_"
@@ -313,24 +321,48 @@ End
 
 Private Function FullScreen_Read() As Boolean
 
-  Return Settings[KEY_FULL_SCREEN, False]
+  Return Settings[KEY_WINDOW_FULL_SCREEN, False]
 
 End
 
 Private Sub FullScreen_Write(Value As Boolean)
 
-  Settings[KEY_FULL_SCREEN] = Value
+  Settings[KEY_WINDOW_FULL_SCREEN] = Value
 
 End
 
 Private Function Opacity_Read() As Integer
 
-  Return Settings[KEY_SCORECARD_OPACITY, 208]
+  Return Settings[KEY_SCORECARD_OPACITY, DEFAULT_OPACITY]
 
 End
 
 Private Sub Opacity_Write(Value As Integer)
 
   Settings[KEY_SCORECARD_OPACITY] = Value
+
+End
+
+Private Function BackgroundType_Read() As Boolean
+
+  Return Settings[KEY_WINDOW_BACKGROUND_TYPE, DEFAULT_WINDOW_BACKGROUND_TYPE]
+
+End
+
+Private Sub BackgroundType_Write(Value As Boolean)
+
+  Settings[KEY_WINDOW_BACKGROUND_TYPE] = Value
+
+End
+
+Private Function Background_Read() As Integer
+
+  Return Settings[KEY_WINDOW_BACKGROUND, DEFAULT_WINDOW_BACKGROUND]
+
+End
+
+Private Sub Background_Write(Value As Integer)
+
+  Settings[KEY_WINDOW_BACKGROUND] = Value
 
 End

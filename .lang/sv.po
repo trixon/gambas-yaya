@@ -15,51 +15,63 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:86
+#: .project:2 FMain.class:88
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:128
+#: CScoreGrid.class:125
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:130
+#: CScoreGrid.class:127
 msgid "Top"
 msgstr "Topp"
 
-#: FMain.class:85
+#: FMain.class:87
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
-#: FMain.form:24
+#: FMain.form:23
 msgid "Menu"
 msgstr "Meny"
 
-#: FMain.form:29 FNewGame.form:25
+#: FMain.form:28 FNewGame.form:25
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: FMain.form:35
+#: FMain.form:34
 msgid "Undo"
 msgstr "Ångra"
 
-#: FMain.form:45
+#: FMain.form:44
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:52 FSettings.form:13
+#: FMain.form:51 FSettings.form:13
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:61
+#: FMain.form:60
 msgid "About"
 msgstr "Om"
 
-#: FMain.form:69
+#: FMain.form:68
 msgid "Quit"
 msgstr "Avsluta"
 
-#: FModDice.form:18 FSettings.class:18
+#: FModBackground.form:22 FSettings.class:21
+msgid "Background"
+msgstr "Bakgrund"
+
+#: FModBackground.form:27
+msgid "Color"
+msgstr "Färg"
+
+#: FModBackground.form:46
+msgid "Image"
+msgstr "Bild"
+
+#: FModDice.form:18 FSettings.class:19
 msgid "Dice"
 msgstr "Tärningar"
 
@@ -99,7 +111,7 @@ msgstr "Ta bort alla spelare?"
 msgid "Player already exists."
 msgstr "Spelaren finns redan."
 
-#: FModPlayers.form:19 FNewGame.form:73 FSettings.class:14
+#: FModPlayers.form:19 FNewGame.form:73 FSettings.class:15
 msgid "Players"
 msgstr "Spelare"
 
@@ -135,7 +147,7 @@ msgstr "Textfärg..."
 msgid "Font..."
 msgstr "Teckensnitt.."
 
-#: FModScorecard.form:54 FSettings.class:16
+#: FModScorecard.form:54 FSettings.class:17
 msgid "Scorecard"
 msgstr "Protokoll"
 
@@ -199,14 +211,6 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: FTest.form:23
-msgid "Label1"
-msgstr ""
-
-#: FTest.form:33
-msgid "Button1"
-msgstr ""
-
 #: MGameLoader.module:15
 msgid "Standard"
 msgstr "Standard"
@@ -235,31 +239,31 @@ msgstr "Slump"
 msgid "Consume"
 msgstr "Förbruka"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Header column"
 msgstr "Rubrikkolumn"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Indicator, bad"
 msgstr "Indikator, dåligt"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Indicator, good"
 msgstr "Indikator, bra"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Name row"
 msgstr "Namnrad"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Score"
 msgstr "Poäng"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Score, inactive"
 msgstr "Poäng, inaktiv"
 
-#: MSettings.module:41
+#: MSettings.module:47
 msgid "Sum"
 msgstr "Summa"
 

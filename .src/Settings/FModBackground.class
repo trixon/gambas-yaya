@@ -1,0 +1,23 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+  optImage.Value = MSettings.BackgroundType
+  optColor.Value = Not optImage.Value
+  cbtBackground.Value = MSettings.Background
+  BackgroundMode_Click()
+
+End
+
+Public Sub Save()
+
+  MSettings.Background = cbtBackground.Value
+  MSettings.BackgroundType = optImage.Value
+
+End
+
+Public Sub BackgroundMode_Click()
+
+  cbtBackground.Enabled = optColor.Value
+
+End

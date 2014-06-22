@@ -74,9 +74,9 @@ Public Sub Open()
 
 End
 
-Public Sub Settings()
+Public Sub ReloadSettings()
 
-  $hScorecard.Settings()
+  $hScorecard.ReloadSettings()
 
 End
 

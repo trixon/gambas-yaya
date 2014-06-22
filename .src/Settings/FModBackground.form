@@ -1,0 +1,35 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,79,39)
+  Arrangement = Arrange.Vertical
+  { VBox2 VBox
+    MoveScaled(0,0,74,26)
+    { Label2 Label
+      MoveScaled(1,0,24,4)
+      Font = Font["Bold"]
+      Text = ("Background")
+    }
+    { optColor RadioButton BackgroundMode
+      Name = "optColor"
+      MoveScaled(1,3,24,4)
+      Text = ("Color")
+    }
+    { Panel1 Panel
+      MoveScaled(4,7,58,4)
+      Arrangement = Arrange.Horizontal
+      AutoResize = True
+      { Panel2 Panel
+        MoveScaled(1,1,3,2)
+      }
+      { cbtBackground ColorButton
+        MoveScaled(4,0,8,4)
+      }
+    }
+    { optImage RadioButton BackgroundMode
+      Name = "optImage"
+      MoveScaled(1,10,24,4)
+      Text = ("Image")
+    }
+  }
+}

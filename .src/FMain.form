@@ -4,7 +4,6 @@
   MoveScaled(0,0,119,60)
   PopupMenu = "mnuMain"
   Icon = Picture["logo.png"]
-  Picture = Picture["images/board.jpg"]
   Arrangement = Arrange.Vertical
   { mnuMain Menu
     Text = ("Menu")

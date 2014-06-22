@@ -45,6 +45,8 @@ Public Sub Form_Open()
   mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
 
+  ReloadSettings()
+
 End
 
 Public Sub Form_Close()
@@ -124,7 +126,21 @@ Private Sub SettingsDialog()
 
   Dim hForm As New FSettings
 
-  If hForm.Run() Then $hGamePanel.Settings()
+  If hForm.Run() Then
+    ReloadSettings()
+    $hGamePanel.ReloadSettings()
+  Endif
+
+End
+
+Private Sub ReloadSettings()
+
+  If MSettings.BackgroundType Then
+    Me.Picture = Picture.Load("images/board.jpg")
+  Else
+    Me.Picture = Null
+    Me.Background = MSettings.Background
+  Endif
 
 End
 
