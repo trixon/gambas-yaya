@@ -76,8 +76,10 @@ Private Sub ResetCellLayout(Row As Integer, Column As Integer)
 
   If Column = $hPlayerIndex.Value + COL_OFFSET_PLAYERS Then
     hCell.Background = MSettings.GetBackground(MSettings.Score) Or $iAlpha
+    hCell.Foreground = MSettings.GetForeground(MSettings.Score) Or $iAlpha
   Else
     hCell.Background = MSettings.GetBackground(MSettings.ScoreInactive) Or $iAlpha
+    hCell.Foreground = MSettings.GetForeground(MSettings.ScoreInactive) Or $iAlpha
   Endif
 
   If Column = 0 Then
@@ -86,6 +88,7 @@ Private Sub ResetCellLayout(Row As Integer, Column As Integer)
     hCell.Font = MSettings.GetFont(MSettings.Header)
     hCell.Alignment = Align.Left
   Endif
+
   If Column = 1 Or Column = 2 Then
     hCell.Background = MSettings.GetBackground(MSettings.Header) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Header)
