@@ -63,6 +63,7 @@ Public Sub NewGame()
   GridInit()
   Settings()
   UpdateUndoPicture()
+  InitMaxTopRolls()
 
 End
 
@@ -261,5 +262,23 @@ End
 Private Sub UpdateUndoPicture()
 
   $hGrid[0, 0].Picture = Picture.Load($aUndoPicturePath[MArrays.BoolToIndex($bUndoable)])
+
+End
+
+Private Sub InitMaxTopRolls()
+
+  Dim hGameRow As CGameRow
+  Dim iPlayableRows As Integer
+
+  For Each hGameRow In $hGameDef.Rows
+    If hGameRow.IsPlayable Then
+      Inc iPlayableRows
+    Endif
+
+  Next
+
+  $hGrid.SetPlayerRolls(-2, iPlayableRows * $hGameDef.Rolls)
+  'TODO: Read from high score
+  $hGrid.SetPlayerRolls(-1, "---")
 
 End
