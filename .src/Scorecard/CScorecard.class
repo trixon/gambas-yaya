@@ -123,6 +123,8 @@ Public Sub Grid_Leave()
 
   If $iLastHoveredRow <> -1 Then
     $hGrid.ResetColumnLayout(0)
+    $hGrid.ResetColumnLayout(1)
+    $hGrid.ResetColumnLayout(2)
     $hGrid.ResetColumnLayout($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
     Try $hGrid.ShowIndicators(MSettings.ShowIndicators)
     $iLastHoveredRow = -1
@@ -169,7 +171,7 @@ Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
   Dim hGameRow As CGameRow
   Dim iRow As Integer
   Dim iScore As Integer
-  Dim iValue As Integer
+  '   Dim iValue As Integer
   '   Dim sValues As String
 
   ' For Each iValue In Values
@@ -203,9 +205,8 @@ Private Sub Undoable_Write(Value As Boolean)
 End
 
 Public Sub NewRoll()
-  'TODO:         mPlayers.get(mActivePlayer).clearPreview();
 
-  Debug
+  $hGrid.ClearPreview()
   UpdateUndoPicture()
 
 End

@@ -114,7 +114,6 @@ Private Sub InitHeaderRow()
 
   For iCol = 0 To iMaxCol
     hCell = Me[iRow, iCol]
-
     hCell.Background = MSettings.GetBackground(MSettings.Name)
     hCell.Foreground = MSettings.GetForeground(MSettings.Name)
     hCell.Font = MSettings.GetFont(MSettings.Name)
@@ -204,7 +203,6 @@ Public Sub RecalcWidth()
       'Second column, max values.
       If $bMaxCol Then
         sText = "8888"
-        'iColumnWidth = hFont.TextWidth(sText)
         iColumnWidth = 0
         For iRow = 0 To iMaxRow
           hFont = Me[iRow, iCol].Font
@@ -290,9 +288,6 @@ Private Sub ResetCellText(Row As Integer, Column As Integer)
       hCell.Text = hGameRow.Lim
     Endif
   Else If Column >= COL_OFFSET_PLAYERS  'Player columns
-    ' If hGameRow.IsCounter Then
-    '   hCell.Text = "0"
-    ' Endif
     If Not IsNull($hCurrentPlayer) Then
       'Debug Row, hGameRow.IsPlayable, Not $hCurrentPlayer.Playable[Row], $hCurrentPlayer.Values[Row]
       If hGameRow.IsPlayable And Not $hCurrentPlayer.Playable[Row] Then 'And $hCurrentPlayer.Values[Row] > 0 Then
@@ -313,8 +308,6 @@ Public Sub ResetColumnText(Column As Integer)
   For iRow = 0 To iMaxRow
     ResetCellText(iRow, Column)
   Next
-
-  'InitHeaderRow()
 
 End
 
@@ -379,28 +372,49 @@ Public Sub HoverRow(Row As Integer, Column As Integer, Playable As Boolean)
   Dim iValue As Integer
 
   ResetColumnLayout(0)
-  'TODO: Hover effect on Player column?
-  '   ResetLayoutByColumn(Column)
+  ResetColumnLayout(1)
+  ResetColumnLayout(2)
+  ResetColumnLayout(Column)
+  Try ShowIndicators(MSettings.ShowIndicators)
 
   hGameRow = $hGameDef.Rows[Row]
   iValue = $aTempValues[Row]
 
   If hGameRow.IsPlayable And Playable Then
-    Me[Row, 0].Font.Underline = Not MSettings.GetFont(MSettings.Header).Underline
-    '  Me[Row, Column].Background = MSettings.GetBackground(MSettings.ScoreInactive) Or ALPHA
-
-    If iValue > 0 And MSettings.ShowIndicators Then
-      If iValue >= hGameRow.Lim Then
-        Me[Row, Column].Background = MSettings.GetBackground(MSettings.IndicatorHi) ' And iHover Or ALPHA
-      Else
-        Me[Row, Column].Background = MSettings.GetBackground(MSettings.IndicatorLo) ' And iHover Or ALPHA
-      Endif
-    Else
-    Endif
+    'Me[Row, 0].Font.Underline = Not MSettings.GetFont(MSettings.Header).Underline
+    HoverCell(Row, 0)
+    HoverCell(Row, 1)
+    HoverCell(Row, 2)
+    HoverCell(Row, Column)
   Endif
 
-  '   Try Me.Indicators = Me.Indicators
-  '   Try ShowIndicators(MSettings.ShowIndicators)
+End
+
+Public Sub ClearPreview()
+
+  Dim iColumn As Integer = $hPlayerIndex.Value + COL_OFFSET_PLAYERS
+
+  ResetColumnLayout(iColumn)
+  ResetColumnText(iColumn)
+
+End
+
+Private Sub HoverCell(Row As Integer, Column As Integer)
+
+  Dim iHoverColor As Integer
+  Dim iCellColor As Integer
+  Dim hColorInfo As ColorInfo
+  Dim iValueFactor As Integer
+  Dim iValue As Integer
+
+  iCellColor = Me[Row, Column].Background
+
+  hColorInfo = Color[iCellColor]
+  iValueFactor = IIf(hColorInfo.Value > &H80, -1, 1)
+  iValue = Min(Max(hColorInfo.Value + iValueFactor * 30, 0), 255)
+  iHoverColor = Color.SetHSV(iCellColor,,, iValue)
+
+  Me[Row, Column].Background = iHoverColor Or $iAlpha
 
 End
 
