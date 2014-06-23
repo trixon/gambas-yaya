@@ -414,7 +414,7 @@ Private Sub HoverCell(Row As Integer, Column As Integer)
 
   hColorInfo = Color[iCellColor]
   iValueFactor = IIf(hColorInfo.Value > &H80, -1, 1)
-  iValue = Min(Max(hColorInfo.Value + iValueFactor * 30, 0), 255)
+  iValue = Min(Max(hColorInfo.Value + iValueFactor * 20, 0), 255)
   iHoverColor = Color.SetHSV(iCellColor,,, iValue)
 
   Me[Row, Column].Background = iHoverColor Or $iAlpha
