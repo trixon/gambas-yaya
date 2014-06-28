@@ -228,14 +228,33 @@ Private Sub Register(Row As Integer)
   $hGrid.ResetColumnLayout($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
 
   $iNumOfRolls = 0
-
   $bRegisterable = False
-  $bUndoable = True
-  UpdateUndoPicture()
-
   Grid_Leave()
 
-  Raise Register()
+  If IsGameOver() Then
+    Raise GameOver()
+  Else
+    $bUndoable = True
+    UpdateUndoPicture()
+    Raise Register()
+  Endif
+
+End
+
+Private Function IsGameOver() As Boolean
+
+  Dim iRow As Integer
+  Dim iPlayer As Integer
+
+  For iRow = 0 To $hGameDef.Rows.Max
+    If $hGameDef.Rows[iRow].IsPlayable Then
+      For iPlayer = 0 To $aPlayers.Max
+        If $aPlayers[iPlayer].Playable[iRow] Then Return False
+      Next
+    Endif
+  Next
+
+  Return True
 
 End
 

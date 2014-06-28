@@ -116,5 +116,6 @@ End
 Public Sub Scorecard_GameOver()
 
   $hDicePanel.GameOver()
+  Message.Info("Game Over", "Ok")
 
 End
