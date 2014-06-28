@@ -15,7 +15,7 @@ Property ShowSymbols As Boolean
 Property ShowTopCol As Boolean
 Property {Variant} As Integer
 
-Public Const DEFAULT_COLOR_SCORE_BG As Integer = &HEEEEEE
+Public Const DEFAULT_COLOR_SCORE_BG As Integer = &HFFFFFF
 Public Const DEFAULT_COLOR_SCORE_FG As Integer = &H555555
 Public Const DEFAULT_COLOR_SCORE_INACTIVE_BG As Integer = &HDDDDDD
 Public Const DEFAULT_COLOR_SCORE_INACTIVE_FG As Integer = &H555555
