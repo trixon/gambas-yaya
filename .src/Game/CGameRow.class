@@ -1,20 +1,24 @@
 ' Gambas class file
 
+Property Formula As String
 Property Id As String
-Property Text As String
-Property IsSum As Boolean
+Property IsBonus As Boolean
 Property IsCounter As Boolean
-Property Symbol As String
 Property IsPlayable As Boolean
+Property IsResult As Boolean
+Property IsSum As Boolean
 Property Lim As Integer
 Property Max As Integer
-Property Formula As String
-Property Sum As String
-Property IsBonus As Boolean
+Property SumRows As Integer[]
+Property Symbol As String
+Property Text As String
+
+Private aSumRows As Integer[]
 
 Private $bBonus As Boolean
 Private $bCounter As Boolean
 Private $bPlayable As Boolean
+Private $bResult As Boolean
 Private $bSum As Boolean
 
 Private $iLim As Integer
@@ -162,14 +166,26 @@ Private Sub IsBonus_Write(Value As Boolean)
 
 End
 
-Private Function Sum_Read() As String
+Private Function SumRows_Read() As Integer[]
 
-  Return $bSum
+  Return aSumRows
 
 End
 
-Private Sub Sum_Write(Value As String)
+Private Sub SumRows_Write(Value As Integer[])
 
-  $bSum = Value
+  aSumRows = Value
+
+End
+
+Private Function IsResult_Read() As Boolean
+
+  Return $bResult
+
+End
+
+Private Sub IsResult_Write(Value As Boolean)
+
+  $bResult = Value
 
 End

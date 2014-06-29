@@ -4,11 +4,9 @@
     "title-sv": "Jakt",
     "numOfDice": 5,
     "numOfRolls": 3,
-    "resultRow": 17,
     "defaultVariant": 0,
     "variants": "standard downwards upwards upper_lower lower_upper random",
-    "versionName": "1",
-    "versionDate": "2014-01-03",
+    "version": "2014-06-29",
     "author": "Patrik Karlsson",
     "rows": [
         {
@@ -88,7 +86,7 @@
             "titleSym": "∑₁",
             "isSum": true,
             "max": 105,
-            "sum": "1-6"
+            "sum": "2-7"
         },
         {
             "id": "bonus",
@@ -99,7 +97,7 @@
             "isBonus": true,
             "lim": 63,
             "max": 35,
-            "sum": "1-6"
+            "sum": "2-7"
         },
         {
             "id": "threeOfAKind",
@@ -178,7 +176,7 @@
             "titleSym": "∑₂",
             "isSum": true,
             "max": 219,
-            "sum": "8-16"
+            "sum": "10-16"
         },
         {
             "id": "total",
@@ -186,8 +184,9 @@
             "title-sv": "Summa",
             "titleSym": "∑",
             "isSum": true,
+            "isResult": true,
             "max": 374,
-            "sum": "1-6,7-17"
+            "sum": "2-7,9-17"
         }
     ]
 }

@@ -4,11 +4,9 @@
     "title-sv": "Stegen",
     "numOfDice": 6,
     "numOfRolls": 2,
-    "resultRow": 8,
     "defaultVariant": 0,
     "variants": "standard downwards upwards random",
-    "versionName": "2",
-    "versionDate": "2014-01-03",
+    "version": "2014-06-29",
     "author": "Patrik Karlsson",
     "rows": [
         {
@@ -97,8 +95,9 @@
             "title-sv": "Summa",
             "titleSym": "∑",
             "isSum": true,
+            "isResult": true,
             "max": 171,
-            "sum": "1-7"
+            "sum": "2-8"
         }
     ]
 }

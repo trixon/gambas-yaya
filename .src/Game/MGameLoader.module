@@ -91,6 +91,7 @@ Public Function LoadDef(sGameDef As String) As CGameDef
   Dim hRows As New CGameRow[]
   Dim hRow As CGameRow
   Dim aVariant As Variant
+  Dim iRow As Integer
 
   sJson = File.Load(sGameDef)
   hGameDefCollection = JSON.Decode(sJson)
@@ -98,7 +99,6 @@ Public Function LoadDef(sGameDef As String) As CGameDef
   hGameDef.Text = LocalizedValue("title", hGameDefCollection)
   hGameDef.Dice = hGameDefCollection["numOfDice"]
   hGameDef.Rolls = hGameDefCollection["numOfRolls"]
-  hGameDef.ResultRow = hGameDefCollection["resultRow"]
   hGameDef.VariantIndex = hGameDefCollection["defaultVariant"]
   hGameDef.Variants = Split(hGameDefCollection["variants"], " ")
   hGameDef.Version = hGameDefCollection["version"]
@@ -113,19 +113,25 @@ Public Function LoadDef(sGameDef As String) As CGameDef
     hRow.IsSum = hRowsCollection["isSum"]
     hRow.IsPlayable = hRowsCollection["isPlayable"]
     hRow.IsBonus = hRowsCollection["isBonus"]
+    hRow.IsResult = hRowsCollection["isResult"]
 
     aVariant = hRowsCollection["lim"]
     If Not IsNull(aVariant) Then hRow.Lim = aVariant
     aVariant = hRowsCollection["max"]
     If Not IsNull(aVariant) Then hRow.Max = aVariant
     hRow.Formula = hRowsCollection["formula"]
-    hRow.Sum = hRowsCollection["sum"]
+    hRow.SumRows = MArrays.ConvertStringToIntArray(hRowsCollection["sum"])
+
+    If hRow.IsResult Then
+      hGameDef.ResultRow = iRow
+    Endif
+    Inc iRow
 
     hRows.Add(hRow)
   Next
 
   hGameDef.Rows = hRows
-  'hGameDef.Debug()
+  '   hGameDef.Debug()
 
   Return hGameDef
 

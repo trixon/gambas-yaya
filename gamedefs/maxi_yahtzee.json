@@ -4,11 +4,9 @@
     "title-sv": "Maxi-Yatzy",
     "numOfDice": 6,
     "numOfRolls": 3,
-    "resultRow": 25,
     "defaultVariant": 0,
     "variants": "standard downwards upwards upper_lower lower_upper random",
-    "versionName": "2",
-    "versionDate": "2014-01-03",
+    "version": "2014-06-29",
     "author": "Patrik Karlsson",
     "rows": [
         {
@@ -88,7 +86,7 @@
             "titleSym": "∑₁",
             "isSum": true,
             "max": 126,
-            "sum": "1-6"
+            "sum": "2-7"
         },
         {
             "id": "bonus",
@@ -99,7 +97,7 @@
             "isBonus": true,
             "lim": 84,
             "max": 100,
-            "sum": "0-6"
+            "sum": "2-7"
         },
         {
             "id": "onePair",
@@ -258,7 +256,7 @@
             "titleSym": "∑₂",
             "isSum": true,
             "max": 423,
-            "sum": "8-22"
+            "sum": "10-24"
         },
         {
             "id": "total",
@@ -266,8 +264,9 @@
             "title-sv": "Summa",
             "titleSym": "∑",
             "isSum": true,
+            "isResult": true,
             "max": 649,
-            "sum": "1-6,7-22"
+            "sum": "2-7,9-24"
         }
     ]
 }

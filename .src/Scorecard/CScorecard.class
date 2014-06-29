@@ -218,6 +218,7 @@ Private Sub Register(Row As Integer)
 
   $aLastValues = $aTempValues.Copy()
   $hCurrentPlayer.Register(Row, $aTempValues[Row])
+  UpdatePlayerSums($hPlayerIndex.Value)
   $hGrid.Register(Row)
 
   'TODO: Move to Grid.Register
@@ -232,12 +233,94 @@ Private Sub Register(Row As Integer)
   Grid_Leave()
 
   If IsGameOver() Then
+    UpdateLeaderIndicator()
     Raise GameOver()
   Else
     $bUndoable = True
     UpdateUndoPicture()
     Raise Register()
   Endif
+
+End
+
+Private Sub UpdateLeaderIndicator()
+
+  Dim iPlayer As Integer
+  Dim sName As String
+
+  For Each iPlayer In Leaders()
+    sName = $hGrid[0, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text
+    $hGrid[0, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text = "★" & sName
+    $hGrid[$hGameDef.ResultRow, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text = "★" & $aPlayers[iPlayer].Values[$hGameDef.ResultRow]
+  Next
+
+End
+
+Private Sub UpdatePlayerSums(PlayerIndex As Integer)
+
+  Dim iRow As Integer
+  Dim iSum As Integer
+  Dim iSumRow As Integer
+  Dim iBonus As Integer
+  Dim hGameRow As CGameRow
+  Dim hPlayer As CPlayer = $aPlayers[PlayerIndex]
+
+  For iRow = 0 To $hGameDef.Rows.Max
+    hGameRow = $hGameDef.Rows[iRow]
+    If hGameRow.SumRows.Length > 0 Then
+      If hGameRow.IsBonus Then
+        iSum = 0
+
+        For Each iSumRow In hGameRow.SumRows
+          iSum += hPlayer.Values[iSumRow]
+        Next
+
+        If iSum >= hGameRow.Lim Then
+          iBonus = hGameRow.Max
+          hPlayer.Values[iRow] = iBonus
+          $hGrid[iRow, CScoreGrid.COL_OFFSET_PLAYERS + PlayerIndex].Text = iBonus
+        Endif
+      Endif
+
+      If hGameRow.IsSum Then
+        iSum = 0
+
+        For Each iSumRow In hGameRow.SumRows
+          iSum += hPlayer.Values[iSumRow]
+        Next
+
+        If iRow = $hGameDef.ResultRow Then
+          hPlayer.Values[iRow] = iSum
+        Endif
+        '              If (scoreCardRow.getRow() == mGameType.getResultRow()){
+        '                     scoreCardRow.setValue(sum);
+        '                     mCurrentScore = sum;
+        '                 }
+        If Not hGameRow.IsBonus Then
+          $hGrid[iRow, CScoreGrid.COL_OFFSET_PLAYERS + PlayerIndex].Text = iSum
+        Endif
+
+      Endif
+    Endif
+  Next
+
+End
+
+Private Function Leaders() As Integer[]
+
+  Dim aLeaders As New Integer[]
+  Dim iPlayer As Integer
+  Dim iValue As Integer
+
+  For iPlayer = 0 To $aPlayers.Max
+    iValue = Max(iValue, $aPlayers[iPlayer].Values[$hGameDef.ResultRow])
+  Next
+
+  For iPlayer = 0 To $aPlayers.Max
+    If $aPlayers[iPlayer].Values[$hGameDef.ResultRow] = iValue Then aLeaders.Add(iPlayer)
+  Next
+
+  Return aLeaders
 
 End
 
@@ -273,6 +356,7 @@ Public Sub Undo()
   $bRegisterable = True
   $bUndoable = False
   UpdateUndoPicture()
+  UpdatePlayerSums($hPlayerIndex.Value)
 
   Raise Undo()
 

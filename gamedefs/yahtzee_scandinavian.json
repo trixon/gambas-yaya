@@ -3,11 +3,10 @@
     "title": "Yahtzee (Scandinavian)",
     "title-sv": "Yatzy (Skandinavisk)",
     "numOfDice": 5,
-    "numOfRolls": 99,
-    "resultRow": 19,
+    "numOfRolls": 3,
     "defaultVariant": 0,
     "variants": "standard downwards upwards upper_lower lower_upper random",
-    "version": "2014-05-19",
+    "version": "2014-06-29",
     "author": "Patrik Karlsson",
     "rows": [
         {
@@ -87,7 +86,7 @@
             "titleSym": "∑₁",
             "isSum": true,
             "max": 105,
-            "sum": "1-6"
+            "sum": "2-7"
         },
         {
             "id": "bonus",
@@ -98,7 +97,7 @@
             "isBonus": true,
             "lim": 63,
             "max": 50,
-            "sum": "1-6"
+            "sum": "2-7"
         },
         {
             "id": "onePair",
@@ -197,7 +196,7 @@
             "titleSym": "∑₂",
             "isSum": true,
             "max": 219,
-            "sum": "8-16"
+            "sum": "10-18"
         },
         {
             "id": "total",
@@ -205,8 +204,9 @@
             "title-sv": "Summa",
             "titleSym": "∑",
             "isSum": true,
+            "isResult": true,
             "max": 374,
-            "sum": "1-6,8-17"
+            "sum": "2-7,9-18"
         }
     ]
 }
