@@ -103,6 +103,8 @@ Public Function LoadDef(sGameDef As String) As CGameDef
   hGameDef.Variants = Split(hGameDefCollection["variants"], " ")
   hGameDef.Version = hGameDefCollection["version"]
   hGameDef.Author = hGameDefCollection["author"]
+  hGameDef.LowerSection = MArrays.ConvertStringToIntArray(hGameDefCollection["lowerSection"])
+  hGameDef.UpperSection = MArrays.ConvertStringToIntArray(hGameDefCollection["upperSection"])
 
   For Each hRowsCollection In hGameDefCollection["rows"]
     hRow = New CGameRow

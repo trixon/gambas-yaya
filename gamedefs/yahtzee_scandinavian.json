@@ -4,6 +4,8 @@
     "title-sv": "Yatzy (Skandinavisk)",
     "numOfDice": 5,
     "numOfRolls": 3,
+    "upperSection": "2-7",
+    "lowerSection": "10-18",
     "defaultVariant": 0,
     "variants": "standard downwards upwards upper_lower lower_upper random",
     "version": "2014-06-29",

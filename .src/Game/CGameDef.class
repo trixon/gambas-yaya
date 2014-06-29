@@ -6,13 +6,17 @@ Property Rolls As Integer
 Property ResultRow As Integer
 Property VariantIndex As Integer
 Property Variants As String[]
+Property UpperSection As Integer[]
+Property LowerSection As Integer[]
 Property Author As String
 Property Version As String
 Property Rows As CGameRow[]
 Property Text As String
 
-Private $aVariants As String[]
+Private $aLowerSection As New Integer[]
 Private $aRows As CGameRow[]
+Private $aUpperSection As New Integer[]
+Private $aVariants As String[]
 
 Private $iDice As Integer
 Private $iRolls As Integer
@@ -166,5 +170,29 @@ End
 Private Sub Text_Write(Value As String)
 
   $sText = Value
+
+End
+
+Private Function UpperSection_Read() As Integer[]
+
+  Return $aUpperSection
+
+End
+
+Private Sub UpperSection_Write(Value As Integer[])
+
+  $aUpperSection = Value
+
+End
+
+Private Function LowerSection_Read() As Integer[]
+
+  Return $aLowerSection
+
+End
+
+Private Sub LowerSection_Write(Value As Integer[])
+
+  $aLowerSection = Value
 
 End
