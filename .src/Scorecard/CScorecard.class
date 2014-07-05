@@ -246,11 +246,8 @@ End
 Private Sub UpdateLeaderIndicator()
 
   Dim iPlayer As Integer
-  Dim sName As String
 
   For Each iPlayer In Leaders()
-    sName = $hGrid[0, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text
-    $hGrid[0, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text = "★" & sName
     $hGrid[$hGameDef.ResultRow, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text = "★" & $aPlayers[iPlayer].Values[$hGameDef.ResultRow]
   Next
 
