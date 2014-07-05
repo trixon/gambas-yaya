@@ -27,7 +27,7 @@
             "title-sv": "Ettor",
             "titleSym": "⚀",
             "isPlayable": true,
-            "lim": 3,
+            "lim": 4,
             "max": 6,
             "formula": "sum 1"
         },
@@ -37,7 +37,7 @@
             "title-sv": "Tvåor",
             "titleSym": "⚁",
             "isPlayable": true,
-            "lim": 6,
+            "lim": 8,
             "max": 12,
             "formula": "sum 2"
         },
@@ -47,7 +47,7 @@
             "title-sv": "Treor",
             "titleSym": "⚂",
             "isPlayable": true,
-            "lim": 9,
+            "lim": 12,
             "max": 18,
             "formula": "sum 3"
         },
@@ -57,7 +57,7 @@
             "title-sv": "Fyror",
             "titleSym": "⚃",
             "isPlayable": true,
-            "lim": 12,
+            "lim": 16,
             "max": 24,
             "formula": "sum 4"
         },
@@ -67,7 +67,7 @@
             "title-sv": "Femmor",
             "titleSym": "⚄",
             "isPlayable": true,
-            "lim": 15,
+            "lim": 20,
             "max": 30,
             "formula": "sum 5"
         },
@@ -77,14 +77,14 @@
             "title-sv": "Sexor",
             "titleSym": "⚅",
             "isPlayable": true,
-            "lim": 18,
+            "lim": 24,
             "max": 36,
             "formula": "sum 6"
         },
         {
             "id": "sum1",
-            "title": "Sum 1",
-            "title-sv": "Delsumma 1",
+            "title": "Upper total",
+            "title-sv": "Övre summa",
             "titleSym": "∑₁",
             "isSum": true,
             "max": 126,
@@ -253,8 +253,8 @@
         },
         {
             "id": "sum2",
-            "title": "Sum 2",
-            "title-sv": "Delsumma 2",
+            "title": "Lower total",
+            "title-sv": "Nedre summa",
             "titleSym": "∑₂",
             "isSum": true,
             "max": 423,
@@ -262,8 +262,8 @@
         },
         {
             "id": "total",
-            "title": "Total",
-            "title-sv": "Summa",
+            "title": "Grand total",
+            "title-sv": "Totalsumma",
             "titleSym": "∑",
             "isSum": true,
             "isResult": true,

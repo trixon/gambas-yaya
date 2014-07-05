@@ -83,8 +83,8 @@
         },
         {
             "id": "sum1",
-            "title": "Sum 1",
-            "title-sv": "Delsumma 1",
+            "title": "Upper total",
+            "title-sv": "Övre summa",
             "titleSym": "∑₁",
             "isSum": true,
             "max": 105,
@@ -173,8 +173,8 @@
         },
         {
             "id": "sum2",
-            "title": "Sum 2",
-            "title-sv": "Delsumma 2",
+            "title": "Lower total",
+            "title-sv": "Nedre summa",
             "titleSym": "∑₂",
             "isSum": true,
             "max": 219,
@@ -182,8 +182,8 @@
         },
         {
             "id": "total",
-            "title": "Total",
-            "title-sv": "Summa",
+            "title": "Grand total",
+            "title-sv": "Totalsumma",
             "titleSym": "∑",
             "isSum": true,
             "isResult": true,

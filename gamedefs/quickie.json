@@ -42,8 +42,8 @@
         },
         {
             "id": "total",
-            "title": "Total",
-            "title-sv": "Summa",
+            "title": "Grand total",
+            "title-sv": "Totalsumma",
             "titleSym": "∑",
             "isSum": true,
             "isResult": true,
