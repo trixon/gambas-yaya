@@ -115,7 +115,12 @@ End
 
 Public Sub Scorecard_GameOver()
 
+  Dim hForm As New FResult
+
   $hDicePanel.GameOver()
-  Message.Info("Game Over", "Ok")
+
+  If hForm.Run($hScorecard.ResultItems) Then
+    NewGame()
+  Endif
 
 End

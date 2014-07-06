@@ -1,0 +1,37 @@
+' Gambas class file
+
+Property Name As String
+Property Score As Integer
+
+Private $iScore As Integer
+Private $sName As String
+
+Public Function _compare(hOther As CResultItem) As Integer
+
+  Return Sgn(Me.Score - hOther.Score)
+
+End
+
+Private Function Name_Read() As String
+
+  Return $sName
+
+End
+
+Private Sub Name_Write(Value As String)
+
+  $sName = Value
+
+End
+
+Private Function Score_Read() As Integer
+
+  Return $iScore
+
+End
+
+Private Sub Score_Write(Value As Integer)
+
+  $iScore = Value
+
+End

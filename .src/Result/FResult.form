@@ -1,0 +1,35 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,51,43)
+  Text = ("Result")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  { hGridView GridView
+    MoveScaled(9,4,32,16)
+    Font = Font["Bold,+6"]
+    Background = Color.Background
+    Expand = True
+    Grid = False
+  }
+  { HBox1 HBox
+    MoveScaled(1,27,44,4)
+    Spacing = True
+    { Panel1 Panel
+      MoveScaled(4,0,4,4)
+      Expand = True
+    }
+    { btnOK Button
+      MoveScaled(9,0,16,4)
+      Text = ("New Game")
+      Default = True
+    }
+    { btnCancel Button
+      MoveScaled(27,0,16,4)
+      Text = ("Close")
+      Cancel = True
+    }
+  }
+}

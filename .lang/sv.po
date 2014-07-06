@@ -19,13 +19,25 @@ msgstr "-"
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
-#: CScoreGrid.class:125
+#: CScoreGrid.class:128
 msgid "Max"
 msgstr "Max"
 
-#: CScoreGrid.class:127
+#: CScoreGrid.class:130
 msgid "Top"
 msgstr "Topp"
+
+#: FGameOver.form:12
+msgid "Result"
+msgstr "Resultat"
+
+#: FGameOver.form:34 FMain.form:28 FNewGame.form:25
+msgid "New Game"
+msgstr "Nytt spel"
+
+#: FGameOver.form:40
+msgid "Close"
+msgstr "Stäng"
 
 #: FMain.class:87
 msgid "Copyright © 2014 Patrik Karlsson"
@@ -34,10 +46,6 @@ msgstr "Copyright © 2014 Patrik Karlsson"
 #: FMain.form:23
 msgid "Menu"
 msgstr "Meny"
-
-#: FMain.form:28 FNewGame.form:25
-msgid "New Game"
-msgstr "Nytt spel"
 
 #: FMain.form:34
 msgid "Undo"
@@ -63,11 +71,11 @@ msgstr "Avsluta"
 msgid "Background"
 msgstr "Bakgrund"
 
-#: FModBackground.form:27
+#: FModBackground.form:28
 msgid "Color"
 msgstr "Färg"
 
-#: FModBackground.form:46
+#: FModBackground.form:48
 msgid "Image"
 msgstr "Bild"
 
@@ -209,6 +217,10 @@ msgstr ""
 
 #: FPlayersEdit.form:36 FSettings.form:41
 msgid "OK"
+msgstr ""
+
+#: FTest.form:22
+msgid "Label1"
 msgstr ""
 
 #: MGameLoader.module:15

@@ -1,0 +1,44 @@
+' Gambas class file
+
+Public Sub _new()
+
+End
+
+Public Sub Run(hResultItems As CResultItem[]) As Boolean
+
+  Dim hResultItem As CResultItem
+  Dim i As Integer
+
+  hGridView.Columns.Count = 3
+  hGridView.Rows.Count = hResultItems.Length
+
+  For i = 0 To hResultItems.Max
+    hGridView[i, 0].Text = CStr(i + 1) & "."
+    hGridView[i, 0].Alignment = Align.Right
+    hGridView[i, 0].Padding = 4
+    hGridView.Columns[0].Width = 50
+
+    hGridView[i, 1].Text = hResultItems[i].Name
+    hGridView[i, 1].Padding = 4
+    hGridView.Columns[1].Width = 250
+
+    hGridView[i, 2].Text = hResultItems[i].Score
+    hGridView[i, 2].Alignment = Align.Right
+
+  Next
+
+  Return Me.ShowModal()
+
+End
+
+Public Sub btnOK_Click()
+
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
+
+  Me.Close
+
+End

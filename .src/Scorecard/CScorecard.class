@@ -5,7 +5,9 @@ Event Undo()
 Event Register()
 
 Property Read Panel As Panel
+Property Read ResultItems As CResultItem[]
 Property Undoable As Boolean
+
 Private $aLastValues As Integer[]
 Private $aPlayers As CPlayer[]
 Private $aTempValues As Integer[]
@@ -380,5 +382,24 @@ Private Sub InitMaxTopRolls()
   $hGrid.SetPlayerRolls(-2, iPlayableRows * $hGameDef.Rolls)
   'TODO: Read from high score
   $hGrid.SetPlayerRolls(-1, "---")
+
+End
+
+Private Function ResultItems_Read() As CResultItem[]
+
+  Dim hItems As New CResultItem[]
+  Dim hItem As New CResultItem
+  Dim iMaxCol As Integer = MSettings.Players
+  Dim iPlayer As Integer
+
+  For iPlayer = 0 To iMaxCol - 1
+    hItem = New CResultItem
+    hItem.Name = MSettings.PlayerSelection[iPlayer]
+    hItem.Score = $aPlayers[iPlayer].Values[$hGameDef.ResultRow]
+    hItems.Add(hItem)
+  Next
+
+  hItems.Sort(gb.Descent)
+  Return hItems
 
 End
