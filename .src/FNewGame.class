@@ -79,8 +79,11 @@ Private Sub LoadPlayerSelection()
 
   Dim i As Integer
 
-  For i = 0 To MAX_PLAYERS - 1
+  For i = 0 To $hCmbPlayers.Max
     Try $hCmbPlayers[i].Text = MSettings.PlayerSelection[i]
+    If Not $hCmbPlayers[i].Text Then
+      $hCmbPlayers[i].Text = $hCmbPlayers[i].List[0]
+    Endif
   Next
 
 End
@@ -109,6 +112,8 @@ Public Sub spbPlayers_Change()
       Try $hCmbPlayers[i].Enabled = False
     Endif
   Next
+
+  btnShuffle.Enabled = spbPlayers.Value > 1
 
 End
 

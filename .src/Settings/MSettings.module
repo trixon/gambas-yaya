@@ -279,7 +279,7 @@ Private Function LoadStringArray(sKey As String) As String[]
   Dim sNames As String = Settings[sKey]
 
   If sNames Then
-    Return Split(sNames, "|", "", True, False)
+    Return Split(sNames, "|", "", False, False)
   Else
     Return New String[]
   Endif
