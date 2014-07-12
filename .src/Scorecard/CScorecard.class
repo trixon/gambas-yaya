@@ -11,7 +11,6 @@ Property Undoable As Boolean
 Private $aLastValues As Integer[]
 Private $aPlayers As CPlayer[]
 Private $aTempValues As Integer[]
-Private $aUndoPicturePath As String[] = ["images/edit-undo16_disabled.png", "images/edit-undo16_enabled.png"]
 
 Private $bRegisterable As Boolean
 Private $bUndoable As Boolean
@@ -363,7 +362,13 @@ End
 
 Private Sub UpdateUndoPicture()
 
-  $hGrid[0, 0].Picture = Picture.Load($aUndoPicturePath[MArrays.BoolToIndex($bUndoable)])
+  Dim hPicture As Picture = Picture.Load("images/edit-undo16.png")
+
+  If Not $bUndoable Then
+    hPicture = hPicture.Image.Desaturate().Picture
+  Endif
+
+  $hGrid[0, 0].Picture = hPicture
 
 End
 
