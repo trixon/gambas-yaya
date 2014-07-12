@@ -44,7 +44,7 @@ End
 Public Sub DicePanel_RollRequest()
 
   $hScorecard.Undoable = False
-  $hScorecard.NewRoll()
+  $hScorecard.RollStarted()
   $hDicePanel.Roll()
 
 End

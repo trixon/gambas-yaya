@@ -13,6 +13,7 @@ Private $aPlayers As CPlayer[]
 Private $aTempValues As Integer[]
 
 Private $bRegisterable As Boolean
+Private $bRolling As Boolean
 Private $bUndoable As Boolean
 
 Private $hCurrentPlayer As CPlayer
@@ -140,6 +141,8 @@ Public Sub Grid_MouseMove()
   Dim iRow As Integer = $hGrid.RowAt(Mouse.Y)
   Dim iPlayerColumn As Integer = $hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS
 
+  If $bRolling Then Return
+
   If iRow <> $iLastHoveredRow And iRow > 0 And If iRow < $hGameDef.Rows.Count And If iPlayerColumn = iCol Then
     $hGrid.HoverRow(iRow, iPlayerColumn, $hCurrentPlayer.Playable[iRow])
     $iLastHoveredRow = iRow
@@ -164,6 +167,7 @@ Public Sub RollFinished(aValues As Integer[])
   $hGrid.ShowIndicators(MSettings.ShowIndicators)
 
   $bRegisterable = True
+  $bRolling = False
 
 End
 
@@ -206,8 +210,9 @@ Private Sub Undoable_Write(Value As Boolean)
 
 End
 
-Public Sub NewRoll()
+Public Sub RollStarted()
 
+  $bRolling = True
   $hGrid.ClearPreview()
   UpdateUndoPicture()
 
