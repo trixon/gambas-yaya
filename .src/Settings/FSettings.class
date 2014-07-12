@@ -33,7 +33,7 @@ Public Sub _new()
   $hModDice = New FModDice(ipnModules[Dice])
   $hModBackground = New FModBackground(ipnModules[Background])
 
-  ipnModules.Index = Scorecard
+  ipnModules.Index = Players
 
 End
 
