@@ -35,7 +35,9 @@ Public Sub DicePanel_RollFinished()
   Inc $iRollCounter
   $mnuUndo.Enabled = False
   $hScorecard.RollFinished($hDicePanel.Values)
-  $hDicePanel.Enabled = $iRollCounter < $hGameDef.Rolls
+
+  $hDicePanel.RollEnabled = $iRollCounter < $hGameDef.Rolls
+  $hDicePanel.SelectEnabled = $iRollCounter < $hGameDef.Rolls
 
 End
 
@@ -50,7 +52,6 @@ End
 Public Sub Close()
 
   $hDicePanel.Close()
-  Debug
 
 End
 
@@ -58,6 +59,8 @@ Public Sub NewGame()
 
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
   $mnuUndo.Enabled = False
+  $iRollCounter = 0
+
   $hScorecard.NewGame()
 
   With $hDicePanel
