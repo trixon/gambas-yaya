@@ -48,6 +48,10 @@ Public StyleNames As String[] = [("Name row"), ("Header column"), ("Score"), ("S
 
 Public Enum Name, Header, Score, ScoreInactive, Sum, IndicatorHi, IndicatorLo, Mask
 
+Private Const DEFAULT_SHOW_MAXCOL As Boolean = False
+Private Const DEFAULT_SHOW_TOPCOL As Boolean = False
+Private Const DEFAULT_SHOW_SYMBOLS As Boolean = False
+
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
 Private Const KEY_GAME_ID As String = "Game/Id"
@@ -224,7 +228,7 @@ End
 
 Private Function ShowMaxCol_Read() As Boolean
 
-  Return Settings[KEY_SCORECARD_SHOW_MAXCOL, True]
+  Return Settings[KEY_SCORECARD_SHOW_MAXCOL, DEFAULT_SHOW_MAXCOL]
 
 End
 
@@ -236,7 +240,7 @@ End
 
 Private Function ShowTopCol_Read() As Boolean
 
-  Return Settings[KEY_SCORECARD_SHOW_TOPCOL, True]
+  Return Settings[KEY_SCORECARD_SHOW_TOPCOL, DEFAULT_SHOW_TOPCOL]
 
 End
 
@@ -309,7 +313,7 @@ End
 
 Private Function ShowSymbols_Read() As Boolean
 
-  Return Settings[KEY_SCORECARD_SHOW_SYMBOLS, False]
+  Return Settings[KEY_SCORECARD_SHOW_SYMBOLS, DEFAULT_SHOW_SYMBOLS]
 
 End
 
