@@ -20,7 +20,7 @@ Public Sub Run(hResultItems As CResultItem[]) As Boolean
 
     hGridView[i, 1].Text = hResultItems[i].Name
     hGridView[i, 1].Padding = 4
-    hGridView.Columns[1].Width = 250
+    hGridView.Columns[1].Width = 200
 
     hGridView[i, 2].Text = hResultItems[i].Score
     hGridView[i, 2].Alignment = Align.Right
