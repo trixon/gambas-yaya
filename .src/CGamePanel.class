@@ -1,7 +1,10 @@
 ' Gambas class file
 
+Event GameOver
+
 Property Read DicePanel As CDicePanel
 Property Read Panel As Panel
+Property Read Scorecard As CScorecard
 
 Private $hDicePanel As CDicePanel
 Private $hGameDef As CGameDef
@@ -118,12 +121,13 @@ End
 
 Public Sub Scorecard_GameOver()
 
-  Dim hForm As New FResult
-
   $hDicePanel.GameOver()
+  Raise GameOver
 
-  If hForm.Run($hScorecard.ResultItems) Then
-    NewGame()
-  Endif
+End
+
+Private Function Scorecard_Read() As CScorecard
+
+  Return $hScorecard
 
 End

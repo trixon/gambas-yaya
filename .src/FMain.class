@@ -1,7 +1,6 @@
 ' Gambas class file
 
 Private $hGamePanel As CGamePanel
-Private $bShown As Boolean
 
 Public Sub _new()
 
@@ -45,6 +44,7 @@ Public Sub Form_Open()
 
   MSettings.Load()
   Settings.Read(Me)
+  Me.Maximized = MSettings.Maximized
   Me.FullScreen = MSettings.FullScreen
   mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
@@ -59,6 +59,8 @@ Public Sub Form_Close()
   'Settings.Reload()
   Settings.Write(Me)
   MSettings.FullScreen = Me.FullScreen
+  MSettings.Maximized = Me.Maximized
+
   '   Settings.Save()
   Debug
 
@@ -154,19 +156,6 @@ Public Sub Form_Menu()
 
 End
 
-Public Sub Form_Show()
-
-  If Not $bShown Then
-    If HasValidPlayers() Then
-      $hGamePanel.NewGame()
-    Else
-      NewGame()
-    Endif
-    $bShown = True
-  Endif
-
-End
-
 Private Function HasValidPlayers() As Boolean
 
   Return MSettings.PlayerNames.Count > 0
@@ -174,6 +163,12 @@ Private Function HasValidPlayers() As Boolean
 End
 
 Public Sub Timer_Timer()
+
+  If HasValidPlayers() Then
+    $hGamePanel.NewGame()
+  Else
+    NewGame()
+  Endif
 
   If MSettings.ShowHelp Then
     ShowHelp()
@@ -188,5 +183,22 @@ Private Sub ShowHelp()
   Dim hForm As New FHelp
 
   hForm.Run()
+
+End
+
+Public Sub GamePanel_GameOver()
+
+  Dim hForm As New FResult
+
+  Select hForm.Run($hGamePanel.Scorecard.ResultItems)
+    Case FResult.NewCustom
+      NewGame()
+
+    Case FResult.NewRepeat
+      $hGamePanel.NewGame()
+
+    Default
+
+  End Select
 
 End

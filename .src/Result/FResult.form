@@ -1,33 +1,75 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,51,43)
+  MoveScaled(0,0,82,43)
+  Background = Color.TextBackground
   Text = ("Result")
   Resizable = False
   Arrangement = Arrange.Vertical
   Spacing = True
   Margin = True
+  { mnuNew Menu
+    Text = ("Menu1")
+    Visible = False
+    { mnuNewGame Menu
+      Text = ("New Game...")
+    }
+  }
+  { dwgBackground DrawingArea
+    MoveScaled(0,0,48,7)
+    Arrangement = Arrange.Horizontal
+    AutoResize = True
+    Padding = 4
+    { lblTitle Label
+      MoveScaled(6,1,32,4)
+      #Translate = False
+      Font = Font["Bold,+3"]
+      Foreground = Color.SelectedForeground
+      Expand = True
+      Text = "Game"
+      Alignment = Align.Center
+    }
+  }
+  { HBox2 HBox
+    MoveScaled(17,8,54,5)
+    Visible = False
+    AutoResize = True
+    { ToggleButton1 ToggleButton
+      MoveScaled(3,0,16,4)
+      Expand = True
+      Text = ("Now")
+    }
+    { ToggleButton2 ToggleButton
+      MoveScaled(23,1,16,4)
+      Expand = True
+      Text = ("Today")
+    }
+    { ToggleButton3 ToggleButton
+      MoveScaled(43,1,16,4)
+      Expand = True
+      Text = ("Ever")
+    }
+  }
   { hGridView GridView
-    MoveScaled(9,4,32,16)
+    MoveScaled(11,13,32,16)
     Font = Font["Bold,+6"]
-    Background = Color.Background
     Expand = True
     Grid = False
   }
   { HBox1 HBox
-    MoveScaled(1,27,44,4)
+    MoveScaled(1,27,63,4)
     Spacing = True
     { Panel1 Panel
       MoveScaled(4,0,4,4)
       Expand = True
     }
-    { btnOK Button
-      MoveScaled(9,0,16,4)
+    { mbtNew MenuButton
+      MoveScaled(25,0,13.7143,4)
       Text = ("New Game")
-      Default = True
+      Menu = "mnuNew"
     }
     { btnCancel Button
-      MoveScaled(27,0,16,4)
+      MoveScaled(44,0,13.7143,4)
       Text = ("Close")
       Cancel = True
     }

@@ -1,10 +1,17 @@
 ' Gambas class file
 
+Public Enum DoNothing, NewRepeat, NewCustom
+
 Public Sub _new()
+
+  MGameLoader.LoadAll()
+  lblTitle.Text = MGameLoader.TextById(MSettings.GameId)
+  Me.Width = 360
+  mbtNew.SetFocus()
 
 End
 
-Public Sub Run(hResultItems As CResultItem[]) As Boolean
+Public Sub Run(hResultItems As CResultItem[]) As Integer
 
   Dim hResultItem As CResultItem
   Dim i As Integer
@@ -31,14 +38,28 @@ Public Sub Run(hResultItems As CResultItem[]) As Boolean
 
 End
 
-Public Sub btnOK_Click()
+Public Sub mnuNewGame_Click()
 
-  Me.Close(True)
+  Me.Close(NewCustom)
 
 End
 
 Public Sub btnCancel_Click()
 
-  Me.Close
+  Me.Close(DoNothing)
+
+End
+
+Public Sub dwgBackground_Draw()
+
+  Paint.Brush = Paint.Color(Color.LightBackground)
+  MGuiUtils.PaintRoundedRect(0, 0, dwgBackground.W, dwgBackground.H, 8)
+  Paint.Fill
+
+End
+
+Public Sub mbtNew_Click()
+
+  Me.Close(NewRepeat)
 
 End

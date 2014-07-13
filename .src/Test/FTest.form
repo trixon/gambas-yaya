@@ -2,22 +2,21 @@
 
 { Form Form
   MoveScaled(0,0,67,33)
+  Background = Color.TextBackground
   Picture = Picture["dice-images/board/default.jpg"]
-  { ColorButton1 ColorButton
-    MoveScaled(39,12,8,4)
-    Foreground = &H00FFFF&
-  }
-  { Label1 Label
-    MoveScaled(12,6,24,4)
-    Background = &H5FFFD7&
-    Foreground = &HFF3F6F&
-    Text = ("Label1")
-  }
-  { Panel1 Panel
-    MoveScaled(6,7,24,24)
-  }
-  { PictureBox1 PictureBox
-    MoveScaled(42,8,16,16)
-    Picture = Picture["icon:/16/undo"]
+  Arrangement = Arrange.Fill
+  { TabStrip1 TabStrip
+    MoveScaled(24,5,24,24)
+    Count = 3
+    Index = 0
+    Text = ("Round")
+    { Panel1 Panel
+      MoveScaled(14,0,24,24)
+    }
+    Index = 1
+    Text = ("Today")
+    Index = 2
+    Text = ("Total")
+    Index = 0
   }
 }

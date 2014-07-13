@@ -4,6 +4,7 @@ Property BackgroundType As Boolean
 Property Background As Integer
 Property FullScreen As Boolean
 Property GameId As String
+Property Maximized As Boolean
 Property Opacity As Integer
 Property Players As Integer
 Property PlayerNames As String[]
@@ -51,8 +52,9 @@ Public Enum Name, Header, Score, ScoreInactive, Sum, IndicatorHi, IndicatorLo, M
 
 Private Const DEFAULT_SHOW_HELP As Boolean = True
 Private Const DEFAULT_SHOW_MAXCOL As Boolean = False
-Private Const DEFAULT_SHOW_TOPCOL As Boolean = False
 Private Const DEFAULT_SHOW_SYMBOLS As Boolean = False
+Private Const DEFAULT_SHOW_TOPCOL As Boolean = False
+Private Const DEFAULT_WINDOW_MAXIMIZED As Boolean = True
 
 Private Const KEY_GAME_PLAYERS As String = "Game/Players"
 Private Const KEY_REVERSE_MOUSE_SCROLL As String = "ReverseMouseScroll"
@@ -68,6 +70,7 @@ Private Const KEY_PLAYER_SELECTION As String = "Game/PlayerSelection"
 Private Const KEY_WINDOW_BACKGROUND As String = "Window/Background"
 Private Const KEY_WINDOW_BACKGROUND_TYPE As String = "Window/BackgroundType"
 Private Const KEY_WINDOW_FULL_SCREEN As String = "Window/FullScreen"
+Private Const KEY_WINDOW_MAXIMIZED As String = "Window/Maximized"
 Private Const KEY_BACKGROUND As String = "Style/Background_"
 Private Const KEY_FOREGROUND As String = "Style/Foreground_"
 Private Const KEY_FONT As String = "Style/Font_"
@@ -255,7 +258,15 @@ End
 
 Private Function PlayerNames_Read() As String[]
 
-  Return LoadStringArray(KEY_PLAYER_NAMES)
+  Dim aNames As String[] = LoadStringArray(KEY_PLAYER_NAMES)
+
+  'TODO: Fix this
+  If aNames.Length = 0 Then
+    Debug
+    '     aNames.Add("Luke")
+  Endif
+
+  Return aNames
 
 End
 
@@ -383,5 +394,17 @@ End
 Private Sub ShowHelp_Write(Value As Boolean)
 
   Settings[KEY_SHOW_HELP] = Value
+
+End
+
+Private Function Maximized_Read() As Boolean
+
+  Return Settings[KEY_WINDOW_MAXIMIZED, DEFAULT_WINDOW_MAXIMIZED]
+
+End
+
+Private Sub Maximized_Write(Value As Boolean)
+
+  Settings[KEY_WINDOW_MAXIMIZED] = Value
 
 End

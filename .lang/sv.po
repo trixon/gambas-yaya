@@ -27,63 +27,55 @@ msgstr "Max"
 msgid "Top"
 msgstr "Topp"
 
-#: FHelp.form:18 FMain.form:62
+#: FHelp.form:18 FMain.form:63
 msgid "Help"
 msgstr "Hjälp"
 
-#: FHelp.form:46 FIntroduction.form:44
+#: FHelp.form:46
 msgid "Did you know that..."
 msgstr "Visste du att..."
 
 #: FHelp.form:59
-msgid "<ul>\n<li>Lower right corner is used to trigger the roll.<br/></li>\n<li>Right mouse button inverts other dice selection.<br/></li>\n<li>Mouse wheel selects all/none.<br/></li>\n<li>Undo is done by clicking upper left cell in the score card.<br/></li>\n<li>A popup menu is used to control the game.<br/></li>\n<ul>\n"
+msgid "<ul>\n<li>Lower right corner is used to trigger the roll.<br/></li>\n<li>Right mouse button on a die inverts other dice selection.<br/></li>\n<li>Mouse wheel selects all/none.<br/></li>\n<li>Undo is done by clicking upper left cell in the score card.<br/></li>\n<li>A popup menu is used to control the game.<br/></li>\n<ul>\n"
 msgstr ""
 
-#: FHelp.form:70 FIntroduction.form:70
+#: FHelp.form:70
 msgid "Show on start"
 msgstr "Visa vid start"
 
-#: FHelp.form:80 FIntroduction.form:80 FResult.form:43
+#: FHelp.form:80 FResult.form:72
 msgid "Close"
 msgstr "Stäng"
-
-#: FIntroduction.form:17
-msgid "Introduction"
-msgstr "Introduktion"
-
-#: FIntroduction.form:59
-msgid "<ul>\n<li>Lower right corner is used to trigger the roll?<br/></li>\n<li>Right mouse button inverts other dice selection?<br/></li>\n<li>Mouse wheel selects all/none?<br/></li>\n<li>Undo is done by clicking upper left in the score card?<br/></li>\n<li>A popup menu is used to control the game?<br/></li>\n<ul>\n"
-msgstr ""
 
 #: FMain.class:91
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
-#: FMain.form:25
+#: FMain.form:26
 msgid "Menu"
 msgstr "Meny"
 
-#: FMain.form:30 FNewGame.form:25 FResult.form:37
+#: FMain.form:31 FNewGame.form:25 FResult.form:66
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: FMain.form:36
+#: FMain.form:37
 msgid "Undo"
 msgstr "Ångra"
 
-#: FMain.form:46
+#: FMain.form:47
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:53 FSettings.form:13
+#: FMain.form:54 FSettings.form:13
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:67
+#: FMain.form:68
 msgid "About"
 msgstr "Om"
 
-#: FMain.form:75
+#: FMain.form:76
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -211,11 +203,11 @@ msgstr "Spel"
 msgid "Variant"
 msgstr "Variant"
 
-#: FNewGame.form:94
+#: FNewGame.form:95
 msgid "Shuffle"
 msgstr "Blanda"
 
-#: FNewGame.form:127
+#: FNewGame.form:131
 msgid "Play"
 msgstr "Spela"
 
@@ -239,9 +231,17 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: FResult.form:12
+#: FResult.form:17
 msgid "Result"
 msgstr "Resultat"
+
+#: FResult.form:24
+msgid "Menu1"
+msgstr ""
+
+#: FResult.form:28
+msgid "New Game..."
+msgstr "Nytt spel..."
 
 #: FTest.form:22
 msgid "Label1"
