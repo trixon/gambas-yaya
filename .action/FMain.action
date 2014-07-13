@@ -9,6 +9,10 @@
     Text = "Full Screen"
     Shortcut = "F11"
   }
+  { Action help
+    Text = "Help"
+    Shortcut = ""
+  }
   { Action new
     Text = "New Game"
     Shortcut = "Ctrl+N"

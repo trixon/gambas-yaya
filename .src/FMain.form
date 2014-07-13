@@ -34,6 +34,10 @@
     }
     { Menu2 Menu
     }
+    { mnuHelp Menu
+      Action = "help"
+      Text = ("Help")
+    }
     { mnuAbout Menu
       Action = "about"
       Text = ("About")
@@ -49,6 +53,11 @@
   { Panel2 Panel
     MoveScaled(1,1,69,6)
   }
+  { Timer #Timer
+    #MoveScaled(85,7)
+    Enabled = True
+    Delay = 1
+  }
 }
 
 # Gambas Action File 3.0
@@ -61,6 +70,10 @@
   { Action full_screen
     Text = "Full Screen"
     Shortcut = "F11"
+  }
+  { Action help
+    Text = "Help"
+    Shortcut = ""
   }
   { Action new
     Text = "New Game"

@@ -1,0 +1,62 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,52)
+  Background = Color.TextBackground
+  Text = ("Help")
+  Resizable = False
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  { Panel2 VBox
+    MoveScaled(2,2,58,39)
+    Expand = True
+    Spacing = True
+    { dwgBackground DrawingArea
+      MoveScaled(1,1,48,7)
+      Arrangement = Arrange.Horizontal
+      AutoResize = True
+      Padding = 4
+      { PictureBox2 PictureBox
+        MoveScaled(0,0,4.5714,4.5714)
+        Picture = Picture["images/help-hint.png"]
+        AutoResize = True
+      }
+      { Label2 Label
+        MoveScaled(6,1,32,4)
+        Font = Font["Bold,+3"]
+        Foreground = Color.SelectedForeground
+        Expand = True
+        Text = ("Did you know that...")
+      }
+    }
+    { Panel4 ScrollView
+      MoveScaled(4,15,52,19)
+      Expand = True
+      { TextLabel1 TextLabel
+        MoveScaled(0,0,54.2857,15)
+        Font = Font["+2"]
+        Padding = 8
+        AutoResize = True
+        Text = ("<ul>\n<li>Lower right corner is used to trigger the roll.<br/></li>\n<li>Right mouse button on a die inverts other dice selection.<br/></li>\n<li>Mouse wheel selects all/none.<br/></li>\n<li>Undo is done by clicking upper left cell in the score card.<br/></li>\n<li>A popup menu is used to control the game.<br/></li>\n<ul>\n")
+      }
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(0,44,62,4)
+    Spacing = True
+    { cbxShowOnStart CheckBox
+      MoveScaled(2,1,24,4)
+      Text = ("Show on start")
+    }
+    { Panel1 Panel
+      MoveScaled(35,0,4,4)
+      Expand = True
+    }
+    { btnOK Button
+      MoveScaled(42,0,12,4)
+      Text = ("Close")
+      Default = True
+    }
+  }
+}

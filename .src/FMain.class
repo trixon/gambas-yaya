@@ -1,6 +1,7 @@
 ' Gambas class file
 
 Private $hGamePanel As CGamePanel
+Private $bShown As Boolean
 
 Public Sub _new()
 
@@ -17,6 +18,9 @@ Public Sub Action_Activate(key As String) As Boolean
 
     Case "new"
       NewGame()
+
+    Case "help"
+      ShowHelp()
 
     Case "settings"
       SettingsDialog()
@@ -152,10 +156,13 @@ End
 
 Public Sub Form_Show()
 
-  If HasValidPlayers() Then
-    $hGamePanel.NewGame()
-  Else
-    NewGame()
+  If Not $bShown Then
+    If HasValidPlayers() Then
+      $hGamePanel.NewGame()
+    Else
+      NewGame()
+    Endif
+    $bShown = True
   Endif
 
 End
@@ -163,5 +170,23 @@ End
 Private Function HasValidPlayers() As Boolean
 
   Return MSettings.PlayerNames.Count > 0
+
+End
+
+Public Sub Timer_Timer()
+
+  If MSettings.ShowHelp Then
+    ShowHelp()
+  Endif
+
+  Timer.Stop()
+
+End
+
+Private Sub ShowHelp()
+
+  Dim hForm As New FHelp
+
+  hForm.Run()
 
 End

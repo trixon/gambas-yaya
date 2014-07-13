@@ -15,7 +15,7 @@ msgstr ""
 msgid "YaYa"
 msgstr "-"
 
-#: .project:2 FMain.class:88
+#: .project:2 FMain.class:92
 msgid "Yet Another Yahtzee"
 msgstr "Ännu en yatzy"
 
@@ -27,43 +27,63 @@ msgstr "Max"
 msgid "Top"
 msgstr "Topp"
 
-#: FGameOver.form:12
-msgid "Result"
-msgstr "Resultat"
+#: FHelp.form:18 FMain.form:62
+msgid "Help"
+msgstr "Hjälp"
 
-#: FGameOver.form:34 FMain.form:28 FNewGame.form:25
-msgid "New Game"
-msgstr "Nytt spel"
+#: FHelp.form:46 FIntroduction.form:44
+msgid "Did you know that..."
+msgstr "Visste du att..."
 
-#: FGameOver.form:40
+#: FHelp.form:59
+msgid "<ul>\n<li>Lower right corner is used to trigger the roll.<br/></li>\n<li>Right mouse button inverts other dice selection.<br/></li>\n<li>Mouse wheel selects all/none.<br/></li>\n<li>Undo is done by clicking upper left cell in the score card.<br/></li>\n<li>A popup menu is used to control the game.<br/></li>\n<ul>\n"
+msgstr ""
+
+#: FHelp.form:70 FIntroduction.form:70
+msgid "Show on start"
+msgstr "Visa vid start"
+
+#: FHelp.form:80 FIntroduction.form:80 FResult.form:43
 msgid "Close"
 msgstr "Stäng"
 
-#: FMain.class:87
+#: FIntroduction.form:17
+msgid "Introduction"
+msgstr "Introduktion"
+
+#: FIntroduction.form:59
+msgid "<ul>\n<li>Lower right corner is used to trigger the roll?<br/></li>\n<li>Right mouse button inverts other dice selection?<br/></li>\n<li>Mouse wheel selects all/none?<br/></li>\n<li>Undo is done by clicking upper left in the score card?<br/></li>\n<li>A popup menu is used to control the game?<br/></li>\n<ul>\n"
+msgstr ""
+
+#: FMain.class:91
 msgid "Copyright © 2014 Patrik Karlsson"
 msgstr "Copyright © 2014 Patrik Karlsson"
 
-#: FMain.form:23
+#: FMain.form:25
 msgid "Menu"
 msgstr "Meny"
 
-#: FMain.form:34
+#: FMain.form:30 FNewGame.form:25 FResult.form:37
+msgid "New Game"
+msgstr "Nytt spel"
+
+#: FMain.form:36
 msgid "Undo"
 msgstr "Ångra"
 
-#: FMain.form:44
+#: FMain.form:46
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: FMain.form:51 FSettings.form:13
+#: FMain.form:53 FSettings.form:13
 msgid "Settings"
 msgstr "Inställningar"
 
-#: FMain.form:60
+#: FMain.form:67
 msgid "About"
 msgstr "Om"
 
-#: FMain.form:68
+#: FMain.form:75
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -179,7 +199,7 @@ msgstr "Visa Toppkolumn"
 msgid "Opacity"
 msgstr "Opacitet"
 
-#: FModScorecard.form:123
+#: FModScorecard.form:124
 msgid "Theme"
 msgstr "Schema"
 
@@ -219,6 +239,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: FResult.form:12
+msgid "Result"
+msgstr "Resultat"
+
 #: FTest.form:22
 msgid "Label1"
 msgstr ""
@@ -251,31 +275,31 @@ msgstr "Slump"
 msgid "Consume"
 msgstr "Förbruka"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Header column"
 msgstr "Rubrikkolumn"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Indicator, bad"
 msgstr "Indikator, dåligt"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Indicator, good"
 msgstr "Indikator, bra"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Name row"
 msgstr "Namnrad"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Score"
 msgstr "Poäng"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Score, inactive"
 msgstr "Poäng, inaktiv"
 
-#: MSettings.module:47
+#: MSettings.module:48
 msgid "Sum"
 msgstr "Summa"
 

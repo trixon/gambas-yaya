@@ -10,6 +10,7 @@ Property PlayerNames As String[]
 Property PlayerSelection As String[]
 Property ReverseMouseScroll As Boolean
 Property ShowIndicators As Boolean
+Property ShowHelp As Boolean
 Property ShowMaxCol As Boolean
 Property ShowSymbols As Boolean
 Property ShowTopCol As Boolean
@@ -48,6 +49,7 @@ Public StyleNames As String[] = [("Name row"), ("Header column"), ("Score"), ("S
 
 Public Enum Name, Header, Score, ScoreInactive, Sum, IndicatorHi, IndicatorLo, Mask
 
+Private Const DEFAULT_SHOW_HELP As Boolean = True
 Private Const DEFAULT_SHOW_MAXCOL As Boolean = False
 Private Const DEFAULT_SHOW_TOPCOL As Boolean = False
 Private Const DEFAULT_SHOW_SYMBOLS As Boolean = False
@@ -69,6 +71,7 @@ Private Const KEY_WINDOW_FULL_SCREEN As String = "Window/FullScreen"
 Private Const KEY_BACKGROUND As String = "Style/Background_"
 Private Const KEY_FOREGROUND As String = "Style/Foreground_"
 Private Const KEY_FONT As String = "Style/Font_"
+Private Const KEY_SHOW_HELP As String = "ShowHelp"
 
 Private $aBackgroundDefaults As Integer[] =
   [DEFAULT_COLOR_NAME_BG,
@@ -368,5 +371,17 @@ End
 Private Sub Background_Write(Value As Integer)
 
   Settings[KEY_WINDOW_BACKGROUND] = Value
+
+End
+
+Private Function ShowHelp_Read() As Boolean
+
+  Return Settings[KEY_SHOW_HELP, DEFAULT_SHOW_HELP]
+
+End
+
+Private Sub ShowHelp_Write(Value As Boolean)
+
+  Settings[KEY_SHOW_HELP] = Value
 
 End
