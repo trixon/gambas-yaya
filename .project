@@ -11,9 +11,9 @@ Component=gb.desktop
 Component=gb.settings
 Component=gb.form.mdi
 Component=gb.media
-Component=gb.web
-Library=/home/pata/git/gambas/libpkdice/libpkdice.gambas
+Library=/home/pata/git/gambas/libpkcommons/libpkcommons.gambas
 Library=/home/pata/git/gambas/libpkdice/libpkcommons.gambas
+Library=/home/pata/git/gambas/libpkdice/libpkdice.gambas
 Description="Yet Another Yahtzee"
 Authors="Patrik Karlsson"
 Environment="XXXGB_GUI=gb.qt4\nXXXLANG=sv_SE.UTF-8\nLC_ALL=sv_SE.UTF-8"
