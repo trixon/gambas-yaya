@@ -4,17 +4,11 @@ Public Sub Form_Open()
 
   lbxPlayers.List = MSettings.PlayerNames
 
-  If MSettings.PlayerNames.Count = 0 Then
-    Balloon.Warning(("Create at least one player."), tlbAdd)
-  Endif
-
 End
 
 Public Sub Save()
 
-  '   Settings.Reload()
   MSettings.PlayerNames = lbxPlayers.List
-  '   Settings.Save()
 
 End
 
@@ -39,6 +33,7 @@ Public Sub tlbRemoveAll_Click()
 
   If Message.Error(("Remove all players?"), ("Remove All"), ("Cancel")) = 1 Then
     lbxPlayers.Clear
+    MSettings.PlayerSelection = [""]
   Endif
 
 End
