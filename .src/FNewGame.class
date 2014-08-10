@@ -25,12 +25,27 @@ End
 
 Public Sub btnOK_Click()
 
+  Dim i As Integer
+  Dim sName As String
+  Dim aPlayerNames As String[] = MSettings.PlayerNames.Copy()
+
+  For i = 0 To spbPlayers.Value - 1
+    sName = $hCmbPlayers[i].Text
+
+    If Not aPlayerNames.Exist(sName, gb.IgnoreCase) Then
+      aPlayerNames.Add(sName)
+    Endif
+  Next
+
+  MSettings.PlayerNames = aPlayerNames
   '   Settings.Reload()
   MSettings.GameId = MGameLoader.IdByText(cmbGame.Text)
   MSettings.Variant = cmbVariant.Index
   MSettings.Players = spbPlayers.Value
+
   SavePlayerSelection()
   Settings.Save()
+
   Me.Close(True)
 
 End
@@ -68,8 +83,7 @@ Private Sub InitPlayers()
       .Font = cmbGame.Font
       .Height = cmbGame.Height
       .List = MSettings.PlayerNames
-      .ReadOnly = True
-      .Text = .List[0]
+      Try .Text = .List[0]
     End With
   Next
 
@@ -122,13 +136,13 @@ Public Sub btnShuffle_Click()
   Dim i As Integer
   Dim iPlayers As Integer = spbPlayers.Value
   Dim iSwapWithIndex As Integer
-  Dim iStoredIndex As Integer
+  Dim sStoredText As String
 
   For i = 0 To iPlayers - 1
-    iStoredIndex = $hCmbPlayers[i].Index
+    sStoredText = $hCmbPlayers[i].Text
     iSwapWithIndex = Int(Rnd(0, iPlayers))
-    $hCmbPlayers[i].Index = $hCmbPlayers[iSwapWithIndex].Index
-    $hCmbPlayers[iSwapWithIndex].Index = iStoredIndex
+    $hCmbPlayers[i].Text = $hCmbPlayers[iSwapWithIndex].Text
+    $hCmbPlayers[iSwapWithIndex].Text = sStoredText
   Next
 
 End

@@ -110,14 +110,8 @@ Private Sub NewGame()
 
   Dim hForm As New FNewGame
 
-  If Not HasValidPlayers() Then
-    SettingsDialog()
-  Endif
-
-  If HasValidPlayers() Then
-    If hForm.Run() Then
-      $hGamePanel.NewGame()
-    Endif
+  If hForm.Run() Then
+    $hGamePanel.NewGame()
   Endif
 
 End
@@ -156,15 +150,9 @@ Public Sub Form_Menu()
 
 End
 
-Private Function HasValidPlayers() As Boolean
-
-  Return MSettings.PlayerNames.Count > 0
-
-End
-
 Public Sub Timer_Timer()
 
-  If HasValidPlayers() Then
+  If MSettings.PlayerNames.Count > 0 Then
     $hGamePanel.NewGame()
   Else
     NewGame()

@@ -258,15 +258,9 @@ End
 
 Private Function PlayerNames_Read() As String[]
 
-  Dim aNames As String[] = LoadStringArray(KEY_PLAYER_NAMES)
+  Dim aEmpty As New String[]
 
-  'TODO: Fix this
-  If aNames.Length = 0 Then
-    Debug
-    '     aNames.Add("Luke")
-  Endif
-
-  Return aNames
+  Return LoadStringArray(KEY_PLAYER_NAMES, aEmpty)
 
 End
 
@@ -278,7 +272,7 @@ End
 
 Private Function PlayerSelection_Read() As String[]
 
-  Return LoadStringArray(KEY_PLAYER_SELECTION)
+  Return LoadStringArray(KEY_PLAYER_SELECTION, ["Ask", "Embla", "Ask", "Embla", "Ask", "Embla", "Ask", "Embla"])
 
 End
 
@@ -288,14 +282,14 @@ Private Sub PlayerSelection_Write(Value As String[])
 
 End
 
-Private Function LoadStringArray(sKey As String) As String[]
+Private Function LoadStringArray(sKey As String, aDefaults As String[]) As String[]
 
   Dim sNames As String = Settings[sKey]
 
   If sNames Then
     Return Split(sNames, "|", "", False, False)
   Else
-    Return New String[]
+    Return aDefaults
   Endif
 
 End
