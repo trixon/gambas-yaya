@@ -12,4 +12,16 @@ vgcore.*
 .lang/*.pot
 .directory
 .info
-
+#---- Gambas files to ignore (v1)
+*.gambas
+.lock
+*~
+core
+core.*
+vgcore
+vgcore.*
+.kdbg*
+.*.prof
+.lang/*.pot
+.gambas/*
+#----
