@@ -28,49 +28,49 @@ Private $iLastHoveredRow As Integer = -1
 Private $iNumOfRolls As Integer
 
 Public Sub _new(hContainer As Container)
-
+  
   $hPanel = New Panel(hContainer) As "Panel"
-
+  
   With $hPanel
     .Arrangement = Arrange.Horizontal
     .Expand = True
   End With
-
+  
 End
 
 Private Function Panel_Read() As Panel
-
+  
   Return $hPanel
-
+  
 End
 
 Public Sub NewGame()
-
+  
   Dim i As Integer
-
+  
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
   $bRegisterable = False
   $bUndoable = False
   $iNumOfRolls = 0
   $aPlayers = New CPlayer[MSettings.Players]
-
+  
   For i = 0 To $aPlayers.Max
     $aPlayers[i] = New CPlayer
     $aPlayers[i].NewGame($hGameDef)
   Next
-
+  
   $hPlayerIndex = New CCircularInt(0, MSettings.Players - 1)
   $hCurrentPlayer = $aPlayers[0]
-
+  
   GridInit()
   ReloadSettings()
   UpdateUndoPicture()
   InitMaxTopRolls()
-
+  
 End
 
 Public Sub ReloadSettings()
-
+  
   Settings.Reload()
   If Not IsNull($hGrid) Then
     With $hGrid
@@ -83,47 +83,47 @@ Public Sub ReloadSettings()
       Try .ShowIndicators(MSettings.ShowIndicators)
     End With
   Endif
-
+  
 End
 
 Private Sub GridInit()
-
+  
   Try $hLeftPanel.Delete
   Try $hGrid.Delete
   Try $hRightPanel.Delete
-
+  
   $hLeftPanel = New Panel($hPanel)
   $hGrid = New CScoreGrid($hPanel, $hGameDef) As "Grid"
   $hRightPanel = New Panel($hPanel)
-
+  
   $hLeftPanel.Expand = True
   $hRightPanel.Expand = True
-
+  
 End
 
 Public Sub Grid_Click()
-
+  
   Dim hGameRow As CGameRow
   Dim iRow As Integer = $hGrid.Row
   Dim iCol As Integer = $hGrid.Column
-
+  
   If $bUndoable And iRow = 0 And iCol = 0 Then
     Undo()
   Endif
-
+  
   If $bRegisterable And iCol = $hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS Then
     hGameRow = $hGameDef.Rows[iRow]
-
+    
     If hGameRow.IsPlayable And $hCurrentPlayer.Playable[iRow] Then
       Debug Subst$("hGameRow.Text &1, $aTempValues[iRow] &2", hGameRow.Text, $aTempValues[iRow])
       Register(iRow)
     Endif
   Endif
-
+  
 End
 
 Public Sub Grid_Leave()
-
+  
   If $iLastHoveredRow <> -1 Then
     $hGrid.ResetColumnLayout(0)
     $hGrid.ResetColumnLayout(1)
@@ -132,112 +132,112 @@ Public Sub Grid_Leave()
     Try $hGrid.ShowIndicators(MSettings.ShowIndicators)
     $iLastHoveredRow = -1
   Endif
-
+  
 End
 
 Public Sub Grid_MouseMove()
-
+  
   Dim iCol As Integer = $hGrid.ColumnAt(Mouse.X)
   Dim iRow As Integer = $hGrid.RowAt(Mouse.Y)
   Dim iPlayerColumn As Integer = $hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS
-
+  
   If $bRolling Then Return
-
+  
   If iRow <> $iLastHoveredRow And iRow > 0 And If iRow < $hGameDef.Rows.Count And If iPlayerColumn = iCol Then
     $hGrid.HoverRow(iRow, iPlayerColumn, $hCurrentPlayer.Playable[iRow])
     $iLastHoveredRow = iRow
   Else If iPlayerColumn <> iCol
     Grid_Leave()
   Endif
-
+  
 End
 
 Public Sub RollFinished(aValues As Integer[])
-
+  
   Dim sRolls As String
-
+  
   Inc $iNumOfRolls
   $hCurrentPlayer.Rolls = $hCurrentPlayer.Rolls + 1
   sRolls = Subst("&1 (&2/&3)", $hCurrentPlayer.Rolls, $iNumOfRolls, $hGameDef.Rolls)
-
+  
   $hGrid.SetPlayerRolls($hPlayerIndex.Value, sRolls)
-
+  
   $aTempValues = CalculatePossibleScores(aValues)
   $hGrid.SetTempData($hPlayerIndex, $hCurrentPlayer, $aTempValues)
   $hGrid.ShowIndicators(MSettings.ShowIndicators)
-
+  
   $bRegisterable = True
   $bRolling = False
-
+  
 End
 
 Private Function CalculatePossibleScores(Values As Integer[]) As Integer[]
-
+  
   Dim aScores As New Integer[$hGameDef.Rows.Length]
   Dim hGameRow As CGameRow
   Dim iRow As Integer
   Dim iScore As Integer
   '   Dim iValue As Integer
   '   Dim sValues As String
-
+  
   ' For Each iValue In Values
   '   sValues &= iValue & " "
   ' Next
   ' Debug sValues
-
+  
   For iRow = 0 To $hGameDef.Rows.Max
     hGameRow = $hGameDef.Rows[iRow]
-
+    
     If hGameRow.Formula Then
       iScore = MFormulaParser.ParseFormula(Values, hGameRow)
       aScores[iRow] = iScore
     Endif
   Next
-
+  
   Return aScores
-
+  
 End
 
 Private Function Undoable_Read() As Boolean
-
+  
   Return $bUndoable
-
+  
 End
 
 Private Sub Undoable_Write(Value As Boolean)
-
+  
   $bUndoable = Value
-
+  
 End
 
 Public Sub RollStarted()
-
+  
   $bRolling = True
   $hGrid.ClearPreview()
   UpdateUndoPicture()
-
+  
 End
 
 Private Sub Register(Row As Integer)
-
+  
   Debug Row, $aTempValues[Row]
-
+  
   $aLastValues = $aTempValues.Copy()
   $hCurrentPlayer.Register(Row, $aTempValues[Row])
   UpdatePlayerSums($hPlayerIndex.Value)
   $hGrid.Register(Row)
-
+  
   'TODO: Move to Grid.Register
   $hGrid.SetPlayerRolls($hPlayerIndex.Value, $hCurrentPlayer.Rolls)
   $hCurrentPlayer = $aPlayers[$hPlayerIndex.Inc()]
   $hGrid.SetCurrentPlayer($hCurrentPlayer)
   $hGrid.ResetColumnLayout($hPlayerIndex.Value + CScoreGrid.COL_OFFSET_PLAYERS)
   $hGrid.ResetColumnLayout($hPlayerIndex.PeekPrev() + CScoreGrid.COL_OFFSET_PLAYERS)
-
+  
   $iNumOfRolls = 0
   $bRegisterable = False
   Grid_Leave()
-
+  
   If IsGameOver() Then
     UpdateLeaderIndicator()
     Raise GameOver()
@@ -246,52 +246,52 @@ Private Sub Register(Row As Integer)
     UpdateUndoPicture()
     Raise Register()
   Endif
-
+  
 End
 
 Private Sub UpdateLeaderIndicator()
-
+  
   Dim iPlayer As Integer
-
+  
   For Each iPlayer In Leaders()
     $hGrid[$hGameDef.ResultRow, iPlayer + CScoreGrid.COL_OFFSET_PLAYERS].Text = "★" & $aPlayers[iPlayer].Values[$hGameDef.ResultRow]
   Next
-
+  
 End
 
 Private Sub UpdatePlayerSums(PlayerIndex As Integer)
-
+  
   Dim iRow As Integer
   Dim iSum As Integer
   Dim iSumRow As Integer
   Dim iBonus As Integer
   Dim hGameRow As CGameRow
   Dim hPlayer As CPlayer = $aPlayers[PlayerIndex]
-
+  
   For iRow = 0 To $hGameDef.Rows.Max
     hGameRow = $hGameDef.Rows[iRow]
     If hGameRow.SumRows.Length > 0 Then
       If hGameRow.IsBonus Then
         iSum = 0
-
+        
         For Each iSumRow In hGameRow.SumRows
           iSum += hPlayer.Values[iSumRow]
         Next
-
+        
         If iSum >= hGameRow.Lim Then
           iBonus = hGameRow.Max
           hPlayer.Values[iRow] = iBonus
           $hGrid[iRow, CScoreGrid.COL_OFFSET_PLAYERS + PlayerIndex].Text = iBonus
         Endif
       Endif
-
+      
       If hGameRow.IsSum Then
         iSum = 0
-
+        
         For Each iSumRow In hGameRow.SumRows
           iSum += hPlayer.Values[iSumRow]
         Next
-
+        
         If iRow = $hGameDef.ResultRow Then
           hPlayer.Values[iRow] = iSum
         Endif
@@ -302,36 +302,36 @@ Private Sub UpdatePlayerSums(PlayerIndex As Integer)
         If Not hGameRow.IsBonus Then
           $hGrid[iRow, CScoreGrid.COL_OFFSET_PLAYERS + PlayerIndex].Text = iSum
         Endif
-
+        
       Endif
     Endif
   Next
-
+  
 End
 
 Private Function Leaders() As Integer[]
-
+  
   Dim aLeaders As New Integer[]
   Dim iPlayer As Integer
   Dim iValue As Integer
-
+  
   For iPlayer = 0 To $aPlayers.Max
     iValue = Max(iValue, $aPlayers[iPlayer].Values[$hGameDef.ResultRow])
   Next
-
+  
   For iPlayer = 0 To $aPlayers.Max
     If $aPlayers[iPlayer].Values[$hGameDef.ResultRow] = iValue Then aLeaders.Add(iPlayer)
   Next
-
+  
   Return aLeaders
-
+  
 End
 
 Private Function IsGameOver() As Boolean
-
+  
   Dim iRow As Integer
   Dim iPlayer As Integer
-
+  
   For iRow = 0 To $hGameDef.Rows.Max
     If $hGameDef.Rows[iRow].IsPlayable Then
       For iPlayer = 0 To $aPlayers.Max
@@ -339,77 +339,77 @@ Private Function IsGameOver() As Boolean
       Next
     Endif
   Next
-
+  
   Return True
-
+  
 End
 
 Public Sub Undo()
-
+  
   Dim iUndoRow As Integer
-
+  
   Debug
   $aTempValues = $aLastValues.Copy()
   $hCurrentPlayer = $aPlayers[$hPlayerIndex.Dec()]
-
+  
   $hGrid.SetTempData($hPlayerIndex, $hCurrentPlayer, $aTempValues)
   iUndoRow = $hCurrentPlayer.Undo()
   $hGrid.Undo(iUndoRow)
-
+  
   $bRegisterable = True
   $bUndoable = False
   UpdateUndoPicture()
   UpdatePlayerSums($hPlayerIndex.Value)
-
+  
   Raise Undo()
-
+  
 End
 
 Private Sub UpdateUndoPicture()
-
+  
   Dim hPicture As Picture = Picture.Load("images/edit-undo16.png")
-
+  
   If Not $bUndoable Then
     hPicture = hPicture.Image.Desaturate().Picture
   Endif
-
+  
   $hGrid[0, 0].Picture = hPicture
-
+  
 End
 
 Private Sub InitMaxTopRolls()
-
+  
   Dim hGameRow As CGameRow
   Dim iPlayableRows As Integer
-
+  
   For Each hGameRow In $hGameDef.Rows
     If hGameRow.IsPlayable Then
       Inc iPlayableRows
     Endif
-
+    
   Next
-
+  
   $hGrid.SetPlayerRolls(-2, iPlayableRows * $hGameDef.Rolls)
   'TODO: Read from high score
   $hGrid.SetPlayerRolls(-1, "---")
-
+  
 End
 
 Private Function ResultItems_Read() As CResultItem[]
-
+  
   Dim hItems As New CResultItem[]
   Dim hItem As New CResultItem
   Dim iMaxCol As Integer = MSettings.Players
   Dim iPlayer As Integer
-
+  
   For iPlayer = 0 To iMaxCol - 1
     hItem = New CResultItem
     hItem.Name = MSettings.PlayerSelection[iPlayer]
     hItem.Score = $aPlayers[iPlayer].Values[$hGameDef.ResultRow]
     hItems.Add(hItem)
   Next
-
+  
   hItems.Sort(gb.Descent)
   Return hItems
-
+  
 End

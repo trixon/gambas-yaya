@@ -3,71 +3,71 @@
 Private $hGamePanel As CGamePanel
 
 Public Sub _new()
-
+  
   MGameLoader.LoadAll()
   $hGamePanel = New CGamePanel(Me, mnuUndo) As "GamePanel"
-
+  
 End
 
 Public Sub Action_Activate(key As String) As Boolean
-
+  
   Select Case key
     Case "about"
       About()
-
+      
     Case "new"
       NewGame()
-
+      
     Case "help"
       ShowHelp()
-
+      
     Case "settings"
       SettingsDialog()
-
+      
     Case "full_screen"
       FullScreenToggle()
-
+      
     Case "quit"
       Me.Close
-
+      
     Case "undo"
       Undo()
-
+      
     Default
       Print "Unknown action: " & key
-
+      
   End Select
-
+  
 End
 
 Public Sub Form_Open()
-
+  
   MSettings.Load()
   Settings.Read(Me)
   Me.Maximized = MSettings.Maximized
   Me.FullScreen = MSettings.FullScreen
   mnuFullScreen.Checked = Me.FullScreen
   $hGamePanel.Open()
-
+  
   ReloadSettings()
-
+  
 End
 
 Public Sub Form_Close()
-
+  
   $hGamePanel.Close()
   'Settings.Reload()
   Settings.Write(Me)
   MSettings.FullScreen = Me.FullScreen
   MSettings.Maximized = Me.Maximized
-
+  
   '   Settings.Save()
   Debug
-
+  
 End
 
 Public Sub Form_KeyPress()
-
+  
   If Key.Code = Key.Esc Then
     Me.Close()
   Else If Key.Code = Key["Q"] And If Key.Control Or Key.Code = Key["Q"]
@@ -81,112 +81,112 @@ Public Sub Form_KeyPress()
   Else If Key.Code = Key["S"]
     SettingsDialog()
   Endif
-
+  
 End
 
 Private Sub About()
-
+  
   Dim hForm As New FAbout
-
+  
   With hForm
     .AppAuthor = "Patrik Karlsson"
     .AppCopyright = ("Copyright © 2014 Patrik Karlsson")
     .AppDescription = ("Yet Another Yahtzee")
     .AppLogo = Picture.Load("logo.png")
   End With
-
+  
   hForm.Run()
-
+  
 End
 
 Public Sub FullScreenToggle()
-
+  
   Me.FullScreen = Not Me.FullScreen
   mnuFullScreen.Checked = Me.FullScreen
-
+  
 End
 
 Private Sub NewGame()
-
+  
   Dim hForm As New FNewGame
-
+  
   If hForm.Run() Then
     $hGamePanel.NewGame()
   Endif
-
+  
 End
 
 Public Sub Undo()
-
+  
   $hGamePanel.Undo()
-
+  
 End
 
 Private Sub SettingsDialog()
-
+  
   Dim hForm As New FSettings
-
+  
   If hForm.Run() Then
     ReloadSettings()
     $hGamePanel.ReloadSettings()
   Endif
-
+  
 End
 
 Private Sub ReloadSettings()
-
+  
   If MSettings.BackgroundType Then
     Me.Picture = Picture.Load("images/board.jpg")
   Else
     Me.Picture = Null
     Me.Background = MSettings.Background
   Endif
-
+  
 End
 
 Public Sub Form_Menu()
-
+  
   mnuMain.Popup
-
+  
 End
 
 Public Sub Timer_Timer()
-
+  
   If MSettings.PlayerNames.Count > 0 Then
     $hGamePanel.NewGame()
   Else
     NewGame()
   Endif
-
+  
   If MSettings.ShowHelp Then
     ShowHelp()
   Endif
-
+  
   Timer.Stop()
-
+  
 End
 
 Private Sub ShowHelp()
-
+  
   Dim hForm As New FHelp
-
+  
   hForm.Run()
-
+  
 End
 
 Public Sub GamePanel_GameOver()
-
+  
   Dim hForm As New FResult
-
+  
   Select hForm.Run($hGamePanel.Scorecard.ResultItems)
     Case FResult.NewCustom
       NewGame()
-
+      
     Case FResult.NewRepeat
       $hGamePanel.NewGame()
-
+      
     Default
-
+      
   End Select
-
+  
 End
