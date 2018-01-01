@@ -22,12 +22,12 @@ Private $hGameDef As CGameDef
 Private $iAlpha As Integer
 
 Public Sub _new(hGameDef As CGameDef)
-  
+
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iMaxRow As Integer = hGameDef.Rows.Count - 1
-  
+
   $hGameDef = hGameDef
-  
+
   With Me
     .Columns.Count = iMaxCol + 1
     .Rows.Count = iMaxRow + 1
@@ -39,41 +39,41 @@ Public Sub _new(hGameDef As CGameDef)
     .AutoResize = False
     .ScrollBar = Scroll.None
   End With
-  
+
   Me.Columns[0].Width = COL_WIDTH_TEXT
   $aTempValues = New Integer[Me.Rows.Count]
-  
+
   ResetRollCounters()
-  
+
 End
 
 Private Sub ResetRollCounters()
-  
+
   Dim iMaxCol As Integer = MSettings.Players - 1
   Dim iCol As Integer
-  
+
   For iCol = 0 To iMaxCol
     SetPlayerRolls(iCol, 0)
   Next
-  
+
 End
 
 Private Sub ResetCellLayout(Row As Integer, Column As Integer)
-  
+
   Dim hGameRow As CGameRow
   Dim hCell As _GridView_Cell
-  
+
   If Row > $hGameDef.Rows.Length - 1 Then
     hGameRow = New CGameRow
   Else
     hGameRow = $hGameDef.Rows[Row]
   Endif
-  
+
   hCell = Me[Row, Column]
   hCell.Padding = 8
   hCell.Alignment = Align.Right
   hCell.Font = MSettings.GetFont(MSettings.Score)
-  
+
   If Column = $hPlayerIndex.Value + COL_OFFSET_PLAYERS Then
     hCell.Background = MSettings.GetBackground(MSettings.Score) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Score) Or $iAlpha
@@ -81,46 +81,46 @@ Private Sub ResetCellLayout(Row As Integer, Column As Integer)
     hCell.Background = MSettings.GetBackground(MSettings.ScoreInactive) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.ScoreInactive) Or $iAlpha
   Endif
-  
+
   If Column = 0 Then
     hCell.Background = MSettings.GetBackground(MSettings.Header) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Header)
     hCell.Font = MSettings.GetFont(MSettings.Header)
     hCell.Alignment = Align.Left
   Endif
-  
+
   If Column = 1 Or Column = 2 Then
     hCell.Background = MSettings.GetBackground(MSettings.Header) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Header)
     hCell.Font = MSettings.GetFont(MSettings.Header)
   Endif
-  
+
   If Row = 0 And Column <> 0 Then
     hCell.Alignment = Align.Center
   Endif
-  
+
   If hGameRow.IsSum Or hGameRow.IsCounter Then
     hCell.Background = MSettings.GetBackground(MSettings.Sum) Or $iAlpha
     hCell.Foreground = MSettings.GetForeground(MSettings.Sum)
     hCell.Font = MSettings.GetFont(MSettings.Sum)
   Endif
-  
+
 End
 
 Private Sub InitHeaderRow()
   'TODO: Don't asume header row = 0
-  
+
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iCol As Integer
   Dim iRow As Integer = 0
   Dim hCell As _GridView_Cell
-  
+
   For iCol = 0 To iMaxCol
     hCell = Me[iRow, iCol]
     hCell.Background = MSettings.GetBackground(MSettings.Name)
     hCell.Foreground = MSettings.GetForeground(MSettings.Name)
     hCell.Font = MSettings.GetFont(MSettings.Name)
-    
+
     If iCol = 0 Then
       hCell.Text = MGameLoader.TextById($hGameDef.Id)
       hCell.Font.Bold = False
@@ -132,57 +132,57 @@ Private Sub InitHeaderRow()
       hCell.Text = MSettings.PlayerSelection[iCol - COL_OFFSET_PLAYERS]
     Endif
   Next
-  
+
 End
 
 Public Sub SetCurrentPlayer(Player As CPlayer)
-  
+
   $hCurrentPlayer = Player
-  
+
 End
 
 Public Sub SetTempData(PlayerIndex As CCircularInt, CurrentPlayer As CPlayer, Values As Integer[])
-  
+
   $hCurrentPlayer = CurrentPlayer
   $hPlayerIndex = PlayerIndex
   $aTempValues = Values
-  
+
 End
 
 Public Sub ShowTextAsSymbols(Value As Boolean)
-  
+
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iRow As Integer
   Dim hGameRow As CGameRow
   Dim hCell As _GridView_Cell
   Dim hFont As Font
-  
+
   For iRow = 1 To iMaxRow
     hCell = Me[iRow, 0]
-    
+
     If iRow > $hGameDef.Rows.Length - 1 Then
       hGameRow = New CGameRow
     Else
       hGameRow = $hGameDef.Rows[iRow]
     Endif
-    
+
     If hGameRow.IsBonus Or hGameRow.IsSum Then
       hFont = MSettings.GetFont(MSettings.Sum)
     Else
       hFont = MSettings.GetFont(MSettings.Header)
     Endif
-    
+
     If Value Then
       hCell.Text = hGameRow.Symbol
     Else
       hCell.Text = hGameRow.Text
     Endif
   Next
-  
+
 End
 
 Public Sub RecalcWidth()
-  
+
   Dim iWidth As Integer
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
@@ -191,7 +191,7 @@ Public Sub RecalcWidth()
   Dim hFont As Font
   Dim iColumnWidth As Integer
   Dim sText As String
-  
+
   For iCol = 0 To iMaxCol
     If iCol = 0 Then
       'First column, game name and headers
@@ -231,57 +231,57 @@ Public Sub RecalcWidth()
       iColumnWidth = 0
       For iRow = 0 To iMaxRow
         hFont = Me[iRow, iCol].Font
-        
+
         If iRow = 0 Then
           sText = "WWWWWWW"
         Else
           sText = "8888"
         Endif
-        
+
         iColumnWidth = Max(iColumnWidth, hFont.TextWidth(sText))
       Next
     Endif
     Me.Columns[iCol].Width = iColumnWidth + COL_WIDTH_MARGIN
   Next
-  
+
   iWidth = Me.Columns[0].Width + Me.Columns[1].Width + Me.Columns[2].Width + MSettings.Players * (iColumnWidth + COL_WIDTH_MARGIN)
   Me.Width = iWidth
-  
+
 End
 
 Public Sub Register(Row As Integer)
-  
+
   ResetColumnText($hPlayerIndex.Value + COL_OFFSET_PLAYERS)
   $aTempValues = New Integer[Me.Rows.Count]
-  
+
 End
 
 Public Sub ResetText()
-  
+
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iCol As Integer
-  
+
   For iCol = 0 To iMaxCol
     ResetColumnText(iCol)
   Next
-  
+
 End
 
 Private Sub ResetCellText(Row As Integer, Column As Integer)
-  
+
   Dim hGameRow As CGameRow
   Dim hCell As _GridView_Cell
-  
+
   If Row > $hGameDef.Rows.Length - 1 Then
     hGameRow = New CGameRow
   Else
     hGameRow = $hGameDef.Rows[Row]
   Endif
-  
+
   If Not hGameRow.IsPlayable Then Return
-  
+
   hCell = Me[Row, Column]
-  
+
   If Column = 1 Then 'Max column
     If Row > 0 Then
       hCell.Text = hGameRow.Max
@@ -300,63 +300,63 @@ Private Sub ResetCellText(Row As Integer, Column As Integer)
       Endif
     Endif
   Endif
-  
+
 End
 
 Public Sub ResetColumnText(Column As Integer)
-  
+
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iRow As Integer
-  
+
   For iRow = 0 To iMaxRow
     ResetCellText(iRow, Column)
   Next
-  
+
 End
 
 Public Sub ResetLayout()
-  
+
   Dim iMaxCol As Integer = MSettings.Players + 2
   Dim iCol As Integer
-  
+
   For iCol = 0 To iMaxCol
     ResetColumnLayout(iCol)
   Next
-  
+
 End
 
 Public Sub ResetColumnLayout(Column As Integer)
-  
+
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iRow As Integer
-  
+
   For iRow = 0 To iMaxRow
     ResetCellLayout(iRow, Column)
   Next
-  
+
   InitHeaderRow()
-  
+
 End
 
 Public Sub ApplyLayout()
-  
+
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iRow As Integer
   Dim hGameRow As CGameRow
   Dim iFontHeight As Integer
-  
+
   $iAlpha = Lsl(255 - MSettings.Opacity, 24)
-  
+
   ResetLayout()
   InitHeaderRow()
-  
+
   For iRow = 0 To iMaxRow
     If iRow > $hGameDef.Rows.Length - 1 Then
       hGameRow = New CGameRow
     Else
       hGameRow = $hGameDef.Rows[iRow]
     Endif
-    
+
     If iRow = 0 Then
       iFontHeight = MSettings.GetFont(MSettings.Name).Height
     Else If hGameRow.IsSum Or hGameRow.IsCounter
@@ -366,23 +366,23 @@ Public Sub ApplyLayout()
     Endif
     Me.Rows[iRow].Height = iFontHeight + ROW_HEIGHT_MARGIN
   Next
-  
+
 End
 
 Public Sub HoverRow(Row As Integer, Column As Integer, Playable As Boolean)
-  
+
   Dim hGameRow As CGameRow
   Dim iValue As Integer
-  
+
   ResetColumnLayout(0)
   ResetColumnLayout(1)
   ResetColumnLayout(2)
   ResetColumnLayout(Column)
   Try ShowIndicators(MSettings.ShowIndicators)
-  
+
   hGameRow = $hGameDef.Rows[Row]
   iValue = $aTempValues[Row]
-  
+
   If hGameRow.IsPlayable And Playable Then
     'Me[Row, 0].Font.Underline = Not MSettings.GetFont(MSettings.Header).Underline
     HoverCell(Row, 0)
@@ -390,78 +390,78 @@ Public Sub HoverRow(Row As Integer, Column As Integer, Playable As Boolean)
     HoverCell(Row, 2)
     HoverCell(Row, Column)
   Endif
-  
+
 End
 
 Public Sub ClearPreview()
-  
+
   Dim iColumn As Integer = $hPlayerIndex.Value + COL_OFFSET_PLAYERS
-  
+
   ResetColumnLayout(iColumn)
   ResetColumnText(iColumn)
-  
+
 End
 
 Private Sub HoverCell(Row As Integer, Column As Integer)
-  
+
   Dim iHoverColor As Integer
   Dim iCellColor As Integer
   Dim hColorInfo As ColorInfo
   Dim iValueFactor As Integer
   Dim iValue As Integer
-  
+
   iCellColor = Me[Row, Column].Background
-  
+
   hColorInfo = Color[iCellColor]
   iValueFactor = IIf(hColorInfo.Value > &H80, -1, 1)
   iValue = Min(Max(hColorInfo.Value + iValueFactor * 20, 0), 255)
   iHoverColor = Color.SetHSV(iCellColor,,, iValue)
-  
+
   Me[Row, Column].Background = iHoverColor Or $iAlpha
-  
+
 End
 
 Private Function MaxCol_Read() As Boolean
-  
+
   Return $bMaxCol
-  
+
 End
 
 Private Sub MaxCol_Write(Value As Boolean)
-  
+
   $bMaxCol = Value
-  
+
 End
 
 Private Function TopCol_Read() As Boolean
-  
+
   Return $bTopCol
-  
+
 End
 
 Private Sub TopCol_Write(Value As Boolean)
-  
+
   $bTopCol = Value
-  
+
 End
 
 Public Sub SetPlayerRolls(Player As Integer, Rolls As Variant)
-  
+
   Dim hGameRow As CGameRow
   Dim iMaxRow As Integer = $hGameDef.Rows.Count - 1
   Dim iRow As Integer
-  
+
   For iRow = 0 To iMaxRow
     hGameRow = $hGameDef.Rows[iRow]
     If hGameRow.IsCounter Then
       Me[iRow, Player + COL_OFFSET_PLAYERS].Text = Rolls
     Endif
   Next
-  
+
 End
 
 Public Sub ShowIndicators(Show As Boolean)
-  
+
   Dim iRow As Integer
   Dim iBackground As Integer
   Dim iForeground As Integer
@@ -469,16 +469,16 @@ Public Sub ShowIndicators(Show As Boolean)
   Dim hFont As Font
   Dim hGameRow As CGameRow
   Dim hCell As _GridView_Cell
-  
+
   ResetColumnLayout($hPlayerIndex.Value + COL_OFFSET_PLAYERS)
-  
+
   If Not Show Then Return
-  
+
   For iRow = 0 To $hGameDef.Rows.Max
     hGameRow = $hGameDef.Rows[iRow]
     hCell = Me[iRow, $hPlayerIndex.Value + COL_OFFSET_PLAYERS]
     iValue = $aTempValues[iRow]
-    
+
     If hGameRow.IsPlayable And iValue > 0 And $hCurrentPlayer.Playable[iRow] Then
       If iValue >= hGameRow.Lim Then
         iBackground = MSettings.GetBackground(MSettings.IndicatorHi)
@@ -490,7 +490,7 @@ Public Sub ShowIndicators(Show As Boolean)
         hFont = MSettings.GetFont(MSettings.IndicatorLo)
       Endif
     Endif
-    
+
     If hGameRow.IsPlayable And iValue > 0 And $hCurrentPlayer.Playable[iRow] Then
       hCell.Background = iBackground Or $iAlpha
       hCell.Foreground = iForeground 'Or $iAlpha
@@ -501,13 +501,13 @@ Public Sub ShowIndicators(Show As Boolean)
       'ResetTextByCell(iRow, $hCurrentPlayerIndex.Value + COL_OFFSET_PLAYERS)
     Endif
   Next
-  
+
 End
 
 Public Sub Undo(UndoRow As Integer)
-  
+
   Me[UndoRow, $hPlayerIndex.Value + COL_OFFSET_PLAYERS].Text = ""
   ResetColumnLayout($hPlayerIndex.PeekNext() + CScoreGrid.COL_OFFSET_PLAYERS)
   ShowIndicators(MSettings.ShowIndicators)
-  
+
 End

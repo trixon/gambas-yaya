@@ -2,7 +2,7 @@ FMain
 YaYa
 0
 0
-0.0.14
+1.0.0
 
 gb.image
 gb.gui
@@ -12,7 +12,6 @@ gb.desktop
 gb.settings
 gb.form.mdi
 gb.media
-/home/pata/git/gambas/libpkcommons/libpkcommons.gambas
 /home/pata/git/gambas/libpkdice/libpkcommons.gambas
 /home/pata/git/gambas/libpkdice/libpkdice.gambas
 

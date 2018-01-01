@@ -1,9 +1,9 @@
 # Gambas Project File 3.0
-# Compiled with Gambas 3.8.0
+# Compiled with Gambas 3.10.0
 Title=YaYa
 Startup=FMain
 Icon=logo.png
-Version=0.0.15
+Version=1.0.0
 Component=gb.image
 Component=gb.gui
 Component=gb.form
@@ -12,7 +12,6 @@ Component=gb.desktop
 Component=gb.settings
 Component=gb.form.mdi
 Component=gb.media
-Library=/home/pata/git/gambas/libpkcommons/libpkcommons.gambas
 Library=/home/pata/git/gambas/libpkdice/libpkcommons.gambas
 Library=/home/pata/git/gambas/libpkdice/libpkdice.gambas
 Description="Yet Another Yahtzee"

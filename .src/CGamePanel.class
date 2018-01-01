@@ -16,118 +16,118 @@ Private $iRollCounter As Integer
 Private $mnuUndo As Menu
 
 Public Sub _new(hContainer As Container, hUndo As Menu)
-  
+
   $hPanel = New Panel(hContainer) As "Panel"
   $mnuUndo = hUndo
-  
+
   With $hPanel
     .Arrangement = Arrange.Vertical
     .Expand = True
   End With
-  
+
   $hScorecard = New CScorecard($hPanel) As "Scorecard"
   $hDicePanel = New CDicePanel($hPanel) As "DicePanel"
   $hDicePanel.DiceToFloor = 200
-  
+
   CDicePanel.ReverseMouseScroll = MSettings.ReverseMouseScroll
-  
+
 End
 
 Public Sub DicePanel_RollFinished()
-  
+
   Inc $iRollCounter
   $mnuUndo.Enabled = False
   $hScorecard.RollFinished($hDicePanel.Values)
-  
+
   $hDicePanel.RollEnabled = $iRollCounter < $hGameDef.Rolls
   $hDicePanel.SelectEnabled = $iRollCounter < $hGameDef.Rolls
-  
+
 End
 
 Public Sub DicePanel_RollRequest()
-  
+
   $hScorecard.Undoable = False
   $hScorecard.RollStarted()
   $hDicePanel.Roll()
-  
+
 End
 
 Public Sub Close()
-  
+
   $hDicePanel.Close()
-  
+
 End
 
 Public Sub NewGame()
-  
+
   $hGameDef = MGameLoader.GameDefs[MSettings.GameId]
   $mnuUndo.Enabled = False
   $iRollCounter = 0
-  
+
   $hScorecard.NewGame()
-  
+
   With $hDicePanel
     .DiceCount = $hGameDef.Dice
     .NewGame()
     .NewTurn()
   End With
-  
+
 End
 
 Public Sub Open()
-  
+
   $hDicePanel.Open()
-  
+
 End
 
 Public Sub ReloadSettings()
-  
+
   $hScorecard.ReloadSettings()
-  
+
 End
 
 Public Sub Undo()
-  
+
   $hScorecard.Undo()
-  
+
 End
 
 Private Function Panel_Read() As Panel
-  
+
   Return $hPanel
-  
+
 End
 
 Private Function DicePanel_Read() As CDicePanel
-  
+
   Return $hDicePanel
-  
+
 End
 
 Public Sub Scorecard_Register()
-  
+
   $iRollCounter = 0
   $hDicePanel.NewTurn()
   $mnuUndo.Enabled = True
-  
+
 End
 
 Public Sub Scorecard_Undo()
-  
+
   $mnuUndo.Enabled = False
   $hDicePanel.Undo()
-  
+
 End
 
 Public Sub Scorecard_GameOver()
-  
+
   $hDicePanel.GameOver()
   Raise GameOver
-  
+
 End
 
 Private Function Scorecard_Read() As CScorecard
-  
+
   Return $hScorecard
-  
+
 End

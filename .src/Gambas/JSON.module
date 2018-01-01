@@ -9,19 +9,19 @@ Private $iPos As Integer
 Private $bUseNull As Boolean
 
 Private Sub GetChar() As String
-  
+
   Dim sCar As String
-  
+
   If $iPos > Len($sStr) Then Return
   sCar = Mid$($sStr, $iPos, 1)
   Inc $iPos
   Return sCar
-  
+
 End
 
 
 Private Sub ReadChar() As String
-  
+
   Dim sCar As String
 
   Do
@@ -29,39 +29,39 @@ Private Sub ReadChar() As String
     If Not sCar Then Return
     If sCar > " " Then Return sCar
   Loop
-  
+
 End
 
 
 Private Sub ReadToken() As String
-  
+
   Dim sToken As String
   Dim sCar As String
 
   sCar = ReadChar()
   If Not IsLetter(sCar) Then Return sCar
-  
+
   sToken = sCar
   Do
     sCar = GetChar()
     If Not sCar Then Break
-    If Not IsLetter(sCar) Then 
+    If Not IsLetter(sCar) Then
       Dec $iPos
       Break
     Endif
     sToken &= sCar
   Loop
-  
+
   Return sToken
-  
+
 End
 
 Private Sub ReadString() As String
-  
+
   Dim sCar As String
   Dim sString As String
   Dim iPos As Integer
-  
+
   Do
     sCar = GetChar()
     If Not sCar Then Error.Raise("Non terminated string")
@@ -81,21 +81,21 @@ Private Sub ReadString() As String
     Endif
     sString &= sCar
   Loop
-  
+
 End
 
 Private Sub ReadObject() As Collection
-  
+
   Dim sCar As String
   Dim cObject As Collection
   Dim sKey As String
-  
+
   If $bUseNull Then
     cObject = New JSONCollection
   Else
     cObject = New Collection
   Endif
-  
+
   Do
     sCar = ReadChar()
     If sCar = "}" Then Return cObject
@@ -108,14 +108,14 @@ Private Sub ReadObject() As Collection
     If sCar = "}" Then Return cObject
     If sCar <> "," Then Error.Raise("Comma expected")
   Loop
-  
+
 End
 
 Private Sub ReadArray() As Variant[]
-  
+
   Dim sCar As String
   Dim aArray As New Variant[]
-  
+
   Do
     sCar = ReadChar()
     If sCar = "]" Then Return aArray
@@ -125,36 +125,36 @@ Private Sub ReadArray() As Variant[]
     If sCar = "]" Then Return aArray
     If sCar <> "," Then Error.Raise("Comma expected")
   Loop
-  
+
 End
 
 Private Sub ReadNumber(sNumber As String) As Variant
-  
+
   Dim sCar As String
   Dim vNumber As Variant
-  
+
   Do
     sCar = GetChar()
     If Not sCar Then Break
-    If InStr("-+0123456789eE.", sCar) = 0 Then 
+    If InStr("-+0123456789eE.", sCar) = 0 Then
       Dec $iPos
       Break
     Endif
     sNumber &= sCar
   Loop
-  
+
   Try vNumber = CFloat(sNumber)
   If IsNull(vNumber) Then Error.Raise("Incorrect number")
   Return vNumber
-  
+
 End
 
 Private Sub ReadValue() As Variant
-  
+
   Dim sCar As String
-  
+
   sCar = ReadToken()
-  
+
   If sCar = "{" Then
     Return ReadObject()
   Else If sCar = "[" Then
@@ -174,34 +174,34 @@ Private Sub ReadValue() As Variant
   Else
     Error.Raise("Incorrect token: " & Quote(sCar))
   Endif
-  
+
 End
 
 Private Sub WriteValue(vVal As Variant)
-  
+
   Dim sStr As String
   Dim iPos As Integer
   Dim aArray As Array
   Dim cCol As Collection
-  
+
   Select Case TypeOf(vVal)
-    
+
     Case gb.Null
       $sStr &= "null"
-    
+
     Case gb.Boolean
       If vVal Then
         $sStr &= "true"
       Else
         $sStr &= "false"
       Endif
-    
+
     Case gb.Byte, gb.Short, gb.Integer, gb.Long, gb.Float
       $sStr &= CStr(vVal)
-    
+
     Case gb.Date
       $sStr &= Chr$(34) & CStr(vVal) & Chr$(34)
-    
+
     Case gb.String
       sStr = Quote(vVal)
       Do
@@ -214,7 +214,7 @@ Private Sub WriteValue(vVal As Variant)
         Endif
       Loop
       $sStr &= sStr
-    
+
     Case Else
       If vVal Is Array Then
         aArray = vVal
@@ -236,15 +236,16 @@ Private Sub WriteValue(vVal As Variant)
         Next
         $sStr &= "}"
       Endif
-    
+
   End Select
-    
+
 End
 
 
 Public Sub Decode(JSONString As String, Optional bUseNull As Boolean) As Variant
-  
+
   Dim vVal As Variant
+
   $sStr = JSONString
   $iPos = 1
   $bUseNull = bUseNull
@@ -253,13 +254,13 @@ Public Sub Decode(JSONString As String, Optional bUseNull As Boolean) As Variant
   $bUseNull = False
   $sStr = ""
   Return vVal
-  
+
 End
 
 Public Sub Encode(Value As Variant) As String
-  
+
   $sStr = ""
   WriteValue(Value)
   Return $sStr
-  
+
 End
